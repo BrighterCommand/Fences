@@ -1,9 +1,7 @@
-# Polly
+# Fences
 
 > [!IMPORTANT]
-> **Polly now participates in the Open Source Maintenance Fee (OSMF).**
-> Starting **November 16, 2026**, companies that earn at least US $20,000 from a product or project that uses Polly will be asked to pay a US $20/month maintenance fee to help fund Polly's ongoing upkeep. The source code stays free and open, and individuals, hobbyists, and organizations below the threshold owe nothing.
-> Read the announcement: [Introducing the Open Source Maintenance Fee for Polly](https://thepollyproject.org/2026/07/14/polly-osmf-announcement.html) · Learn about the [OSMF](https://opensourcemaintenancefee.org) · [Become a sponsor](https://github.com/sponsors/App-vNext)
+Fences is a fork of https://github.com/App-vNext/Polly/. It is a detached fork, whose intent is to avoid the Open Source Maintainers Fee (OSMF) now being charged for Polly
 
 Polly is a .NET resilience and transient-fault-handling library that allows developers to express resilience strategies such as Retry, Circuit Breaker, Hedging, Timeout, Rate Limiter and Fallback in a fluent and thread-safe manner.
 
