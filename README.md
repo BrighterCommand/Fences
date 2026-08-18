@@ -1,51 +1,38 @@
 # Fences
 
 > [!IMPORTANT]
-Fences is a fork of https://github.com/App-vNext/Polly/. It is a detached fork, whose intent is to avoid the Open Source Maintainers Fee (OSMF) now being charged for Polly
+> Fences is a fork of https://github.com/App-vNext/Polly/. It is a detached fork intended to avoid the Open Source Maintainers Fee (OSMF) now charged for Polly.
+> This fork is under construction and won't offer binaries until it has been renamed. 
+>
+> 
 
-Polly is a .NET resilience and transient-fault-handling library that allows developers to express resilience strategies such as Retry, Circuit Breaker, Hedging, Timeout, Rate Limiter and Fallback in a fluent and thread-safe manner.
-
-<!-- markdownlint-disable MD042 -->
-[![NuGet][package-badge-version]](#)
-[![NuGet Downloads][package-badge-downloads]](#)
-<!-- markdownlint-enable MD042 -->
-
-[<img align="right" src="https://github.com/dotnet/swag/raw/main/logo/dotnetfoundation_v4_small.png" width="100" alt="The .NET Foundation logo" />](https://www.dotnetfoundation.org/)
-We are a member of the [.NET Foundation](https://www.dotnetfoundation.org/about)!
-
-**Keep up to date with new feature announcements, tips & tricks, and other news through [www.thepollyproject.org](https://www.thepollyproject.org)**
-
-[![Build status](https://github.com/App-vNext/Polly/actions/workflows/build.yml/badge.svg?branch=main&event=push)](https://github.com/App-vNext/Polly/actions/workflows/build.yml?query=branch%3Amain+event%3Apush) [![Code coverage](https://codecov.io/gh/App-vNext/Polly/branch/main/graph/badge.svg)](https://codecov.io/gh/App-vNext/Polly) [![Mutation score](https://img.shields.io/endpoint?style=flat&url=https%3A%2F%2Fbadge-api.stryker-mutator.io%2Fgithub.com%2FApp-vNext%2FPolly%2Fmain)](https://dashboard.stryker-mutator.io/reports/github.com/App-vNext/Polly/main) [![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/App-vNext/Polly/badge)](https://securityscorecards.dev/viewer/?uri=github.com/App-vNext/Polly)
-
-<!-- markdownlint-disable MD042 -->
-[![Polly logo](https://raw.github.com/App-vNext/Polly/main/Polly-Logo.png)](#)
-<!-- markdownlint-enable MD034 -->
+Fences is a .NET resilience and transient-fault-handling library that allows developers to express resilience strategies such as Retry, Circuit Breaker, Hedging, Timeout, Rate Limiter and Fallback in a fluent and thread-safe manner.
 
 > [!IMPORTANT]
-> This documentation describes the new Polly v8 API. If you are using the v7 API, please refer to the [previous version](https://github.com/App-vNext/Polly/tree/7.2.4) of the documentation.
+> This documentation describes the new Fences v8 API. If you are using the v7 API, please refer to the [previous version](https://github.com/BrigherCommand/Fences/tree/7.2.4) of the documentation.
 
 ## NuGet Packages
 
 | **Package** | **Latest Version** | **About** |
 | :---------- | :----------------- | :-------- |
-| `Polly.Core` | [![NuGet](https://img.shields.io/nuget/v/Polly.Core?logo=nuget&label=NuGet&color=blue)](https://www.nuget.org/packages/Polly.Core/ "Download Polly.Core from NuGet.org") | The core abstractions and [built-in strategies](https://www.pollydocs.org/strategies/index). |
-| `Polly.Extensions` | [![NuGet](https://img.shields.io/nuget/v/Polly.Extensions?logo=nuget&label=NuGet&color=blue)](https://www.nuget.org/packages/Polly.Extensions/ "Download Polly.Extensions from NuGet.org") | [Telemetry](https://www.pollydocs.org/advanced/telemetry) and [dependency injection](https://www.pollydocs.org/advanced/dependency-injection) support. |
-| `Polly.RateLimiting` | [![NuGet](https://img.shields.io/nuget/v/Polly.RateLimiting?logo=nuget&label=NuGet&color=blue)](https://www.nuget.org/packages/Polly.RateLimiting/ "Download Polly.RateLimiting from NuGet.org") | Integration with [`System.Threading.RateLimiting`](https://www.nuget.org/packages/System.Threading.RateLimiting) APIs. |
-| `Polly.Testing` | [![NuGet](https://img.shields.io/nuget/v/Polly.Testing?logo=nuget&label=NuGet&color=blue)](https://www.nuget.org/packages/Polly.Testing/ "Download Polly.Testing from NuGet.org") | [Testing support](https://www.pollydocs.org/advanced/testing) for Polly libraries. |
-| `Polly` | [![NuGet](https://img.shields.io/nuget/v/Polly?logo=nuget&label=NuGet&color=blue)](https://www.nuget.org/packages/Polly/ "Download Polly from NuGet.org") | This package contains the legacy API exposed by versions of the Polly library before version 8. |
+| `Fences.Core` |  | The core abstractions and [built-in strategies]) |
+| `Fences.Extensions` |  | [Telemetry] |
+| `Fences.RateLimiting` |  | Integration with [`System.Threading.RateLimiting`] APIs. |
+| `Fences.Testing` | [![NuGet]() | [Testing support]() |
+| `Fences` | [ | This package contains the legacy API exposed by versions of the Fences library before version 8. |
 
 ## Documentation
 
-This README aims to give a quick overview of some Polly features - including enough to get you started with any resilience strategy. For deeper detail on any resilience strategy, and many other aspects of Polly, be sure also to check out [pollydocs.org][polly-docs].
+This README aims to give a quick overview of some Fences features - including enough to get you started with any resilience strategy. For more detail on any resilience strategy, and many other aspects of Fences, also check out TBD.
 
 ## Quick start
 
-To use Polly, you must provide a callback and execute it using [**resilience pipeline**](https://www.pollydocs.org/pipelines). A resilience pipeline is a combination of one or more [**resilience strategies**](https://www.pollydocs.org/strategies) such as retry, timeout, and rate limiter. Polly uses **builders** to integrate these strategies into a pipeline.
+To use Fences, you must provide a callback and execute it using [**resilience pipeline**](). A resilience pipeline combines one or more [**resilience strategies**](), such as retry, timeout, and rate limiter. Fences uses **builders** to integrate these strategies into a pipeline.
 
-To get started, first add the [Polly.Core](https://www.nuget.org/packages/Polly.Core/) package to your project by running the following command:
+To get started, first add the [Fences.Core]() package to your project by running the following command:
 
 ```sh
-dotnet add package Polly.Core
+dotnet add package Fences.Core
 ```
 
 You can create a `ResiliencePipeline` using the `ResiliencePipelineBuilder` class as shown below:
@@ -65,10 +52,10 @@ await pipeline.ExecuteAsync(static async token => { /* Your custom logic goes he
 
 ### Dependency injection
 
-If you prefer to define resilience pipelines using [`IServiceCollection`](https://learn.microsoft.com/dotnet/api/microsoft.extensions.dependencyinjection.iservicecollection), you'll need to install the [Polly.Extensions](https://www.nuget.org/packages/Polly.Extensions/) package:
+If you prefer to define resilience pipelines using [`IServiceCollection`](https://learn.microsoft.com/dotnet/api/microsoft.extensions.dependencyinjection.iservicecollection), you'll need to install the [Fences.Extensions]() package:
 
 ```sh
-dotnet add package Polly.Extensions
+dotnet add package Fences.Extensions
 ```
 
 You can then define your resilience pipeline using the `AddResiliencePipeline(...)` extension method as shown:
@@ -107,39 +94,38 @@ await pipeline.ExecuteAsync(static async token =>
 
 ## Resilience strategies
 
-Polly provides a variety of resilience strategies. Alongside the comprehensive guides for each strategy, the wiki also includes an [overview of the role each strategy plays in resilience engineering](https://github.com/App-vNext/Polly/wiki/Transient-fault-handling-and-proactive-resilience-engineering).
+Fences provides a variety of resilience strategies. Alongside the comprehensive guides for each strategy, the wiki also includes an [overview of the role each strategy plays in resilience engineering]().
 
-Polly categorizes resilience strategies into two main groups:
+Fences categorizes resilience strategies into two main groups:
 
 ### Reactive
 
-These strategies handle specific exceptions that are thrown, or results that are returned, by the callbacks executed through the strategy.
+These strategies handle specific exceptions thrown or results returned by callbacks executed through the strategy.
 
 | Strategy | Premise | AKA | Mitigation |
 | ------------- | ------------- | -------------- | ------------ |
 | [**Retry** family](#retry) | Many faults are transient and may self-correct after a short delay. | *Maybe it's just a blip* | Allows configuring automatic retries. |
-| [**Circuit-breaker** family](#circuit-breaker) | When a system is seriously struggling, failing fast is better than making users/callers wait. <br/><br/>Protecting a faulting system from overload can help it recover. | *Stop doing it if it hurts* <br/><br/>*Give that system a break* | Breaks the circuit (blocks executions) for a period, when faults exceed some pre-configured threshold. |
+| [**Circuit-breaker** family](#circuit-breaker) | When a system is seriously struggling, failing fast is better than making users/callers wait. <br/><br/>Protecting a faulting system from overload can help it recover. | *Stop doing it if it hurts* <br/><br/>*Give that system a break* | Breaks the circuit (blocks executions) for a period when faults exceed some pre-configured threshold. |
 | [**Fallback**](#fallback) | Things will still fail - plan what you will do when that happens. | *Degrade gracefully* | Defines an alternative value to be returned (or action to be executed) on failure. |
-| [**Hedging**](#hedging) | Things can be slow sometimes, plan what you will do when that happens. | *Hedge your bets* | Executes parallel actions when things are slow and waits for the fastest one. |
+| [**Hedging**](#hedging) | Things can be slow sometimes; plan what you will do when that happens. | *Hedge your bets* | Executes parallel actions when things are slow and waits for the fastest one. |
 
 ### Proactive
 
-Unlike reactive strategies, proactive strategies do not focus on handling errors, but the callbacks might throw or return.
-They can make proactive decisions to cancel or reject the execution of callbacks.
+Unlike reactive strategies, proactive strategies don't focus on handling errors; instead, they focus on what callbacks might throw or return. They can proactively cancel or reject callback execution.
 
 | Strategy | Premise | AKA | Prevention |
 | ----------- | ------------- | -------------- | ------------ |
 | [**Timeout**](#timeout) | Beyond a certain wait, a success result is unlikely. | *Don't wait forever* | Guarantees the caller won't have to wait beyond the timeout. |
-| [**Rate Limiter**](#rate-limiter) | Limiting the rate a system handles requests is another way to control load. <br/> <br/> This can apply to the way your system accepts incoming calls, and/or to the way you call downstream services. | *Slow down a bit, will you?* | Constrains executions to not exceed a certain rate. |
+| [**Rate Limiter**](#rate-limiter) | Limiting the rate at which a system handles requests is another way to control load. <br/> <br/> This can apply to the way your system accepts incoming calls, and/or to the way you call downstream services. | *Slow down a bit, will you?* | Constrains executions to not exceed a certain rate. |
 
-Visit [resilience strategies](https://www.pollydocs.org/strategies) docs to explore how to configure individual resilience strategies in more detail.
+Visit [resilience strategies]( docs to explore how to configure individual resilience strategies in more detail.
 
 ### Retry
 
 <!-- snippet: retry -->
 ```cs
 // Retry using the default options.
-// See https://www.pollydocs.org/strategies/retry#defaults for defaults.
+// See TBD for defaults.
 var optionsDefaults = new RetryStrategyOptions();
 
 // For instant retries with no delay
@@ -221,7 +207,7 @@ new ResiliencePipelineBuilder<HttpResponseMessage>().AddRetry(optionsExtractDela
 
 If all retries fail, a retry strategy rethrows the final exception back to the calling code.
 
-For more details, visit the [retry strategy](https://www.pollydocs.org/strategies/retry) documentation.
+For more details, visit the [retry strategy]() documentation.
 
 ### Circuit Breaker
 
@@ -485,32 +471,8 @@ To learn more about Polly, visit [pollydocs.org][polly-docs].
 - [Polly-Samples](https://github.com/App-vNext/Polly-Samples): Contains practical examples for using various implementations of Polly. Please feel free to contribute to the Polly-Samples repository in order to assist others who are either learning Polly for the first time, or are seeking advanced examples and novel approaches provided by our generous community.
 - Microsoft's [eShopOnContainers project](https://github.com/dotnet/eShop): Sample project demonstrating a .NET Micro-services architecture and using Polly for resilience.
 
-## Sponsors
-
-Thanks to the following companies for sponsoring the ongoing development of Polly.
-
-- [.NET on AWS Open Source Software Fund](https://github.com/aws/dotnet-foss)
-- [Microsoft's Free and Open Source Software Fund](https://github.com/microsoft/foss-fund)
-- [GitHub's Secure Open Source Fund](https://resources.github.com/github-secure-open-source-fund/)
-
-<!-- markdownlint-disable MD042 -->
-[![AWS logo](./logos/aws.png)](#)
-[![Microsoft logo](./logos/microsoft.png)](#)
-[![GitHub logo](./logos/github.png)](#)
-<!-- markdownlint-enable MD034 -->
-
-### Open Source Maintenance Fee
-
-Polly participates in the [Open Source Maintenance Fee (OSMF)](https://opensourcemaintenancefee.org). Starting **November 16, 2026**, companies that earn at least US $20,000 from a product or project that uses Polly are asked to pay a US $20/month maintenance fee, regardless of how many of their projects use Polly. This helps fund the ongoing work of keeping the project secure, current, and well maintained.
-
-The source code remains free and open under its existing license. Individuals, hobbyists, students, non-profits, and organizations below the revenue threshold owe nothing. For full details, see the [announcement post](https://thepollyproject.org/2026/07/14/polly-osmf-announcement.html) and the [OSMF FAQ](https://opensourcemaintenancefee.org/consumers/faq/).
-
-Help support this project by becoming a sponsor through [GitHub Sponsors](https://github.com/sponsors/App-vNext).
 
 ## License
 
 Licensed under the terms of the [New BSD License](https://opensource.org/license/bsd-3-clause/)
 
-[package-badge-downloads]: https://img.shields.io/nuget/dt/Polly?logo=nuget&label=Downloads&color=blue
-[package-badge-version]: https://img.shields.io/nuget/v/Polly?logo=nuget&label=Latest&color=blue
-[polly-docs]: https://www.pollydocs.org/
