@@ -133,3 +133,9 @@ coverage-reports/
 !eng/**
 
 !**/BenchmarkDotNet.Artifacts/**/*.md
+
+# Local agent resume state (see Brighter/Docs convention)
+PROMPT.md
+
+# Local pre-rename baselines (P0.3) — the rename oracle, not part of the repo
+baseline/
