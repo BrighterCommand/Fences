@@ -865,7 +865,7 @@ Also done in Phase 3, from the Phase 1–2 outstanding list:
 
 Align with Brighter, adapted to this repo's very different engineering conventions.
 
-- [ ] **P4.1** Rewrite `CONTRIBUTING.md` using Brighter's structure (`BrighterCommand/Brighter/CONTRIBUTING.md`),
+- [x] **P4.1** Rewrite `CONTRIBUTING.md` using Brighter's structure (`BrighterCommand/Brighter/CONTRIBUTING.md`),
       keeping these sections: *First Time Contributing?*, *Architecture Decision Records*,
       *Code Style*, *Testing*, *Documentation*, *Dependency Management*, *Making Changes*
       (Build & Test / Commit Messages / Branching / Submitting Changes), *Contributor Agreement*,
@@ -885,21 +885,84 @@ Align with Brighter, adapted to this repo's very different engineering conventio
       | Mutation testing | none | Stryker, 100% threshold |
       | Test infra | Docker Compose | none needed — all tests are in-process |
 
-- [ ] **P4.2** Replace `CODE_OF_CONDUCT.md` — remove the .NET Foundation reference (**B6**), adopt
+- [x] **P4.2** Replace `CODE_OF_CONDUCT.md` — remove the .NET Foundation reference (**B6**), adopt
       Contributor Covenant, matching Brighter.
-- [ ] **P4.3** Rewrite `SECURITY.md` (**B7**) — point at GitHub Security Advisories on
+- [x] **P4.3** Rewrite `SECURITY.md` (**B7**) — point at GitHub Security Advisories on
       `BrighterCommand/Fences`, remove the Polly Slack contact, name the D11 maintainers as
       fallback. Update `.github/IRP.md` likewise. Note Brighter has no `SECURITY.md`, so this is
       the org's first — consider porting it back to Brighter and Darker afterwards.
-- [ ] **P4.4** Contributor agreement per D7 — copy Brighter's `CLA.txt` into Fences and wire up
+- [x] **P4.4** Contributor agreement per D7 — copy Brighter's `CLA.txt` into Fences and wire up
       CLA Assistant. See D7 for the cross-repo work and the prose bug that must be fixed.
-- [ ] **P4.5** `.github/ISSUE_TEMPLATE/*` and `pull_request_template.md` — remove Polly-specific
+- [x] **P4.5** `.github/ISSUE_TEMPLATE/*` and `pull_request_template.md` — remove Polly-specific
       wording and links; add a "which Polly version does this correspond to?" field to the bug
       template while we are still tracking upstream closely.
-- [ ] **P4.6** Add `CODEOWNERS` per D11: `* @iancooper @holytshirt @DevJonny @preardon`.
+- [x] **P4.6** Add `CODEOWNERS` per D11: `* @iancooper @holytshirt @DevJonny @preardon`.
 
 **Exit criteria:** no contributor-facing document binds anyone to the .NET Foundation or routes
 them to Polly.
+
+**COMPLETE.** Every contributor-facing document is now Fences'. No .NET Foundation obligation
+survives; no reader is routed to Polly's Slack, tracker or documentation site. Nothing under `src/`,
+`test/`, `eng/` or `cake.cs` changed, so the build cannot have regressed.
+
+Deliberate deviations from the wording above, and decisions taken while doing the work:
+
+* **`CLA.txt` is not byte-for-byte Brighter's.** Sections 1 to 6 — the whole operative agreement,
+  Harmony HA-CLA-I 1.0 — are verbatim. Three things changed, because copying them literally would
+  have produced a defective document: the title and opening sentence now name `Paramore.Fences`
+  rather than `Paramore.Brighter`; the execution instruction points at the CLA assistant instead of
+  the defunct `clahub.com`; and the scraped GitHub Pages chrome (`Paramore` /
+  `View the Project on GitHub BrighterCommand/Brighter` header, `Theme by orderedlist` footer) is
+  gone. The dangling cross-reference the Harmony template leaves in section 1 and 3(d)
+  ("follow the instructions in .") is **retained as-is** — it is in the legal text and fixing it
+  means inventing terms.
+* **CLA Assistant stores signatures on a `cla-signatures` branch of this repository**, not in a
+  separate repository or gist as D7's table suggested. Same custody outcome — BrighterCommand holds
+  the signature record — but it runs on `GITHUB_TOKEN` alone, so no personal access token has to be
+  provisioned before the workflow works. `.github/workflows/cla.yml` is gated on
+  `github.event.repository.fork == false` like the repo's other `pull_request_target` workflows, and
+  carries the same `# zizmor: ignore[dangerous-triggers]` justification as `dependabot-approve.yml`.
+* **`CONTRIBUTING.md` gained two sections Brighter does not have.** *Public API Changes* is its own
+  top-level section rather than a bullet under Code Style, because it is the discipline contributors
+  and agents get wrong most often. *Configure Git Blame* carries the
+  `git config blame.ignoreRevsFile .git-blame-ignore-revs` note.
+* **`.github/ISSUE_TEMPLATE.md` deleted.** The legacy single-file template is superseded by the
+  `.github/ISSUE_TEMPLATE/` forms, duplicated `10_bug_report.yml`, and was unreferenced.
+* **`.github/wordlist.txt` gained 36 entries.** `aspell` is not installed here, so the CI spellcheck
+  could not be run against the new prose. The additions are belt-and-braces for terms the dictionary
+  plausibly does not know (`Shouldly`, `NSubstitute`, `Stryker`, `docfx`, `PowerShell`, the
+  maintainer handles, and the British spellings `licence`, `behavioural`, `organisation`,
+  `labelled`, `honours`). Extra entries are harmless; a missing one fails the build.
+* **`markdownlint-cli2` was run locally** against `.markdownlint.json` over every changed Markdown
+  file: 0 issues. All changed YAML parses.
+
+**New finding, for Phase 6 or 7:** `.github/workflows/gh-pages.yml` still sets
+`cname: www.fencesdocs.org` — the rename script's mechanical output from `www.pollydocs.org`. D8
+puts the site at `https://brightercommand.github.io/Fences/` and explicitly defers buying a domain,
+so the `cname:` line contradicts the decision and would break the Pages deployment. The Phase 4
+documents all link to the `github.io` URL, per D8.
+
+**Second new finding — CI Markdown lint is already broken, on Phase 1 and 3 output.** Running the
+exact tool the `gh-pages` workflow pins (`markdownlint-cli2` **0.23.2**, confirmed by reading
+`package.json` at the pinned action SHA) over the same glob it uses gives errors on four *tracked*
+files, none of them touched by Phase 4:
+
+| File | Errors | Rules |
+| --- | --- | --- |
+| `fork-migration-plan.md` | 105 | `MD004` (86, dash vs asterisk), `MD060` (90 → 45 sites), `MD037`, `MD046`, `MD040`, `MD031`, `MD024` |
+| `docs/adr/0002-fork-polly-as-fences.md` | 5 | `MD025` (front matter `title` counts as the first h1), `MD060` |
+| `docs/adr/0001-record-architecture-decisions.md` | 1 | `MD025` |
+| `NOTICE.md` | 1 | `MD040` (fence with no language) |
+
+`PROMPT.md` and `baseline/README.md` also fail but are gitignored, so CI never sees them. The
+Phase 3 files (`README.md`, `package-readme.md`, `docs/index.md`) are clean — that check was real,
+it just did not cover the Phase 1 files or the plan itself.
+
+The three small files are a few minutes' work. `fork-migration-plan.md` is the awkward one: it is a
+working document that will be retired, and `MD004` wants its 86 `-` bullets turned into `*`, which
+is pure churn. The cheaper answer for it is to add `!fork-migration-plan.md` to the `globs:` list in
+`.github/workflows/gh-pages.yml`, alongside the existing `BenchmarkDotNet.Artifacts` exclusion.
+Deferred to Phase 7 unless done sooner as a standalone chore.
 
 ### Phase 5 — Agentic workflow support
 

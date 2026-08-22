@@ -6,7 +6,9 @@ body:
 - type: markdown
   attributes:
     value: |
-      Please check for an existing issue and our documentation at [fencesdocs.org](https://www.pollydocs.org/) before submitting a bug report.
+      Please check for an existing issue and [our documentation](https://brightercommand.github.io/Fences/) before submitting a bug report.
+
+      Fences is a community fork of [Polly](https://github.com/App-vNext/Polly). It is not affiliated with, endorsed by, or supported by App vNext or the Polly maintainers, and they cannot help with issues raised here. Equally, please raise Polly bugs on the Polly tracker rather than this one.
 - type: textarea
   attributes:
     label: Describe the bug
@@ -50,6 +52,14 @@ body:
     label: Paramore.Fences version
     description: |
       Which version of Paramore.Fences are you facing the issue with?
+  validations:
+    required: false
+- type: input
+  attributes:
+    label: Does this also happen in Polly?
+    description: |
+      Fences is a recent fork of Polly, so most of the code is still shared. If you can, tell us which version of Polly you tried and whether the same behaviour occurs there. It tells us straight away whether the bug is ours or inherited, and whether the fix needs reporting upstream too.
+    placeholder: e.g. "Also happens in Polly 8.6.1" or "Works fine in Polly 8.6.1"
   validations:
     required: false
 - type: input
