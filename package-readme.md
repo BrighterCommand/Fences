@@ -4,7 +4,7 @@ Polly is a .NET resilience and transient-fault-handling library that allows deve
 
 [![NuGet version](https://img.shields.io/nuget/v/Polly?logo=nuget&label=NuGet&color=blue)](https://www.nuget.org/packages/Polly/) [![Build status](https://github.com/App-vNext/Polly/actions/workflows/build.yml/badge.svg?branch=main&event=push)](https://github.com/App-vNext/Polly/actions/workflows/build.yml?query=branch%3Amain+event%3Apush) [![Code coverage](https://codecov.io/gh/App-vNext/Polly/branch/main/graph/badge.svg)](https://codecov.io/gh/App-vNext/Polly)
 
-![Polly logo](https://raw.github.com/App-vNext/Polly/main/Polly-Logo.png)
+![Fences logo](https://raw.githubusercontent.com/BrighterCommand/Fences/main/images/fences-264.png)
 
 ## Release notes
 
