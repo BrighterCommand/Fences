@@ -352,7 +352,15 @@ including the `mdsnippets` mechanism that compiles `src/Snippets` and injects th
 prose. Throwing that away to gain family consistency is a bad trade.
 
 Cross-link both ways: a Fences entry in the GitBook pointing out to the docfx site, and a link
-home to BrighterCommand from the Fences site. Buying a domain is a later, optional step.
+home to BrighterCommand from the Fences site.
+
+**No domain will be bought — CONFIRMED 2026-08-22 (session 4).** There is no point paying for one
+while Phase 8 is held pending the Polly negotiation; if the talks succeed the fork may be retired,
+and `brightercommand.github.io/Fences` costs nothing and works today. The
+`cname: www.fencesdocs.org` line the rename script produced in `.github/workflows/gh-pages.yml` has
+been **removed**. It had never taken effect — the live site is already
+`https://brightercommand.github.io/Fences/` and the repository's Pages configuration reports
+`cname: null` — but leaving it in would have pointed the next deployment at a domain nobody owns.
 
 ### D9 — Attribution boundary (see also Phase 1)
 
@@ -936,11 +944,13 @@ Deliberate deviations from the wording above, and decisions taken while doing th
 * **`markdownlint-cli2` was run locally** against `.markdownlint.json` over every changed Markdown
   file: 0 issues. All changed YAML parses.
 
-**New finding, for Phase 6 or 7:** `.github/workflows/gh-pages.yml` still sets
-`cname: www.fencesdocs.org` — the rename script's mechanical output from `www.pollydocs.org`. D8
-puts the site at `https://brightercommand.github.io/Fences/` and explicitly defers buying a domain,
-so the `cname:` line contradicts the decision and would break the Pages deployment. The Phase 4
-documents all link to the `github.io` URL, per D8.
+**Found in Phase 4, now CLOSED:** `.github/workflows/gh-pages.yml` still set
+`cname: www.fencesdocs.org` — the rename script's mechanical output from `www.pollydocs.org`, for a
+domain nobody owns. The line is **removed** and D8 now records that no domain will be bought while
+Phase 8 is held. The Phase 4 documents all link to `https://brightercommand.github.io/Fences/`.
+
+That leaves `fencesdocs` in `.github/wordlist.txt` as a dead entry, and **P7.3 unblocked**: the
+`pollydocs.org` links now have a settled destination to be rewritten to.
 
 **Second new finding — CI Markdown lint is already broken, on Phase 1 and 3 output.** Running the
 exact tool the `gh-pages` workflow pins (`markdownlint-cli2` **0.23.2**, confirmed by reading
