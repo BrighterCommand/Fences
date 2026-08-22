@@ -794,12 +794,13 @@ must rename *and* re-provision them, or delete the steps.
 
 ### Phase 3 — New identity
 
-- [ ] **P3.1** Generate `Fences.snk` and wire up `FencesStrongNamePublicKey` (D5, **B2**).
+- [x] **P3.1** Generate `Fences.snk` and wire up `FencesStrongNamePublicKey` (D5, **B2**).
       Verify `InternalsVisibleTo` still works — i.e. the test projects still see internals.
-- [ ] **P3.2** `MinVerMinimumMajorMinor` → `9.0`. **`PackageValidationBaselineVersion` is already
+      *Done in Phase 2; token `6998A40D28482B6D`, asserted in `test/Shared/StrongNameTests.cs`.*
+- [x] **P3.2** `MinVerMinimumMajorMinor` → `9.0`. **`PackageValidationBaselineVersion` is already
       done** — it had to be pulled forward into Phase 2 to get a green build; see the Phase 2
       execution notes. **B3 is closed.**
-- [ ] **P3.2a** Decide what `PublicAPI.Shipped.txt` should contain. The rename script rewrote the
+- [x] **P3.2a** Decide what `PublicAPI.Shipped.txt` should contain. The rename script rewrote the
       five `Shipped.txt` files in place, so the analyser now treats the whole `Paramore.Fences.*`
       surface as *shipped* — but nothing has shipped under that name, and D3 starts us at `9.0.0`.
       Strictly, `Shipped.txt` should be empty and everything should sit in `Unshipped.txt` until
@@ -807,19 +808,56 @@ must rename *and* re-provision them, or delete the steps.
       rebranded fork usually does; it also keeps the P2.2 diff meaningful. **Confirm the carry-
       forward deliberately rather than by accident** — the alternative is a 1,725-line churn and
       loses the oracle.
-- [ ] **P3.3** `eng/Library.targets` package metadata:
+
+      **CONFIRMED 2026-08-22 (session 3): carry the baseline forward.** The `Shipped.txt` files
+      keep the renamed surface and are treated as if it had shipped under the Fences names. Two
+      consequences to hold on to: the D12 rename lives in `Shipped.txt` rather than
+      `Unshipped.txt`, which is the one place this repo's "every public API change goes in
+      Unshipped" rule is deliberately not followed; and the `baseline/publicapi/` oracle stays
+      comparable, so the P2.2 diff continues to read "D12 and nothing else".
+- [x] **P3.3** `eng/Library.targets` package metadata:
       `Company` → `Brighter Command`; `Authors` → `Brighter Command`;
       `Copyright` → `Copyright (c) 2026-$(year), Brighter Command`;
       `PackageProjectUrl` → `https://github.com/BrighterCommand/Fences`;
       `PackageReleaseNotes` → the Fences changelog URL. (D9)
-- [ ] **P3.4** Package descriptions and tags: describe Fences, drop `Polly`/`Simmy` from
+
+      **Deviation, deliberate:** `Copyright` retains App vNext's notice *alongside* ours rather
+      than replacing it — `Copyright (c) 2015-2025, App vNext. Copyright (c) 2026-$(year),
+      Brighter Command.` G2 constrains `Authors` and `Company`, which assert authorship of this
+      package; `Copyright` states who holds copyright in a derivative work, and BSD-3-Clause
+      clause 1 requires the upstream notice be retained. This matches `LICENSE`, which carries
+      both lines and is packed into every nupkg.
+- [x] **P3.4** Package descriptions and tags: describe Fences, drop `Polly`/`Simmy` from
       `PackageTags`, keep a factual "fork of Polly" sentence in the description. (D9)
-- [ ] **P3.5** Telemetry rename per D4, plus a `docs/migration-from-polly.md` section listing the
-      old → new meter/metric names.
-- [ ] **P3.6** Fix `README.md` (**B9**): the broken link syntax, the empty NuGet badges, and the
+      Every description now opens with the G1 lineage sentence immediately followed by the G3
+      non-affiliation line. `PackageTags` lead with `Fences Paramore`; the dotted
+      `Paramore.Fences` token is gone (it was a rename artefact — a dotted string is a poor tag).
+- [x] **P3.5** Telemetry rename per D4, plus a `docs/migration-from-polly.md` section listing the
+      old → new meter/metric names. *The code side of D4 landed in Phase 2; Phase 3 adds the
+      guide (`docs/migration-from-polly.md`, linked from `docs/toc.yml`) and bumps
+      `MinVerMinimumMajorMinor` to `9.0` in `eng/Common.props`.*
+- [x] **P3.6** Fix `README.md` (**B9**): the broken link syntax, the empty NuGet badges, and the
       `BrigherCommand` typo. Add the fork-provenance note and a "Migrating from Polly" section
       (it is a two-line change for consumers — say so, it is our best adoption argument).
-- [ ] **P3.7** Rewrite the 40 `pollydocs.org` links per D8.
+- [x] **P3.7** ~~Rewrite the 40 `pollydocs.org` links per D8.~~ **Moved to Phase 7 (P7.3).**
+      The plan contradicted itself: §2b's survivors table already assigned these to Phase 7. Phase
+      7 is right, because `.github/wordlist.txt` says `fencesdocs` and the spellcheck workflow
+      fails until the links and the wordlist change in the same commit — and Phase 7 rewrites
+      those same files' prose anyway. `README.md`'s own prose links were fixed under P3.6; the
+      `pollydocs.org` URLs still visible in `README.md` are inside generated `<!-- snippet: -->`
+      regions and belong to `src/Snippets/Docs/*.cs`, which is Phase 7's.
+
+Also done in Phase 3, from the Phase 1–2 outstanding list:
+
+- [x] `docs/index.md` — deleted the false *"Polly is part of the .NET Foundation"* claim and
+      rebranded the page. The `eShopOnContainers` bullet went with it: it is a Polly resource, not
+      a Fences one, and the link was already stale.
+- [x] `package-readme.md` — was still wholly Polly's. Rewritten. **The NuGet version badge is
+      removed, not repointed**, because nothing is published; Phase 8 puts it back.
+- [x] `docs/docfx.json` — `_appName`/`_appTitle` are now `Fences`, the site name, not
+      `Paramore.Fences`, the package name.
+- [x] `.github/wordlist.txt` — added `paramore`, `brighter`, `brightercommand`, which the new
+      prose needs and aspell does not know.
 
 **Exit criteria:** packages build with Fences identity, correct strong name, correct metadata.
 
@@ -1023,9 +1061,13 @@ missing secrets, and `packages-*` artefacts containing `Paramore.Fences.*.nupkg`
 
 - [ ] **P7.1** Rebuild the docfx site under the new branding; verify `docs/api` metadata generation
       still resolves after the project renames.
-- [ ] **P7.2** Add `docs/migration-from-polly.md`: the `using` change, the package-ID map, the
-      telemetry rename (D4), and the strong-name change.
-- [ ] **P7.3** Publish to GitHub Pages per D8; update all README/doc links.
+- [x] **P7.2** ~~Add `docs/migration-from-polly.md`~~ — **delivered early, in Phase 3 (P3.5)**:
+      the `using` change, the package-ID map, the D12 type rename, the telemetry rename (D4), the
+      strong-name change, and the bounded `Microsoft.Extensions.Http.Resilience` claim.
+- [ ] **P7.3** Publish to GitHub Pages per D8; update all doc links. **This now also owns the ~40
+      `pollydocs.org` links** (moved here from P3.7) — in `docs/**/*.md`,
+      `src/Snippets/Docs/*.cs` and `.github/ISSUE_TEMPLATE/*`. Change
+      `.github/wordlist.txt`'s `fencesdocs` entry in the *same* commit or CI spellcheck breaks.
 - [ ] **P7.4** Prune `docs/community/*` — it lists Polly-ecosystem resources, Slack, and
       contributor pages that no longer apply.
 
@@ -1129,6 +1171,7 @@ traceability:
 | D10 | Icon | Fence palisade in Brighter's palette; draft accepted as a starting point |
 | D11 | Ownership | `@iancooper @holytshirt @DevJonny @preardon`; security via GitHub Advisories |
 | D12 | The one public type rename | `PollyServiceCollectionExtensions` → `ResilienceServiceCollectionExtensions` |
+| P3.2a | `PublicAPI.Shipped.txt` | Carry the renamed Polly baseline forward; keep the oracle |
 | P8.1 | NuGet IDs | `Paramore.*` prefix reservation email only — no placeholder publish |
 | — | SDK | Install `10.0.400`, keep the pin, add `rollForward: latestFeature` |
 | — | `update-dotnet-sdk.yml` | Delete |

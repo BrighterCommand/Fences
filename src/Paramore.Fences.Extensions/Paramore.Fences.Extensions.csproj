@@ -14,8 +14,8 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <Description>Paramore.Fences.Extensions adds support for dependency injection and telemetry for the Paramore.Fences.Core library.</Description>
-    <PackageTags>Paramore.Fences Exception Handling Resilience Transient Fault Policy DI DependencyInjection IOC InversionOfControl Metrics Observability Telemetry</PackageTags>
+    <Description>Fences is a community fork of Polly, maintained by Brighter Command. It is not affiliated with, endorsed by, or supported by App vNext or the Polly maintainers. Paramore.Fences.Extensions adds support for dependency injection and telemetry to the Paramore.Fences.Core library.</Description>
+    <PackageTags>Fences Paramore Exception Handling Resilience Transient Fault Policy DI DependencyInjection IOC InversionOfControl Metrics Observability Telemetry</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>

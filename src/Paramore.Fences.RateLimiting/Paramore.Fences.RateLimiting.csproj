@@ -14,8 +14,8 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <Description>Paramore.Fences.RateLimiting is a .NET resilience and transient-fault-handling library that allows developers to express resilience strategies using a Rate Limiter in a fluent and thread-safe manner.</Description>
-    <PackageTags>Paramore.Fences Exception Handling Resilience Transient Fault Policy Wait Bulkhead Rate-limit Throttle Hedging</PackageTags>
+    <Description>Fences is a community fork of Polly, maintained by Brighter Command. It is not affiliated with, endorsed by, or supported by App vNext or the Polly maintainers. Paramore.Fences.RateLimiting is a .NET resilience and transient-fault-handling library that allows developers to express resilience strategies using a Rate Limiter in a fluent and thread-safe manner.</Description>
+    <PackageTags>Fences Paramore Exception Handling Resilience Transient Fault Policy Wait Bulkhead Rate-limit Throttle Hedging</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>
