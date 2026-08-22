@@ -665,12 +665,17 @@ These will not be caught by a casual eye and each will break the build or a chec
 
 #### 2d. Validate
 
-- [ ] **P2.1** `./build.ps1` green (same test counts as the P0.2 baseline).
-- [ ] **P2.2** `diff` the regenerated `PublicAPI.Shipped.txt` against the P0.3 baseline — the only
+- [x] **P2.1** `./build.ps1` green (same test counts as the P0.2 baseline). **Done — exit 0,
+      0 errors, 0 warnings; counts identical to baseline on all three TFMs; all five packages
+      packed.**
+- [x] **P2.2** **Done — the only diff across 1,725 lines is D12.** Four of the five projects are
+      byte-identical modulo the prefix. `diff` the regenerated `PublicAPI.Shipped.txt` against the P0.3 baseline — the only
       change must be the namespace prefix. Any other diff is a bug in the rename.
-- [ ] **P2.3** `git grep -in polly` and triage every remaining hit. Expected survivors: the
-      exclusion list, and nothing else.
-- [ ] **P2.4** Append the rename commit SHA to `.git-blame-ignore-revs`.
+- [x] **P2.3** **Done — every non-Markdown hit triaged against the survivor table above; no
+      unexpected hits.** All `*.md` still match, by design (2b-bis).
+- [x] **P2.4** **Done — `ad904b6e`.** Note that **git does not use this file unless told to**:
+      contributors need `git config blame.ignoreRevsFile .git-blame-ignore-revs` locally.
+      GitHub's blame UI honours it automatically. Say so in `CONTRIBUTING.md` (Phase 4).
 
 **Exit criteria:** build green, public API diff is prefix-only, `git grep polly` returns only
 deliberate survivors.
