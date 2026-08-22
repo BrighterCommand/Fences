@@ -49,14 +49,40 @@ Polly maintainers make the fork unnecessary.
 
 ### 2.3 The single most important finding
 
-**No public type or member name contains the string `Polly`.**
+> **CORRECTED 2026-08-22.** This section originally read *"No public type or member name contains
+> the string `Polly`"*, citing
+> `git grep -ohE "\b[A-Za-z_]*Polly[A-Za-z_]*\b" -- "src/*.cs"` returning nothing. **That was a
+> false negative with two independent bugs**: `\b` is a GNU extension unsupported by this
+> platform's POSIX ERE, so the pattern matches nothing at all
+> (`git grep -cE "\bPolly\b"` on a file with six hits exits 1); and the pathspec `src/*.cs`
+> matches only files directly in `src/`, of which there are none. **Do not use `\b` with
+> `git grep -E` in this repo.**
+>
+> The corrected check runs against the P0.3 baseline rather than the source:
+> ```sh
+> cat baseline/publicapi/*.txt \
+>   | grep -ohE "[A-Za-z0-9_]*Polly[A-Za-z0-9_]+|[A-Za-z0-9_]+Polly[A-Za-z0-9_]*" | sort -u
+> ```
 
-`git grep -ohE "\b[A-Za-z_]*Polly[A-Za-z_]*\b" -- "src/*.cs"` returns nothing. Public surface is
-`ResiliencePipeline`, `RetryStrategyOptions`, `ResilienceContext` etc. — all brand-neutral.
+**Exactly one public type name contains the string `Polly`: `Polly.PollyServiceCollectionExtensions`
+(`src/Polly.Extensions/DependencyInjection/`), carrying 8 public members.** Everything else in the
+public surface is brand-neutral — `ResiliencePipeline`, `RetryStrategyOptions`,
+`ResilienceContext`.
+
+That one type is an extension-method holder, so consumers write
+`services.AddResiliencePipeline(...)` and never name the class; the practical migration cost is
+still nil. But it is a public API change and needs a `.PublicAPI/PublicAPI.Unshipped.txt` entry,
+and it must be handled in **Pass 1**, or `Polly.PollyServiceCollectionExtensions` becomes
+`Paramore.Fences.Paramore.FencesServiceCollectionExtensions`.
+
+Other embedded `Polly*` identifiers exist and were missed for the same reason — `PollyVersion`
+(54 hits), `PollyConfig` (11), `EnablePollyMetering` (6), `ListenPollyMetrics` (3),
+`PollyDiagnosticSource` (2) — but all are in `bench/`, `test/` or docs prose. Internal, and
+mechanical.
 
 Consequences:
 
-* The rename is a **namespace / assembly / package-ID** change only. No type renames, no API
+* The rename is a **namespace / assembly / package-ID** change plus **one type rename**. No API
   redesign, no doc-comment rewrites of member names.
 * A consumer migrating from Polly 8.7 to Fences changes `using Polly…;` to `using Fences…;`
   and their package references. Nothing else.
@@ -119,6 +145,7 @@ These are the `Meter` / `ActivitySource` names and metric names — see decision
 | D9 | Lead with the Polly lineage, inside the guardrails in D9 | **CONFIRMED 2026-08-22** |
 | D10 | Icon: fence palisade in Brighter's palette | **CONFIRMED 2026-08-22 — draft accepted as starting point** |
 | D11 | Ownership: same four maintainers as Brighter | **CONFIRMED 2026-08-22** |
+| D12 | Rename `PollyServiceCollectionExtensions` → `ResilienceServiceCollectionExtensions` | **CONFIRMED 2026-08-22** |
 
 All decisions are settled. Phases 0–8 are cleared to execute.
 
@@ -370,6 +397,29 @@ Courtesy check before P4.6 lands: the other three are being signed up for Fences
 project that may be abandoned if the Polly talks succeed. Worth a heads-up rather than a surprise
 review request.
 
+### D12 — The one public type rename — **CONFIRMED: `ResilienceServiceCollectionExtensions`**
+
+§2.3's correction turned up exactly one public type carrying the brand:
+`Polly.PollyServiceCollectionExtensions`, with 8 public members. It has to change — shipping a
+type called `Polly*` from a package called `Paramore.Fences` is the branding-not-nominative-use
+that G4 rules out.
+
+**Chosen: `ResilienceServiceCollectionExtensions`** — drop the brand token, describe what the class
+does. It matches how the rest of the surface is already named: `ResiliencePipeline`,
+`ResilienceContext`, `ResiliencePipelineBuilder`, none of which carry a brand. `Polly*` was the
+odd one out upstream, and the fork is the moment to fix it rather than carry it forward as
+`Fences*`.
+
+Rejected: `FencesServiceCollectionExtensions` (mechanically simpler, but re-introduces a brand
+token into a surface that is otherwise brand-free).
+
+Consumer impact is nil in practice — it is an extension-method holder, so callers write
+`services.AddResiliencePipeline(...)` and never name the class. It is still a public API change
+and needs a `.PublicAPI/PublicAPI.Unshipped.txt` entry.
+
+Handle it in **Pass 1**, before the dotted replacement, or it becomes
+`Paramore.Fences.Paramore.FencesServiceCollectionExtensions`.
+
 ---
 
 ## 4. Phases
@@ -508,12 +558,23 @@ bench/Polly.Core.Benchmarks   -> bench/Paramore.Fences.Core.Benchmarks
 
 **Pass 1 — embedded identifiers (must run first):**
 
+> **Revised 2026-08-22.** The original Pass-1 table had four entries. The §2.3 correction found
+> six more — they were missed by the same broken `\b` grep. The full list, verified with
+> `git grep -ohE "[A-Za-z0-9_]*Polly[A-Za-z0-9_]+|[A-Za-z0-9_]+Polly[A-Za-z0-9_]*" | sort -u`:
+
 | Pattern | Replacement | Where |
 |---|---|---|
+| `PollyServiceCollectionExtension` | `ResilienceServiceCollectionExtension` | **public API** — D12. The un-suffixed pattern deliberately catches both `…Extensions` (the type) and `…ExtensionTests` (its test class) |
 | `PollyStrongNamePublicKey` | `FencesStrongNamePublicKey` | `Directory.Build.props`, `eng/Library.targets` |
 | `IncludePollyUsings` | `IncludeFencesUsings` | `Directory.Build.targets`, `eng/Benchmark.targets` |
 | `PollyDiagnosticSource` | `FencesDiagnosticSource` | `src/Polly.Core/Telemetry/TelemetryUtil.cs` |
 | `SKIP_POLLY_ANALYZERS` | `SKIP_FENCES_ANALYZERS` | `eng/Analyzers.targets` |
+| `PollyVersion` | `FencesVersion` | `bench/` — 54 hits, the most common of the lot |
+| `PollyConfig` | `FencesConfig` | `bench/Polly.Benchmarks` |
+| `EnablePollyMetering` | `EnableFencesMetering` | `test/Polly.TestUtils`, `test/Polly.Extensions.Tests` |
+| `ListenPollyMetrics` | `ListenFencesMetrics` | `bench/Polly.Core.Benchmarks` |
+
+All but the first are internal, in `bench/` or `test/`.
 
 **Pass 2 — the bulk (word-boundary-aware):**
 
@@ -542,11 +603,41 @@ nothing. Any hit is a Pass-1 case that was missed.
 * `docs/adr/0002-fork-polly-as-fences.md` — including its *filename*. The ADR records what we
   forked and why; rewriting "Polly" inside it would make it unreadable and destroy the record.
   ADR 0001 has no "Polly" in it, so it is unaffected either way.
+* **All `*.md`** — see "Why prose is out of scope" below.
+* `fork-migration-plan.md`, `CLAUDE.md`, `PROMPT.md` — working documents *about* the migration.
 * `.git-blame-ignore-revs`
 * Any URL that must continue to resolve to upstream: the `Polly-Contrib/Polly.Contrib.WaitAndRetry`
   link in `src/Polly.Core/Retry/RetryHelper.cs`, and upstream issue links in doc prose. Handle
   these as a manual pass after the bulk script.
 * The `DynamicProxyGenAssembly2` public key in `eng/Library.targets`.
+
+#### 2b-bis. Why prose is out of scope for this commit
+
+**Decided 2026-08-22.** The original 2c listed "`docs/toc.yml` and 35 doc pages" as part of the
+rename script. Renaming Markdown *prose* mechanically does not merely look clumsy — **it
+manufactures falsehoods**, and a few minutes in the docs makes that concrete:
+
+* `docs/community/resources.md` is 33 hits of **third-party article and podcast titles**:
+  "NuGet Package of the Week: Polly wanna fluently express…", ".NET Rocks — *Polly V8 with Joel
+  Hulen and Martin Costello*". Rewriting them misquotes Scott Hanselman and Carl Franklin.
+* `docs/community/polly-contrib.md`, `http-client-integrations.md` and
+  `libraries-and-contributions.md` describe **Polly's ecosystem** — `Polly-Contrib`, `Simmy`,
+  third-party packages. A mechanical pass invents a `Fences-Contrib` organisation that does not
+  exist.
+* `README.md` links `App-vNext/Polly-Samples` and `dotnet/eShop`. Renaming the link text
+  misdescribes real repositories; renaming inside the URL breaks them.
+* `docs/migration-v8.md` is Polly's own v7 → v8 guide. "Migrating from Fences v7" is false —
+  there was no Fences v7.
+
+So: **the rename script skips every `*.md`.** Documentation is Phase 7's job (D8 already owns the
+40 `pollydocs.org` links), and it is editorial work — decide what to keep, delete, rewrite or cite
+as external — not a substitution.
+
+The corollary for **P2.3**: `git grep -in polly` will still return every `*.md` after this commit.
+That is expected, not a miss. Triage the *non-Markdown* hits.
+
+Structural, non-prose docs files **are** in scope, because the build depends on them:
+`docs/docfx.json`, `docs/toc.yml`, `mdsnippets.json`.
 
 #### 2c. Non-obvious files that must be touched
 
@@ -907,6 +998,7 @@ traceability:
 | D9 | Attribution | Lead with the Polly lineage, inside guardrails G1–G6 |
 | D10 | Icon | Fence palisade in Brighter's palette; draft accepted as a starting point |
 | D11 | Ownership | `@iancooper @holytshirt @DevJonny @preardon`; security via GitHub Advisories |
+| D12 | The one public type rename | `PollyServiceCollectionExtensions` → `ResilienceServiceCollectionExtensions` |
 | P8.1 | NuGet IDs | `Paramore.*` prefix reservation email only — no placeholder publish |
 | — | SDK | Install `10.0.400`, keep the pin, add `rollForward: latestFeature` |
 | — | `update-dotnet-sdk.yml` | Delete |
