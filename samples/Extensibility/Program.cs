@@ -1,6 +1,6 @@
 ﻿using Extensibility.Proactive;
 using Extensibility.Reactive;
-using Polly;
+using Paramore.Fences;
 using System.Net;
 
 #region ext-proactive-strategy-usage

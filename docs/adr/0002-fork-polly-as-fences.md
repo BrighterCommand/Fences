@@ -121,5 +121,22 @@ downstream: to be accurate about what Fences is, to send fixes upstream where th
 and to say plainly that Polly is actively maintained and remains the right choice for many users.
 Fences is a divergence, not a criticism.
 
+**A limit on what the fork achieves.** `Microsoft.Extensions.Http.Resilience` — Microsoft's
+official HttpClient resilience package, and a common dependency in ASP.NET Core applications — has
+a hard NuGet dependency on `Polly.Extensions` and `Polly.RateLimiting` via
+`Microsoft.Extensions.Resilience`. Its `AddResilienceHandler` callback receives a
+`Polly.ResiliencePipelineBuilder<HttpResponseMessage>`, which no Fences strategy can attach to.
+
+Fences therefore removes *Brighter's* Polly dependency, but it cannot remove Polly from an
+application that calls `AddStandardResilienceHandler`. Those users keep Polly binaries in their
+graph regardless of what Brighter does, and whatever OSMF exposure follows from that is unchanged
+by this fork. This does not undermine the decision — Brighter's own transitive imposition on its
+users is the thing we control and the thing we remove — but it does bound the claim, and the
+migration guide must say so plainly rather than implying the fork makes an application
+Polly-free. The two libraries coexist safely; that is the point of the full rename (R5).
+
+Closing that gap would mean shipping our own `AddResilienceHandler` equivalent, a
+`Paramore.Fences.Http` package. That is a candidate for future work, not part of the fork.
+
 **Held.** Nothing is published to nuget.org pending the negotiation with the Polly maintainers.
 Package IDs cannot be deleted once published, only unlisted.

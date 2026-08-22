@@ -1,8 +1,8 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Polly;
-using Polly.Registry;
-using Polly.Timeout;
+using Paramore.Fences;
+using Paramore.Fences.Registry;
+using Paramore.Fences.Timeout;
 
 // ------------------------------------------------------------------------
 // 1. Register your resilience pipeline

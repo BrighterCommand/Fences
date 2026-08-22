@@ -42,8 +42,8 @@ jobs:
         env:
           DOTNET_CLI_TELEMETRY_OPTOUT: true
           DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
-          GIT_COMMIT_USER_EMAIL: '138034000+polly-updater-bot[bot]@users.noreply.github.com'
-          GIT_COMMIT_USER_NAME: 'polly-updater-bot[bot]'
+          GIT_COMMIT_USER_EMAIL: '138034000+fences-updater-bot[bot]@users.noreply.github.com'
+          GIT_COMMIT_USER_NAME: 'fences-updater-bot[bot]'
         run: |
           $ErrorActionPreference = "Stop"
           $ProgressPreference = "SilentlyContinue"

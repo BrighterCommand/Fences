@@ -1,12 +1,13 @@
 using System.Net.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Polly.CircuitBreaker;
-using Polly.Registry;
-using Polly.Retry;
-using Polly.Simmy;
-using Polly.Simmy.Fault;
-using Polly.Simmy.Latency;
+using Paramore.Fences;
+using Paramore.Fences.CircuitBreaker;
+using Paramore.Fences.Registry;
+using Paramore.Fences.Retry;
+using Paramore.Fences.Simmy;
+using Paramore.Fences.Simmy.Fault;
+using Paramore.Fences.Simmy.Latency;
 
 namespace Snippets.Docs;
 

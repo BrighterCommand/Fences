@@ -6,7 +6,7 @@ body:
 - type: markdown
   attributes:
     value: |
-      Please check for an existing issue and our documentation at [pollydocs.org](https://www.pollydocs.org/) before submitting a feature request.
+      Please check for an existing issue and our documentation at [fencesdocs.org](https://www.pollydocs.org/) before submitting a feature request.
 - type: textarea
   attributes:
     label: Is your feature request related to a specific problem? Or an existing feature?

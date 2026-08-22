@@ -18,11 +18,11 @@ $version = [System.Version]::new($ReleaseVersion)
 $releasedVersion = $version.ToString()
 
 $packages = @(
-    "Polly",
-    "Polly.Core",
-    "Polly.Extensions",
-    "Polly.RateLimiting",
-    "Polly.Testing"
+    "Paramore.Fences",
+    "Paramore.Fences.Core",
+    "Paramore.Fences.Extensions",
+    "Paramore.Fences.RateLimiting",
+    "Paramore.Fences.Testing"
 )
 
 foreach ($package in $packages) {

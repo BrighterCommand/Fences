@@ -1,6 +1,7 @@
 ﻿using System.Threading.RateLimiting;
 using Microsoft.Extensions.DependencyInjection;
-using Polly.RateLimiting;
+using Paramore.Fences;
+using Paramore.Fences.RateLimiting;
 
 namespace Snippets.Docs;
 

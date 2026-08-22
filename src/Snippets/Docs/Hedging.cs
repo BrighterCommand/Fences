@@ -1,6 +1,7 @@
 ﻿using System.Net;
 using System.Net.Http;
-using Polly.Hedging;
+using Paramore.Fences;
+using Paramore.Fences.Hedging;
 using Snippets.Docs.Utils;
 
 namespace Snippets.Docs;

@@ -144,8 +144,8 @@ jobs:
       uses: anchore/sbom-action@e22c389904149dbc22b58101806040fa8d37a610 # v0.24.0
       if: runner.os == 'Windows'
       with:
-        artifact-name: polly.spdx.json
-        output-file: ./artifacts/polly.spdx.json
+        artifact-name: fences.spdx.json
+        output-file: ./artifacts/fences.spdx.json
         path: ./artifacts/bin
         upload-release-assets: true
 
@@ -270,9 +270,9 @@ jobs:
           **/*.nupkg `
           --base-directory "${env:GITHUB_WORKSPACE}/packages" `
           --file-list "${env:GITHUB_WORKSPACE}/signing-config/filelist.txt" `
-          --application-name "Polly" `
+          --application-name "Paramore.Fences" `
           --publisher-name "App vNext" `
-          --description "Polly" `
+          --description "Paramore.Fences" `
           --description-url "https://github.com/${env:GITHUB_REPOSITORY}" `
           --azure-key-vault-certificate ${env:AZURE_KEY_VAULT_CERTIFICATE} `
           --azure-key-vault-url ${env:AZURE_KEY_VAULT_URL} `
@@ -308,7 +308,7 @@ jobs:
     - name: Download SBOM
       uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
       with:
-        name: polly.spdx.json
+        name: fences.spdx.json
         path: ./artifacts
 
     - name: Setup .NET SDK
@@ -412,7 +412,7 @@ jobs:
       uses: actions/attest@1e69f48acb82d1966a394da916b4c1698aa569d6 # v4.2.2
       with:
         subject-path: |
-          ./artifacts/polly.spdx.json
+          ./artifacts/fences.spdx.json
           ./artifacts/*/lib/**/*
 
   publish-nuget:

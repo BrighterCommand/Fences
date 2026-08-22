@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>net10.0;net9.0;net8.0</TargetFrameworks>
+    <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('Windows'))">$(TargetFrameworks);net481</TargetFrameworks>
+    <ProjectType>Test</ProjectType>
+    <Nullable>enable</Nullable>
+    <Threshold>100</Threshold>
+    <Include>[Paramore.Fences.Extensions]*</Include>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="..\Shared\StrongNameTests.cs" Link="StrongNameTests.cs" />
+    <Compile Include="..\Shared\TestCancellation.cs" Link="TestCancellation.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\Paramore.Fences.Core.Tests\Utils\ObjectPoolTests.cs" Link="Utils\ObjectPoolTests.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Using Include="Paramore.Fences.TestUtils" />
+    <ProjectReference Include="..\..\src\Paramore.Fences.Extensions\Paramore.Fences.Extensions.csproj" />
+    <ProjectReference Include="..\..\src\Paramore.Fences.RateLimiting\Paramore.Fences.RateLimiting.csproj" />
+    <ProjectReference Include="..\Paramore.Fences.TestUtils\Paramore.Fences.TestUtils.csproj" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" />
+    <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" />
+    <Reference Include="System.Net.Http" Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'" />
+  </ItemGroup>
+</Project>

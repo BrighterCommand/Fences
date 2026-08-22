@@ -6,7 +6,7 @@ body:
 - type: markdown
   attributes:
     value: |
-      Please check for an existing issue and our documentation at [pollydocs.org](https://www.pollydocs.org/) before submitting a bug report.
+      Please check for an existing issue and our documentation at [fencesdocs.org](https://www.pollydocs.org/) before submitting a bug report.
 - type: textarea
   attributes:
     label: Describe the bug
@@ -47,9 +47,9 @@ body:
     required: false
 - type: input
   attributes:
-    label: Polly version
+    label: Paramore.Fences version
     description: |
-      Which version of Polly are you facing the issue with?
+      Which version of Paramore.Fences are you facing the issue with?
   validations:
     required: false
 - type: input
@@ -57,7 +57,7 @@ body:
     label: .NET Version
     description: |
       Run `dotnet --version` to get the .NET SDK version you're using.
-      Alternatively, which target framework(s) (e.g. `net6.0`) does the project you're using Polly in target?
+      Alternatively, which target framework(s) (e.g. `net6.0`) does the project you're using Paramore.Fences in target?
   validations:
     required: false
 - type: textarea

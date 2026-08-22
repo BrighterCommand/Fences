@@ -41,7 +41,7 @@ jobs:
           show-progress: false
           token: ${{ steps.generate-application-token.outputs.token }}
 
-      - name: Update Polly version
+      - name: Update Paramore.Fences version
         shell: pwsh
         run: ./eng/bump-version.ps1 ${env:RELEASE_VERSION}
 
@@ -57,8 +57,8 @@ jobs:
         id: push-changes
         shell: pwsh
         env:
-          GIT_COMMIT_USER_EMAIL: '138034000+polly-updater-bot[bot]@users.noreply.github.com'
-          GIT_COMMIT_USER_NAME: 'polly-updater-bot[bot]'
+          GIT_COMMIT_USER_EMAIL: '138034000+fences-updater-bot[bot]@users.noreply.github.com'
+          GIT_COMMIT_USER_NAME: 'fences-updater-bot[bot]'
         run: |
           $gitStatus = (git status --porcelain)
 

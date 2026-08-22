@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Polly.Registry;
-using Polly.Retry;
+using Paramore.Fences;
+using Paramore.Fences.Registry;
+using Paramore.Fences.Retry;
 
 namespace Snippets.Docs;
 

@@ -122,6 +122,15 @@ PASS2 = [
     ("polly", "fences"),
 ]
 
+# PASS 3 - repo-level names, which must NOT carry the `Paramore.` prefix. PASS 2
+# has by now turned `Polly.snk` into `Paramore.Fences.snk`; the key file is named
+# after the repository, not a package, so it is `Fences.snk` (matching
+# Brighter.snk). Runs last, on the output of PASS 2.
+PASS3 = [
+    ("Paramore.Fences.snk", "Fences.snk"),
+    ("Paramore.Fences.slnx", "Fences.slnx"),
+]
+
 # Extensions the script will rewrite. Anything not listed is left alone, which
 # is why `.md` needs no explicit exclusion and binaries are safe by default.
 TEXT_SUFFIXES = {
@@ -146,6 +155,13 @@ EXCLUDE_PREFIXES = (
 
 URL_RE = re.compile(r"https?://[^\s\"'`)<>\]]+")
 
+# Third-party package IDs that merely start with `Polly`. They are somebody
+# else's published packages and must keep their real names - renaming
+# `Polly.Contrib.WaitAndRetry` invents `Paramore.Fences.Contrib.WaitAndRetry`,
+# which does not exist on nuget.org and fails restore outright. Masked like a
+# URL, and listed longest-first so the longer ID wins.
+PROTECTED_RE = re.compile(r"Polly\.Contrib(\.[A-Za-z0-9_]+)*")
+
 
 def run(*args: str) -> str:
     return subprocess.run(args, check=True, capture_output=True, text=True).stdout
@@ -162,7 +178,7 @@ def should_rewrite(path: str) -> bool:
 
 
 def substitute(text: str) -> str:
-    """Apply pass 1 then pass 2, with http(s) URLs masked throughout."""
+    """Apply pass 1 then pass 2, with URLs and third-party IDs masked."""
     urls: list[str] = []
 
     def mask(match: re.Match[str]) -> str:
@@ -171,10 +187,13 @@ def substitute(text: str) -> str:
         return f"\0{len(urls) - 1}\0"
 
     text = URL_RE.sub(mask, text)
+    text = PROTECTED_RE.sub(mask, text)
 
     for old, new in PASS1:
         text = text.replace(old, new)
     for old, new in PASS2:
+        text = text.replace(old, new)
+    for old, new in PASS3:
         text = text.replace(old, new)
 
     return re.sub(r"\0(\d+)\0", lambda m: urls[int(m.group(1))], text)
@@ -230,19 +249,32 @@ def rewrite_contents(dry_run: bool) -> int:
     return changed
 
 
+MANGLED_RE = re.compile(r"Paramore\.Fences[A-Za-z]")
+
+
 def guard() -> bool:
     """After the passes, `Paramore.Fences` must never be glued to a letter.
 
     Any hit is a PASS 1 case that was missed - the dotted replacement landed
     inside an identifier and produced something like
     `Paramore.FencesStrongNamePublicKey`.
+
+    Scoped to the files this script actually rewrites. A repo-wide `git grep`
+    reports this script and the migration plan, both of which spell the failure
+    mode out in prose on purpose.
     """
     print("\n== guard ==")
-    result = subprocess.run(
-        ["git", "grep", "-nE", r"Paramore\.Fences[A-Za-z]"],
-        capture_output=True, text=True,
-    )
-    hits = [line for line in result.stdout.splitlines() if line]
+    hits: list[str] = []
+    for path in tracked_files():
+        if not should_rewrite(path):
+            continue
+        try:
+            text = Path(path).read_text(encoding="utf-8")
+        except (UnicodeDecodeError, FileNotFoundError):
+            continue
+        for n, line in enumerate(text.splitlines(), start=1):
+            if MANGLED_RE.search(line):
+                hits.append(f"{path}:{n}:{line.strip()}")
     if hits:
         print(f"   FAIL - {len(hits)} identifier(s) mangled by the dotted replacement:")
         for line in hits[:20]:

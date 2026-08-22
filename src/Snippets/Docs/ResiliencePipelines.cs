@@ -1,7 +1,8 @@
 ﻿using System.Net.Http;
 using Microsoft.Extensions.DependencyInjection;
-using Polly.Registry;
-using Polly.Timeout;
+using Paramore.Fences;
+using Paramore.Fences.Registry;
+using Paramore.Fences.Timeout;
 
 namespace Snippets.Docs;
 

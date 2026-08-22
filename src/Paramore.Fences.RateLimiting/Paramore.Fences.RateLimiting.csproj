@@ -1,0 +1,32 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>net8.0;net6.0;netstandard2.0;net472;net462</TargetFrameworks>
+    <AssemblyTitle>Paramore.Fences.RateLimiting</AssemblyTitle>
+    <RootNamespace>Paramore.Fences.RateLimiting</RootNamespace>
+    <Nullable>enable</Nullable>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <ProjectType>Library</ProjectType>
+    <MutationScore>100</MutationScore>
+    <LegacySupport>true</LegacySupport>
+  </PropertyGroup>
+  <PropertyGroup Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net8.0'))">
+    <IsAotCompatible>true</IsAotCompatible>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <Description>Paramore.Fences.RateLimiting is a .NET resilience and transient-fault-handling library that allows developers to express resilience strategies using a Rate Limiter in a fluent and thread-safe manner.</Description>
+    <PackageTags>Paramore.Fences Exception Handling Resilience Transient Fault Policy Wait Bulkhead Rate-limit Throttle Hedging</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Using Include="Paramore.Fences.Utils" />
+    <Compile Include="..\Paramore.Fences.Core\Utils\ExceptionUtilities.cs" Link="utils\ExceptionUtilities.cs" />
+    <Compile Include="..\Paramore.Fences.Core\Utils\Guard.cs" Link="Utils\Guard.cs" />
+    <InternalsVisibleToProject Include="Paramore.Fences.RateLimiting.Tests" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Paramore.Fences.Core\Paramore.Fences.Core.csproj" />
+    <PackageReference Include="System.Threading.RateLimiting" />
+  </ItemGroup>
+</Project>

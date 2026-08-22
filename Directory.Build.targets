@@ -10,17 +10,17 @@
     <Using Remove="System.Net.Http" />
   </ItemGroup>
 
-  <ItemGroup Condition="'$(IncludePollyUsings)' == 'true'">
-    <Using Include="Polly.Bulkhead" />
-    <Using Include="Polly.Caching" />
-    <Using Include="Polly.CircuitBreaker" />
-    <Using Include="Polly.Fallback" />
-    <Using Include="Polly.NoOp" />
-    <Using Include="Polly.RateLimit" />
-    <Using Include="Polly.Registry" />
-    <Using Include="Polly.Retry" />
-    <Using Include="Polly.Timeout" />
-    <Using Include="Polly.Utilities" />
-    <Using Include="Polly.Wrap" />
+  <ItemGroup Condition="'$(IncludeFencesUsings)' == 'true'">
+    <Using Include="Paramore.Fences.Bulkhead" />
+    <Using Include="Paramore.Fences.Caching" />
+    <Using Include="Paramore.Fences.CircuitBreaker" />
+    <Using Include="Paramore.Fences.Fallback" />
+    <Using Include="Paramore.Fences.NoOp" />
+    <Using Include="Paramore.Fences.RateLimit" />
+    <Using Include="Paramore.Fences.Registry" />
+    <Using Include="Paramore.Fences.Retry" />
+    <Using Include="Paramore.Fences.Timeout" />
+    <Using Include="Paramore.Fences.Utilities" />
+    <Using Include="Paramore.Fences.Wrap" />
   </ItemGroup>
 </Project>

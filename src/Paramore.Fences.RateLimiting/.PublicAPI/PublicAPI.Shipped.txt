@@ -1,0 +1,31 @@
+﻿#nullable enable
+Paramore.Fences.RateLimiterResiliencePipelineBuilderExtensions
+Paramore.Fences.RateLimiting.OnRateLimiterRejectedArguments
+Paramore.Fences.RateLimiting.OnRateLimiterRejectedArguments.Context.get -> Paramore.Fences.ResilienceContext!
+Paramore.Fences.RateLimiting.OnRateLimiterRejectedArguments.Lease.get -> System.Threading.RateLimiting.RateLimitLease!
+Paramore.Fences.RateLimiting.OnRateLimiterRejectedArguments.OnRateLimiterRejectedArguments() -> void
+Paramore.Fences.RateLimiting.OnRateLimiterRejectedArguments.OnRateLimiterRejectedArguments(Paramore.Fences.ResilienceContext! context, System.Threading.RateLimiting.RateLimitLease! lease) -> void
+Paramore.Fences.RateLimiting.RateLimiterArguments
+Paramore.Fences.RateLimiting.RateLimiterArguments.Context.get -> Paramore.Fences.ResilienceContext!
+Paramore.Fences.RateLimiting.RateLimiterArguments.RateLimiterArguments() -> void
+Paramore.Fences.RateLimiting.RateLimiterArguments.RateLimiterArguments(Paramore.Fences.ResilienceContext! context) -> void
+Paramore.Fences.RateLimiting.RateLimiterRejectedException
+Paramore.Fences.RateLimiting.RateLimiterRejectedException.RateLimiterRejectedException() -> void
+Paramore.Fences.RateLimiting.RateLimiterRejectedException.RateLimiterRejectedException(string! message) -> void
+Paramore.Fences.RateLimiting.RateLimiterRejectedException.RateLimiterRejectedException(string! message, System.Exception! inner) -> void
+Paramore.Fences.RateLimiting.RateLimiterRejectedException.RateLimiterRejectedException(string! message, System.TimeSpan retryAfter) -> void
+Paramore.Fences.RateLimiting.RateLimiterRejectedException.RateLimiterRejectedException(string! message, System.TimeSpan retryAfter, System.Exception! inner) -> void
+Paramore.Fences.RateLimiting.RateLimiterRejectedException.RateLimiterRejectedException(System.TimeSpan retryAfter) -> void
+Paramore.Fences.RateLimiting.RateLimiterRejectedException.RetryAfter.get -> System.TimeSpan?
+Paramore.Fences.RateLimiting.RateLimiterStrategyOptions
+Paramore.Fences.RateLimiting.RateLimiterStrategyOptions.DefaultRateLimiterOptions.get -> System.Threading.RateLimiting.ConcurrencyLimiterOptions!
+Paramore.Fences.RateLimiting.RateLimiterStrategyOptions.DefaultRateLimiterOptions.set -> void
+Paramore.Fences.RateLimiting.RateLimiterStrategyOptions.OnRejected.get -> System.Func<Paramore.Fences.RateLimiting.OnRateLimiterRejectedArguments, System.Threading.Tasks.ValueTask>?
+Paramore.Fences.RateLimiting.RateLimiterStrategyOptions.OnRejected.set -> void
+Paramore.Fences.RateLimiting.RateLimiterStrategyOptions.RateLimiter.get -> System.Func<Paramore.Fences.RateLimiting.RateLimiterArguments, System.Threading.Tasks.ValueTask<System.Threading.RateLimiting.RateLimitLease!>>?
+Paramore.Fences.RateLimiting.RateLimiterStrategyOptions.RateLimiter.set -> void
+Paramore.Fences.RateLimiting.RateLimiterStrategyOptions.RateLimiterStrategyOptions() -> void
+static Paramore.Fences.RateLimiterResiliencePipelineBuilderExtensions.AddConcurrencyLimiter<TBuilder>(this TBuilder! builder, int permitLimit, int queueLimit = 0) -> TBuilder!
+static Paramore.Fences.RateLimiterResiliencePipelineBuilderExtensions.AddConcurrencyLimiter<TBuilder>(this TBuilder! builder, System.Threading.RateLimiting.ConcurrencyLimiterOptions! options) -> TBuilder!
+static Paramore.Fences.RateLimiterResiliencePipelineBuilderExtensions.AddRateLimiter<TBuilder>(this TBuilder! builder, Paramore.Fences.RateLimiting.RateLimiterStrategyOptions! options) -> TBuilder!
+static Paramore.Fences.RateLimiterResiliencePipelineBuilderExtensions.AddRateLimiter<TBuilder>(this TBuilder! builder, System.Threading.RateLimiting.RateLimiter! limiter) -> TBuilder!

@@ -1,7 +1,8 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Polly.Retry;
-using Polly.Telemetry;
+using Paramore.Fences;
+using Paramore.Fences.Retry;
+using Paramore.Fences.Telemetry;
 
 namespace Snippets.Docs;
 

@@ -53,9 +53,9 @@ jobs:
           contains(steps.dependabot-metadata.outputs.dependency-names, 'dependabot/fetch-metadata') ||
           contains(steps.dependabot-metadata.outputs.dependency-names, 'github/codeql-action') ||
           contains(steps.dependabot-metadata.outputs.dependency-names, 'Microsoft.NET.Test.Sdk') ||
-          contains(steps.dependabot-metadata.outputs.dependency-names, 'Polly') ||
-          contains(steps.dependabot-metadata.outputs.dependency-names, 'Polly.Core') ||
-          contains(steps.dependabot-metadata.outputs.dependency-names, 'Polly.Extensions') ||
+          contains(steps.dependabot-metadata.outputs.dependency-names, 'Paramore.Fences') ||
+          contains(steps.dependabot-metadata.outputs.dependency-names, 'Paramore.Fences.Core') ||
+          contains(steps.dependabot-metadata.outputs.dependency-names, 'Paramore.Fences.Extensions') ||
           contains(steps.dependabot-metadata.outputs.dependency-names, 'xunit') ||
           contains(steps.dependabot-metadata.outputs.dependency-names, 'xunit.runner.visualstudio')
         env:

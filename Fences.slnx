@@ -1,0 +1,60 @@
+<Solution>
+  <Folder Name="/bench/">
+    <Project Path="bench/Paramore.Fences.Benchmarks/Paramore.Fences.Benchmarks.csproj" />
+    <Project Path="bench/Paramore.Fences.Core.Benchmarks/Paramore.Fences.Core.Benchmarks.csproj" />
+  </Folder>
+  <Folder Name="/Solution Items/">
+    <File Path=".editorconfig" />
+    <File Path=".gitattributes" />
+    <File Path=".gitignore" />
+    <File Path="cake.cs" />
+    <File Path="CHANGELOG.md" />
+    <File Path="Directory.Build.props" />
+    <File Path="Directory.Build.targets" />
+    <File Path="Directory.Packages.props" />
+    <File Path="global.json" />
+    <File Path="NuGet.config" />
+    <File Path="README.md" />
+  </Folder>
+  <Folder Name="/Solution Items/.config/">
+    <File Path=".config/dotnet-tools.json" />
+  </Folder>
+  <Folder Name="/Solution Items/eng/">
+    <File Path="eng/Analyzers.targets" />
+    <File Path="eng/Benchmark.targets" />
+    <File Path="eng/bump-version.ps1" />
+    <File Path="eng/Common.props" />
+    <File Path="eng/Common.targets" />
+    <File Path="eng/Library.targets" />
+    <File Path="eng/stryker-config.json" />
+    <File Path="eng/Test.targets" />
+    <File Path="eng/update-baselines.ps1" />
+    <File Path="eng/update-changelog.ps1" />
+  </Folder>
+  <Folder Name="/Solution Items/eng/analyzers/">
+    <File Path="eng/analyzers/BannedSymbols.txt" />
+    <File Path="eng/analyzers/Benchmark.globalconfig" />
+    <File Path="eng/analyzers/Library.globalconfig" />
+    <File Path="eng/analyzers/SonarLint.xml" />
+    <File Path="eng/analyzers/Stylecop.globalconfig" />
+    <File Path="eng/analyzers/Stylecop.json" />
+    <File Path="eng/analyzers/Test.globalconfig" />
+  </Folder>
+  <Folder Name="/src/">
+    <Project Path="src/Paramore.Fences.Core/Paramore.Fences.Core.csproj" />
+    <Project Path="src/Paramore.Fences.Extensions/Paramore.Fences.Extensions.csproj" />
+    <Project Path="src/Paramore.Fences.RateLimiting/Paramore.Fences.RateLimiting.csproj" />
+    <Project Path="src/Paramore.Fences.Testing/Paramore.Fences.Testing.csproj" />
+    <Project Path="src/Paramore.Fences/Paramore.Fences.csproj" />
+    <Project Path="src/Snippets/Snippets.csproj" />
+  </Folder>
+  <Folder Name="/test/">
+    <Project Path="test/Paramore.Fences.AotTest/Paramore.Fences.AotTest.csproj" />
+    <Project Path="test/Paramore.Fences.Core.Tests/Paramore.Fences.Core.Tests.csproj" />
+    <Project Path="test/Paramore.Fences.Extensions.Tests/Paramore.Fences.Extensions.Tests.csproj" />
+    <Project Path="test/Paramore.Fences.RateLimiting.Tests/Paramore.Fences.RateLimiting.Tests.csproj" />
+    <Project Path="test/Paramore.Fences.Specs/Paramore.Fences.Specs.csproj" />
+    <Project Path="test/Paramore.Fences.Testing.Tests/Paramore.Fences.Testing.Tests.csproj" />
+    <Project Path="test/Paramore.Fences.TestUtils/Paramore.Fences.TestUtils.csproj" />
+  </Folder>
+</Solution>

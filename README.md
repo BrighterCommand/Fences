@@ -125,7 +125,7 @@ Visit [resilience strategies]( docs to explore how to configure individual resil
 <!-- snippet: retry -->
 ```cs
 // Retry using the default options.
-// See TBD for defaults.
+// See https://www.pollydocs.org/strategies/retry#defaults for defaults.
 var optionsDefaults = new RetryStrategyOptions();
 
 // For instant retries with no delay

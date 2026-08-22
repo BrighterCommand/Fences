@@ -3,7 +3,7 @@ open System
 open System.Threading
 open System.Threading.Tasks
 open IcedTasks
-open Polly
+open Paramore.Fences
 
 let getBestFilmAsync token =
     task {
@@ -27,7 +27,7 @@ let demo () =
         pipeline.Execute(fun () -> printfn "Hello, world!")
 
         // Asynchronously
-        // Note that Polly expects a ValueTask to be returned, so the function uses the valueTask builder
+        // Note that Paramore.Fences expects a ValueTask to be returned, so the function uses the valueTask builder
         // from IcedTasks to make it easier to use ValueTask. See https://github.com/TheAngryByrd/IcedTasks.
         do! pipeline.ExecuteAsync(
             fun token ->
@@ -43,7 +43,7 @@ let demo () =
         let someResult = pipeline.Execute(fun token -> "some-result")
 
         // Asynchronously with result
-        // Note that Polly expects a ValueTask<T> to be returned, so the function uses the valueTask builder
+        // Note that Paramore.Fences expects a ValueTask<T> to be returned, so the function uses the valueTask builder
         // from IcedTasks to make it easier to use ValueTask<T>. See https://github.com/TheAngryByrd/IcedTasks.
         let! bestFilm = pipeline.ExecuteAsync(
             fun token ->

@@ -1,0 +1,19 @@
+using Paramore.Fences.Simmy.Latency;
+
+namespace Paramore.Fences.Core.Tests.Simmy.Latency;
+
+public static class LatencyGeneratorArgumentsTests
+{
+    [Fact]
+    public static void Ctor_Ok()
+    {
+        // Arrange
+        var context = ResilienceContextPool.Shared.Get(TestCancellation.Token);
+
+        // Act
+        var args = new LatencyGeneratorArguments(context);
+
+        // Assert
+        args.Context.ShouldNotBeNull();
+    }
+}

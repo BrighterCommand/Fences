@@ -460,9 +460,9 @@ IAsyncPolicy<HttpResponseMessage> asyncPolicyT = Policy.RateLimitAsync<HttpRespo
 
 <!-- snippet: migration-rate-limit-v8 -->
 ```cs
-// The equivalent to Polly v7's RateLimit is the SlidingWindowRateLimiter.
+// The equivalent to Paramore.Fences v7's RateLimit is the SlidingWindowRateLimiter.
 //
-// Polly exposes just a simple wrapper to the APIs exposed by the System.Threading.RateLimiting APIs.
+// Paramore.Fences exposes just a simple wrapper to the APIs exposed by the System.Threading.RateLimiting APIs.
 // There is no need to create separate instances for sync and async flows as ResiliencePipeline handles both scenarios.
 ResiliencePipeline pipeline = new ResiliencePipelineBuilder()
     .AddRateLimiter(new SlidingWindowRateLimiter(new SlidingWindowRateLimiterOptions
@@ -475,7 +475,7 @@ ResiliencePipeline pipeline = new ResiliencePipelineBuilder()
 
 // The creation of generic pipeline is almost identical.
 //
-// Polly exposes the same set of rate-limiter extensions for both ResiliencePipeline<HttpResponseMessage> and ResiliencePipeline.
+// Paramore.Fences exposes the same set of rate-limiter extensions for both ResiliencePipeline<HttpResponseMessage> and ResiliencePipeline.
 ResiliencePipeline<HttpResponseMessage> pipelineT = new ResiliencePipelineBuilder<HttpResponseMessage>()
     .AddRateLimiter(new SlidingWindowRateLimiter(new SlidingWindowRateLimiterOptions
     {
@@ -932,7 +932,7 @@ ResiliencePipeline<int> pipeline = new ResiliencePipelineBuilder<int>()
     .Build();
 
 // Synchronous execution
-// Polly v8 does not support
+// Paramore.Fences v8 does not support
 
 // Asynchronous execution
 var context = ResilienceContextPool.Shared.Get();

@@ -1,4 +1,5 @@
-using Polly.Timeout;
+using Paramore.Fences;
+using Paramore.Fences.Timeout;
 
 namespace Snippets.Docs;
 
@@ -55,7 +56,7 @@ internal static partial class Migration
             .Build();
 
         // Synchronous execution
-        // Polly v8 does not support
+        // Paramore.Fences v8 does not support
 
         // Asynchronous execution
         var context = ResilienceContextPool.Shared.Get();

@@ -1,6 +1,7 @@
 ﻿using System.Net;
 using System.Net.Http;
-using Polly.Retry;
+using Paramore.Fences;
+using Paramore.Fences.Retry;
 using Snippets.Docs.Utils;
 
 namespace Snippets.Docs;

@@ -643,22 +643,25 @@ Structural, non-prose docs files **are** in scope, because the build depends on 
 
 These will not be caught by a casual eye and each will break the build or a check if missed:
 
-- [ ] `src/*/.PublicAPI/PublicAPI.Shipped.txt` × 5 (1,725 lines) — namespace prefix (**B8**)
-- [ ] `mdsnippets.json` — `ExcludeSnippetDirectories` lists `src/Polly*` paths
-- [ ] `eng/signing/filelist.txt` — contains `**/Polly*`
-- [ ] `eng/stryker-config.json` (paths are passed from `cake.cs`, verify)
-- [ ] `cake.cs` — `var projectName = "Polly"`, the five packable project paths, the AOT test path,
+- [x] `src/*/.PublicAPI/PublicAPI.Shipped.txt` × 5 (1,725 lines) — namespace prefix (**B8**)
+- [x] `mdsnippets.json` — `ExcludeSnippetDirectories` lists `src/Polly*` paths
+- [x] `eng/signing/filelist.txt` — contains `**/Polly*`
+- [x] `eng/stryker-config.json` (paths are passed from `cake.cs`, verify)
+- [x] `cake.cs` — `var projectName = "Polly"`, the five packable project paths, the AOT test path,
       the `if (moduleName == "Polly.Testing")` special case, all mutation-test targets
-- [ ] `docs/docfx.json` — `_appName`, `_appTitle`, and the `Polly/**` metadata exclusion
-- [ ] `docs/toc.yml` and 35 doc pages
-- [ ] `.github/wordlist.txt` (spellcheck dictionary — `pollydocs` entry) and `.github/spellcheck.yml`
-- [ ] `exclusion.dic` (VS spell checker)
-- [ ] `Directory.Build.targets` — the eleven `Polly.*` implicit `Using` entries
-- [ ] `eng/Library.targets` — `Company`, `Copyright`, `Authors`, `PackageProjectUrl`,
+- [x] `docs/docfx.json` — `_appName`, `_appTitle`, and the `Polly/**` metadata exclusion
+- [x] `docs/toc.yml` — done. **The 35 doc *pages* are NOT done**: prose is Phase 7, see 2b-bis
+- [x] `.github/wordlist.txt` (spellcheck dictionary — `pollydocs` entry) and `.github/spellcheck.yml`
+- [x] `exclusion.dic` (VS spell checker)
+- [x] `Directory.Build.targets` — the eleven `Polly.*` implicit `Using` entries
+- [x] `eng/Library.targets` — `Company`, `Copyright`, `Authors`, `PackageProjectUrl`,
       `PackageReleaseNotes`, `PackageValidationBaselineVersion` (see D9, D3)
-- [ ] `samples/*` — 7 sample projects including `Intro.VisualBasic` (a `.vb` file, easy to miss)
-- [ ] `.vscode/` settings and `.config/dotnet-tools.json` (verify)
-- [ ] `AGENTS.md` — superseded in Phase 5, but rename it in this commit for consistency
+- [x] `samples/*` — **8**, not 7: the plan missed `Intro.FSharp` (`.fsproj` + `Program.fs`)
+      alongside `Intro.VisualBasic`. All switched from `PackageReference` to `ProjectReference`
+- [x] `.vscode/` settings and `.config/dotnet-tools.json` (verify)
+- [ ] `AGENTS.md` — **deferred**: it is Markdown, so 2b-bis excludes it from the script. It is
+      superseded in Phase 5 anyway, so renaming it now would be churn on a file about to be
+      rewritten
 
 #### 2d. Validate
 
@@ -672,11 +675,133 @@ These will not be caught by a casual eye and each will break the build or a chec
 **Exit criteria:** build green, public API diff is prefix-only, `git grep polly` returns only
 deliberate survivors.
 
+#### Execution notes (2026-08-22)
+
+The script is `eng/rename-to-fences.py` (Python, not PowerShell — `pwsh` is not installed on the
+dev machine). Four things came out of running it that the plan did not anticipate:
+
+* **`Polly.Contrib.WaitAndRetry` is a third-party package, and the bulk pass renamed it to
+  `Paramore.Fences.Contrib.WaitAndRetry`** — a package that does not exist, so `restore` failed
+  outright. The script now masks `Polly.Contrib.*` the same way it masks URLs. **Any future
+  `Polly*` package ID that is somebody else's must go in `PROTECTED_RE`, not in the exclusion
+  list** — the exclusion list works per file, and this appears in three.
+* **P3.1 (the strong-name key) had to be pulled forward too.** PASS 2 rewrote
+  `AssemblyOriginatorKeyFile` to `Paramore.Fences.snk`, but the key is a *repo-level* name like
+  `Fences.slnx`, so it is `Fences.snk` — that is what PASS 3 in the script now fixes, rather than
+  being a manual step as originally planned. And the file has to *exist*: with `Polly.snk` deleted,
+  every signed assembly fails `CS7027` and Phase 2 cannot be green. So `Fences.snk` is generated
+  here (D5's `openssl` recipe, but **2048-bit**, where Polly's was 1024), and
+  `FencesStrongNamePublicKey` now holds **our** public key rather than Polly's — otherwise
+  `InternalsVisibleTo` would still be granting access to assemblies signed with Polly's key.
+  **`sn.exe`/`ildasm` do not exist on macOS**; extract the blob from a built assembly by finding
+  the `00 24 00 00 04 80 00 00` header and reading the little-endian length that follows. Do not
+  derive it from the `.snk` directly — openssl emits a `CALG_RSA_KEYX` algid (`00a40000`) where the
+  compiler normalises to `CALG_RSA_SIGN` (`00240000`), so the two blobs differ by four bytes and
+  `InternalsVisibleTo` silently stops matching.
+* **`PackageValidationBaselineVersion` had to be pulled forward from P3.2 into this commit.** It
+  pointed at `8.5.2`, and package validation downloads that baseline from nuget.org as
+  `Paramore.Fences.Core` 8.5.2 — which does not exist. Restore fails, so Phase 2 cannot be green
+  without it. It is now commented out with a pointer to reinstate at `9.0.0`. **B3 is closed.**
+* **The samples were referencing published `Polly.*` packages, and there is no published
+  `Paramore.Fences.*` to switch them to** (Phase 8 is held, possibly forever). `cake.cs` restores
+  every `**/*.slnx`, `samples/Samples.slnx` included, so this is a build break, not a cosmetic
+  one. All 8 sample projects — including the F# and VB ones — now use `ProjectReference` into
+  `src/`, and the corresponding `PackageVersion` entries are gone from `Directory.Packages.props`.
+  **Confirmed as the preferred shape, not a stopgap** — project references for samples are what we
+  want here permanently, so do not switch them back to `PackageReference` when Phase 8 publishes.
+* **The fork cannot remove Polly from an app that uses `Microsoft.Extensions.Http.Resilience`** —
+  discovered because it broke the build, and much the most important thing to come out of Phase 2.
+  Microsoft's package has a **hard NuGet dependency** on Polly:
+
+  ```
+  Microsoft.Extensions.Http.Resilience 10.8.0
+    -> Microsoft.Extensions.Resilience
+         -> Polly.Extensions 8.4.2
+         -> Polly.RateLimiting 8.4.2
+  ```
+
+  `AddResilienceHandler` hands its callback a `Polly.ResiliencePipelineBuilder<HttpResponseMessage>`,
+  so no Fences strategy can be attached to it, and no rename changes that. **This qualifies the
+  OSMF rationale in ADR 0002**: the fork removes *Brighter's* Polly dependency, but any consumer
+  calling `AddStandardResilienceHandler` — very common in ASP.NET Core — still has Polly binaries
+  in their graph via Microsoft. Say so in the migration guide rather than letting people discover
+  it; overclaiming here would be worse than the limitation itself.
+
+  **Decided: document the interop rather than delete it.** `Polly.Core` is now an explicit
+  `PackageReference` of `src/Snippets` and `samples/Chaos`, and those files use Polly's API
+  deliberately, with a comment saying why. Nothing is deleted; Phase 7 writes the prose. The
+  project-wide `<Using Include="Paramore.Fences" />` had to go from `Snippets.csproj` — both
+  libraries export `ResiliencePipelineBuilder`, `PredicateResult`, `DelayBackoffType` and friends,
+  and a *global* using cannot be opted out of per file, so it made every interop snippet
+  ambiguous. 23 snippet files gained an explicit `using Paramore.Fences;` instead.
+  `Pattern_CircuitPerEndpoint` moved from `CircuitBreaker.cs` to `HttpClientIntegrations.cs`,
+  which is transparent to the docs because mdsnippets resolves regions by name across the project,
+  not by file.
+
+  A **`Paramore.Fences.Http`** package providing our own `AddResilienceHandler` is the way to
+  close this properly. It is real work and out of scope here — record it as a candidate phase.
+
+  Trap while doing this: inserting a `using` line **before a file's byte-order mark** leaves the
+  BOM stranded mid-file, which surfaces as `IDE0055`/`SA1208` on the *following* line and reads
+  like an ordering problem rather than an encoding one. Strip every BOM and re-emit a single
+  leading one. Ordering is `System.*` first, then the rest alphabetically. Note that an
+  *incremental* `dotnet build` of `src/Snippets` can report success while the analyzers are stale —
+  use `--no-incremental` before believing it.
+* **`test/Shared/StrongNameTests.cs` hard-codes the expected public key *and* the public key
+  token**, so generating `Fences.snk` made it fail deterministically on all three TFMs — the only
+  genuine test regression in the whole rename. Both literals are now ours. The token is not
+  derivable by eye: it is the **last 8 bytes of `SHA1(publicKeyBlob)`, reversed**
+  (`6998A40D28482B6D`). If `Fences.snk` is ever rotated, this file must change with it, and it is
+  the *only* place the key is duplicated outside `eng/Common.props`.
+* **One line of prose inside a `.cs` file went false.** `RetryHelper.cs` read *"Per discussion in
+  Polly issue https://…/Polly/issues/530"*; the URL was protected but the words were not, giving
+  *"Per discussion in **Paramore.Fences** issue https://…/**Polly**/issues/530"*. Fixed by hand.
+  It was the only instance — `git grep -In "Paramore\.Fences" -- '*.cs' | grep -iE "App-vNext|Polly-Contrib|pollydocs"`
+  finds this class of error and now returns nothing. **Re-run that grep if the script is ever
+  re-run.**
+
+**Deliberate survivors after this commit**, i.e. the expected output of P2.3:
+
+| What | Where | Owner |
+|---|---|---|
+| Every `*.md` | 76 files | Phase 7 — see 2b-bis |
+| `App-vNext/Polly/issues/NNN` citations | ~20 code comments | permanent; they cite real upstream issues |
+| `Polly-Contrib/Polly.Contrib.WaitAndRetry` | `RetryHelper.cs`, `RetryStrategyOptions.TResult.cs`, `Directory.Packages.props` | permanent; third-party |
+| `pollydocs.org` links | `src/Snippets/Docs/*.cs`, `.github/ISSUE_TEMPLATE/*` | Phase 7 (D8) |
+| `PackageProjectUrl`, `PackageReleaseNotes` | `eng/Library.targets` | Phase 3 (P3.3) |
+| `https://www.nuget.org/profiles/Polly` | `.github/workflows/build.yml` | Phase 6 / 8 |
+| `App-vNext/Polly` link | `docs/template/public/main.js` | Phase 7 |
+| **`POLLY_UPDATER_BOT_*` / `POLLY_REVIEWER_BOT_*` secrets** | 6 workflow files | **Phase 6** |
+
+Two things the script renamed *correctly but not finally*, both for Phase 3/7:
+
+* `.github/wordlist.txt` now has `fencesdocs` where it had `pollydocs`. But `pollydocs.org` still
+  appears throughout `docs/`, so **the spellcheck workflow will fail on `pollydocs` until Phase 7
+  rewrites those links**. It runs in CI, not in the local build, so it is invisible here. Fix the
+  links and the wordlist entry together.
+* `docs/docfx.json` has `_appName` and `_appTitle` as `Paramore.Fences`. That is the *package*
+  name; the site should be titled **Fences**. P3.3/P7 — the same distinction as `Fences.slnx`.
+
+That last row is a genuine miss in the original plan and survives only because the Pass-2 rules are
+case-sensitive: **uppercase `POLLY_`** never matched. They name GitHub App secrets that do not
+exist in the BrighterCommand org, so those workflow steps cannot work regardless of naming. P6
+must rename *and* re-provision them, or delete the steps.
+
 ### Phase 3 — New identity
 
 - [ ] **P3.1** Generate `Fences.snk` and wire up `FencesStrongNamePublicKey` (D5, **B2**).
       Verify `InternalsVisibleTo` still works — i.e. the test projects still see internals.
-- [ ] **P3.2** `MinVerMinimumMajorMinor` → `9.0`; clear `PackageValidationBaselineVersion` (D3, **B3**).
+- [ ] **P3.2** `MinVerMinimumMajorMinor` → `9.0`. **`PackageValidationBaselineVersion` is already
+      done** — it had to be pulled forward into Phase 2 to get a green build; see the Phase 2
+      execution notes. **B3 is closed.**
+- [ ] **P3.2a** Decide what `PublicAPI.Shipped.txt` should contain. The rename script rewrote the
+      five `Shipped.txt` files in place, so the analyser now treats the whole `Paramore.Fences.*`
+      surface as *shipped* — but nothing has shipped under that name, and D3 starts us at `9.0.0`.
+      Strictly, `Shipped.txt` should be empty and everything should sit in `Unshipped.txt` until
+      `9.0.0` is released. Carrying the baseline forward is the pragmatic choice and is what a
+      rebranded fork usually does; it also keeps the P2.2 diff meaningful. **Confirm the carry-
+      forward deliberately rather than by accident** — the alternative is a 1,725-line churn and
+      loses the oracle.
 - [ ] **P3.3** `eng/Library.targets` package metadata:
       `Company` → `Brighter Command`; `Authors` → `Brighter Command`;
       `Copyright` → `Copyright (c) 2026-$(year), Brighter Command`;

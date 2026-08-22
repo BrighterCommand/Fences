@@ -1,4 +1,5 @@
-﻿using Polly.Registry;
+﻿using Paramore.Fences;
+using Paramore.Fences.Registry;
 
 namespace Snippets.Docs;
 

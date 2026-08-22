@@ -1,0 +1,19 @@
+using Paramore.Fences.Simmy.Outcomes;
+
+namespace Paramore.Fences.Core.Tests.Simmy.Outcomes;
+
+public static class OutcomeGeneratorArgumentsTests
+{
+    [Fact]
+    public static void Ctor_Ok()
+    {
+        // Arrange
+        var context = ResilienceContextPool.Shared.Get(TestCancellation.Token);
+
+        // Act
+        var args = new OutcomeGeneratorArguments(context);
+
+        // Assert
+        args.Context.ShouldNotBeNull();
+    }
+}

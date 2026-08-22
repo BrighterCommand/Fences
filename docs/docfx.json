@@ -11,7 +11,7 @@
             "**/obj/**",
             "**/bin/**",
             "_site/**",
-            "Polly/**",
+            "Paramore.Fences/**",
             "v7/**"
           ]
         }
@@ -29,8 +29,8 @@
   ],
   "build": {
     "globalMetadata": {
-      "_appName": "Polly",
-      "_appTitle": "Polly",
+      "_appName": "Paramore.Fences",
+      "_appTitle": "Paramore.Fences",
       "_appLogoPath": "icon.png",
       "_appFaviconPath": "icon.png",
       "_enableSearch": true,

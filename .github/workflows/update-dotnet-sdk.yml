@@ -15,8 +15,8 @@ jobs:
     with:
       labels: "dependencies,.NET"
       update-nuget-packages: false
-      user-email: '138034000+polly-updater-bot[bot]@users.noreply.github.com'
-      user-name: 'polly-updater-bot[bot]'
+      user-email: '138034000+fences-updater-bot[bot]@users.noreply.github.com'
+      user-name: 'fences-updater-bot[bot]'
     secrets:
       application-id: ${{ secrets.POLLY_UPDATER_BOT_APP_ID }}
       application-private-key: ${{ secrets.POLLY_UPDATER_BOT_KEY }}

@@ -8,12 +8,12 @@ permissions: {}
 jobs:
   review:
     runs-on: ubuntu-24.04
-    if: github.event.repository.fork == false && github.event.pull_request.user.login == 'polly-updater-bot[bot]'
+    if: github.event.repository.fork == false && github.event.pull_request.user.login == 'fences-updater-bot[bot]'
 
     env:
       POWERSHELL_YAML_VERSION: '0.4.12'
-      REVIEWER_LOGIN: 'polly-reviewer-bot[bot]'
-      UPDATER_LOGIN: 'polly-updater-bot[bot]'
+      REVIEWER_LOGIN: 'fences-reviewer-bot[bot]'
+      UPDATER_LOGIN: 'fences-updater-bot[bot]'
 
     permissions:
       contents: read

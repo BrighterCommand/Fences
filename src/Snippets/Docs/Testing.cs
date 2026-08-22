@@ -1,9 +1,10 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using NSubstitute;
-using Polly.Registry;
-using Polly.Retry;
-using Polly.Testing;
-using Polly.Timeout;
+using Paramore.Fences;
+using Paramore.Fences.Registry;
+using Paramore.Fences.Retry;
+using Paramore.Fences.Testing;
+using Paramore.Fences.Timeout;
 using Xunit;
 
 namespace Snippets.Docs;

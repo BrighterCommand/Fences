@@ -1,5 +1,6 @@
 ﻿using System.Net.Http;
-using Polly.Timeout;
+using Paramore.Fences;
+using Paramore.Fences.Timeout;
 
 namespace Snippets.Docs;
 

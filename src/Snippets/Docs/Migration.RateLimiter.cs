@@ -1,5 +1,6 @@
 ﻿using System.Net.Http;
 using System.Threading.RateLimiting;
+using Paramore.Fences;
 
 namespace Snippets.Docs;
 
@@ -36,9 +37,9 @@ internal static partial class Migration
     {
         #region migration-rate-limit-v8
 
-        // The equivalent to Polly v7's RateLimit is the SlidingWindowRateLimiter.
+        // The equivalent to Paramore.Fences v7's RateLimit is the SlidingWindowRateLimiter.
         //
-        // Polly exposes just a simple wrapper to the APIs exposed by the System.Threading.RateLimiting APIs.
+        // Paramore.Fences exposes just a simple wrapper to the APIs exposed by the System.Threading.RateLimiting APIs.
         // There is no need to create separate instances for sync and async flows as ResiliencePipeline handles both scenarios.
         ResiliencePipeline pipeline = new ResiliencePipelineBuilder()
             .AddRateLimiter(new SlidingWindowRateLimiter(new SlidingWindowRateLimiterOptions
@@ -51,7 +52,7 @@ internal static partial class Migration
 
         // The creation of generic pipeline is almost identical.
         //
-        // Polly exposes the same set of rate-limiter extensions for both ResiliencePipeline<HttpResponseMessage> and ResiliencePipeline.
+        // Paramore.Fences exposes the same set of rate-limiter extensions for both ResiliencePipeline<HttpResponseMessage> and ResiliencePipeline.
         ResiliencePipeline<HttpResponseMessage> pipelineT = new ResiliencePipelineBuilder<HttpResponseMessage>()
             .AddRateLimiter(new SlidingWindowRateLimiter(new SlidingWindowRateLimiterOptions
             {
