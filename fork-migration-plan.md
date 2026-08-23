@@ -968,11 +968,29 @@ files, none of them touched by Phase 4:
 Phase 3 files (`README.md`, `package-readme.md`, `docs/index.md`) are clean — that check was real,
 it just did not cover the Phase 1 files or the plan itself.
 
-The three small files are a few minutes' work. `fork-migration-plan.md` is the awkward one: it is a
-working document that will be retired, and `MD004` wants its 86 `-` bullets turned into `*`, which
-is pure churn. The cheaper answer for it is to add `!fork-migration-plan.md` to the `globs:` list in
-`.github/workflows/gh-pages.yml`, alongside the existing `BenchmarkDotNet.Artifacts` exclusion.
-Deferred to Phase 7 unless done sooner as a standalone chore.
+**CLOSED 2026-08-23.** Every tracked Markdown file now passes; verified by running the pinned
+`markdownlint-cli2` 0.23.2 over the workflow's exact glob set. How each was fixed:
+
+* `NOTICE.md` — gave the licence-notice fence a `text` language.
+* `docs/adr/0002-fork-polly-as-fences.md` — spaced the decision table's separator row.
+* **Both ADRs** — added `"MD025": { "front_matter_title": "" }` to `.markdownlint.json` rather than
+  touching the files. The front matter `title:` is page metadata for docfx; the body `# 2. Fork
+  Polly as Fences` is the document's heading, per Nygard's ADR format. `MD025` was counting both as
+  h1. This is the right fix for every ADR we will ever write, not just these two.
+* `fork-migration-plan.md` — **excluded** via `!fork-migration-plan.md` in the `globs:` list. It is
+  a working document that will be retired, `MD004` wanted 86 bullets rewritten for style alone, and
+  nobody editing a migration decision should be thinking about bullet characters.
+
+`PROMPT.md` and `baseline/README.md` still fail but are gitignored, so CI never checks them out.
+
+**Also done at the same time, on the spellcheck side:** `fork-migration-plan.md` is excluded from
+`.github/spellcheck.yml`'s sources too — it is root-level and tracked, so `**/*.md` was matching it,
+and it carries roughly 40 genuinely unknown words (`clahub`, `aspell`, `mdsnippets`, `openssl`,
+`nupkg`, `csproj`, `slnx`, `SBOM`, `OIDC`, `HSM`, `TFM`, surnames from the acknowledgements, and so
+on). Sixteen more entries went into `.github/wordlist.txt` as insurance for the tracked Phase 1
+files (`Authenticode`, `BSD`, `CLA`, `GitBook`, `Nygard`, `OTel`, `SBOM`, `SVG`, `wordmark`, the
+surnames, and the British `colours`). **`aspell` is not installed here, so unlike the Markdown lint
+this could not be verified locally** — it is reasoned from the pipeline's filters, not proven.
 
 ### Phase 5 — Agentic workflow support
 

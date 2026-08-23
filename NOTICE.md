@@ -28,7 +28,7 @@ fork was made.
 Fences is distributed under the BSD 3-Clause Licence, the same licence as Polly. The upstream
 copyright notice is retained as clause 1 of that licence requires:
 
-```
+```text
 Copyright (c) 2015-2025, App vNext
 Copyright (c) 2026, Brighter Command
 ```

@@ -62,7 +62,7 @@ We fork `App-vNext/Polly` at commit `47e3b412e8c3b7e6db1629acd98f3e3b6b529d6c` (
 The decisions that follow from that:
 
 | # | Decision |
-|---|---|
+| --- | --- |
 | D1 | Full rename: `Polly.*` → `Paramore.Fences.*` across namespaces, assemblies, package IDs, project and folder names, and the solution file. Type-forwarding is not available — `[TypeForwardedTo]` requires the same fully-qualified name and so cannot bridge a namespace change. |
 | D2 | Package ID = assembly name = root namespace = `Paramore.Fences.*`, the convention `Paramore.Brighter.*` and `Paramore.Darker.*` already follow. `Fences.slnx` and `Fences.snk` stay unprefixed: they name the repository, not a package. |
 | D3 | Versioning starts at `9.0.0`. It continues the lineage — `Fences 9.x` reads as "Polly 8.7 plus our changes" — and a major bump is the honest signal for a breaking namespace change. Inherited tags are kept as provenance. |

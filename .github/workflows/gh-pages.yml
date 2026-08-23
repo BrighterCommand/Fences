@@ -32,9 +32,12 @@ jobs:
       uses: DavidAnson/markdownlint-cli2-action@21c1be1b93ad9ed58fa840aacc3f279cde2a72ff # v24.2.0
       with:
         config: '.markdownlint.json'
+        # fork-migration-plan.md is a working document for the fork migration, retired once it
+        # completes. It is edited for its content, not its Markdown style.
         globs: |
           **/*.md
           !**/BenchmarkDotNet.Artifacts/**/*.md
+          !fork-migration-plan.md
 
     - name: Spellcheck
       uses: rojopolis/spellcheck-github-actions@c1934c57e61c734261d7905b525486b12f8eb670 # 0.66.0
