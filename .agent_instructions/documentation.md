@@ -305,10 +305,12 @@ This guidance applies to ADRs, requirements specs, design specs, and any other l
 CI runs both over **every** `*.md` file in the repository, including this one and everything under
 `.claude/`:
 
-- `markdownlint-cli2` against `.markdownlint.json`. You can run it locally:
+- `markdownlint-cli2` against `.markdownlint.json`. You can run it locally. Pin the version — it is
+  read from the action's `package.json` at the SHA in `gh-pages.yml`, and a newer one enables rules
+  CI does not have:
 
   ```bash
-  npx markdownlint-cli2 --config .markdownlint.json "**/*.md" "!**/BenchmarkDotNet.Artifacts/**/*.md" "!fork-migration-plan.md"
+  npx --yes markdownlint-cli2@0.23.2 --config .markdownlint.json "**/*.md" "!**/BenchmarkDotNet.Artifacts/**/*.md" "!fork-migration-plan.md"
   ```
 
 - A spell check against `.github/wordlist.txt`, configured by `.github/spellcheck.yml`. It uses
