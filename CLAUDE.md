@@ -3,38 +3,160 @@
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this
 repository.
 
-> **Interim file.** Fences is mid-migration from its Polly fork. This is a stub so that a fresh
-> session finds the right context; Phase 5 of `fork-migration-plan.md` (P5.11) replaces it with
-> the full version, mirroring Brighter's.
+## How to Use This File
 
-## Read these first, in this order
+This file contains instructions for Claude Code. It is not intended to be modified by contributors.
+Human contributors should follow [CONTRIBUTING.md](CONTRIBUTING.md), from which these guidelines
+derive. Where the two disagree, `CONTRIBUTING.md` is right.
 
-1. **`PROMPT.md`** (untracked, local) — current session state: what is done, what is next, and the
-   established facts not to re-derive. **Always read this before starting work.**
-2. **`fork-migration-plan.md`** — the authoritative migration plan. Decisions in §3, phases in §4,
-   decision log in §7.
-3. **`AGENTS.md`** — build commands and architecture (still written in upstream Polly terms until
-   Phase 2 renames it).
+[AGENTS.md](AGENTS.md) carries the agent-neutral version of the same material. This file adds the
+workflow rules that are specific to Claude Code.
 
-## Context management
+## ⚠️ Fences is not Brighter
 
-Prefer **project-owned files** over ephemeral Claude memory:
+Fences shares an organisation with Brighter and Darker but **not their engineering conventions**.
+It inherits Polly's, deliberately. Several rules are the exact opposite:
 
-- `PROMPT.md` for temporary state that should persist across conversations.
-- `fork-migration-plan.md` for anything that is a decision or a plan.
-- `.agent_instructions/` for durable conventions (created in Phase 5).
+| Rule | Fences | Brighter |
+| --- | --- | --- |
+| Constants | `PascalCase` | `ALL_CAPS` |
+| Licence header | **None.** Do not add one | `#region Licence` on every file |
+| Test directory | `test/` | `tests/` |
+| Test naming | `Member_Scenario_Outcome` | `When_X_Then_Y` |
+| Test doubles | NSubstitute | FakeItEasy |
+| Expression-bodied members | Required, at `error` | Preferred |
+| `InternalsVisibleTo` | The established mechanism | Banned |
+| Public API baseline | Every change updates `.PublicAPI/` | No equivalent |
 
-Only use Claude memory (`MEMORY.md`) for user-specific preferences that do not belong in the
-project.
+If you have Brighter context in this session, check it against
+[.agent_instructions/code_style.md](.agent_instructions/code_style.md) before applying it.
 
-## Standing constraints during the migration
+## ⛔ TDD Workflow (MANDATORY — NOT OPTIONAL)
 
-- **Do not publish to NuGet.** Phase 8 is held pending the Polly negotiation; published IDs can
-  never be deleted, only unlisted.
-- **Do not commit to `main`.** Work on `fork/rebrand-to-fences`.
-- **Do not change the public API** unless explicitly asked. Every public API change requires an
-  update to the relevant `src/*/.PublicAPI/PublicAPI.Unshipped.txt`.
-- **Do not add or update dependencies** unless explicitly asked.
-- Bug fixes must include a test that fails without the fix.
-- This repo's conventions are **not** Brighter's — see `PROMPT.md` item 7 before applying any
-  Brighter habit here.
+When working on implementation tasks in `specs/*/tasks.md`:
+
+- **ALWAYS use `/test-first <behavior>`** for TEST tasks
+- **NEVER write tests manually and proceed to implementation**
+- **STOP and ASK FOR APPROVAL** after writing each test
+- The user will review the test in their IDE before you implement
+- Each TEST task in `tasks.md` specifies the exact `/test-first` command to use
+- The command enforces the approval gate automatically — you cannot bypass it
+
+**Why this is mandatory:**
+
+1. Tests correctly specify desired behaviour before implementation
+2. Scope control — only code required by tests is written
+3. No speculative code
+4. The user reviews the test in their IDE, not in CLI output
+
+**If a task says `/test-first when ...`** — YOU MUST USE THAT COMMAND. Do not write the test file
+by hand.
+
+Independently of the spec workflow: **a bug fix must include a test that fails without the fix.**
+
+## ⛔ Public API discipline
+
+This is the rule most often got wrong in this repository.
+
+- **The default posture is: do not change the public API.** If the task did not ask for an API
+  change and you find yourself writing `public`, stop and reconsider.
+- If you do change it, append the entry to `src/<Project>/.PublicAPI/PublicAPI.Unshipped.txt` —
+  never to `Shipped.txt`. A removal is a `*REMOVED*` line.
+- The analyser fails the build on any difference, so this is not optional bookkeeping.
+
+See [.agent_instructions/public_api.md](.agent_instructions/public_api.md).
+
+## Spec Workflow
+
+Follow the structured specification workflow: Requirements → ADR Design → Adversarial Review
+(multiple rounds) → Task Breakdown → Implementation. Never skip review rounds or assume approval —
+wait for explicit user approval before proceeding to the next phase.
+
+## Change Scope
+
+Do NOT change defaults or make changes beyond what was explicitly requested. When fixing or
+modifying code, restrict changes to exactly what the user asked for — no additional "improvements"
+and no default value changes. The same applies to dependencies: **do not add or update one unless
+asked**.
+
+## Adversarial Reviews
+
+When conducting adversarial reviews, apply strict judgment criteria. A clear violation should result
+in FAIL, not NEEDS_ATTENTION. Err on the side of strictness rather than leniency when evaluating
+against guardrails and principles.
+
+## Claude Code Commands
+
+Commands automate common workflows and enforce mandatory engineering practices. **Use them
+proactively** rather than manually following the documented procedure.
+
+- **[Command index](.claude/commands/README.md)** — full documentation for all of them
+
+### Core development
+
+- `/test-first <behavior>` — TDD with a mandatory approval gate
+  ([docs](.claude/commands/tdd/README.md))
+- `/tidy-first <change>` — separate structural from behavioural changes
+  ([docs](.claude/commands/refactor/README.md))
+- `/adr <title>` — create an Architecture Decision Record
+  ([docs](.claude/commands/adr/README.md))
+- `/bugfix:*` — diagnosis-first bug workflow: Triage → Confirm (✋ gate) → Test-first → Fix →
+  Verify. Use it for a bug whose root cause is not yet proven, or one that arrived with a suggested
+  fix you should verify first ([docs](.claude/commands/bugfix/README.md))
+
+### Specification workflow
+
+- `/spec:requirements`, `/spec:design`, `/spec:tasks`, `/spec:implement`, `/spec:review`,
+  `/spec:status` ([docs](.claude/commands/spec/README.md))
+
+**When to use which:**
+
+- `/test-first` when adding behaviour or fixing a bug
+- `/tidy-first` when code needs refactoring before or during feature work
+- `/adr` when documenting an architectural decision
+- `/spec:*` for full feature development from requirements to implementation
+
+## Verification gates
+
+Before calling any change done, check all of these. They are what CI checks.
+
+1. The build is **analyser-clean** — StyleCop, Sonar and BannedApiAnalyzers run in every build and
+   CI treats warnings as errors.
+2. Tests pass. Name one framework while iterating: test projects multi-target `net10.0;net9.0;net8.0`.
+3. If a public member changed, `.PublicAPI/PublicAPI.Unshipped.txt` was updated.
+4. If `src/Snippets` changed, `dotnet mdsnippets` was run and the regenerated Markdown committed.
+5. If a project under `src/` was touched, its Stryker mutation score has not regressed.
+6. No dependency was added or updated.
+
+There is **no external infrastructure** — no Docker, no database, no broker. Every test in this
+repository runs in process.
+
+## Context Management
+
+When asked to remember learnings or update guidance:
+
+- **Prefer project-owned files** (`.agent_instructions/`, `CLAUDE.md`, `PROMPT.md`) over ephemeral
+  Claude memory. Project-owned files are shared, version-controlled and authoritative.
+- Update `.agent_instructions/code_style.md` for coding conventions,
+  `.agent_instructions/testing.md` for test practices, and so on.
+- Use `PROMPT.md`, if it exists, for temporary state that should persist across conversations.
+- Only use Claude memory (`MEMORY.md`) for user-specific preferences that do not belong in the
+  project.
+
+## Migration status
+
+Fences is mid-migration from its Polly fork. While that is true:
+
+- **Do not publish to NuGet.** Published package IDs can never be deleted, only unlisted.
+- **Do not commit to `main`.** Work on the migration branch.
+- **Do not rewrite `CHANGELOG.md`.** It is the historical record and still describes Polly
+  releases up to the fork. That is deliberate.
+- Most files under `docs/` still say Polly. That is expected, not a miss — the prose rewrite is a
+  later phase.
+- `fork-migration-plan.md` is the authoritative plan; `PROMPT.md`, if present, is the current
+  session state. Read `PROMPT.md` first when picking up migration work.
+
+## Detailed Instructions
+
+See [AGENTS.md](AGENTS.md) for the full index into
+[`.agent_instructions/`](.agent_instructions/).

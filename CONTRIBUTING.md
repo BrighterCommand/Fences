@@ -407,7 +407,26 @@ from the same material.
 - `.claude/commands/` holds commands that walk an agent through our preferred workflow.
 
 Because the instructions live in `.agent_instructions/` rather than in a vendor-specific file, they
-are straightforward for other agents to consume.
+are straightforward for other agents to consume. The files are:
+
+| File | Covers |
+| --- | --- |
+| [`build_and_development.md`](.agent_instructions/build_and_development.md) | Cake targets, `build.ps1`, the inner loop, the analyser escape hatch, the CI gates |
+| [`project_structure.md`](.agent_instructions/project_structure.md) | The projects, the target framework matrix, the core abstractions, the strategy taxonomy |
+| [`code_style.md`](.agent_instructions/code_style.md) | The conventions, and a table of where they differ from Brighter's |
+| [`public_api.md`](.agent_instructions/public_api.md) | The `.PublicAPI/` discipline |
+| [`testing.md`](.agent_instructions/testing.md) | xUnit, Shouldly, NSubstitute, FsCheck, `FakeTimeProvider`, the mutation threshold |
+| [`documentation.md`](.agent_instructions/documentation.md) | XML docs, docfx, generated snippets, and how to write an ADR |
+| [`adr_frontmatter.md`](.agent_instructions/adr_frontmatter.md) | The ADR frontmatter schema and tag vocabulary |
+| [`design_principles.md`](.agent_instructions/design_principles.md) | The architecture invariants worth defending |
+| [`dependency_management.md`](.agent_instructions/dependency_management.md) | Central package management and the multi-targeting constraint |
+| [`release_and_versioning.md`](.agent_instructions/release_and_versioning.md) | MinVer, the release scripts, and what they own |
+
+The commands are `/test-first`, `/tidy-first`, `/adr`, the `/spec:*` specification workflow and the
+`/bugfix:*` diagnosis-first bug workflow. Each set has a `README.md` in its directory, and
+[`.claude/commands/README.md`](.claude/commands/README.md) indexes them. `specs/` and `bugfixes/`
+hold the state those workflows write; `docs/adr/index.md` is generated from ADR frontmatter and must
+not be hand-edited.
 
 We accept code written with the help of an agent. You remain responsible for what you submit: read
 it, understand it, and check it follows these guidelines. In particular, agents are unreliable about
