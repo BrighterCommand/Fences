@@ -1,6 +1,6 @@
-# Polly V8 API Documentation
+# Fences v8 API Documentation
 
-The Polly V8 API offers a unified, non-allocating resilience API. At the core of Polly V8 is the [`ResiliencePipeline`](ResiliencePipeline.cs) class, responsible for executing user-provided callbacks. This class handles all scenarios covered in Polly V7, such as:
+The Fences v8 API offers a unified, non-allocating resilience API. At its core is the [`ResiliencePipeline`](ResiliencePipeline.cs) class, responsible for executing user-provided callbacks. This class handles all scenarios covered by the v7 API, such as:
 
 - `ISyncPolicy`
 - `IAsyncPolicy`
@@ -46,7 +46,7 @@ public sealed class ResilienceContext
 }
 ```
 
-The `ResiliencePipeline` class unifies the four different policies that were available in Polly v7, enabling user actions to be executed via a single API. This class offers various methods to handle different scenarios:
+The `ResiliencePipeline` class unifies the four different policies that were available in the v7 API, enabling user actions to be executed via a single API. This class offers various methods to handle different scenarios:
 
 - Synchronous methods without a return value.
 - Synchronous methods that return a value.
@@ -54,8 +54,8 @@ The `ResiliencePipeline` class unifies the four different policies that were ava
 - Asynchronous methods that return a value.
 
 > [!NOTE]
-> Polly also provides a `ResiliencePipeline<T>` class. This specialized pipeline is useful for scenarios where the consumer is concerned with only a single type of result.
+> Fences also provides a `ResiliencePipeline<T>` class. This specialized pipeline is useful for scenarios where the consumer is concerned with only a single type of result.
 
 ## Resources
 
-Visit [pollydocs.org](https://pollydocs.org) to learn more about Polly.
+Visit [the Fences documentation](https://brightercommand.github.io/Fences/) to learn more.

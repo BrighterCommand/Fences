@@ -1,5 +1,12 @@
 # 3rd Party Libraries and Contributions
 
+> [!NOTE]
+> Fences is a fork of Polly 8.7.0, and this page is inherited with the code. The libraries listed
+> below are the ones Polly depended on, and the acknowledgements are Polly's contributors — the
+> people who wrote the code Fences is built from. Version references such as "until Polly v5.0.6"
+> are Polly's history and are left as they were. See [`NOTICE.md`](https://github.com/BrighterCommand/Fences/blob/main/NOTICE.md)
+> for provenance and attribution.
+
 - [xUnit.net](https://github.com/xunit/xunit) - Free, open source, community-focused unit testing tool for the .NET Framework | [Apache License 2.0 (Apache)](https://github.com/xunit/xunit/blob/main/license.txt)
 - [Ian Griffith's `TimedLock`](http://www.interact-sw.co.uk/iangblog/2004/04/26/yetmoretimedlocking)
 - [Steven van Deursen's `ReadOnlyDictionary`](https://blogs.cuttingedge.it/steven/posts/2007/readonlydictionary/) (until Polly v5.0.6)

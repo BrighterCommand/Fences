@@ -3,7 +3,7 @@
 ## About
 
 - **Option(s)**:
-  - [`HedgingStrategyOptions<T>`](xref:Polly.Hedging.HedgingStrategyOptions`1)
+  - [`HedgingStrategyOptions<T>`](xref:Paramore.Fences.Hedging.HedgingStrategyOptions`1)
 - **Extension(s)**:
   - `AddHedging`
 - **Exception(s)**: -
@@ -22,7 +22,7 @@ This strategy also supports multiple [concurrency modes](#concurrency-modes) to 
 <!-- snippet: hedging -->
 ```cs
 // Hedging with default options.
-// See https://www.pollydocs.org/strategies/hedging#defaults for defaults.
+// See https://brightercommand.github.io/Fences/strategies/hedging#defaults for defaults.
 var optionsDefaults = new HedgingStrategyOptions<HttpResponseMessage>();
 
 // A customized hedging strategy that retries up to 3 times if the execution
@@ -103,7 +103,7 @@ Execution attempt. Source: 'MyPipeline/MyPipelineInstance/Hedging', Operation Ke
     CustomException: Exception of type 'CustomException' was thrown.
         at Program.<>c.<<Main>b__0_2>d.MoveNext()
         ...
-        at Polly.ResiliencePipeline.<>c__8`1.<<ExecuteAsync>b__8_0>d.MoveNext() in /_/src/Polly.Core/ResiliencePipeline.AsyncT.cs:line 95
+        at Paramore.Fences.ResiliencePipeline.<>c__8`1.<<ExecuteAsync>b__8_0>d.MoveNext() in /_/src/Paramore.Fences.Core/ResiliencePipeline.AsyncT.cs:line 95
 ```
 
 > [!NOTE]

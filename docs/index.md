@@ -41,7 +41,6 @@ You can also find many resources and community contributions, such as:
 
 - [Samples](https://github.com/BrighterCommand/Fences/tree/main/samples): Samples in this repository that serve as an introduction to Fences.
 - [Practical Samples](https://github.com/App-vNext/Polly-Samples): Practical examples written for Polly. The v8 API is unchanged in Fences, so they apply once the package references and namespaces are swapped.
-- [Polly-Contrib](community/polly-contrib.md): Community projects and libraries that extend and enhance the ecosystem Fences inherits from Polly.
 - [Libraries and contributions](community/libraries-and-contributions.md): Dependencies and contributors that make Fences possible and awesome.
 - [Git Workflow](community/git-workflow.md): Our suggested Git workflow for contributing to Fences.
 

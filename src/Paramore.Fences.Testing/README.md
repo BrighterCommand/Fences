@@ -1,8 +1,8 @@
-# About Polly.Testing
+# About Paramore.Fences.Testing
 
 This package exposes APIs and utilities that can be used to assert on the composition of resilience pipelines.
 
-See [the documentation](https://www.pollydocs.org/advanced/testing) for more details.
+See [the documentation](https://brightercommand.github.io/Fences/advanced/testing) for more details.
 
 ## Usage
 

@@ -3,7 +3,7 @@
 ## About
 
 - **Option(s)**:
-  - [`FallbackStrategyOptions<T>`](xref:Polly.Fallback.FallbackStrategyOptions`1)
+  - [`FallbackStrategyOptions<T>`](xref:Paramore.Fences.Fallback.FallbackStrategyOptions`1)
 - **Extension(s)**:
   - `AddFallback`
 - **Exception(s)**: -
@@ -89,7 +89,7 @@ Resilience event occurred. EventName: 'OnFallback', Source: '(null)/(null)/Fallb
     CustomException: Exception of type 'CustomException' was thrown.
         at Program.<>c.<Main>b__0_3(ResilienceContext ctx)
         ...
-        at Polly.ResiliencePipeline.<>c__8`1.<<ExecuteAsync>b__8_0>d.MoveNext() in /_/src/Polly.Core/ResiliencePipeline.AsyncT.cs:line 95
+        at Paramore.Fences.ResiliencePipeline.<>c__8`1.<<ExecuteAsync>b__8_0>d.MoveNext() in /_/src/Paramore.Fences.Core/ResiliencePipeline.AsyncT.cs:line 95
 ```
 
 > [!NOTE]
@@ -190,7 +190,7 @@ Here's a breakdown of the behavior when the callback produces either an `HttpSta
 
 ## Anti-patterns
 
-Over the years, many developers have used Polly in various ways. Some of these
+Over the years, many developers have used Fences in various ways. Some of these
 recurring patterns may not be ideal. The sections below highlight anti-patterns to avoid.
 
 ### Using fallback to replace thrown exception
@@ -388,4 +388,4 @@ return await pipeline.ExecuteAsync(CallExternalSystem, CancellationToken.None);
 
 **Reasoning**:
 
-In this approach, we leverage the escalation mechanism provided by Polly rather than creating our own through nesting. `CancellationToken` values are automatically propagated between the strategies for you.
+In this approach, we leverage the escalation mechanism provided by Fences rather than creating our own through nesting. `CancellationToken` values are automatically propagated between the strategies for you.

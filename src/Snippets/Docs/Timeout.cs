@@ -14,7 +14,7 @@ internal static class Timeout
         new ResiliencePipelineBuilder().AddTimeout(TimeSpan.FromSeconds(3));
 
         // Timeout using the default options.
-        // See https://www.pollydocs.org/strategies/timeout#defaults for defaults.
+        // See https://brightercommand.github.io/Fences/strategies/timeout#defaults for defaults.
         var optionsDefaults = new TimeoutStrategyOptions();
 
         // To add a timeout using a custom timeout generator function

@@ -3,11 +3,11 @@
 ## About
 
 - **Option(s)**:
-  - [`TimeoutStrategyOptions`](xref:Polly.Timeout.TimeoutStrategyOptions)
+  - [`TimeoutStrategyOptions`](xref:Paramore.Fences.Timeout.TimeoutStrategyOptions)
 - **Extension(s)**:
   - `AddTimeout`
 - **Exception(s)**:
-  - [`TimeoutRejectedException`](xref:Polly.Timeout.TimeoutRejectedException): Thrown when a delegate executed through a timeout strategy does not complete before the timeout.
+  - [`TimeoutRejectedException`](xref:Paramore.Fences.Timeout.TimeoutRejectedException): Thrown when a delegate executed through a timeout strategy does not complete before the timeout.
 
 ---
 
@@ -24,7 +24,7 @@ The timeout **proactive** resilience strategy cancels the execution if it does n
 new ResiliencePipelineBuilder().AddTimeout(TimeSpan.FromSeconds(3));
 
 // Timeout using the default options.
-// See https://www.pollydocs.org/strategies/timeout#defaults for defaults.
+// See https://brightercommand.github.io/Fences/strategies/timeout#defaults for defaults.
 var optionsDefaults = new TimeoutStrategyOptions();
 
 // To add a timeout using a custom timeout generator function
@@ -122,7 +122,7 @@ So, what is the purpose of the `OnTimeout` in case of static timeout settings?
 
 The `OnTimeout` delegate can be useful when you define a resilience pipeline which consists of multiple strategies. For example you have a timeout as the inner strategy and a retry as the outer strategy. If the retry is defined to handle `TimeoutRejectedException`, that means the `Execute{Async}` may or may not throw that exception depending on future attempts. So, if you need to be notified about a timeout occurring, you must provide a delegate to the `OnTimeout` property.
 
-The `TimeoutRejectedException` provides access to a `TelemetrySource` property. This property is a [`ResilienceTelemetrySource`](xref:Polly.Telemetry.ResilienceTelemetrySource) which allows you retrieve information such as the executed pipeline and strategy. These can be useful if you have multiple timeout strategies in your pipeline and you need to know which strategy caused the `TimeoutRejectedException` to be thrown.
+The `TimeoutRejectedException` provides access to a `TelemetrySource` property. This property is a [`ResilienceTelemetrySource`](xref:Paramore.Fences.Telemetry.ResilienceTelemetrySource) which allows you retrieve information such as the executed pipeline and strategy. These can be useful if you have multiple timeout strategies in your pipeline and you need to know which strategy caused the `TimeoutRejectedException` to be thrown.
 
 ## Defaults
 
@@ -214,7 +214,7 @@ sequenceDiagram
 
 ## Anti-patterns
 
-Over the years, many developers have used Polly in various ways. Some of these
+Over the years, many developers have used Fences in various ways. Some of these
 recurring patterns may not be ideal. The sections below highlight anti-patterns to avoid.
 
 ### Ignoring Cancellation Token

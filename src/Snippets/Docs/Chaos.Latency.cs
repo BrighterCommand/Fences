@@ -13,7 +13,7 @@ internal static partial class Chaos
     {
         #region chaos-latency-usage
         // Latency using the default options.
-        // See https://www.pollydocs.org/chaos/latency#defaults for defaults.
+        // See https://brightercommand.github.io/Fences/chaos/latency#defaults for defaults.
         var optionsDefault = new ChaosLatencyStrategyOptions();
 
         // 10% of invocations will be randomly affected

@@ -19,7 +19,7 @@ internal static class Retry
         #region retry
 
         // Retry using the default options.
-        // See https://www.pollydocs.org/strategies/retry#defaults for defaults.
+        // See https://brightercommand.github.io/Fences/strategies/retry#defaults for defaults.
         var optionsDefaults = new RetryStrategyOptions();
 
         // For instant retries with no delay

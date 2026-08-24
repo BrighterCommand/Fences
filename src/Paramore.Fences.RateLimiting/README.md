@@ -1,19 +1,19 @@
-# About Polly.RateLimiting
+# About Paramore.Fences.RateLimiting
 
-The `Polly.RateLimiting` package adopts the [.NET Rate Limiting](https://devblogs.microsoft.com/dotnet/announcing-rate-limiting-for-dotnet/) APIs for Polly scenarios.
+The `Paramore.Fences.RateLimiting` package adopts the [.NET Rate Limiting](https://devblogs.microsoft.com/dotnet/announcing-rate-limiting-for-dotnet/) APIs for Fences scenarios.
 
 - It exposes the `AddRateLimiter` extension methods for `ResiliencePipelineBuilder`.
 - It exposes the `AddConcurrencyLimiter` convenience extension methods for `ResiliencePipelineBuilder`.
 - It exposes the `RateLimiterRejectedException` class to notify the caller that the operation was rate limited.
 
-See [the documentation](https://www.pollydocs.org/strategies/rate-limiter) for more details.
+See [the documentation](https://brightercommand.github.io/Fences/strategies/rate-limiter) for more details.
 
 ## Usage
 
 <!-- snippet: rate-limiter -->
 ```cs
 // Add rate limiter with default options.
-// See https://www.pollydocs.org/strategies/rate-limiter#defaults for defaults.
+// See https://brightercommand.github.io/Fences/strategies/rate-limiter#defaults for defaults.
 new ResiliencePipelineBuilder()
     .AddRateLimiter(new RateLimiterStrategyOptions());
 

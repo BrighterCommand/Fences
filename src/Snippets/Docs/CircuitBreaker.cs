@@ -14,7 +14,7 @@ internal static class CircuitBreaker
         #region circuit-breaker
 
         // Circuit breaker with default options.
-        // See https://www.pollydocs.org/strategies/circuit-breaker#defaults for defaults.
+        // See https://brightercommand.github.io/Fences/strategies/circuit-breaker#defaults for defaults.
         var optionsDefaults = new CircuitBreakerStrategyOptions();
 
         // Circuit breaker with customized options:

@@ -147,7 +147,7 @@ Visit [resilience strategies](docs/strategies/) to explore how to configure indi
 <!-- snippet: retry -->
 ```cs
 // Retry using the default options.
-// See https://www.pollydocs.org/strategies/retry#defaults for defaults.
+// See https://brightercommand.github.io/Fences/strategies/retry#defaults for defaults.
 var optionsDefaults = new RetryStrategyOptions();
 
 // For instant retries with no delay
@@ -236,7 +236,7 @@ For more details, visit the [retry strategy](docs/strategies/retry.md) documenta
 <!-- snippet: circuit-breaker -->
 ```cs
 // Circuit breaker with default options.
-// See https://www.pollydocs.org/strategies/circuit-breaker#defaults for defaults.
+// See https://brightercommand.github.io/Fences/strategies/circuit-breaker#defaults for defaults.
 var optionsDefaults = new CircuitBreakerStrategyOptions();
 
 // Circuit breaker with customized options:
@@ -362,7 +362,7 @@ For more details, visit the [fallback strategy](docs/strategies/fallback.md) doc
 <!-- snippet: hedging -->
 ```cs
 // Hedging with default options.
-// See https://www.pollydocs.org/strategies/hedging#defaults for defaults.
+// See https://brightercommand.github.io/Fences/strategies/hedging#defaults for defaults.
 var optionsDefaults = new HedgingStrategyOptions<HttpResponseMessage>();
 
 // A customized hedging strategy that retries up to 3 times if the execution
@@ -413,7 +413,7 @@ The timeout resilience strategy assumes delegates you execute support [co-operat
 new ResiliencePipelineBuilder().AddTimeout(TimeSpan.FromSeconds(3));
 
 // Timeout using the default options.
-// See https://www.pollydocs.org/strategies/timeout#defaults for defaults.
+// See https://brightercommand.github.io/Fences/strategies/timeout#defaults for defaults.
 var optionsDefaults = new TimeoutStrategyOptions();
 
 // To add a timeout using a custom timeout generator function
@@ -455,7 +455,7 @@ For more details, visit the [timeout strategy](docs/strategies/timeout.md) docum
 <!-- snippet: rate-limiter -->
 ```cs
 // Add rate limiter with default options.
-// See https://www.pollydocs.org/strategies/rate-limiter#defaults for defaults.
+// See https://brightercommand.github.io/Fences/strategies/rate-limiter#defaults for defaults.
 new ResiliencePipelineBuilder()
     .AddRateLimiter(new RateLimiterStrategyOptions());
 

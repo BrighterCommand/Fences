@@ -72,7 +72,6 @@ enum
 eshoponcontainers
 extensibility
 FakeItEasy
-fencesdocs
 FluentAssertions
 flurl
 frontmatter

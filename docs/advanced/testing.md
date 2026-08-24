@@ -1,18 +1,18 @@
 # Testing
 
-This document explains how to test Polly's resilience pipelines. You should not test how the resilience pipelines operate internally, but rather test your own settings or custom delegates.
+This document explains how to test Fences's resilience pipelines. You should not test how the resilience pipelines operate internally, but rather test your own settings or custom delegates.
 
-To make the testing process simpler, Polly offers the [`Polly.Testing`](https://www.nuget.org/packages/Polly.Testing/) package. This package has a range of APIs designed to help you test the setup and combination of resilience pipelines in your user code.
+To make the testing process simpler, Fences offers the [`Paramore.Fences.Testing`](https://www.nuget.org/packages/Paramore.Fences.Testing/) package. This package has a range of APIs designed to help you test the setup and combination of resilience pipelines in your user code.
 
 ## Usage
 
-Begin by adding the [`Polly.Testing`](https://www.nuget.org/packages/Polly.Testing) package to your test project:
+Begin by adding the [`Paramore.Fences.Testing`](https://www.nuget.org/packages/Paramore.Fences.Testing) package to your test project:
 
 ```sh
-dotnet add package Polly.Testing
+dotnet add package Paramore.Fences.Testing --prerelease
 ```
 
-Use the `GetPipelineDescriptor` extension method to get the [`ResiliencePipelineDescriptor`](xref:Polly.Testing.ResiliencePipelineDescriptor) which provides details on the pipeline's composition:
+Use the `GetPipelineDescriptor` extension method to get the [`ResiliencePipelineDescriptor`](xref:Paramore.Fences.Testing.ResiliencePipelineDescriptor) which provides details on the pipeline's composition:
 
 <!-- snippet: get-pipeline-descriptor -->
 ```cs

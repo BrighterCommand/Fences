@@ -1,33 +1,35 @@
-# Migration guide from v7 to v8
+# Migration guide from the v7 API to the v8 API
 
-Welcome to the migration guide for Polly's v8 release. Version 8 of Polly brings major new enhancements and supports all of the same scenarios as previous versions. In the following sections, we'll detail the differences between the v7 and v8 APIs, and provide steps on how to transition smoothly.
+Fences ships two generations of API. The **v8 API** — resilience pipelines and strategies — is the one the rest of this documentation describes. The **v7 API** — policies — is still shipped, in the `Paramore.Fences` package. This guide explains the differences and how to move between them.
 
 > [!NOTE]
-> The v7 API is still available and fully supported even when using the v8 version by referencing the [Polly](https://www.nuget.org/packages/Polly) package.
+> **This is Polly's own v7-to-v8 guide, inherited with the code, with its package names changed to Fences'.** There was never a Fences v7; "v7" and "v8" here name *API generations*, not Fences releases. Fences forked from Polly 8.7.0 and carries both, so the guide is as useful here as it was upstream.
+>
+> The v7 API remains fully supported alongside the v8 API, via the [`Paramore.Fences`](https://www.nuget.org/packages/Paramore.Fences) package. If you are arriving from Polly rather than from the v7 API, read [Migrate from Polly](migration-from-polly.md) first — that is a different and much smaller job.
 
 ## Major differences
 
-- **The term *Policy* is now replaced with *Strategy***: In previous versions, Polly used the term *policy* for retries, timeouts, etc. In v8, these are referred to as *resilience strategies*.
-- **Introduction of Resilience Pipelines**: A [resilience pipeline](pipelines/index.md) combines one or more resilience strategies. This is the foundational API for Polly v8, similar to the **Policy Wrap** in previous versions but integrated into the core API.
+- **The term *Policy* is now replaced with *Strategy***: In previous versions, the library used the term *policy* for retries, timeouts, etc. In v8, these are referred to as *resilience strategies*.
+- **Introduction of Resilience Pipelines**: A [resilience pipeline](pipelines/index.md) combines one or more resilience strategies. This is the foundational API for v8, similar to the **Policy Wrap** in previous versions but integrated into the core API.
 - **Unified sync and async flows**: Interfaces such as `IAsyncPolicy`, `IAsyncPolicy<T>`, `ISyncPolicy`, `ISyncPolicy<T>`, and `IPolicy` are now unified under `ResiliencePipeline` and `ResiliencePipeline<T>`. The resilience pipeline supports both synchronous and asynchronous execution flows.
-- **Native async support**: Polly v8 was designed with asynchronous support from the start.
+- **Native async support**: The v8 API was designed with asynchronous support from the start.
 - **No static APIs**: Unlike previous versions, v8 doesn't use static APIs. This improves testability and extensibility while maintaining ease of use.
 - **Options-based configuration**: Configuring individual resilience strategies is now options-based, offering more flexibility and improving maintainability and extensibility.
-- **Built-in telemetry**: Polly v8 now has built-in telemetry support.
-- **Improved performance and low-allocation APIs**: Polly v8 brings significant performance enhancements and provides zero-allocation APIs for advanced use cases.
+- **Built-in telemetry**: The v8 API has built-in telemetry support.
+- **Improved performance and low-allocation APIs**: The v8 API brings significant performance enhancements and provides zero-allocation APIs for advanced use cases.
 
 > [!NOTE]
 > Please read the comments in the code carefully for additional context and explanations.
 
-## Polly or Polly.Core package
+## `Paramore.Fences` or `Paramore.Fences.Core`
 
 When you do your migration process it is recommended to follow these steps:
 
-- Upgrade the `Polly` package version from 7.x to 8.x
+- Reference the `Paramore.Fences` package, which carries the v7 API
   - Your previous policies should run smoothly without any change
-- Migrate your V7 policies to V8 strategies gradually, such as one at a time
+- Migrate your v7 policies to v8 strategies gradually, such as one at a time
   - Test your migrated code thoroughly
-- After you have successfully migrated all your legacy Polly code then change your package reference from `Polly` to [`Polly.Core`](https://www.nuget.org/packages/Polly.Core)
+- After you have successfully migrated all your legacy policy code, change your package reference from `Paramore.Fences` to [`Paramore.Fences.Core`](https://www.nuget.org/packages/Paramore.Fences.Core)
 
 ## Migrating execution policies
 
@@ -35,7 +37,7 @@ This section describes how to migrate from execution policies (i.e. `IAsyncPolic
 
 ### Configuring policies in v7
 
-In earlier versions, Polly exposed various interfaces to execute user code:
+In earlier versions, the library exposed various interfaces to execute user code:
 
 - `IAsyncPolicy`
 - `IAsyncPolicy<T>`
@@ -91,7 +93,7 @@ await asyncPolicyT.ExecuteAsync(async token =>
 
 ### Configuring strategies in v8
 
-In Polly v8, there are no such interfaces. The previous samples become:
+In the v8 API, there are no such interfaces. The previous samples become:
 
 <!-- snippet: migration-policies-v8 -->
 ```cs
@@ -425,7 +427,7 @@ new ResiliencePipelineBuilder<HttpResponseMessage>().AddRetry(new RetryStrategyO
 
 ## Migrating rate limit policies
 
-The rate limit policy is now replaced by the [rate limiter strategy](strategies/rate-limiter.md) which uses the [`System.Threading.RateLimiting`](https://www.nuget.org/packages/System.Threading.RateLimiting) package. Polly does not implement its own rate limiter anymore.
+The rate limit policy is now replaced by the [rate limiter strategy](strategies/rate-limiter.md) which uses the [`System.Threading.RateLimiting`](https://www.nuget.org/packages/System.Threading.RateLimiting) package. Fences does not implement its own rate limiter.
 
 ### Rate limit in v7
 
@@ -456,7 +458,7 @@ IAsyncPolicy<HttpResponseMessage> asyncPolicyT = Policy.RateLimitAsync<HttpRespo
 ### Rate limit in v8
 
 > [!NOTE]
-> In v8, you have to add the [`Polly.RateLimiting`](https://www.nuget.org/packages/Polly.RateLimiting) package to your application otherwise you won't see the `AddRateLimiter` extension.
+> In v8, you have to add the [`Paramore.Fences.RateLimiting`](https://www.nuget.org/packages/Paramore.Fences.RateLimiting) package to your application otherwise you won't see the `AddRateLimiter` extension.
 
 <!-- snippet: migration-rate-limit-v8 -->
 ```cs
@@ -532,7 +534,7 @@ IAsyncPolicy<HttpResponseMessage> asyncPolicyT = Policy.BulkheadAsync<HttpRespon
 ### Bulkhead in v8
 
 > [!NOTE]
-> In v8, you have to add the [`Polly.RateLimiting`](https://www.nuget.org/packages/Polly.RateLimiting) package to your application otherwise you won't see the `AddConcurrencyLimiter` extension.
+> In v8, you have to add the [`Paramore.Fences.RateLimiting`](https://www.nuget.org/packages/Paramore.Fences.RateLimiting) package to your application otherwise you won't see the `AddConcurrencyLimiter` extension.
 
 <!-- snippet: migration-bulkhead-v8 -->
 ```cs
@@ -703,7 +705,7 @@ cbPolicy.Reset(); // Transitions into the Closed state
 
 > [!NOTE]
 >
-> Polly V8 does not support the standard (*"classic"*) circuit breaker with consecutive failure counting.
+> The v8 API does not support the standard (*"classic"*) circuit breaker with consecutive failure counting.
 >
 > In case of V8 you can define a Circuit Breaker strategy which works like the advanced circuit breaker in V7.
 
@@ -781,9 +783,9 @@ ____
 >
 > For further information please check out the [Circuit Breaker resilience strategy documentation](strategies/circuit-breaker.md).
 
-## Migrating `Polly.Context`
+## Migrating `Paramore.Fences.Context`
 
-The successor of the `Polly.Context` is the `ResilienceContext`. The major differences:
+The successor of the `Paramore.Fences.Context` is the `ResilienceContext`. The major differences:
 
 - `ResilienceContext` is pooled for enhanced performance and cannot be directly created. Instead, use the `ResilienceContextPool` class to get an instance.
 - `Context` allowed directly custom data attachment, whereas `ResilienceContext` employs the `ResilienceContext.Properties` for the same purpose.
@@ -923,7 +925,7 @@ string? ctxValue = asyncPolicyResult.Context.GetValueOrDefault(Key) as string;
 
 > [!NOTE]
 >
-> Polly V8 does not provide an API to synchronously execute and capture the outcome of a pipeline.
+> The v8 API does not provide an API to synchronously execute and capture the outcome of a pipeline.
 
 <!-- snippet: migration-execute-v8 -->
 ```cs
@@ -1072,7 +1074,7 @@ registry.AddOrUpdate(
 
 > [!NOTE]
 >
-> Polly V8 does not provide an explicit API to directly update a strategy in the registry.
+> The v8 API does not provide an explicit API to directly update a strategy in the registry.
 >
 > On the other hand it does provide a mechanism to [reload pipelines](pipelines/resilience-pipeline-registry.md#dynamic-reloads).
 
@@ -1113,7 +1115,7 @@ In the name of interoperability you can define V8 strategies use them with your 
 V8 provides a set of extension methods to support easy conversion from v8 to v7 APIs, as shown in the example below:
 
 > [!NOTE]
-> In v8, you have to add the [`Polly.RateLimiting`](https://www.nuget.org/packages/Polly.RateLimiting) package to your application otherwise you won't see the `AddRateLimiter` extension.
+> In v8, you have to add the [`Paramore.Fences.RateLimiting`](https://www.nuget.org/packages/Paramore.Fences.RateLimiting) package to your application otherwise you won't see the `AddRateLimiter` extension.
 
 <!-- snippet: migration-interoperability -->
 ```cs

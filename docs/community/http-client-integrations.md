@@ -1,8 +1,15 @@
 # HTTP client integration samples
 
-Transient failures are inevitable for HTTP based communication as well. It is not a surprise that many developers use Polly with an HTTP client to make their applications more robust.
+Transient failures are inevitable for HTTP based communication as well. It is not a surprise that many developers put a resilience library behind an HTTP client to make their applications more robust.
 
-Here we have collected some popular HTTP client libraries and show how to integrate them with Polly.
+> [!IMPORTANT]
+> **The samples on this page use Polly's API, not Fences', and that is deliberate.**
+>
+> HTTP client resilience in .NET runs through [`Microsoft.Extensions.Http.Resilience`](https://www.nuget.org/packages/Microsoft.Extensions.Http.Resilience), which has a hard dependency on Polly: its `AddResilienceHandler` callback is handed a Polly `ResiliencePipelineBuilder<HttpResponseMessage>`, not a Fences one. **Fences cannot take Polly out of the dependency graph of an application that calls `AddResilienceHandler` or `AddStandardResilienceHandler`.** The samples below therefore keep Polly's package references and namespaces, and they work as written.
+>
+> See [Migrate from Polly](../migration-from-polly.md) for the bounded form of this claim, and [ADR 0002](../adr/0002-fork-polly-as-fences.md) for why it is accepted rather than worked around.
+
+Here we have collected some popular HTTP client libraries and show how to integrate them.
 
 ## Setting the stage
 

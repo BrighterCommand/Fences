@@ -62,7 +62,7 @@ ResilienceContextPool.Shared.Return(context);
 The above samples demonstrate how to use the resilience pipeline within the same scope. Additionally, consider the following:
 
 - Separate the resilience pipeline's definition from its usage. Inject pipelines into the code that will consume them. This [facilitates various unit-testing scenarios](https://github.com/App-vNext/Polly/wiki/Unit-testing-with-Polly---with-examples).
-- If your application uses Polly in multiple locations, define all pipelines at startup using [`ResiliencePipelineRegistry`](/docs/resilience-pipeline-registry.md) or using the `AddResiliencePipeline` extension. This is a common approach in .NET Core applications. For example, you could create your own extension method on `IServiceCollection` to configure pipelines consumed elsewhere in your application.
+- If your application uses Fences in multiple locations, define all pipelines at startup using [`ResiliencePipelineRegistry`](/docs/resilience-pipeline-registry.md) or using the `AddResiliencePipeline` extension. This is a common approach in .NET Core applications. For example, you could create your own extension method on `IServiceCollection` to configure pipelines consumed elsewhere in your application.
 
 <!-- snippet: resilience-pipeline-di-usage -->
 ```cs
@@ -133,7 +133,7 @@ else
 ```
 <!-- endSnippet -->
 
-Use `ExecuteOutcomeAsync(...)` in high-performance scenarios where you wish to avoid re-throwing exceptions. Keep in mind that Polly's resilience strategies also make use of the `Outcome` struct to prevent unnecessary exception throwing.
+Use `ExecuteOutcomeAsync(...)` in high-performance scenarios where you wish to avoid re-throwing exceptions. Keep in mind that Fences's resilience strategies also make use of the `Outcome` struct to prevent unnecessary exception throwing.
 
 ### Context vs State
 

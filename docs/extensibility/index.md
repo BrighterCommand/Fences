@@ -1,6 +1,6 @@
 # Extensibility
 
-This article explains how to extend Polly with new [resilience strategies](../strategies/index.md). Polly identifies two types of resilience strategies:
+This article explains how to extend Fences with new [resilience strategies](../strategies/index.md). Fences identifies two types of resilience strategies:
 
 - **Reactive**: These strategies handle specific exceptions that are thrown, or results that are returned, by the callbacks executed through the strategy.
 - **Proactive**: Unlike reactive strategies, proactive strategies do not focus on handling errors by the callbacks might throw or return. They can make proactive decisions to cancel or reject the execution of callbacks (e.g., using a rate limiter or a timeout resilience strategy).
@@ -11,8 +11,8 @@ This guide will help you create a new illustrative resilience strategy for each 
 
 Regardless of whether the strategy is reactive or proactive, every new resilience strategy should include the following components:
 
-- The strategy itself which should inherit from [`ResilienceStrategy`](xref:Polly.ResilienceStrategy)
-- Options detailing the strategy's configuration. This should inherit from [`ResilienceStrategyOptions`](xref:Polly.ResilienceStrategyOptions).
+- The strategy itself which should inherit from [`ResilienceStrategy`](xref:Paramore.Fences.ResilienceStrategy)
+- Options detailing the strategy's configuration. This should inherit from [`ResilienceStrategyOptions`](xref:Paramore.Fences.ResilienceStrategyOptions).
 - Extensions for `ResiliencePipelineBuilder` or `ResiliencePipelineBuilder<T>` to register the strategy into the pipeline.
 - Custom argument types for delegates that contain information about a specific event.
 

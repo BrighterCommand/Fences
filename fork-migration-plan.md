@@ -1203,21 +1203,77 @@ missing secrets, and `packages-*` artefacts containing `Paramore.Fences.*.nupkg`
 
 ### Phase 7 — Documentation site
 
-- [ ] **P7.1** Rebuild the docfx site under the new branding; verify `docs/api` metadata generation
-      still resolves after the project renames.
+- [x] **P7.1** Rebuild the docfx site under the new branding; verify `docs/api` metadata generation
+      still resolves after the project renames. **Done — `docfx metadata` and `docfx build` both
+      exit 0 with 0 warnings from a clean `_site`.** This mattered more than the plan assumed: see
+      the xref finding below.
 - [x] **P7.2** ~~Add `docs/migration-from-polly.md`~~ — **delivered early, in Phase 3 (P3.5)**:
       the `using` change, the package-ID map, the D12 type rename, the telemetry rename (D4), the
       strong-name change, and the bounded `Microsoft.Extensions.Http.Resilience` claim.
-- [ ] **P7.3** Publish to GitHub Pages per D8; update all doc links. **This now also owns the ~40
-      `pollydocs.org` links** (moved here from P3.7) — in `docs/**/*.md`,
-      `src/Snippets/Docs/*.cs` and `.github/ISSUE_TEMPLATE/*`. Change
-      `.github/wordlist.txt`'s `fencesdocs` entry in the *same* commit or CI spellcheck breaks.
-- [ ] **P7.4** Prune `docs/community/*` — it lists Polly-ecosystem resources, Slack, and
-      contributor pages that no longer apply.
+- [x] **P7.3** Publish to GitHub Pages per D8; update all doc links. **Done.** Every
+      `pollydocs.org` link is now `https://brightercommand.github.io/Fences/<same path>` —
+      the extensionless deep-link form, verified live against the running site. All of the ones
+      visible in `docs/**/*.md` and `README.md` were inside generated `<!-- snippet: -->` regions,
+      so they were fixed in `src/Snippets/Docs/*.cs` and regenerated. `fencesdocs` is out of
+      `.github/wordlist.txt` in this same commit, as required.
+- [x] **P7.4** Prune `docs/community/*`. **Done — decided 2026-08-24.** Deleted
+      `polly-contrib.md` (describes Polly's GitHub org and Slack; Fences has no equivalent) and
+      `resources.md` (33 third-party article and podcast titles that cannot be rewritten without
+      misquoting their authors). Kept and rewritten: `git-workflow.md` (repointed at this
+      repository), `http-client-integrations.md` and `libraries-and-contributions.md`.
 
-### Phase 8 — NuGet publishing (**HELD**)
+**Exit criteria:** the docfx site builds clean, no page claims to be Polly's, and no page claims to
+be ours when it is Polly's.
 
-Everything is built and staged; the trigger is not pulled.
+**What Phase 7 actually did (session 6).** The plan under-scoped this phase; four things it did not
+mention were the substance of the work:
+
+* **31 `xref:Polly.*` cross-references were broken** and would have rendered as dead links on the
+  site. The API metadata is generated from the renamed assemblies, so every `xref` had to become
+  `xref:Paramore.Fences.*`. The clean docfx build is what proves they now resolve — spot-checked in
+  `_site/strategies/retry.html`, which links `../api/Paramore.Fences.Retry.RetryStrategyOptions.html`.
+* **`docs/community/toc.yml` pointed at `fences-contrib.md`, which never existed.** The Phase 2
+  script renamed `toc.yml` (a structural file, in scope) but not the `.md` page (prose, out of
+  scope), so the site had a broken navigation entry from the moment of the rename.
+* **The telemetry documentation was factually wrong.** It described a `Polly` meter and logger and
+  `resilience.polly.*` instruments. The code emits `Paramore.Fences` and `resilience.fences.*`
+  (verified in `src/Paramore.Fences.Extensions/Telemetry/`). D4 changed the code in Phase 2; the
+  docs were never updated to match.
+* **The illustrative stack traces were wrong** for the same reason — they showed
+  `at Polly.ResiliencePipeline …` in `/_/src/Polly.Core/`.
+
+Editorial decisions taken, beyond P7.4:
+
+* **`docs/migration-v8.md` and `docs/v7/extensibility.md` were kept and reframed as *API
+  generations*, not product versions.** Fences ships the pre-v8 API in the `Paramore.Fences`
+  package, so the guide is genuinely useful; but "migrating from Fences v7" would be false, and both
+  pages now say plainly that this is Polly's material, inherited. **There was never a Fences v7 —
+  do not let a later pass "tidy" that framing away.**
+* **`docs/community/http-client-integrations.md` now leads with the bounded claim.** The whole page
+  is built on `Microsoft.Extensions.Http.Resilience`, which hands its callback a *Polly* builder, so
+  its samples use Polly's API and say so. Same for `samples/Chaos/README.md`. This is the one place
+  the documentation admits Fences cannot replace Polly.
+* **Polly-branded binaries were deleted**, on the same reasoning as D9's guardrails: ten cheat-sheet
+  PDFs and their PowerPoint sources, plus `simmy-logo.png`. They could not be regenerated here and
+  shipping Polly and Simmy branding from the Fences site is the most visible possible inconsistency.
+  Recreating the cheat sheets is candidate work, not started.
+
+Two traps for whoever runs the next prose pass:
+
+* **A bare `Polly` → `Fences` substitution manufactures falsehoods, exactly as 2b-bis predicted.**
+  The automated pass in this session did it under protection of a sentinel list, and still produced
+  "Fences is a community fork of [Fences]", "practical examples written for Fences" about
+  Polly-Samples, and a corrupted wiki URL (`Unit-testing-with-Fences`, a page that does not exist).
+  All were caught by reading the diff. **Review, do not trust, any such pass.**
+* **`.claude/commands/adr/generate_adr_index.awk` emitted two things that failed CI**: a relative
+  link escaping the docfx root (`../../.agent_instructions/…`, now an absolute GitHub URL) and a
+  `|----|----|` table delimiter that `MD060` rejects (now `| --- | --- |`). A previous session had
+  hand-fixed the *generated* file, which the file itself says not to do; regenerating reintroduced
+  both failures. **The generator is fixed, so `docs/adr/index.md` is now lint-clean when regenerated.**
+
+### Phase 8 — NuGet publishing (**UNHELD by D13**)
+
+Everything is built and staged. **D13 lifted the hold on 2026-08-24**: Fences publishes pre-releases, `9.0.0-alpha001` onwards. What remains is P8.1 and P8.3.
 
 - [ ] **P8.1** Reserve the **`Paramore.*`** ID prefix on nuget.org. Moving to `Paramore.Fences.*`
       (D2) turns this from a likely rejection into a strong application, and it benefits all three
