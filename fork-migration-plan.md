@@ -147,6 +147,7 @@ These are the `Meter` / `ActivitySource` names and metric names — see decision
 | D11 | Ownership: same four maintainers as Brighter | **CONFIRMED 2026-08-22** |
 | D12 | Rename `PollyServiceCollectionExtensions` → `ResilienceServiceCollectionExtensions` | **CONFIRMED 2026-08-22** |
 | D13 | Publish pre-releases now, as `9.0.0-alphaNNN`, rather than holding for the Polly negotiation | **CONFIRMED 2026-08-24 — supersedes the Phase 8 hold** |
+| D14 | Packages and the trusted-publishing policy are owned by the `BrighterCommand` nuget.org account, not a personal one | **CONFIRMED 2026-08-24 — detail in P8.3** |
 
 All decisions are settled. Phases 0–8 are cleared to execute.
 
@@ -1311,9 +1312,75 @@ Everything is built and staged. **D13 lifted the hold on 2026-08-24**: Fences pu
       D13.** `publish-nuget` is gated on a tag push and the `NuGet.org` environment, which is the
       normal shape. The third gate existed to enforce a hold that no longer exists. Requiring a
       reviewer on the `NuGet.org` environment is a repository setting and is still recommended.
-- [ ] **P8.3** Configure NuGet trusted publishing (the workflow already uses `NuGet/login` with
-      OIDC — needs `NUGET_USER` and a nuget.org trusted-publisher policy). **This is now the one
-      thing standing between the branch and a first publish.**
+- [ ] **P8.3** Configure NuGet trusted publishing. **This is the one thing standing between the
+      branch and a first publish.** The workflow side is already done — `build.yml`'s
+      `publish-nuget` job runs `NuGet/login@v1.2.0` with `id-token: write` immediately before
+      `dotnet nuget push --api-key`, so no long-lived NuGet key ever exists. What is left is
+      outside the repository.
+
+      **D14 — the packages and the policy are owned by the `BrighterCommand` nuget.org account,
+      not by a personal one. CONFIRMED 2026-08-24.** Four reasons, in order of weight:
+
+      1. **P8.1 depends on it.** A prefix reservation is granted *to an owner*. The application's
+         own argument is that 120 of the 121 `Paramore.*` packages are owned by `BrighterCommand`;
+         publishing Fences under a personal account would exempt it from the reservation being
+         applied for, and undercut the argument while making it.
+      2. **All 123 existing `Paramore.*` packages are owned by `BrighterCommand`** (~15.8M
+         downloads, verified 2026-08-24 via the nuget.org search API). Fences should not be the
+         odd one out in its own family.
+      3. **Policy ownership drags package ownership with it.** A trusted-publishing policy
+         "applies to all packages owned by the selected owner", and all five IDs are new, so the
+         *first push creates them owned by whoever the key is scoped to*. A personally-owned
+         policy would create five personally-owned packages and then require nuget.org's manual
+         co-owner invite/accept flow to move them. Choosing the org up front avoids that entirely.
+      4. **D11 names four maintainers.** A personal account means only one of them can unlist,
+         deprecate or transfer these packages — a poor bus factor for a project whose purpose is
+         to de-risk a dependency.
+
+      **The policy fields** (nuget.org → your username → *Trusted Publishing* → add policy;
+      all case-insensitive):
+
+      | Field | Value |
+      |---|---|
+      | Owner | `BrighterCommand` |
+      | Repository Owner | `BrighterCommand` |
+      | Repository | `Fences` |
+      | Workflow File | `build.yml` — **filename only**, not `.github/workflows/build.yml` |
+      | Environment | `NuGet.org` |
+
+      The environment field is optional in general, but `publish-nuget` declares
+      `environment: name: NuGet.org`, so setting it narrows the policy to exactly that job. It
+      must match exactly, dot included.
+
+      **Then, in the GitHub repository** — neither exists today, checked 2026-08-24:
+
+      - Secret **`NUGET_USER`** = `BrighterCommand`. The repo has *no* secrets at all and no org
+        secrets are visible to it. **This is the one value the documentation does not pin down:**
+        `NuGet/login`'s `user` input is described only as "your NuGet account username" (profile
+        name, **not** an email), and neither Microsoft Learn nor the action's README says what to
+        use for an org-owned policy. The reasoning for `BrighterCommand` is that nuget.org
+        organizations and users share one account namespace and organizations own packages
+        directly, so the `username` in the token exchange names *which account's policies to
+        check*. **If the exchange returns 403 on the first run, try the personal username before
+        assuming anything else is wrong.**
+      - Environment **`NuGet.org`**. Only `github-pages` exists. Add a required reviewer if you
+        want a human gate — approval blocks the job *before it starts*, so the 1-hour key lifetime
+        is not at risk while it waits.
+
+      **Two constraints worth knowing.** The temporary API key lives **1 hour**, and each OIDC
+      token is single-use — one token, one key. `publish-nuget` logs in seconds before pushing, so
+      both are satisfied. And a policy may start *"temporarily active"* for 7 days, going inactive
+      if no publish happens, because nuget.org needs GitHub's numeric repo and owner IDs to lock
+      the policy against resurrection attacks. That is documented as *usually* affecting private
+      repositories; `BrighterCommand/Fences` is public and not a fork, so it should activate fully
+      on creation. If the UI does say pending, the window can be restarted at any time.
+
+      **Unverified:** whether `BrighterCommand` is formally a nuget.org *organization* or a shared
+      user account — the profile page does not say. It matters only because you can select an
+      organization as policy owner solely while an active member of it. The Trusted Publishing
+      page settles it on sight: an owner dropdown means organization. If it turns out to be a
+      plain user account, converting it to an organization is worth doing while only alphas are
+      at stake.
 - [ ] **P8.4** ~~Dry-run against a private feed first~~ — optional under D13. `--skip-duplicate`
       makes a re-run safe, and the first tag is an alpha, so the cost of a failed first attempt is a
       wasted alpha number rather than a bad release.

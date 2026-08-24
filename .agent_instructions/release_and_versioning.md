@@ -61,7 +61,9 @@ Constraints worth knowing before you edit any of that:
    `startsWith(github.ref, 'refs/tags/')`, so they run for a tag and are skipped everywhere else.
    `publish-nuget` authenticates with NuGet.org **trusted publishing**: `NuGet/login` exchanges the
    job's OIDC token for a short-lived API key, so no long-lived NuGet key lives in the repository.
-   The only secret involved is `NUGET_USER`.
+   The only secret involved is `NUGET_USER`, and per **D14** it is `BrighterCommand` — the packages
+   and the trusted-publishing policy are owned by the organisation account that owns every other
+   `Paramore.*` package, not by an individual.
 3. Publishing the release triggers `after-release.yml`, which runs, in order:
    - `eng/update-changelog.ps1 <version> <notes> <server-url>` — prepends the release notes to
      `CHANGELOG.md`.
