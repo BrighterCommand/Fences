@@ -1337,6 +1337,15 @@ Everything is built and staged. **D13 lifted the hold on 2026-08-24**: Fences pu
          deprecate or transfer these packages — a poor bus factor for a project whose purpose is
          to de-risk a dependency.
 
+      **The policy exists and is `Active` — created 2026-08-24 as `Fences-Policy`.** It captured
+      both GitHub numeric IDs on creation (Repository Owner `#24714628`, Repository `#1338118962`,
+      both verified against the GitHub API), which is what makes a policy *permanently* active, so
+      the 7-day pending-activation window below never applied. Recorded as created:
+      Package owner `BrighterCommand`, glob `Paramore.Fences*` (which matches all five IDs,
+      including the bare `Paramore.Fences`), scopes *push new packages and package versions* and
+      *unlist or relist package versions*, publisher GitHubActions, workflow `build.yml`,
+      environment `NuGet.org`. **The remaining work is the two GitHub-side items below.**
+
       **The policy fields** (nuget.org → your username → *Trusted Publishing* → add policy;
       all case-insensitive):
 
@@ -1375,12 +1384,18 @@ Everything is built and staged. **D13 lifted the hold on 2026-08-24**: Fences pu
       repositories; `BrighterCommand/Fences` is public and not a fork, so it should activate fully
       on creation. If the UI does say pending, the window can be restarted at any time.
 
-      **Unverified:** whether `BrighterCommand` is formally a nuget.org *organization* or a shared
-      user account — the profile page does not say. It matters only because you can select an
-      organization as policy owner solely while an active member of it. The Trusted Publishing
-      page settles it on sight: an owner dropdown means organization. If it turns out to be a
-      plain user account, converting it to an organization is worth doing while only alphas are
-      at stake.
+      **Resolved 2026-08-24:** `BrighterCommand` was selectable as *Package owner* when creating
+      the policy, and GitHub reports the org's `owner.type` as `Organization`. D14 is applied.
+
+      **Getting `NUGET_USER` wrong is cheap.** `NuGet/login` runs *before* `dotnet nuget push`, so
+      a bad username fails the job at the login step with nothing published. Fix the secret and
+      re-run the failed job from the Actions UI — the tag and the `packages-windows` artefact are
+      still there, and `--skip-duplicate` makes a partial re-push safe.
+
+      **One trap when creating the `NuGet.org` environment: we publish from a _tag_.** If you set
+      *Deployment branches and tags* to anything other than the permissive default, a tag push
+      will not be allowed to deploy to the environment and `publish-nuget` will never start. Either
+      leave that rule unset, or add a tag pattern that matches the release tags.
 - [ ] **P8.4** ~~Dry-run against a private feed first~~ — optional under D13. `--skip-duplicate`
       makes a re-run safe, and the first tag is an alpha, so the cost of a failed first attempt is a
       wasted alpha number rather than a bad release.
