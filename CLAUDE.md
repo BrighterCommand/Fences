@@ -147,7 +147,9 @@ When asked to remember learnings or update guidance:
 
 Fences is mid-migration from its Polly fork. While that is true:
 
-- **Do not publish to NuGet.** Published package IDs can never be deleted, only unlisted.
+- **Never publish to NuGet by hand.** Fences now ships pre-releases (`9.0.0-alpha001` onwards), but
+  only ever from a tag, through CI. `dotnet nuget push` is denied in `.claude/settings.json`.
+  Published package IDs can never be deleted, only unlisted.
 - **Do not commit to `main`.** Work on the migration branch.
 - **Do not rewrite `CHANGELOG.md`.** It is the historical record and still describes Polly
   releases up to the fork. That is deliberate.

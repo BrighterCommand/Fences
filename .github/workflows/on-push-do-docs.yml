@@ -14,16 +14,11 @@ jobs:
     runs-on: ubuntu-24.04
     if: github.event.repository.fork == false
 
-    steps:
+    permissions:
+      contents: write
+      pull-requests: write
 
-      - name: Generate GitHub application token
-        id: generate-application-token
-        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
-        with:
-          client-id: ${{ secrets.POLLY_UPDATER_BOT_APP_ID }}
-          private-key: ${{ secrets.POLLY_UPDATER_BOT_KEY }}
-          permission-contents: write
-          permission-pull-requests: write
+    steps:
 
       - name: Checkout code
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -31,7 +26,6 @@ jobs:
           filter: 'tree:0'
           persist-credentials: true # zizmor: ignore[artipacked] Needed to push commits
           show-progress: false
-          token: ${{ steps.generate-application-token.outputs.token }}
 
       - name: Setup .NET SDK
         uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6.0.0
@@ -42,8 +36,8 @@ jobs:
         env:
           DOTNET_CLI_TELEMETRY_OPTOUT: true
           DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
-          GIT_COMMIT_USER_EMAIL: '138034000+fences-updater-bot[bot]@users.noreply.github.com'
-          GIT_COMMIT_USER_NAME: 'fences-updater-bot[bot]'
+          GIT_COMMIT_USER_EMAIL: '41898282+github-actions[bot]@users.noreply.github.com'
+          GIT_COMMIT_USER_NAME: 'github-actions[bot]'
         run: |
           $ErrorActionPreference = "Stop"
           $ProgressPreference = "SilentlyContinue"
@@ -84,7 +78,7 @@ jobs:
         env:
           BRANCH_NAME: ${{ steps.update-docs.outputs.branchName }}
         with:
-          github-token: ${{ steps.generate-application-token.outputs.token }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             const { repo, owner } = context.repo;
             const workflowUrl = `${process.env.GITHUB_SERVER_URL}/${owner}/${repo}/actions/runs/${process.env.GITHUB_RUN_ID}`;

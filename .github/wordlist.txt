@@ -5,6 +5,7 @@ adrs
 agentic
 alloc
 allowed-tools
+alphanumeric
 analyser
 analysers
 aot
@@ -12,6 +13,9 @@ apis
 applyTo
 args
 argument-hint
+artefact
+artefacts
+ASCII
 ASD
 askuserquestion
 ASP.NET
@@ -126,6 +130,7 @@ nuget
 nullable
 nupkg
 Nygard
+OIDC
 opentelemetry
 org
 organisation
@@ -146,6 +151,7 @@ polyfills
 PowerShell
 pre
 preardon
+prerelease
 proactive
 Pryce
 PSScriptAnalyzer

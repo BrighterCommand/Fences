@@ -146,8 +146,30 @@ These are the `Meter` / `ActivitySource` names and metric names — see decision
 | D10 | Icon: fence palisade in Brighter's palette | **CONFIRMED 2026-08-22 — draft accepted as starting point** |
 | D11 | Ownership: same four maintainers as Brighter | **CONFIRMED 2026-08-22** |
 | D12 | Rename `PollyServiceCollectionExtensions` → `ResilienceServiceCollectionExtensions` | **CONFIRMED 2026-08-22** |
+| D13 | Publish pre-releases now, as `9.0.0-alphaNNN`, rather than holding for the Polly negotiation | **CONFIRMED 2026-08-24 — supersedes the Phase 8 hold** |
 
 All decisions are settled. Phases 0–8 are cleared to execute.
+
+### D13 — Publish now, as a pre-release — **CONFIRMED 2026-08-24**
+
+**Supersedes the Phase 8 hold**, which said publish nothing until the Polly negotiation concluded.
+
+The hold traded away two things it should not have: the package identifiers, which anyone can take
+while we wait, and user feedback, which we cannot get from a repository nobody can consume. Both are
+bought back cheaply by publishing pre-releases, because a pre-release makes no compatibility promise
+and does not commit us to shipping `9.0.0`.
+
+- Versions are **`9.0.0-alpha001`, `9.0.0-alpha002`, …** — zero-padded to three digits, with no dot
+  before the number. `9.0.0-alpha.001` is invalid SemVer (a numeric identifier may not carry a
+  leading zero); `alpha001` is one alphanumeric identifier and sorts correctly to `alpha999`. There
+  may be several before `9.0.0`, which is what the padding is for.
+- **`README.md` and `package-readme.md` must both say that Fences may be retired** if App vNext
+  reverses the OSMF decision, expected by the end of August 2026, and that the migration reverses
+  cleanly. This is the condition on which the decision rests — it is not optional wording.
+- The reversal risk is genuinely low-cost for adopters: going back to Polly is the same
+  package-reference and namespace change in the other direction.
+- **P8.1 is unaffected.** The `Paramore.*` prefix reservation still stands on its own merits and the
+  mail should still go. Publishing does not reserve the prefix; it only claims the five IDs.
 
 ### D1 — How far does the rename go? — **CONFIRMED: full rename to `Paramore.Fences`**
 
@@ -1115,38 +1137,69 @@ attestation) and most of it survives.
 | `lint.yml` | Keep (actionlint / zizmor / PSScriptAnalyzer) |
 | `ossf-scorecard.yml` | Keep |
 | `stale.yml` | Keep |
-| `dependabot-approve.yml` + `dependabot.yml` | Keep; verify auto-approve policy suits BrighterCommand |
+| `dependabot-approve.yml` + `dependabot.yml` | **Kept, edited** — app token → `GITHUB_TOKEN`; `codecov/codecov-action` dropped from the allow-list |
 | `gh-pages.yml` | Keep, re-point to the Fences Pages URL (D8) |
-| `on-push-do-docs.yml` | Keep (regenerates docs from `src/Snippets`) |
+| `on-push-do-docs.yml` | **Kept, edited** — app token → `GITHUB_TOKEN` |
 | `mutation-tests.yml` | Keep — the 100% Stryker threshold is a real quality asset |
 | `release.yml` | Keep (draft-release creator, no Polly coupling) |
-| `after-release.yml` | Review — check for Polly-specific announcement targets |
+| `after-release.yml` | **Kept, edited** — app token → `GITHUB_TOKEN`; the `bump-version.ps1` step removed |
 | `updater-approve.yml` | **Delete** — gates on `polly-updater-bot[bot]` (**B5**) |
 | `nuget-packages-published.yml` | **Delete** — driven by the `repository_dispatch` we are removing |
 | `update-dotnet-sdk.yml` | **Delete** — it calls a reusable workflow from `martincostello/update-dotnet-sdk`, a Polly maintainer's personal repo. Dropping it removes an external dependency and one more app token to provision. Dependabot still covers NuGet packages; `global.json` gets bumped by hand. |
 
 #### 6b. `build.yml` changes
 
-- [ ] **P6.1** Keep the macOS / Ubuntu / Windows matrix, `./build.ps1`, artifact upload, and the
+- [x] **P6.1** Keep the macOS / Ubuntu / Windows matrix, `./build.ps1`, artifact upload, and the
       `validate-packages` job. These need no secrets.
-- [ ] **P6.2** Remove the `sign` job and the Authenticode half of `validate-signed-packages` (D6, **B4**).
+- [x] **P6.2** Remove the `sign` job and the Authenticode half of `validate-signed-packages` (D6, **B4**).
       Keep the SBOM step (rename `polly.spdx.json` → `fences.spdx.json`) and the
       `actions/attest` provenance step.
-- [ ] **P6.3** Codecov: either add `CODECOV_TOKEN` to BrighterCommand and keep the two upload steps,
+- [x] **P6.3** Codecov: either add `CODECOV_TOKEN` to BrighterCommand and keep the two upload steps,
       or remove them and rely on the coverage artefact + the `GenerateCoverageReports` step-summary
       that `eng/Test.targets` already emits. Recommend **keep the artefact + step summary now,
       add Codecov later** — one fewer secret on day one.
-- [ ] **P6.4** Rewire `publish-nuget` (see Phase 8) — do **not** delete it, gate it.
-- [ ] **P6.5** Remove the `POLLY_UPDATER_BOT_*` app-token step and the `repository-dispatch` step.
-- [ ] **P6.6** Update the `environment.url` (currently `nuget.org/profiles/Polly`).
-- [ ] **P6.7** Verify the `github.event.repository.fork == false` guards — confirmed **true** for
+- [x] **P6.4** Rewire `publish-nuget` (see Phase 8) — do **not** delete it, gate it.
+- [x] **P6.5** Remove the `POLLY_UPDATER_BOT_*` app-token step and the `repository-dispatch` step.
+- [x] **P6.6** Update the `environment.url` (currently `nuget.org/profiles/Polly`).
+- [x] **P6.7** Verify the `github.event.repository.fork == false` guards — confirmed **true** for
       `BrighterCommand/Fences`, so no change needed, but re-check if the repo is ever recreated
       as a GitHub fork.
-- [ ] **P6.8** Confirm the `10.0.400` SDK pin (P0.1) is consistent between `global.json` and the
+- [x] **P6.8** Confirm the `10.0.400` SDK pin (P0.1) is consistent between `global.json` and the
       workflow's `setup-dotnet` steps.
 
 **Exit criteria:** a push to `fork/rebrand-to-fences` produces a fully green Actions run with no
 missing secrets, and `packages-*` artefacts containing `Paramore.Fences.*.nupkg`.
+
+**What Phase 6 actually did (session 6).** Deviations from the triage above:
+
+* **P6.4 is the opposite of what this plan said**, because of **D13**. `publish-nuget` is *armed*,
+  not gated behind a hold: it needs `[build, attest-packages]` and runs on a tag push to a non-fork.
+  `--api-key` is now passed to `dotnet nuget push` explicitly rather than relying on the
+  `NUGET_API_KEY` environment variable being picked up implicitly.
+* **`validate-signed-packages` became `attest-packages`.** With signing gone it duplicated
+  `validate-packages`'s `dotnet validate` run and its Authenticode step had nothing to check. What
+  survives is the SBOM download, the package extraction and `actions/attest`, tag-gated as before.
+* **The bot secrets were resolved by falling back to `GITHUB_TOKEN`**, not by provisioning apps.
+  Consequence to remember: **pull requests opened by `after-release.yml` and `on-push-do-docs.yml`
+  will not trigger `build.yml`**, because GitHub suppresses workflow runs for events raised with
+  `GITHUB_TOKEN`. Push a commit to the branch to get CI. `dependabot-approve.yml` mostly survives —
+  approve-and-auto-merge on `GITHUB_TOKEN` is GitHub's own documented recipe — but it needs "Allow
+  auto-merge" enabled in repository settings, and it has one hard limit: **the app token carried
+  `permission-workflows: write`, and `GITHUB_TOKEN` has no equivalent.** GitHub refuses to let it
+  merge a pull request that touches `.github/workflows/**`, so Dependabot's `github-actions`
+  group — including the `github/codeql-action` bumps — must be merged by hand. The `nuget`
+  ecosystem PRs are unaffected.
+* **`eng/bump-version.ps1` was deleted, not fixed.** It was broken twice over: `[System.Version]`
+  cannot parse a SemVer pre-release such as `9.0.0-alpha001`, and there are no `Paramore.Fences*`
+  `PackageVersion` entries in `Directory.Packages.props` for it to update — the samples use
+  `ProjectReference`. It had nothing to do.
+* **Also removed as newly-dead:** `.github/codecov.yml`, `eng/signing/filelist.txt`, and the
+  `authenticodelint`, `sign` and `MartinCostello.WaitForNuGetPackage` entries in
+  `.config/dotnet-tools.json`. The Codecov badge went from `package-readme.md` and the Codecov
+  claim from `CONTRIBUTING.md`.
+* **`STRYKER_DASHBOARD_API_KEY` needs no action.** `dashboard` is not in
+  `eng/stryker-config.json`'s `reporters`, so the missing secret is inert.
+* **The only secret that must now be provisioned is `NUGET_USER`** (P8.3).
 
 ### Phase 7 — Documentation site
 
@@ -1198,18 +1251,24 @@ Everything is built and staged; the trigger is not pulled.
       regardless of whether Fences ever ships); hold the placeholder publish unless squatting risk
       looks material.
 
-- [ ] **P8.2** Gate `publish-nuget` behind **all** of: a tag push, a protected GitHub Environment
-      (`NuGet.org`) with required reviewers, **and** a repository variable such as
-      `FENCES_PUBLISH_ENABLED == 'true'`. Belt, braces and a third thing — the explicit cost of an
-      accidental publish is an unretractable package ID.
+- [x] **P8.2** ~~Gate `publish-nuget` behind a repository variable as well as a tag~~ — **dropped by
+      D13.** `publish-nuget` is gated on a tag push and the `NuGet.org` environment, which is the
+      normal shape. The third gate existed to enforce a hold that no longer exists. Requiring a
+      reviewer on the `NuGet.org` environment is a repository setting and is still recommended.
 - [ ] **P8.3** Configure NuGet trusted publishing (the workflow already uses `NuGet/login` with
-      OIDC — needs `NUGET_USER` and a nuget.org trusted-publisher policy).
-- [ ] **P8.4** Dry-run the whole path against a private feed (GitHub Packages) to prove the
-      pipeline end to end without touching nuget.org.
-- [ ] **P8.5** Prepare, but do not publish: release notes, the migration guide, and the Brighter-side
-      PR that switches Brighter's `Polly` reference to `Fences`.
-
-**Do not proceed past P8.4 without an explicit decision that the Polly negotiations have failed.**
+      OIDC — needs `NUGET_USER` and a nuget.org trusted-publisher policy). **This is now the one
+      thing standing between the branch and a first publish.**
+- [ ] **P8.4** ~~Dry-run against a private feed first~~ — optional under D13. `--skip-duplicate`
+      makes a re-run safe, and the first tag is an alpha, so the cost of a failed first attempt is a
+      wasted alpha number rather than a bad release.
+- [x] **P8.5** ~~Prepare, but do not publish, release notes and the migration guide~~ — the migration
+      guide shipped in P3.5 and now carries the pre-release caveat. **Still outstanding:** the
+      Brighter-side PR switching Brighter's `Polly` reference to Fences, which should not be raised
+      until an alpha is actually on nuget.org.
+- [ ] **P8.6** After the first successful publish, restore the NuGet version badge to
+      `package-readme.md` (removed in Phase 3 because it would have rendered "not found") and
+      re-check whether `PackageValidationBaselineVersion` should be set — it should **not** be,
+      while the series is pre-release.
 
 ---
 

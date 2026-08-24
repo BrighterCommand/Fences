@@ -5,13 +5,17 @@ Fences is a .NET resilience and transient-fault-handling library that allows dev
 Fences is a community fork of [Polly](https://github.com/App-vNext/Polly), maintained by [Brighter Command](https://github.com/BrighterCommand). It is not affiliated with, endorsed by, or supported by App vNext or the Polly maintainers. The fork was taken from Polly 8.7.0 to avoid the Open Source Maintainers Fee now charged for Polly; see [ADR 0002](docs/adr/0002-fork-polly-as-fences.md) for the reasoning and [`NOTICE.md`](NOTICE.md) for provenance and attribution.
 
 > [!IMPORTANT]
-> Fences is under construction. The rename from Polly is complete, but **no packages have been published to NuGet yet**. Build from source until the first `9.0.0` release.
+> **Fences is pre-release, and its future is not yet settled.**
+>
+> Packages are published to NuGet as `9.0.0-alpha001` and onwards. They exist to secure the package identifiers and to gather early feedback, not to carry a compatibility promise. The API is Polly 8.7.0's and is not expected to churn, but nothing is guaranteed until `9.0.0`.
+>
+> Fences exists only because of the Open Source Maintainers Fee (OSMF) that App vNext now charges for Polly. **If that decision is reversed, Brighter Command may retire the fork and go back to Polly.** We expect to know by the end of August 2026. Adopting Fences now is low-risk in either direction - going back is the same package-reference and namespace change described below, in reverse - but adopt it knowing that.
 
 This README describes the v8 API. The pre-v8 API is still shipped, in the `Paramore.Fences` package; see the [v7 documentation](docs/v7/).
 
 ## NuGet packages
 
-None of these are published yet. The identifiers are reserved by this table, not by nuget.org.
+All five are published as **pre-release only**. `dotnet add package` will not find them without `--prerelease` or an explicit version.
 
 | **Package** | **Replaces** | **About** |
 | :---------- | :----------- | :-------- |
@@ -33,7 +37,7 @@ For a project on Polly 8.7.0, moving to Fences is a change of package reference 
 
 ```diff
 -<PackageReference Include="Polly.Core" Version="8.7.0" />
-+<PackageReference Include="Paramore.Fences.Core" Version="9.0.0" />
++<PackageReference Include="Paramore.Fences.Core" Version="9.0.0-alpha001" />
 ```
 
 ```diff
@@ -50,7 +54,7 @@ To use Fences, you must provide a callback and execute it using a [**resilience 
 To get started, first add the `Paramore.Fences.Core` package to your project by running the following command:
 
 ```sh
-dotnet add package Paramore.Fences.Core
+dotnet add package Paramore.Fences.Core --prerelease
 ```
 
 You can create a `ResiliencePipeline` using the `ResiliencePipelineBuilder` class as shown below:
@@ -73,7 +77,7 @@ await pipeline.ExecuteAsync(static async token => { /* Your custom logic goes he
 If you prefer to define resilience pipelines using [`IServiceCollection`](https://learn.microsoft.com/dotnet/api/microsoft.extensions.dependencyinjection.iservicecollection), you'll need to install the `Paramore.Fences.Extensions` package:
 
 ```sh
-dotnet add package Paramore.Fences.Extensions
+dotnet add package Paramore.Fences.Extensions --prerelease
 ```
 
 You can then define your resilience pipeline using the `AddResiliencePipeline(...)` extension method as shown:

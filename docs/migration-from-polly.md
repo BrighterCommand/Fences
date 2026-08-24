@@ -4,7 +4,7 @@ Fences is a community fork of [Polly](https://github.com/App-vNext/Polly), maint
 [Brighter Command](https://github.com/BrighterCommand). It is not affiliated with, endorsed by,
 or supported by App vNext or the Polly maintainers.
 
-Fences 9.0.0 is forked from Polly 8.7.0. **The API is unchanged**, apart from the one type rename
+Fences 9.0 is forked from Polly 8.7.0. **The API is unchanged**, apart from the one type rename
 described below. Moving from Polly 8.7.0 to Fences is a change of package reference and namespace,
 not a rewrite: for most projects it is two lines of `.csproj` and a find-and-replace over `using`
 directives.
@@ -12,10 +12,18 @@ directives.
 The one thing you cannot fix with a find-and-replace is the telemetry names — see
 [Telemetry](#telemetry) below.
 
+> [!IMPORTANT]
+> Fences is currently **pre-release**. The published packages are `9.0.0-alpha001` and onwards, and
+> they carry no compatibility promise until `9.0.0`. Fences also exists only because of the Open
+> Source Maintainers Fee that App vNext charges for Polly; if that is reversed, Brighter Command may
+> retire the fork. Every step in this guide reverses cleanly, so a migration back to Polly is the
+> same work in the other direction.
+
 ## Package references
 
-Replace each Polly package reference with its Fences equivalent. Versions restart at `9.0.0`; see
-[Versioning](#versioning).
+Replace each Polly package reference with its Fences equivalent. Versions restart at `9.0`; see
+[Versioning](#versioning). The packages are pre-release, so you need an explicit version or
+`--prerelease` — `dotnet add package Paramore.Fences.Core` alone will not resolve them.
 
 | Polly | Fences |
 | :---- | :----- |
@@ -28,8 +36,8 @@ Replace each Polly package reference with its Fences equivalent. Versions restar
 ```diff
 -<PackageReference Include="Polly.Core" Version="8.7.0" />
 -<PackageReference Include="Polly.Extensions" Version="8.7.0" />
-+<PackageReference Include="Paramore.Fences.Core" Version="9.0.0" />
-+<PackageReference Include="Paramore.Fences.Extensions" Version="9.0.0" />
++<PackageReference Include="Paramore.Fences.Core" Version="9.0.0-alpha001" />
++<PackageReference Include="Paramore.Fences.Extensions" Version="9.0.0-alpha001" />
 ```
 
 The package identifiers carry the `Paramore` prefix because that is the identifier family used by
@@ -150,6 +158,10 @@ the part we control.
 Fences starts at `9.0.0`. The major version is bumped past Polly's `8.x` so that a Fences version
 number is never mistaken for a Polly one, and so there is no ambiguity about which project a given
 `8.7.0` refers to.
+
+Until `9.0.0` itself ships, releases are pre-releases named `9.0.0-alpha001`, `9.0.0-alpha002` and
+so on. The number is zero-padded, and has no dot before it, so that the sequence sorts correctly; `9.0.0-alpha.001`
+would not be valid SemVer.
 
 `CHANGELOG.md` in the repository retains Polly's history in full. Entries for `8.7.0` and below
 describe Polly releases, not Fences ones.

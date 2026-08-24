@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       version:
-        description: 'The version to create the release for.'
+        description: 'The version to create the release for, e.g. 9.0.0-alpha001 or 9.0.0.'
         required: true
         type: string
 

@@ -233,7 +233,9 @@ not kill the mutants is not finished.
 ./build.ps1 -Target MutationTests
 ```
 
-Coverage is collected by coverlet during the normal test run and uploaded to Codecov by CI.
+Coverage is collected by coverlet during the normal test run. CI publishes it as the
+`coverage-<os>` build artefact and as a job step summary; there is no external coverage
+service.
 
 ## Documentation
 

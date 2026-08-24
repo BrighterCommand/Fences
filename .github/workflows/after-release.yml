@@ -22,16 +22,11 @@ jobs:
       group: '${{ github.workflow }}-changelog'
       cancel-in-progress: false
 
-    steps:
+    permissions:
+      contents: write
+      pull-requests: write
 
-      - name: Generate GitHub application token
-        id: generate-application-token
-        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
-        with:
-          client-id: ${{ secrets.POLLY_UPDATER_BOT_APP_ID }}
-          private-key: ${{ secrets.POLLY_UPDATER_BOT_KEY }}
-          permission-contents: write
-          permission-pull-requests: write
+    steps:
 
       - name: Checkout code
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -39,11 +34,6 @@ jobs:
           filter: 'tree:0'
           persist-credentials: true # zizmor: ignore[artipacked] Needed to push commits
           show-progress: false
-          token: ${{ steps.generate-application-token.outputs.token }}
-
-      - name: Update Paramore.Fences version
-        shell: pwsh
-        run: ./eng/bump-version.ps1 ${env:RELEASE_VERSION}
 
       - name: Update CHANGELOG
         shell: pwsh
@@ -57,8 +47,8 @@ jobs:
         id: push-changes
         shell: pwsh
         env:
-          GIT_COMMIT_USER_EMAIL: '138034000+fences-updater-bot[bot]@users.noreply.github.com'
-          GIT_COMMIT_USER_NAME: 'fences-updater-bot[bot]'
+          GIT_COMMIT_USER_EMAIL: '41898282+github-actions[bot]@users.noreply.github.com'
+          GIT_COMMIT_USER_NAME: 'github-actions[bot]'
         run: |
           $gitStatus = (git status --porcelain)
 
@@ -96,7 +86,7 @@ jobs:
           BASE_BRANCH: ${{ github.event.repository.default_branch }}
           HEAD_BRANCH: ${{ steps.push-changes.outputs.branch-name }}
         with:
-          github-token: ${{ steps.generate-application-token.outputs.token }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             const version = process.env.RELEASE_VERSION;
             const { repo, owner } = context.repo;
