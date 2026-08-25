@@ -2,9 +2,9 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-      <title>Use with F# and Visual Basic | Polly </title>
+      <title>Use with F# and Visual Basic | Fences </title>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta name="title" content="Use with F# and Visual Basic | Polly ">
+      <meta name="title" content="Use with F# and Visual Basic | Fences ">
       
       
       <link rel="icon" href="../icon.png">
@@ -16,7 +16,7 @@
       <meta name="docfx:rel" content="../">
       
       
-      <meta name="docfx:docurl" content="https://github.com/App-vNext/Polly/blob/main/docs/advanced/use-with-fsharp-and-visual-basic.md/#L1">
+      <meta name="docfx:docurl" content="https://github.com/BrighterCommand/Fences/blob/main/docs/advanced/use-with-fsharp-and-visual-basic.md/#L1">
       <meta name="loc:inThisArticle" content="In this article">
       <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
       <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
@@ -44,8 +44,8 @@
       <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
         <div class="container-xxl flex-nowrap">
           <a class="navbar-brand" href="../index.html">
-            <img id="logo" class="svg" src="../icon.png" alt="Polly">
-            Polly
+            <img id="logo" class="svg" src="../icon.png" alt="Fences">
+            Fences
           </a>
           <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
             <i class="bi bi-three-dots"></i>
@@ -87,8 +87,8 @@
         <article data-uid="">
 <h1 id="use-with-f-and-visual-basic">Use with F# and Visual Basic</h1>
 
-<p>Asynchronous methods in the Polly.Core API return either <code>ValueTask</code> or <code>ValueTask&lt;T&gt;</code>
-instead of <code>Task</code> or <code>Task&lt;T&gt;</code>. This is because Polly v8 was designed to be optimized
+<p>Asynchronous methods in the Paramore.Fences.Core API return either <code>ValueTask</code> or <code>ValueTask&lt;T&gt;</code>
+instead of <code>Task</code> or <code>Task&lt;T&gt;</code>. This is because the v8 API was designed to be optimized
 for high performance and uses <code>ValueTask</code> to avoid unnecessary allocations.</p>
 <p>One downside to this choice is that in Visual Basic and F#, it is not possible to directly
 await a method that returns <code>ValueTask</code> or <code>ValueTask&lt;T&gt;</code>, instead requiring the use of
@@ -105,7 +105,7 @@ open System
 open System.Threading
 open System.Threading.Tasks
 open IcedTasks
-open Polly
+open Paramore.Fences
 
 let getBestFilmAsync token =
     task {
@@ -129,7 +129,7 @@ let demo () =
         pipeline.Execute(fun () -&gt; printfn &quot;Hello, world!&quot;)
 
         // Asynchronously
-        // Note that Polly expects a ValueTask to be returned, so the function uses the valueTask builder
+        // Note that Fences expects a ValueTask to be returned, so the function uses the valueTask builder
         // from IcedTasks to make it easier to use ValueTask. See https://github.com/TheAngryByrd/IcedTasks.
         do! pipeline.ExecuteAsync(
             fun token -&gt;
@@ -145,7 +145,7 @@ let demo () =
         let someResult = pipeline.Execute(fun token -&gt; &quot;some-result&quot;)
 
         // Asynchronously with result
-        // Note that Polly expects a ValueTask&lt;T&gt; to be returned, so the function uses the valueTask builder
+        // Note that Fences expects a ValueTask&lt;T&gt; to be returned, so the function uses the valueTask builder
         // from IcedTasks to make it easier to use ValueTask&lt;T&gt;. See https://github.com/TheAngryByrd/IcedTasks.
         let! bestFilm = pipeline.ExecuteAsync(
             fun token -&gt;
@@ -159,10 +159,10 @@ let demo () =
         printfn $&quot;Link to the best film: {bestFilm}&quot;
     }
 </code></pre>
-<p><a href="https://github.com/App-vNext/Polly/tree/main/samples/Intro.FSharp">Source</a></p>
+<p><a href="https://github.com/BrighterCommand/Fences/tree/main/samples/Intro.FSharp">Source</a></p>
 <h2 id="visual-basic">Visual Basic</h2>
 <pre><code class="lang-vb">Imports System.Threading
-Imports Polly
+Imports Paramore.Fences
 
 Module Program
     Sub Main()
@@ -181,7 +181,7 @@ Module Program
                          End Sub)
 
         ' Asynchronously
-        ' Note that the function is wrapped in a ValueTask for Polly to use as VB.NET cannot
+        ' Note that the function is wrapped in a ValueTask for Fences to use as VB.NET cannot
         ' await ValueTask directly, and AsTask() is used to convert the ValueTask returned by
         ' ExecuteAsync() to a Task so it can be awaited.
         Await pipeline.ExecuteAsync(Function(token)
@@ -195,7 +195,7 @@ Module Program
                                           End Function)
 
         ' Asynchronously with result
-        ' Note that the function is wrapped in a ValueTask(Of String) for Polly to use as VB.NET cannot
+        ' Note that the function is wrapped in a ValueTask(Of String) for Fences to use as VB.NET cannot
         ' await ValueTask directly, and AsTask() is used to convert the ValueTask(Of String) returned by
         ' ExecuteAsync() to a Task(Of String) so it can be awaited.
         Dim bestFilm = Await pipeline.ExecuteAsync(Function(token)
@@ -218,12 +218,12 @@ Module Program
     End Function
 End Module
 </code></pre>
-<p><a href="https://github.com/App-vNext/Polly/tree/main/samples/Intro.VisualBasic">Source</a></p>
+<p><a href="https://github.com/BrighterCommand/Fences/tree/main/samples/Intro.VisualBasic">Source</a></p>
 
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/App-vNext/Polly/blob/main/docs/advanced/use-with-fsharp-and-visual-basic.md/#L1" class="edit-link">Edit this page</a>
+          <a href="https://github.com/BrighterCommand/Fences/blob/main/docs/advanced/use-with-fsharp-and-visual-basic.md/#L1" class="edit-link">Edit this page</a>
         </div>
 
         <div class="next-article d-print-none border-top" id="nextArticle"></div>

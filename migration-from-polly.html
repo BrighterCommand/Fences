@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+      <title>Migrate from Polly to Fences | Fences </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Migrate from Polly to Fences | Fences ">
+      
+      
+      <link rel="icon" href="icon.png">
+      <link rel="stylesheet" href="public/docfx.min.css">
+      <link rel="stylesheet" href="public/main.css">
+      <meta name="docfx:navrel" content="toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/BrighterCommand/Fences/blob/main/docs/migration-from-polly.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="index.html">
+            <img id="logo" class="svg" src="icon.png" alt="Fences">
+            Fences
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+
+      <div class="content">
+        <div class="actionbar">
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="migrate-from-polly-to-fences">Migrate from Polly to Fences</h1>
+
+<p>Fences is a community fork of <a href="https://github.com/App-vNext/Polly">Polly</a>, maintained by
+<a href="https://github.com/BrighterCommand">Brighter Command</a>. It is not affiliated with, endorsed by,
+or supported by App vNext or the Polly maintainers.</p>
+<p>Fences 9.0 is forked from Polly 8.7.0. <strong>The API is unchanged</strong>, apart from the one type rename
+described below. Moving from Polly 8.7.0 to Fences is a change of package reference and namespace,
+not a rewrite: for most projects it is two lines of <code>.csproj</code> and a find-and-replace over <code>using</code>
+directives.</p>
+<p>The one thing you cannot fix with a find-and-replace is the telemetry names — see
+<a href="#telemetry">Telemetry</a> below.</p>
+<div class="IMPORTANT">
+<h5>Important</h5>
+<p>Fences is currently <strong>pre-release</strong>. The published packages are <code>9.0.0-alpha001</code> and onwards, and
+they carry no compatibility promise until <code>9.0.0</code>. Fences also exists only because of the Open
+Source Maintainers Fee that App vNext charges for Polly; if that is reversed, Brighter Command may
+retire the fork. Every step in this guide reverses cleanly, so a migration back to Polly is the
+same work in the other direction.</p>
+</div>
+<h2 id="package-references">Package references</h2>
+<p>Replace each Polly package reference with its Fences equivalent. Versions restart at <code>9.0</code>; see
+<a href="#versioning">Versioning</a>. The packages are pre-release, so you need an explicit version or
+<code>--prerelease</code> — <code>dotnet add package Paramore.Fences.Core</code> alone will not resolve them.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Polly</th>
+<th style="text-align: left;">Fences</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>Polly.Core</code></td>
+<td style="text-align: left;"><code>Paramore.Fences.Core</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>Polly.Extensions</code></td>
+<td style="text-align: left;"><code>Paramore.Fences.Extensions</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>Polly.RateLimiting</code></td>
+<td style="text-align: left;"><code>Paramore.Fences.RateLimiting</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>Polly.Testing</code></td>
+<td style="text-align: left;"><code>Paramore.Fences.Testing</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>Polly</code> (the pre-v8 API)</td>
+<td style="text-align: left;"><code>Paramore.Fences</code></td>
+</tr>
+</tbody>
+</table>
+<pre><code class="lang-diff">-&lt;PackageReference Include=&quot;Polly.Core&quot; Version=&quot;8.7.0&quot; /&gt;
+-&lt;PackageReference Include=&quot;Polly.Extensions&quot; Version=&quot;8.7.0&quot; /&gt;
++&lt;PackageReference Include=&quot;Paramore.Fences.Core&quot; Version=&quot;9.0.0-alpha001&quot; /&gt;
++&lt;PackageReference Include=&quot;Paramore.Fences.Extensions&quot; Version=&quot;9.0.0-alpha001&quot; /&gt;
+</code></pre>
+<p>The package identifiers carry the <code>Paramore</code> prefix because that is the identifier family used by
+the rest of the Brighter Command projects. The library, the repository and the documentation site
+are all called <strong>Fences</strong>; only the package and assembly names are prefixed.</p>
+<h2 id="namespaces">Namespaces</h2>
+<p>Every namespace maps one-for-one: <code>Polly</code> becomes <code>Paramore.Fences</code>, and every child namespace
+follows.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Polly</th>
+<th style="text-align: left;">Fences</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>Polly</code></td>
+<td style="text-align: left;"><code>Paramore.Fences</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>Polly.CircuitBreaker</code></td>
+<td style="text-align: left;"><code>Paramore.Fences.CircuitBreaker</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>Polly.DependencyInjection</code></td>
+<td style="text-align: left;"><code>Paramore.Fences.DependencyInjection</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>Polly.Fallback</code></td>
+<td style="text-align: left;"><code>Paramore.Fences.Fallback</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>Polly.Hedging</code></td>
+<td style="text-align: left;"><code>Paramore.Fences.Hedging</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>Polly.RateLimiting</code></td>
+<td style="text-align: left;"><code>Paramore.Fences.RateLimiting</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>Polly.Registry</code></td>
+<td style="text-align: left;"><code>Paramore.Fences.Registry</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>Polly.Retry</code></td>
+<td style="text-align: left;"><code>Paramore.Fences.Retry</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>Polly.Simmy</code></td>
+<td style="text-align: left;"><code>Paramore.Fences.Simmy</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>Polly.Telemetry</code></td>
+<td style="text-align: left;"><code>Paramore.Fences.Telemetry</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>Polly.Testing</code></td>
+<td style="text-align: left;"><code>Paramore.Fences.Testing</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>Polly.Timeout</code></td>
+<td style="text-align: left;"><code>Paramore.Fences.Timeout</code></td>
+</tr>
+</tbody>
+</table>
+<p>A case-sensitive replacement of <code>Polly</code> with <code>Paramore.Fences</code> across your <code>using</code> directives is
+enough. If you use implicit or global usings, the change is a single line:</p>
+<pre><code class="lang-diff">-global using Polly;
++global using Paramore.Fences;
+</code></pre>
+<h2 id="the-one-renamed-type">The one renamed type</h2>
+<p><code>Polly.PollyServiceCollectionExtensions</code> is called
+<code>Paramore.Fences.ResilienceServiceCollectionExtensions</code> in Fences. It is the only public type whose
+name changed, and it holds the <code>AddResiliencePipeline</code>, <code>AddResiliencePipelines</code> and
+<code>AddResiliencePipelineRegistry</code> extension methods.</p>
+<p>Because those are extension methods, callers write <code>services.AddResiliencePipeline(...)</code> and never
+name the class, so in practice this affects nobody. If you did reference the type by name — to call
+a method non-extensively, or in a <code>using static</code> — update it:</p>
+<pre><code class="lang-diff">-PollyServiceCollectionExtensions.AddResiliencePipeline(services, &quot;my-pipeline&quot;, builder =&gt; { });
++ResilienceServiceCollectionExtensions.AddResiliencePipeline(services, &quot;my-pipeline&quot;, builder =&gt; { });
+</code></pre>
+<p>The name changed because shipping a type called <code>Polly*</code> from a package called <code>Paramore.Fences</code>
+would be a use of the Polly name as branding rather than as a statement of fact. It also brings the
+type into line with the rest of the surface — <code>ResiliencePipeline</code>, <code>ResilienceContext</code>,
+<code>ResiliencePipelineBuilder</code> — none of which carry a brand token.</p>
+<h2 id="telemetry">Telemetry</h2>
+<p><strong>This is the one change a find-and-replace on your own source will not fix.</strong> The meter,
+<code>ActivitySource</code> and metric names are emitted by Fences, so they change in your dashboards,
+alerts and collector configuration, not in your code.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Kind</th>
+<th style="text-align: left;">Polly</th>
+<th style="text-align: left;">Fences</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Meter and <code>ActivitySource</code> name</td>
+<td style="text-align: left;"><code>Polly</code></td>
+<td style="text-align: left;"><code>Paramore.Fences</code></td>
+</tr>
+<tr>
+<td style="text-align: left;">Metric</td>
+<td style="text-align: left;"><code>resilience.polly.pipeline.duration</code></td>
+<td style="text-align: left;"><code>resilience.fences.pipeline.duration</code></td>
+</tr>
+<tr>
+<td style="text-align: left;">Metric</td>
+<td style="text-align: left;"><code>resilience.polly.strategy.events</code></td>
+<td style="text-align: left;"><code>resilience.fences.strategy.events</code></td>
+</tr>
+<tr>
+<td style="text-align: left;">Metric</td>
+<td style="text-align: left;"><code>resilience.polly.strategy.attempt.duration</code></td>
+<td style="text-align: left;"><code>resilience.fences.strategy.attempt.duration</code></td>
+</tr>
+</tbody>
+</table>
+<p>The instrument names, units, descriptions and tags are otherwise identical, so a dashboard query
+usually only needs its metric name substituted.</p>
+<p>Anywhere you enable the meter by name, use the new one:</p>
+<pre><code class="lang-diff"> builder.Services.AddOpenTelemetry()
+     .WithMetrics(metrics =&gt; metrics
+-        .AddMeter(&quot;Polly&quot;));
++        .AddMeter(&quot;Paramore.Fences&quot;));
+</code></pre>
+<p>The instrumentation scope takes the full <code>Paramore.Fences</code> because the convention is that it
+matches the assembly name. The metric names keep the short <code>fences</code> token because they are
+lowercase dotted identifiers and should not carry an organisation prefix.</p>
+<h2 id="assembly-identity-and-strong-naming">Assembly identity and strong naming</h2>
+<p>Fences assemblies are strong-named with a key belonging to Brighter Command, not the Polly key.
+The public key token is <code>6998a40d28482b6d</code>. This matters if you have <code>InternalsVisibleTo</code>
+attributes naming Fences assemblies, binding redirects, or anything else that pins an assembly
+identity — those need the new name and the new token.</p>
+<p>Fences and Polly can be installed side by side. The assembly names do not collide, the namespaces
+do not collide, and the meter names do not collide, so a gradual migration is possible.</p>
+<h2 id="what-has-not-changed">What has not changed</h2>
+<ul>
+<li>Every strategy: retry, circuit breaker, timeout, rate limiter, hedging, fallback, and the Simmy
+chaos strategies.</li>
+<li>Every option type, builder, delegate signature and default value.</li>
+<li>The target frameworks: <code>net8.0</code>, <code>net6.0</code>, <code>netstandard2.0</code>, <code>net472</code> and <code>net462</code>.</li>
+<li>The licence: BSD 3-Clause, the same as Polly's, with App vNext's copyright notice retained.</li>
+</ul>
+<h2 id="microsoftextensionshttpresilience"><code>Microsoft.Extensions.Http.Resilience</code></h2>
+<p>Fences cannot remove Polly from an application that uses
+<code>Microsoft.Extensions.Http.Resilience</code> — for example <code>AddStandardResilienceHandler</code> or
+<code>AddResilienceHandler</code>. That package has a hard dependency on <code>Microsoft.Extensions.Resilience</code>,
+which depends on <code>Polly.Extensions</code> and <code>Polly.RateLimiting</code>, and its <code>AddResilienceHandler</code>
+callback is handed a Polly <code>ResiliencePipelineBuilder&lt;T&gt;</code>. Those types come from Polly, and no
+change on our side alters that.</p>
+<p>If you use that package, expect Polly to remain in your dependency graph after migrating. What
+Fences removes is the resilience dependency that Brighter itself imposed on its users, which is
+the part we control.</p>
+<h2 id="versioning">Versioning</h2>
+<p>Fences starts at <code>9.0.0</code>. The major version is bumped past Polly's <code>8.x</code> so that a Fences version
+number is never mistaken for a Polly one, and so there is no ambiguity about which project a given
+<code>8.7.0</code> refers to.</p>
+<p>Until <code>9.0.0</code> itself ships, releases are pre-releases named <code>9.0.0-alpha001</code>, <code>9.0.0-alpha002</code> and
+so on. The number is zero-padded, and has no dot before it, so that the sequence sorts correctly; <code>9.0.0-alpha.001</code>
+would not be valid SemVer.</p>
+<p><code>CHANGELOG.md</code> in the repository retains Polly's history in full. Entries for <code>8.7.0</code> and below
+describe Polly releases, not Fences ones.</p>
+<h2 id="why-the-fork-exists">Why the fork exists</h2>
+<p>See <a href="adr/0002-fork-polly-as-fences.html">ADR 0002</a> for the reasoning, and
+<a href="https://github.com/BrighterCommand/Fences/blob/main/NOTICE.md"><code>NOTICE.md</code></a> for provenance and
+attribution.</p>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/BrighterCommand/Fences/blob/main/docs/migration-from-polly.md/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

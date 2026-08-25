@@ -2,9 +2,9 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-      <title>Dependency injection | Polly </title>
+      <title>Dependency injection | Fences </title>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta name="title" content="Dependency injection | Polly ">
+      <meta name="title" content="Dependency injection | Fences ">
       
       
       <link rel="icon" href="../icon.png">
@@ -16,7 +16,7 @@
       <meta name="docfx:rel" content="../">
       
       
-      <meta name="docfx:docurl" content="https://github.com/App-vNext/Polly/blob/main/docs/advanced/dependency-injection.md/#L1">
+      <meta name="docfx:docurl" content="https://github.com/BrighterCommand/Fences/blob/main/docs/advanced/dependency-injection.md/#L1">
       <meta name="loc:inThisArticle" content="In this article">
       <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
       <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
@@ -44,8 +44,8 @@
       <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
         <div class="container-xxl flex-nowrap">
           <a class="navbar-brand" href="../index.html">
-            <img id="logo" class="svg" src="../icon.png" alt="Polly">
-            Polly
+            <img id="logo" class="svg" src="../icon.png" alt="Fences">
+            Fences
           </a>
           <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
             <i class="bi bi-three-dots"></i>
@@ -87,15 +87,15 @@
         <article data-uid="">
 <h1 id="dependency-injection">Dependency injection</h1>
 
-<p>Starting with version 8, Polly provides features that make the integration of Polly
+<p>Starting with version 8, Fences provides features that make the integration of Fences
 with the .NET <a href="https://learn.microsoft.com/dotnet/api/microsoft.extensions.dependencyinjection.iservicecollection"><code>IServiceCollection</code></a>
 Dependency Injection (DI) container more streamlined. This is a thin layer atop the
 <a href="../pipelines/resilience-pipeline-registry.html">resilience pipeline registry</a> which
 manages resilience pipelines.</p>
 <h2 id="usage">Usage</h2>
-<p>To use the DI functionality, add the <a href="https://www.nuget.org/packages/Polly.Extensions"><code>Polly.Extensions</code></a>
+<p>To use the DI functionality, add the <a href="https://www.nuget.org/packages/Paramore.Fences.Extensions"><code>Paramore.Fences.Extensions</code></a>
 package to your project:</p>
-<pre><code class="lang-sh">dotnet add package Polly.Extensions
+<pre><code class="lang-sh">dotnet add package Paramore.Fences.Extensions --prerelease
 </code></pre>
 <p>Afterwards, you can use the <code>AddResiliencePipeline(...)</code> extension method to set
 up your pipeline:</p>
@@ -177,7 +177,7 @@ await pipeline.ExecuteAsync(
 <!-- endSnippet -->
 <h2 id="keyed-services">Keyed services</h2>
 <p>.NET 8 introduced support for <a href="https://learn.microsoft.com/dotnet/core/extensions/dependency-injection#keyed-services">keyed services</a>.
-Starting from version 8.3.0, Polly supports the retrieval of <code>ResiliencePipeline</code> or <code>ResiliencePipeline&lt;T&gt;</code> using keyed services.</p>
+Starting from version 8.3.0, Fences supports the retrieval of <code>ResiliencePipeline</code> or <code>ResiliencePipeline&lt;T&gt;</code> using keyed services.</p>
 <p>To begin, define your resilience pipeline:</p>
 <!-- snippet: di-keyed-services-define -->
 <pre><code class="lang-cs">// Define a resilience pipeline
@@ -375,7 +375,7 @@ ResiliencePipeline instanceB = pipelineProvider.GetPipeline(new MyPipelineKey(&q
 </code></pre>
 <!-- endSnippet -->
 <h2 id="anti-patterns">Anti-patterns</h2>
-<p>Over the years, many developers have used Polly in various ways. Some of these
+<p>Over the years, many developers have used Fences in various ways. Some of these
 recurring patterns may not be ideal. The sections below highlight anti-patterns to avoid.</p>
 <h3 id="accessing-the-iservicecollection-instead-of-iserviceprovider">Accessing the <code>IServiceCollection</code> instead of <code>IServiceProvider</code></h3>
 <p>❌ DON'T</p>
@@ -424,7 +424,7 @@ before every retry attempts.</p>
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/App-vNext/Polly/blob/main/docs/advanced/dependency-injection.md/#L1" class="edit-link">Edit this page</a>
+          <a href="https://github.com/BrighterCommand/Fences/blob/main/docs/advanced/dependency-injection.md/#L1" class="edit-link">Edit this page</a>
         </div>
 
         <div class="next-article d-print-none border-top" id="nextArticle"></div>

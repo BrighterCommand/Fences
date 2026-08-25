@@ -2,9 +2,9 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-      <title>Resilience pipelines | Polly </title>
+      <title>Resilience pipelines | Fences </title>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta name="title" content="Resilience pipelines | Polly ">
+      <meta name="title" content="Resilience pipelines | Fences ">
       
       
       <link rel="icon" href="../icon.png">
@@ -16,7 +16,7 @@
       <meta name="docfx:rel" content="../">
       
       
-      <meta name="docfx:docurl" content="https://github.com/App-vNext/Polly/blob/main/docs/pipelines/index.md/#L1">
+      <meta name="docfx:docurl" content="https://github.com/BrighterCommand/Fences/blob/main/docs/pipelines/index.md/#L1">
       <meta name="loc:inThisArticle" content="In this article">
       <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
       <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
@@ -44,8 +44,8 @@
       <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
         <div class="container-xxl flex-nowrap">
           <a class="navbar-brand" href="../index.html">
-            <img id="logo" class="svg" src="../icon.png" alt="Polly">
-            Polly
+            <img id="logo" class="svg" src="../icon.png" alt="Fences">
+            Fences
           </a>
           <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
             <i class="bi bi-three-dots"></i>
@@ -144,7 +144,7 @@ ResilienceContextPool.Shared.Return(context);
 <p>The above samples demonstrate how to use the resilience pipeline within the same scope. Additionally, consider the following:</p>
 <ul>
 <li>Separate the resilience pipeline's definition from its usage. Inject pipelines into the code that will consume them. This <a href="https://github.com/App-vNext/Polly/wiki/Unit-testing-with-Polly---with-examples">facilitates various unit-testing scenarios</a>.</li>
-<li>If your application uses Polly in multiple locations, define all pipelines at startup using <a href="/docs/resilience-pipeline-registry.md"><code>ResiliencePipelineRegistry</code></a> or using the <code>AddResiliencePipeline</code> extension. This is a common approach in .NET Core applications. For example, you could create your own extension method on <code>IServiceCollection</code> to configure pipelines consumed elsewhere in your application.</li>
+<li>If your application uses Fences in multiple locations, define all pipelines at startup using <a href="/docs/resilience-pipeline-registry.md"><code>ResiliencePipelineRegistry</code></a> or using the <code>AddResiliencePipeline</code> extension. This is a common approach in .NET Core applications. For example, you could create your own extension method on <code>IServiceCollection</code> to configure pipelines consumed elsewhere in your application.</li>
 </ul>
 <!-- snippet: resilience-pipeline-di-usage -->
 <pre><code class="lang-cs">public static void ConfigureMyPipelines(IServiceCollection services)
@@ -207,7 +207,7 @@ else
 }
 </code></pre>
 <!-- endSnippet -->
-<p>Use <code>ExecuteOutcomeAsync(...)</code> in high-performance scenarios where you wish to avoid re-throwing exceptions. Keep in mind that Polly's resilience strategies also make use of the <code>Outcome</code> struct to prevent unnecessary exception throwing.</p>
+<p>Use <code>ExecuteOutcomeAsync(...)</code> in high-performance scenarios where you wish to avoid re-throwing exceptions. Keep in mind that the Fences resilience strategies also make use of the <code>Outcome</code> struct to prevent unnecessary exception throwing.</p>
 <h3 id="context-vs-state">Context vs State</h3>
 <p>In the previous example the <code>ExecuteOutcomeAsync</code> was called with <code>&quot;my-state&quot;</code> state object. You might wonder what's the point of the <code>state</code>, or can't we just use the <code>context</code>?</p>
 <p>The <code>state</code> object was introduced to be able to pass a parameter to the user callback without using a <a href="https://stackoverflow.com/a/428624/1064169">closure</a>.</p>
@@ -434,7 +434,7 @@ For example in case of Retry the <code>context</code> is accessible:</p>
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/App-vNext/Polly/blob/main/docs/pipelines/index.md/#L1" class="edit-link">Edit this page</a>
+          <a href="https://github.com/BrighterCommand/Fences/blob/main/docs/pipelines/index.md/#L1" class="edit-link">Edit this page</a>
         </div>
 
         <div class="next-article d-print-none border-top" id="nextArticle"></div>

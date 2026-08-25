@@ -2,9 +2,9 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-      <title>Fallback resilience strategy | Polly </title>
+      <title>Fallback resilience strategy | Fences </title>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta name="title" content="Fallback resilience strategy | Polly ">
+      <meta name="title" content="Fallback resilience strategy | Fences ">
       
       
       <link rel="icon" href="../icon.png">
@@ -16,7 +16,7 @@
       <meta name="docfx:rel" content="../">
       
       
-      <meta name="docfx:docurl" content="https://github.com/App-vNext/Polly/blob/main/docs/strategies/fallback.md/#L1">
+      <meta name="docfx:docurl" content="https://github.com/BrighterCommand/Fences/blob/main/docs/strategies/fallback.md/#L1">
       <meta name="loc:inThisArticle" content="In this article">
       <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
       <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
@@ -44,8 +44,8 @@
       <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
         <div class="container-xxl flex-nowrap">
           <a class="navbar-brand" href="../index.html">
-            <img id="logo" class="svg" src="../icon.png" alt="Polly">
-            Polly
+            <img id="logo" class="svg" src="../icon.png" alt="Fences">
+            Fences
           </a>
           <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
             <i class="bi bi-three-dots"></i>
@@ -91,7 +91,7 @@
 <ul>
 <li><strong>Option(s)</strong>:
 <ul>
-<li><a class="xref" href="../api/Polly.Fallback.FallbackStrategyOptions-1.html"><code>FallbackStrategyOptions&lt;T&gt;</code></a></li>
+<li><a class="xref" href="../api/Paramore.Fences.Fallback.FallbackStrategyOptions-1.html"><code>FallbackStrategyOptions&lt;T&gt;</code></a></li>
 </ul>
 </li>
 <li><strong>Extension(s)</strong>:
@@ -205,7 +205,7 @@ Resilience event occurred. EventName: 'OnFallback', Source: '(null)/(null)/Fallb
     CustomException: Exception of type 'CustomException' was thrown.
         at Program.&lt;&gt;c.&lt;Main&gt;b__0_3(ResilienceContext ctx)
         ...
-        at Polly.ResiliencePipeline.&lt;&gt;c__8`1.&lt;&lt;ExecuteAsync&gt;b__8_0&gt;d.MoveNext() in /_/src/Polly.Core/ResiliencePipeline.AsyncT.cs:line 95
+        at Paramore.Fences.ResiliencePipeline.&lt;&gt;c__8`1.&lt;&lt;ExecuteAsync&gt;b__8_0&gt;d.MoveNext() in /_/src/Paramore.Fences.Core/ResiliencePipeline.AsyncT.cs:line 95
 </code></pre>
 <div class="NOTE">
 <h5>Note</h5>
@@ -291,7 +291,7 @@ pipeline.Execute(() =&gt; new HttpResponseMessage(HttpStatusCode.InternalServerE
 <p>The preceding example also demonstrates how to re-use <code>ResiliencePipelineBuilder&lt;HttpResponseMessage&gt;</code> across multiple strategies.</p>
 </div>
 <h2 id="anti-patterns">Anti-patterns</h2>
-<p>Over the years, many developers have used Polly in various ways. Some of these
+<p>Over the years, many developers have used Fences in various ways. Some of these
 recurring patterns may not be ideal. The sections below highlight anti-patterns to avoid.</p>
 <h3 id="using-fallback-to-replace-thrown-exception">Using fallback to replace thrown exception</h3>
 <p>❌ DON'T</p>
@@ -449,12 +449,12 @@ return await pipeline.ExecuteAsync(CallExternalSystem, CancellationToken.None);
 </code></pre>
 <!-- endSnippet -->
 <p><strong>Reasoning</strong>:</p>
-<p>In this approach, we leverage the escalation mechanism provided by Polly rather than creating our own through nesting. <code>CancellationToken</code> values are automatically propagated between the strategies for you.</p>
+<p>In this approach, we leverage the escalation mechanism provided by Fences rather than creating our own through nesting. <code>CancellationToken</code> values are automatically propagated between the strategies for you.</p>
 
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/App-vNext/Polly/blob/main/docs/strategies/fallback.md/#L1" class="edit-link">Edit this page</a>
+          <a href="https://github.com/BrighterCommand/Fences/blob/main/docs/strategies/fallback.md/#L1" class="edit-link">Edit this page</a>
         </div>
 
         <div class="next-article d-print-none border-top" id="nextArticle"></div>

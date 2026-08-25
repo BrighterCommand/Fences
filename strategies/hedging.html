@@ -2,9 +2,9 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-      <title>Hedging resilience strategy | Polly </title>
+      <title>Hedging resilience strategy | Fences </title>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta name="title" content="Hedging resilience strategy | Polly ">
+      <meta name="title" content="Hedging resilience strategy | Fences ">
       
       
       <link rel="icon" href="../icon.png">
@@ -16,7 +16,7 @@
       <meta name="docfx:rel" content="../">
       
       
-      <meta name="docfx:docurl" content="https://github.com/App-vNext/Polly/blob/main/docs/strategies/hedging.md/#L1">
+      <meta name="docfx:docurl" content="https://github.com/BrighterCommand/Fences/blob/main/docs/strategies/hedging.md/#L1">
       <meta name="loc:inThisArticle" content="In this article">
       <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
       <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
@@ -44,8 +44,8 @@
       <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
         <div class="container-xxl flex-nowrap">
           <a class="navbar-brand" href="../index.html">
-            <img id="logo" class="svg" src="../icon.png" alt="Polly">
-            Polly
+            <img id="logo" class="svg" src="../icon.png" alt="Fences">
+            Fences
           </a>
           <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
             <i class="bi bi-three-dots"></i>
@@ -91,7 +91,7 @@
 <ul>
 <li><strong>Option(s)</strong>:
 <ul>
-<li><a class="xref" href="../api/Polly.Hedging.HedgingStrategyOptions-1.html"><code>HedgingStrategyOptions&lt;T&gt;</code></a></li>
+<li><a class="xref" href="../api/Paramore.Fences.Hedging.HedgingStrategyOptions-1.html"><code>HedgingStrategyOptions&lt;T&gt;</code></a></li>
 </ul>
 </li>
 <li><strong>Extension(s)</strong>:
@@ -111,7 +111,7 @@
 <h2 id="usage">Usage</h2>
 <!-- snippet: hedging -->
 <pre><code class="lang-cs">// Hedging with default options.
-// See https://www.pollydocs.org/strategies/hedging#defaults for defaults.
+// See https://brightercommand.github.io/Fences/strategies/hedging#defaults for defaults.
 var optionsDefaults = new HedgingStrategyOptions&lt;HttpResponseMessage&gt;();
 
 // A customized hedging strategy that retries up to 3 times if the execution
@@ -235,7 +235,7 @@ Execution attempt. Source: 'MyPipeline/MyPipelineInstance/Hedging', Operation Ke
     CustomException: Exception of type 'CustomException' was thrown.
         at Program.&lt;&gt;c.&lt;&lt;Main&gt;b__0_2&gt;d.MoveNext()
         ...
-        at Polly.ResiliencePipeline.&lt;&gt;c__8`1.&lt;&lt;ExecuteAsync&gt;b__8_0&gt;d.MoveNext() in /_/src/Polly.Core/ResiliencePipeline.AsyncT.cs:line 95
+        at Paramore.Fences.ResiliencePipeline.&lt;&gt;c__8`1.&lt;&lt;ExecuteAsync&gt;b__8_0&gt;d.MoveNext() in /_/src/Paramore.Fences.Core/ResiliencePipeline.AsyncT.cs:line 95
 </code></pre>
 <div class="NOTE">
 <h5>Note</h5>
@@ -807,7 +807,7 @@ Execution attempt. Source: 'MyPipeline/MyPipelineInstance/Hedging', Operation Ke
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/App-vNext/Polly/blob/main/docs/strategies/hedging.md/#L1" class="edit-link">Edit this page</a>
+          <a href="https://github.com/BrighterCommand/Fences/blob/main/docs/strategies/hedging.md/#L1" class="edit-link">Edit this page</a>
         </div>
 
         <div class="next-article d-print-none border-top" id="nextArticle"></div>

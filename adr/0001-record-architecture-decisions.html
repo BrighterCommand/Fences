@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+      <title>Record architecture decisions | Fences </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Record architecture decisions | Fences ">
+      
+      
+      <link rel="icon" href="../icon.png">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="../toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/BrighterCommand/Fences/blob/main/docs/adr/0001-record-architecture-decisions.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../icon.png" alt="Fences">
+            Fences
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+
+      <div class="content">
+        <div class="actionbar">
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="1-record-architecture-decisions">1. Record architecture decisions</h1>
+
+<p>Date: 2026-08-22</p>
+<h2 id="status">Status</h2>
+<p>Accepted</p>
+<h2 id="context">Context</h2>
+<p>We need to record the architectural decisions made on this project.</p>
+<p>Fences is a fork of Polly, and the fork itself is the first such decision. The reasoning behind
+it — why we forked, how far the rename goes, what we kept — is currently held in a migration
+plan that will be retired once the migration completes. That reasoning needs somewhere durable
+to live.</p>
+<p>Brighter already records its decisions this way, in <code>docs/adr/</code>. Using the same mechanism here
+means a contributor moving between the two repositories finds what they expect.</p>
+<h2 id="decision">Decision</h2>
+<p>We will use Architecture Decision Records, as <a href="https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions">described by Michael Nygard</a>.</p>
+<p>ADRs live in <code>docs/adr/</code>, numbered sequentially, and carry the same YAML front matter Brighter
+uses: <code>id</code>, <code>title</code>, <code>status</code>, <code>author</code>, <code>created</code>, <code>summary</code>, <code>tags</code>.</p>
+<p>An ADR is immutable once accepted. To change a decision, write a new ADR that supersedes it and
+mark the old one <code>Superseded by NNNN</code>.</p>
+<h2 id="consequences">Consequences</h2>
+<p>See Michael Nygard's article, linked above. For a lightweight ADR toolset, see Nat Pryce's
+<a href="https://github.com/npryce/adr-tools">adr-tools</a>.</p>
+<p>The agent workflows added in this repository expect <code>docs/adr/</code> to exist and treat accepted ADRs
+as binding context.</p>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/BrighterCommand/Fences/blob/main/docs/adr/0001-record-architecture-decisions.md/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

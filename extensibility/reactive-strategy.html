@@ -2,9 +2,9 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-      <title>Reactive resilience strategy | Polly </title>
+      <title>Reactive resilience strategy | Fences </title>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta name="title" content="Reactive resilience strategy | Polly ">
+      <meta name="title" content="Reactive resilience strategy | Fences ">
       
       
       <link rel="icon" href="../icon.png">
@@ -16,7 +16,7 @@
       <meta name="docfx:rel" content="../">
       
       
-      <meta name="docfx:docurl" content="https://github.com/App-vNext/Polly/blob/main/docs/extensibility/reactive-strategy.md/#L1">
+      <meta name="docfx:docurl" content="https://github.com/BrighterCommand/Fences/blob/main/docs/extensibility/reactive-strategy.md/#L1">
       <meta name="loc:inThisArticle" content="In this article">
       <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
       <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
@@ -44,8 +44,8 @@
       <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
         <div class="container-xxl flex-nowrap">
           <a class="navbar-brand" href="../index.html">
-            <img id="logo" class="svg" src="../icon.png" alt="Polly">
-            Polly
+            <img id="logo" class="svg" src="../icon.png" alt="Fences">
+            Fences
           </a>
           <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
             <i class="bi bi-three-dots"></i>
@@ -89,7 +89,7 @@
 
 <p>This document describes how to set up a <strong>Result reporting resilience strategy</strong>. This strategy lets you listen for specific results and report them to other components. It serves as a good example of a reactive strategy because it deals with specific results.</p>
 <h2 id="implementation">Implementation</h2>
-<p>Reactive resilience strategies inherit from the <a class="xref" href="../api/Polly.ResilienceStrategy-1.html"><code>ResilienceStrategy&lt;T&gt;</code></a> base class. The implementation for this specific strategy:</p>
+<p>Reactive resilience strategies inherit from the <a class="xref" href="../api/Paramore.Fences.ResilienceStrategy-1.html"><code>ResilienceStrategy&lt;T&gt;</code></a> base class. The implementation for this specific strategy:</p>
 <!-- snippet: ext-reactive-strategy -->
 <pre><code class="lang-cs">// Strategies should be internal and not exposed in the library's public API.
 // Use extension methods and options to configure the strategy.
@@ -178,7 +178,7 @@ internal sealed class ResultReportingResilienceStrategy&lt;T&gt; : ResilienceStr
 <!-- endSnippet -->
 <p>Using arguments in callbacks supports a more maintainable and extensible API.</p>
 <h2 id="options">Options</h2>
-<p>In the previous section, we implemented the <code>ResultReportingResilienceStrategy&lt;T&gt;</code>. Now, we need to integrate it with Polly and its public API.</p>
+<p>In the previous section, we implemented the <code>ResultReportingResilienceStrategy&lt;T&gt;</code>. Now, we need to integrate it with Fences and its public API.</p>
 <p>Define the public <code>ResultReportingStrategyOptions&lt;TResult&gt;</code> class to configure our strategy:</p>
 <!-- snippet: ext-reactive-options -->
 <pre><code class="lang-cs">public class ResultReportingStrategyOptions&lt;TResult&gt; : ResilienceStrategyOptions
@@ -312,15 +312,15 @@ new ResiliencePipelineBuilder()
 <h2 id="resources">Resources</h2>
 <p>For further information about reactive resilience strategies, consider exploring these resources:</p>
 <ul>
-<li><a href="https://github.com/App-vNext/Polly/tree/main/samples/Extensibility/Reactive">Result reporting strategy sample</a>: A practical example from this guide.</li>
-<li><a href="https://github.com/App-vNext/Polly/tree/main/src/Polly.Core/Retry">Retry resilience strategy</a>: Discover the built-in retry resilience strategy implementation.</li>
-<li><a href="https://github.com/App-vNext/Polly/tree/main/src/Polly.Core/Fallback">Fallback resilience strategy</a>: Discover the built-in fallback resilience strategy implementation.</li>
+<li><a href="https://github.com/BrighterCommand/Fences/tree/main/samples/Extensibility/Reactive">Result reporting strategy sample</a>: A practical example from this guide.</li>
+<li><a href="https://github.com/BrighterCommand/Fences/tree/main/src/Paramore.Fences.Core/Retry">Retry resilience strategy</a>: Discover the built-in retry resilience strategy implementation.</li>
+<li><a href="https://github.com/BrighterCommand/Fences/tree/main/src/Paramore.Fences.Core/Fallback">Fallback resilience strategy</a>: Discover the built-in fallback resilience strategy implementation.</li>
 </ul>
 
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/App-vNext/Polly/blob/main/docs/extensibility/reactive-strategy.md/#L1" class="edit-link">Edit this page</a>
+          <a href="https://github.com/BrighterCommand/Fences/blob/main/docs/extensibility/reactive-strategy.md/#L1" class="edit-link">Edit this page</a>
         </div>
 
         <div class="next-article d-print-none border-top" id="nextArticle"></div>

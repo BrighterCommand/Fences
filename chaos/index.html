@@ -2,9 +2,9 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-      <title>Chaos engineering | Polly </title>
+      <title>Chaos engineering | Fences </title>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta name="title" content="Chaos engineering | Polly ">
+      <meta name="title" content="Chaos engineering | Fences ">
       
       
       <link rel="icon" href="../icon.png">
@@ -16,7 +16,7 @@
       <meta name="docfx:rel" content="../">
       
       
-      <meta name="docfx:docurl" content="https://github.com/App-vNext/Polly/blob/main/docs/chaos/index.md/#L1">
+      <meta name="docfx:docurl" content="https://github.com/BrighterCommand/Fences/blob/main/docs/chaos/index.md/#L1">
       <meta name="loc:inThisArticle" content="In this article">
       <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
       <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
@@ -44,8 +44,8 @@
       <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
         <div class="container-xxl flex-nowrap">
           <a class="navbar-brand" href="../index.html">
-            <img id="logo" class="svg" src="../icon.png" alt="Polly">
-            Polly
+            <img id="logo" class="svg" src="../icon.png" alt="Fences">
+            Fences
           </a>
           <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
             <i class="bi bi-three-dots"></i>
@@ -95,8 +95,7 @@
 <li><a href="https://learn.microsoft.com/azure/chaos-studio/chaos-studio-chaos-engineering-overview">Understanding chaos engineering and resilience</a>: Intro to chaos engineering in the context of <a href="https://learn.microsoft.com/en-us/azure/chaos-studio/chaos-studio-overview">Azure Chaos Studio</a>, managed service that uses chaos engineering to help you measure, understand, and improve your cloud application and service resilience.</li>
 </ul>
 <h2 id="chaos-engineering-with-simmy">Chaos engineering with Simmy</h2>
-<p><a href="https://github.com/Polly-Contrib/Simmy">Simmy</a> is a major new addition to Polly library, adding a chaos engineering and fault-injection dimension to Polly, through the provision of strategies to selectively inject faults, latency, custom behavior or fake results.</p>
-<p><img src="../media/simmy-logo.png" alt="Simmy"></p>
+<p>The chaos strategies add a chaos engineering and fault-injection dimension to Fences, through strategies that selectively inject faults, latency, custom behavior or fake results. They began life as <a href="https://github.com/Polly-Contrib/Simmy">Simmy</a>, a Polly-Contrib project, and were absorbed into the v8 API; Fences inherits them, in the <code>Paramore.Fences.Simmy</code> namespace.</p>
 <h2 id="usage">Usage</h2>
 <!-- snippet: chaos-usage -->
 <pre><code class="lang-cs">var builder = new ResiliencePipelineBuilder&lt;HttpResponseMessage&gt;();
@@ -203,7 +202,7 @@ builder
 <h5>Note</h5>
 <p>It is usual to place the chaos strategy as the last strategy in the resilience pipeline.
 By placing the chaos strategies as last, they subvert the usual outbound call at the last minute, substituting their fault or adding extra latency, etc.
-The existing resilience strategies - further out in the <code>ResiliencePipeline</code> - still apply, so you can test how the Polly resilience strategies you have configured handle the chaos/faults injected by Simmy.</p>
+The existing resilience strategies - further out in the <code>ResiliencePipeline</code> - still apply, so you can test how the Fences resilience strategies you have configured handle the chaos/faults injected by Simmy.</p>
 <p>The <code>AddChaosFault</code> <code>AddChaosLatency</code> <code>AddChaosOutcome</code> <code>AddChaosBehavior</code> will take effect sequentially if you combine them together.
 In the above example, we use <strong>fault first then latency strategy</strong>, it can save fault waiting time. If you put <code>AddChaosLatency</code> before <code>AddChaosFault</code>, you will get different behavior.</p>
 </div>
@@ -211,7 +210,7 @@ In the above example, we use <strong>fault first then latency strategy</strong>,
 <p>This section highlights the major differences compared to the <a href="https://github.com/Polly-Contrib/Simmy"><code>Polly.Contrib.Simmy</code></a> library:</p>
 <ul>
 <li><strong>From <code>MonkeyPolicy</code> to <code>ChaosStrategy</code></strong>: We've updated the terminology from <code>Monkey</code> to <code>Chaos</code> to better align with the well-recognized principles of <em>chaos engineering</em>.</li>
-<li><strong>Unified configuration options</strong>: The <code>InjectOptionsBase</code> and <code>InjectOptionsAsyncBase</code> are now consolidated into <code>ChaosStrategyOptions</code>. This change brings Simmy in line with the Polly v8 API, offering built-in support for options-based configuration and seamless integration of synchronous and asynchronous executions.</li>
+<li><strong>Unified configuration options</strong>: The <code>InjectOptionsBase</code> and <code>InjectOptionsAsyncBase</code> are now consolidated into <code>ChaosStrategyOptions</code>. This change brings the chaos strategies in line with the v8 API, offering built-in support for options-based configuration and seamless integration of synchronous and asynchronous executions.</li>
 <li><strong>Chaos strategies enabled by default</strong>: Adding a chaos strategy (previously known as monkey policy) now means it's active right away. This is a departure from earlier versions, where the monkey policy had to be explicitly enabled.</li>
 <li><strong>API changes</strong>: The new version of Simmy introduces several API updates. While this list isn't complete, it includes key changes like renaming <code>Inject</code> to <code>AddChaos</code> and switching from <code>Result</code> to <code>Outcome</code>. Here are some specific renames:</li>
 </ul>
@@ -242,7 +241,7 @@ In the above example, we use <strong>fault first then latency strategy</strong>,
 </tbody>
 </table>
 <ul>
-<li><strong>Sync and async unification</strong>: Before, Simmy had various methods to set policies like <code>InjectLatency</code>, <code>InjectLatencyAsync</code>, <code>InjectLatency&lt;T&gt;</code>, and <code>InjectLatencyAsync&lt;T&gt;</code>. With the new version based on Polly v8, these methods have been combined into a single <code>AddChaosLatency</code> extension that works for both <code>ResiliencePipelineBuilder</code> and <code>ResiliencePipelineBuilder&lt;T&gt;</code>. These rules are covering all types of chaos strategies (Outcome, Fault, Latency, and Behavior).</li>
+<li><strong>Sync and async unification</strong>: Before, Simmy had various methods to set policies like <code>InjectLatency</code>, <code>InjectLatencyAsync</code>, <code>InjectLatency&lt;T&gt;</code>, and <code>InjectLatencyAsync&lt;T&gt;</code>. With the version based on the v8 API, these methods have been combined into a single <code>AddChaosLatency</code> extension that works for both <code>ResiliencePipelineBuilder</code> and <code>ResiliencePipelineBuilder&lt;T&gt;</code>. These rules are covering all types of chaos strategies (Outcome, Fault, Latency, and Behavior).</li>
 </ul>
 <h2 id="motivation">Motivation</h2>
 <p>There are a lot of questions when it comes to chaos engineering and making sure that a system is actually ready to face the worst possible scenarios:</p>
@@ -252,7 +251,7 @@ In the above example, we use <strong>fault first then latency strategy</strong>,
 <li>How will my system behave if X happens?</li>
 <li>How can I test without waiting for a handled (or even unhandled) exception to happen in my production environment?</li>
 </ul>
-<p>Using Polly helps introduce resilience to a project, but we don't want to have to wait for expected or unexpected failures to test it out. A resilience could be wrongly implemented; testing the scenarios is not straightforward; and mocking failure of some dependencies (for example a cloud SaaS or PaaS service) is not always straightforward.</p>
+<p>Using Fences helps introduce resilience to a project, but we don't want to have to wait for expected or unexpected failures to test it out. A resilience could be wrongly implemented; testing the scenarios is not straightforward; and mocking failure of some dependencies (for example a cloud SaaS or PaaS service) is not always straightforward.</p>
 <h3 id="what-is-needed-to-simulate-chaotic-scenarios">What is needed to simulate chaotic scenarios?</h3>
 <ul>
 <li>A way to simulate failures of dependencies (any service dependency for example).</li>
@@ -261,7 +260,7 @@ In the above example, we use <strong>fault first then latency strategy</strong>,
 <li>To be production grade, to run this in a production or near-production system with automation.</li>
 </ul>
 <h2 id="chaos-strategies">Chaos strategies</h2>
-<p>Chaos strategies (formerly known as Monkey strategies) are in essence a <a href="../strategies/index.html#built-in-strategies">Resilience strategy</a>, which means, as a <em>Resilience Strategy</em> is the minimum unit of resilience for Polly, a <em>Chaos Strategy</em> is the minimum unit of chaos for Simmy.</p>
+<p>Chaos strategies (formerly known as Monkey strategies) are in essence a <a href="../strategies/index.html#built-in-strategies">Resilience strategy</a>, which means, as a <em>Resilience Strategy</em> is the minimum unit of resilience for Fences, a <em>Chaos Strategy</em> is the minimum unit of chaos.</p>
 <h3 id="built-in-strategies">Built-in strategies</h3>
 <table>
 <thead>
@@ -295,7 +294,7 @@ In the above example, we use <strong>fault first then latency strategy</strong>,
 </tbody>
 </table>
 <h2 id="common-options-across-strategies">Common options across strategies</h2>
-<p>All the strategies' options implement the <a class="xref" href="../api/Polly.Simmy.ChaosStrategyOptions.html"><code>ChaosStrategyOptions</code></a> class as it contains the basic configuration for every chaos strategy.</p>
+<p>All the strategies' options implement the <a class="xref" href="../api/Paramore.Fences.Simmy.ChaosStrategyOptions.html"><code>ChaosStrategyOptions</code></a> class as it contains the basic configuration for every chaos strategy.</p>
 <div class="IMPORTANT">
 <h5>Important</h5>
 <p>Please bear in mind that with the V8 API the chaos strategies are enabled by default. So, you can opt-out of them one-by-one either via the <code>Enabled</code> or via the <code>EnabledGenerator</code> property.</p>
@@ -338,7 +337,7 @@ In the above example, we use <strong>fault first then latency strategy</strong>,
 <p>If both <code>Enabled</code> and <code>EnabledGenerator</code> are specified then <code>Enabled</code> will be ignored.</p>
 </div>
 <h2 id="telemetry">Telemetry</h2>
-<p>The telemetry of chaos strategies is seamlessly integrated with Polly <a href="../advanced/telemetry.html">telemetry infrastructure</a>. The chaos strategies produce the following information events:</p>
+<p>The telemetry of chaos strategies is seamlessly integrated with Fences <a href="../advanced/telemetry.html">telemetry infrastructure</a>. The chaos strategies produce the following information events:</p>
 <ul>
 <li><a href="fault.html#telemetry"><code>Chaos.OnFault</code></a></li>
 <li><a href="outcome.html#telemetry"><code>Chaos.OnOutcome</code></a></li>
@@ -556,7 +555,7 @@ services.AddResiliencePipeline(&quot;my-pipeline-2&quot;, (builder, context) =&g
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/App-vNext/Polly/blob/main/docs/chaos/index.md/#L1" class="edit-link">Edit this page</a>
+          <a href="https://github.com/BrighterCommand/Fences/blob/main/docs/chaos/index.md/#L1" class="edit-link">Edit this page</a>
         </div>
 
         <div class="next-article d-print-none border-top" id="nextArticle"></div>

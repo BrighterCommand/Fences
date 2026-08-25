@@ -2,9 +2,9 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-      <title>Rate limiter resilience strategy | Polly </title>
+      <title>Rate limiter resilience strategy | Fences </title>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta name="title" content="Rate limiter resilience strategy | Polly ">
+      <meta name="title" content="Rate limiter resilience strategy | Fences ">
       
       
       <link rel="icon" href="../icon.png">
@@ -16,7 +16,7 @@
       <meta name="docfx:rel" content="../">
       
       
-      <meta name="docfx:docurl" content="https://github.com/App-vNext/Polly/blob/main/docs/strategies/rate-limiter.md/#L1">
+      <meta name="docfx:docurl" content="https://github.com/BrighterCommand/Fences/blob/main/docs/strategies/rate-limiter.md/#L1">
       <meta name="loc:inThisArticle" content="In this article">
       <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
       <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
@@ -44,8 +44,8 @@
       <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
         <div class="container-xxl flex-nowrap">
           <a class="navbar-brand" href="../index.html">
-            <img id="logo" class="svg" src="../icon.png" alt="Polly">
-            Polly
+            <img id="logo" class="svg" src="../icon.png" alt="Fences">
+            Fences
           </a>
           <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
             <i class="bi bi-three-dots"></i>
@@ -91,7 +91,7 @@
 <ul>
 <li><strong>Option(s)</strong>:
 <ul>
-<li><a class="xref" href="../api/Polly.RateLimiting.RateLimiterStrategyOptions.html"><code>RateLimiterStrategyOptions</code></a></li>
+<li><a class="xref" href="../api/Paramore.Fences.RateLimiting.RateLimiterStrategyOptions.html"><code>RateLimiterStrategyOptions</code></a></li>
 </ul>
 </li>
 <li><strong>Extension(s)</strong>:
@@ -102,13 +102,13 @@
 </li>
 <li><strong>Exception(s)</strong>:
 <ul>
-<li><a class="xref" href="../api/Polly.RateLimiting.RateLimiterRejectedException.html"><code>RateLimiterRejectedException</code></a>: Thrown when a rate limiter rejects an execution.</li>
+<li><a class="xref" href="../api/Paramore.Fences.RateLimiting.RateLimiterRejectedException.html"><code>RateLimiterRejectedException</code></a>: Thrown when a rate limiter rejects an execution.</li>
 </ul>
 </li>
 </ul>
 <div class="NOTE">
 <h5>Note</h5>
-<p>The rate limiter strategy resides inside the <a href="https://www.nuget.org/packages/Polly.RateLimiting">Polly.RateLimiting</a> package, not in (<a href="https://www.nuget.org/packages/Polly.Core">Polly.Core</a>) like other strategies.</p>
+<p>The rate limiter strategy resides inside the <a href="https://www.nuget.org/packages/Paramore.Fences.RateLimiting">Paramore.Fences.RateLimiting</a> package, not in (<a href="https://www.nuget.org/packages/Paramore.Fences.Core">Paramore.Fences.Core</a>) like other strategies.</p>
 </div>
 <hr>
 <p>The rate limiter <strong>proactive</strong> resilience strategy controls the number of operations that can pass through it. This strategy is a thin layer over the API provided by the <a href="https://www.nuget.org/packages/System.Threading.RateLimiting"><code>System.Threading.RateLimiting</code></a> package. This strategy can be used in two flavors: to control inbound load via a rate limiter and to control outbound load via a concurrency limiter.</p>
@@ -120,7 +120,7 @@
 <h2 id="usage">Usage</h2>
 <!-- snippet: rate-limiter -->
 <pre><code class="lang-cs">// Add rate limiter with default options.
-// See https://www.pollydocs.org/strategies/rate-limiter#defaults for defaults.
+// See https://brightercommand.github.io/Fences/strategies/rate-limiter#defaults for defaults.
 new ResiliencePipelineBuilder()
     .AddRateLimiter(new RateLimiterStrategyOptions());
 
@@ -211,7 +211,7 @@ catch (RateLimiterRejectedException)
 <h5>Note</h5>
 <p>The <code>RetryAfter</code> value is not available inside the <code>OnRejected</code> callback.</p>
 </div>
-<p>The <code>TelemetrySource</code> property is a <a class="xref" href="../api/Polly.Telemetry.ResilienceTelemetrySource.html"><code>ResilienceTelemetrySource</code></a> which allows you retrieve information such as the executed pipeline and strategy. These can be useful if you have multiple limiter strategies in your pipeline (for example both a rate and concurrency limiter) and you need to know which strategy caused the <code>RateLimiterRejectedException</code> to be thrown.</p>
+<p>The <code>TelemetrySource</code> property is a <a class="xref" href="../api/Paramore.Fences.Telemetry.ResilienceTelemetrySource.html"><code>ResilienceTelemetrySource</code></a> which allows you retrieve information such as the executed pipeline and strategy. These can be useful if you have multiple limiter strategies in your pipeline (for example both a rate and concurrency limiter) and you need to know which strategy caused the <code>RateLimiterRejectedException</code> to be thrown.</p>
 <h2 id="defaults">Defaults</h2>
 <table>
 <thead>
@@ -383,7 +383,7 @@ Resilience event occurred. EventName: 'OnRateLimiterRejected', Source: 'MyPipeli
     P-&gt;&gt;C2: Returns result
 </code></pre>
 <h2 id="disposal-of-rate-limiters">Disposal of rate limiters</h2>
-<p>The <code>RateLimiter</code> is a disposable resource. When you explicitly create a <code>RateLimiter</code> instance, it's good practice to dispose of it once it's no longer needed. This is usually not an issue when manually creating resilience pipelines using the <code>ResiliencePipelineBuilder</code>. However, when dynamic reloads are enabled, failing to dispose of discarded rate limiters can lead to excessive resource consumption. Fortunately, Polly provides a way to dispose of discarded rate limiters, as demonstrated in the example below:</p>
+<p>The <code>RateLimiter</code> is a disposable resource. When you explicitly create a <code>RateLimiter</code> instance, it's good practice to dispose of it once it's no longer needed. This is usually not an issue when manually creating resilience pipelines using the <code>ResiliencePipelineBuilder</code>. However, when dynamic reloads are enabled, failing to dispose of discarded rate limiters can lead to excessive resource consumption. Fortunately, Fences provides a way to dispose of discarded rate limiters, as demonstrated in the example below:</p>
 <!-- snippet: rate-limiter-disposal -->
 <pre><code class="lang-cs">services
     .AddResiliencePipeline(&quot;my-pipeline&quot;, (builder, context) =&gt;
@@ -474,7 +474,7 @@ new ResiliencePipelineBuilder()
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/App-vNext/Polly/blob/main/docs/strategies/rate-limiter.md/#L1" class="edit-link">Edit this page</a>
+          <a href="https://github.com/BrighterCommand/Fences/blob/main/docs/strategies/rate-limiter.md/#L1" class="edit-link">Edit this page</a>
         </div>
 
         <div class="next-article d-print-none border-top" id="nextArticle"></div>

@@ -2,9 +2,9 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-      <title>Resilience pipeline registry | Polly </title>
+      <title>Resilience pipeline registry | Fences </title>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta name="title" content="Resilience pipeline registry | Polly ">
+      <meta name="title" content="Resilience pipeline registry | Fences ">
       
       
       <link rel="icon" href="../icon.png">
@@ -16,7 +16,7 @@
       <meta name="docfx:rel" content="../">
       
       
-      <meta name="docfx:docurl" content="https://github.com/App-vNext/Polly/blob/main/docs/pipelines/resilience-pipeline-registry.md/#L1">
+      <meta name="docfx:docurl" content="https://github.com/BrighterCommand/Fences/blob/main/docs/pipelines/resilience-pipeline-registry.md/#L1">
       <meta name="loc:inThisArticle" content="In this article">
       <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
       <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
@@ -44,8 +44,8 @@
       <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
         <div class="container-xxl flex-nowrap">
           <a class="navbar-brand" href="../index.html">
-            <img id="logo" class="svg" src="../icon.png" alt="Polly">
-            Polly
+            <img id="logo" class="svg" src="../icon.png" alt="Fences">
+            Fences
           </a>
           <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
             <i class="bi bi-three-dots"></i>
@@ -248,7 +248,7 @@ ResiliencePipeline pipeline = registry.GetPipeline(&quot;A&quot;);
 <li>Pipelines enabled for reloads remain valid and current post-reload. The registry manages this transparently.</li>
 </ul>
 <h3 id="how-dynamic-reloads-work">How dynamic reloads work</h3>
-<p>Dynamic reloading is a concept anchored in the registry, while the <a class="xref" href="../api/Polly.ResiliencePipelineBuilder.html">ResiliencePipelineBuilder</a> remains agnostic to it. The registry employs callbacks to configure the builders, and these callbacks are invoked right before the creation of the pipeline. When dynamic reloading is activated, the registry monitors any changes that could affect the pipeline, seamlessly reloading it as needed. The reloading process involves invoking the callback that configures the pipeline; within this callback is also the call to the <code>AddReloadToken</code> method. Thus, each reload also enables dynamic reloads for that particular pipeline. As a consumer, you may opt to stop reloading by simply not invoking the <code>AddReloadToken</code> method. It's crucial to note that if any error occurs during reloading, the previous pipeline is retained, reloading is halted, and Polly emits a <code>ReloadFailed</code> telemetry event.</p>
+<p>Dynamic reloading is a concept anchored in the registry, while the <a class="xref" href="../api/Paramore.Fences.ResiliencePipelineBuilder.html">ResiliencePipelineBuilder</a> remains agnostic to it. The registry employs callbacks to configure the builders, and these callbacks are invoked right before the creation of the pipeline. When dynamic reloading is activated, the registry monitors any changes that could affect the pipeline, seamlessly reloading it as needed. The reloading process involves invoking the callback that configures the pipeline; within this callback is also the call to the <code>AddReloadToken</code> method. Thus, each reload also enables dynamic reloads for that particular pipeline. As a consumer, you may opt to stop reloading by simply not invoking the <code>AddReloadToken</code> method. It's crucial to note that if any error occurs during reloading, the previous pipeline is retained, reloading is halted, and Fences emits a <code>ReloadFailed</code> telemetry event.</p>
 <h2 id="resource-disposal">Resource disposal</h2>
 <p>The registry caches and manages all pipelines and resources linked to them. When you dispose of the registry, all pipelines created by it are also disposed of and can't be used anymore. The following example illustrates this:</p>
 <!-- snippet: registry-disposed -->
@@ -385,7 +385,7 @@ public sealed class PipelineRegistryAdapter : IDisposable
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/App-vNext/Polly/blob/main/docs/pipelines/resilience-pipeline-registry.md/#L1" class="edit-link">Edit this page</a>
+          <a href="https://github.com/BrighterCommand/Fences/blob/main/docs/pipelines/resilience-pipeline-registry.md/#L1" class="edit-link">Edit this page</a>
         </div>
 
         <div class="next-article d-print-none border-top" id="nextArticle"></div>

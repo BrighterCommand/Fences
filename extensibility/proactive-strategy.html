@@ -2,9 +2,9 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-      <title>Proactive resilience strategy | Polly </title>
+      <title>Proactive resilience strategy | Fences </title>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta name="title" content="Proactive resilience strategy | Polly ">
+      <meta name="title" content="Proactive resilience strategy | Fences ">
       
       
       <link rel="icon" href="../icon.png">
@@ -16,7 +16,7 @@
       <meta name="docfx:rel" content="../">
       
       
-      <meta name="docfx:docurl" content="https://github.com/App-vNext/Polly/blob/main/docs/extensibility/proactive-strategy.md/#L1">
+      <meta name="docfx:docurl" content="https://github.com/BrighterCommand/Fences/blob/main/docs/extensibility/proactive-strategy.md/#L1">
       <meta name="loc:inThisArticle" content="In this article">
       <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
       <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
@@ -44,8 +44,8 @@
       <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
         <div class="container-xxl flex-nowrap">
           <a class="navbar-brand" href="../index.html">
-            <img id="logo" class="svg" src="../icon.png" alt="Polly">
-            Polly
+            <img id="logo" class="svg" src="../icon.png" alt="Fences">
+            Fences
           </a>
           <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
             <i class="bi bi-three-dots"></i>
@@ -89,7 +89,7 @@
 
 <p>This document guides you in creating a <strong>Timing resilience strategy</strong> that tracks the execution times of callbacks and reports when the execution time exceeds the expected duration. This is a prime example of a proactive strategy because we aren't concerned with the individual results produced by the callbacks. Hence, this strategy can be used across various result types.</p>
 <h2 id="implementation">Implementation</h2>
-<p>Proactive resilience strategies are derived from the <a class="xref" href="../api/Polly.ResilienceStrategy.html"><code>ResilienceStrategy</code></a> base class. For this strategy, the implementation is:</p>
+<p>Proactive resilience strategies are derived from the <a class="xref" href="../api/Paramore.Fences.ResilienceStrategy.html"><code>ResilienceStrategy</code></a> base class. For this strategy, the implementation is:</p>
 <!-- snippet: ext-proactive-strategy -->
 <pre><code class="lang-cs">// Strategies should be internal and not exposed in the library's public API.
 // Configure the strategy through extension methods and options.
@@ -166,7 +166,7 @@ public readonly struct OnThresholdExceededArguments
 <!-- endSnippet -->
 <p>Arguments should always have an <code>Arguments</code> suffix and include a <code>Context</code> property. Using arguments boosts the extensibility and maintainability of the API, as adding new members becomes a non-breaking change. The <code>OnThresholdExceededArguments</code> provides details about the actual execution time and threshold, allowing consumers to respond to this event or supply a custom callback for such situations.</p>
 <h2 id="options">Options</h2>
-<p>In the previous section, we implemented the <code>TimingResilienceStrategy</code>. Now, it's time to integrate it with Polly and its public API.</p>
+<p>In the previous section, we implemented the <code>TimingResilienceStrategy</code>. Now, it's time to integrate it with Fences and its public API.</p>
 <p>Let's define the public <code>TimingStrategyOptions</code> to configure our strategy:</p>
 <!-- snippet: ext-proactive-options -->
 <pre><code class="lang-cs">public class TimingStrategyOptions : ResilienceStrategyOptions
@@ -246,15 +246,15 @@ var pipeline = new ResiliencePipelineBuilder()
 <h2 id="resources">Resources</h2>
 <p>For further information on proactive resilience strategies, consider exploring these resources:</p>
 <ul>
-<li><a href="https://github.com/App-vNext/Polly/tree/main/samples/Extensibility/Proactive">Timing strategy sample</a>: A practical example from this guide.</li>
-<li><a href="https://github.com/App-vNext/Polly/tree/main/src/Polly.Core/Timeout">Timeout resilience strategy</a>: Discover the built-in timeout resilience strategy implementation.</li>
-<li><a href="https://github.com/App-vNext/Polly/tree/main/src/Polly.RateLimiting">Rate limiter resilience strategy</a>: Discover how rate limiter strategy is implemented.</li>
+<li><a href="https://github.com/BrighterCommand/Fences/tree/main/samples/Extensibility/Proactive">Timing strategy sample</a>: A practical example from this guide.</li>
+<li><a href="https://github.com/BrighterCommand/Fences/tree/main/src/Paramore.Fences.Core/Timeout">Timeout resilience strategy</a>: Discover the built-in timeout resilience strategy implementation.</li>
+<li><a href="https://github.com/BrighterCommand/Fences/tree/main/src/Paramore.Fences.RateLimiting">Rate limiter resilience strategy</a>: Discover how rate limiter strategy is implemented.</li>
 </ul>
 
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/App-vNext/Polly/blob/main/docs/extensibility/proactive-strategy.md/#L1" class="edit-link">Edit this page</a>
+          <a href="https://github.com/BrighterCommand/Fences/blob/main/docs/extensibility/proactive-strategy.md/#L1" class="edit-link">Edit this page</a>
         </div>
 
         <div class="next-article d-print-none border-top" id="nextArticle"></div>

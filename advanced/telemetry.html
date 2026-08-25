@@ -2,9 +2,9 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-      <title>Telemetry | Polly </title>
+      <title>Telemetry | Fences </title>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta name="title" content="Telemetry | Polly ">
+      <meta name="title" content="Telemetry | Fences ">
       
       
       <link rel="icon" href="../icon.png">
@@ -16,7 +16,7 @@
       <meta name="docfx:rel" content="../">
       
       
-      <meta name="docfx:docurl" content="https://github.com/App-vNext/Polly/blob/main/docs/advanced/telemetry.md/#L1">
+      <meta name="docfx:docurl" content="https://github.com/BrighterCommand/Fences/blob/main/docs/advanced/telemetry.md/#L1">
       <meta name="loc:inThisArticle" content="In this article">
       <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
       <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
@@ -44,8 +44,8 @@
       <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
         <div class="container-xxl flex-nowrap">
           <a class="navbar-brand" href="../index.html">
-            <img id="logo" class="svg" src="../icon.png" alt="Polly">
-            Polly
+            <img id="logo" class="svg" src="../icon.png" alt="Fences">
+            Fences
           </a>
           <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
             <i class="bi bi-three-dots"></i>
@@ -87,10 +87,10 @@
         <article data-uid="">
 <h1 id="telemetry">Telemetry</h1>
 
-<p>Starting with version 8, Polly provides telemetry for all built-in standard and chaos resilience strategies.</p>
+<p>Starting with version 8, Fences provides telemetry for all built-in standard and chaos resilience strategies.</p>
 <h2 id="usage">Usage</h2>
-<p>To enable telemetry in Polly, add the <code>Polly.Extensions</code> package to your project:</p>
-<pre><code class="lang-sh">dotnet add package Polly.Extensions
+<p>To enable telemetry in Fences, add the <code>Paramore.Fences.Extensions</code> package to your project:</p>
+<pre><code class="lang-sh">dotnet add package Paramore.Fences.Extensions --prerelease
 </code></pre>
 <p>Afterwards, you can use the <code>ConfigureTelemetry(...)</code> extension method on the <code>ResiliencePipelineBuilder</code>:</p>
 <!-- snippet: configure-telemetry -->
@@ -147,7 +147,7 @@ internal sealed class MyMeteringEnricher : MeteringEnricher
 </code></pre>
 <!-- endSnippet -->
 <h2 id="metrics">Metrics</h2>
-<p>The metrics are emitted under the <code>Polly</code> meter name. The subsequent sections provide insights into the metrics produced by Polly. Please note that any custom enriched tags are not depicted in the following tables.</p>
+<p>The metrics are emitted under the <code>Fences</code> meter name. The subsequent sections provide insights into the metrics produced by Fences. Please note that any custom enriched tags are not depicted in the following tables.</p>
 <p>Every telemetry event has the following optional tags:</p>
 <ul>
 <li><code>pipeline.name</code>: comes from <code>ResiliencePipelineBuilder.Name</code>.</li>
@@ -185,8 +185,8 @@ pipeline.Execute(
 <h5>Note</h5>
 <p>Beware of using very large or unbounded combinations of tag values for the tags above. See <a href="https://learn.microsoft.com/dotnet/core/diagnostics/metrics-instrumentation#best-practices-3">best practices</a> for more details.</p>
 </div>
-<p>These values are subsequently reflected in the following metering instruments exposed by Polly:</p>
-<h3 id="instrument-resiliencepollystrategyevents">Instrument: <code>resilience.polly.strategy.events</code></h3>
+<p>These values are subsequently reflected in the following metering instruments exposed by Fences:</p>
+<h3 id="instrument-resiliencefencesstrategyevents">Instrument: <code>resilience.fences.strategy.events</code></h3>
 <ul>
 <li>Type: <em>Counter</em></li>
 <li>Numerical type of measurement: <em>int</em></li>
@@ -247,7 +247,7 @@ pipeline.Execute(
 <li><a href="../chaos/latency.html#telemetry"><code>Chaos.OnLatency</code></a></li>
 <li><a href="../chaos/behavior.html#telemetry"><code>Chaos.OnBehavior</code></a></li>
 </ul>
-<h3 id="instrument-resiliencepollystrategyattemptduration">Instrument: <code>resilience.polly.strategy.attempt.duration</code></h3>
+<h3 id="instrument-resiliencefencesstrategyattemptduration">Instrument: <code>resilience.fences.strategy.attempt.duration</code></h3>
 <ul>
 <li>Type: <em>Histogram</em></li>
 <li>Unit: <em>milliseconds</em></li>
@@ -301,7 +301,7 @@ pipeline.Execute(
 </tr>
 </tbody>
 </table>
-<h3 id="instrument-resiliencepollypipelineduration">Instrument: <code>resilience.polly.pipeline.duration</code></h3>
+<h3 id="instrument-resiliencefencespipelineduration">Instrument: <code>resilience.fences.pipeline.duration</code></h3>
 <ul>
 <li>Type: <em>Histogram</em></li>
 <li>Unit: <em>milliseconds</em></li>
@@ -336,7 +336,7 @@ pipeline.Execute(
 </tbody>
 </table>
 <h3 id="metering-enrichment">Metering enrichment</h3>
-<p>Polly API lets you add extra tags to any resilience event created by resilience strategies. To do this, derive from the <a class="xref" href="../api/Polly.Telemetry.MeteringEnricher.html">MeteringEnricher</a> class and add your custom enricher to the <a class="xref" href="../api/Polly.Telemetry.TelemetryOptions.html#Polly_Telemetry_TelemetryOptions_MeteringEnrichers">MeteringEnrichers</a> list.</p>
+<p>Fences API lets you add extra tags to any resilience event created by resilience strategies. To do this, derive from the <a class="xref" href="../api/Paramore.Fences.Telemetry.MeteringEnricher.html">MeteringEnricher</a> class and add your custom enricher to the <a class="xref" href="../api/Paramore.Fences.Telemetry.TelemetryOptions.html#Paramore_Fences_Telemetry_TelemetryOptions_MeteringEnrichers">MeteringEnrichers</a> list.</p>
 <p>The custom enricher:</p>
 <!-- snippet: metering-enricher -->
 <pre><code class="lang-cs">internal sealed class CustomMeteringEnricher : MeteringEnricher
@@ -368,7 +368,7 @@ var pipeline = new ResiliencePipelineBuilder()
 </code></pre>
 <!-- endSnippet -->
 <h2 id="logs">Logs</h2>
-<p>Logs are registered under the <code>Polly</code> logger name. Here are some examples of the logs:</p>
+<p>Logs are registered under the <code>Fences</code> logger name. Here are some examples of the logs:</p>
 <pre><code class="lang-text">// This log is recorded whenever a resilience event occurs. EventId = 0
 Resilience event occurred. EventName: '{EventName}', Source: '{PipelineName}/{PipelineInstance}/{StrategyName}', Operation Key: '{OperationKey}', Result: '{Result}'
 
@@ -382,11 +382,11 @@ Resilience pipeline executed. Source: '{PipelineName}/{PipelineInstance}', Opera
 Execution attempt. Source: '{PipelineName}/{PipelineInstance}/{StrategyName}', Operation Key: '{OperationKey}', Result: '{Result}', Handled: '{Handled}', Attempt: '{Attempt}', Execution Time: '{ExecutionTime}ms'
 </code></pre>
 <h2 id="emitting-telemetry-events">Emitting telemetry events</h2>
-<p>Each resilience strategy can generate telemetry data through the <a class="xref" href="../api/Polly.Telemetry.ResilienceStrategyTelemetry.html"><code>ResilienceStrategyTelemetry</code></a> API. Polly encapsulates event details as <a class="xref" href="../api/Polly.Telemetry.TelemetryEventArguments-2.html"><code>TelemetryEventArguments</code></a> and emits them via <code>TelemetryListener</code>.</p>
+<p>Each resilience strategy can generate telemetry data through the <a class="xref" href="../api/Paramore.Fences.Telemetry.ResilienceStrategyTelemetry.html"><code>ResilienceStrategyTelemetry</code></a> API. Fences encapsulates event details as <a class="xref" href="../api/Paramore.Fences.Telemetry.TelemetryEventArguments-2.html"><code>TelemetryEventArguments</code></a> and emits them via <code>TelemetryListener</code>.</p>
 <p>To leverage this telemetry data, users should assign a <code>TelemetryListener</code> instance to <code>ResiliencePipelineBuilder.TelemetryListener</code> and then consume the <code>TelemetryEventArguments</code>.</p>
-<p>For common scenarios, it is expected that users would make use of <code>Polly.Extensions</code>. This extension enables telemetry configuration through the <code>ResiliencePipelineBuilder.ConfigureTelemetry(...)</code> method, which processes <code>TelemetryEventArguments</code> to generate logs and metrics.</p>
+<p>For common scenarios, it is expected that users would make use of <code>Paramore.Fences.Extensions</code>. This extension enables telemetry configuration through the <code>ResiliencePipelineBuilder.ConfigureTelemetry(...)</code> method, which processes <code>TelemetryEventArguments</code> to generate logs and metrics.</p>
 <h2 id="customizing-the-severity-of-telemetry-events">Customizing the severity of telemetry events</h2>
-<p>To customize the severity of telemetry events, set the <a class="xref" href="../api/Polly.Telemetry.TelemetryOptions.html#Polly_Telemetry_TelemetryOptions_SeverityProvider"><code>SeverityProvider</code></a> delegate that allows changing the default severity of resilience events:</p>
+<p>To customize the severity of telemetry events, set the <a class="xref" href="../api/Paramore.Fences.Telemetry.TelemetryOptions.html#Paramore_Fences_Telemetry_TelemetryOptions_SeverityProvider"><code>SeverityProvider</code></a> delegate that allows changing the default severity of resilience events:</p>
 <!-- snippet: telemetry-severity-override -->
 <pre><code class="lang-cs">services.AddResiliencePipeline(&quot;my-strategy&quot;, (builder, context) =&gt;
 {
@@ -429,7 +429,7 @@ then use the <code>args.Source.StrategyName</code> information as well inside th
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/App-vNext/Polly/blob/main/docs/advanced/telemetry.md/#L1" class="edit-link">Edit this page</a>
+          <a href="https://github.com/BrighterCommand/Fences/blob/main/docs/advanced/telemetry.md/#L1" class="edit-link">Edit this page</a>
         </div>
 
         <div class="next-article d-print-none border-top" id="nextArticle"></div>

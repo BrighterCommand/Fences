@@ -2,9 +2,9 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-      <title>Meet Polly: The .NET resilience library | Polly </title>
+      <title>Meet Fences: The .NET resilience library | Fences </title>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta name="title" content="Meet Polly: The .NET resilience library | Polly ">
+      <meta name="title" content="Meet Fences: The .NET resilience library | Fences ">
       
       
       <link rel="icon" href="icon.png">
@@ -16,7 +16,7 @@
       <meta name="docfx:rel" content="">
       
       
-      <meta name="docfx:docurl" content="https://github.com/App-vNext/Polly/blob/main/docs/index.md/#L1">
+      <meta name="docfx:docurl" content="https://github.com/BrighterCommand/Fences/blob/main/docs/index.md/#L1">
       <meta name="loc:inThisArticle" content="In this article">
       <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
       <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
@@ -44,8 +44,8 @@
       <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
         <div class="container-xxl flex-nowrap">
           <a class="navbar-brand" href="index.html">
-            <img id="logo" class="svg" src="icon.png" alt="Polly">
-            Polly
+            <img id="logo" class="svg" src="icon.png" alt="Fences">
+            Fences
           </a>
           <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
             <i class="bi bi-three-dots"></i>
@@ -71,13 +71,13 @@
         </div>
 
         <article data-uid="">
-<h1 id="meet-polly-the-net-resilience-library">Meet Polly: The .NET resilience library</h1>
+<h1 id="meet-fences-the-net-resilience-library">Meet Fences: The .NET resilience library</h1>
 
-<p><img src="https://raw.github.com/App-vNext/Polly/main/Polly-Logo.png" alt="Polly logo"></p>
-<p>Polly is a powerful library for .NET that helps you handle transient faults and improve the resilience of your applications. With Polly, you can easily define and apply strategies such as Retry, Circuit Breaker, Hedging, Timeout, Rate Limiter and Fallback to handle failures and slowdowns in a fluent and thread-safe way.</p>
-<p>Polly is part of the <a href="https://www.dotnetfoundation.org/about">.NET Foundation</a>!</p>
-<h2 id="what-can-polly-do-for-you">What can Polly do for you?</h2>
-<p>Polly lets you use and combine different resilience strategies to cope with various scenarios, such as:</p>
+<p><img src="icon.png" alt="Fences logo"></p>
+<p>Fences is a powerful library for .NET that helps you handle transient faults and improve the resilience of your applications. With Fences, you can easily define and apply strategies such as Retry, Circuit Breaker, Hedging, Timeout, Rate Limiter and Fallback to handle failures and slowdowns in a fluent and thread-safe way.</p>
+<p>Fences is a community fork of <a href="https://github.com/App-vNext/Polly">Polly</a>, maintained by <a href="https://github.com/BrighterCommand">Brighter Command</a>. It is not affiliated with, endorsed by, or supported by App vNext or the Polly maintainers. If you are coming from Polly, start with <a href="migration-from-polly.html">Migrate from Polly</a>.</p>
+<h2 id="what-can-fences-do-for-you">What can Fences do for you?</h2>
+<p>Fences lets you use and combine different resilience strategies to cope with various scenarios, such as:</p>
 <ul>
 <li><a href="strategies/retry.html">Retry</a>: Try again if something fails. This can be useful when the problem is temporary and might go away.</li>
 <li><a href="strategies/circuit-breaker.html">Circuit Breaker</a>: Stop trying if something is broken or busy. This can benefit you by avoiding wasting time and making things worse. It can also support the system to recover.</li>
@@ -87,35 +87,34 @@
 <li><a href="strategies/hedging.html">Hedging</a>: Do more than one thing at the same time and take the fastest one. This can make your program faster and more responsive.</li>
 </ul>
 <p>You can learn more about each strategy and how to use them <a href="strategies/index.html">resilience strategies</a> section.</p>
-<h2 id="how-to-get-started-with-polly">How to get started with Polly?</h2>
-<p>Polly is easy to install and use. You can follow the <a href="getting-started.html">getting started</a> guide to add and start using Polly in your projects.</p>
+<h2 id="how-to-get-started-with-fences">How to get started with Fences?</h2>
+<p>Fences is easy to install and use. You can follow the <a href="getting-started.html">getting started</a> guide to add and start using Fences in your projects.</p>
 <h2 id="where-to-find-more-information">Where to find more information?</h2>
-<p>Polly has a rich documentation that covers various topics, such as:</p>
+<p>Fences has a rich documentation that covers various topics, such as:</p>
 <ul>
+<li><a href="migration-from-polly.html">Migrate from Polly</a>: The package, namespace and telemetry changes needed to move an existing Polly project across.</li>
 <li><a href="strategies/index.html">Resilience strategies</a>: A collection of strategies for improving the resilience of your system.</li>
 <li><a href="pipelines/index.html">Resilience pipelines</a>: How to combine and reuse strategies in a flexible and modular way.</li>
-<li><a href="advanced/telemetry.html">Telemetry and monitoring</a>: How to access and analyze the data generated by Polly strategies and pipelines.</li>
-<li><a href="advanced/dependency-injection.html">Dependency injection</a>: How to integrate Polly with dependency injection frameworks and containers.</li>
-<li><a href="advanced/performance.html">Performance</a>: Tips on optimizing and getting the best performance from Polly.</li>
+<li><a href="advanced/telemetry.html">Telemetry and monitoring</a>: How to access and analyze the data generated by Fences strategies and pipelines.</li>
+<li><a href="advanced/dependency-injection.html">Dependency injection</a>: How to integrate Fences with dependency injection frameworks and containers.</li>
+<li><a href="advanced/performance.html">Performance</a>: Tips on optimizing and getting the best performance from Fences.</li>
 <li><a href="advanced/testing.html">Testing</a>: How to test the composition and configuration of resilience pipelines.</li>
-<li><a href="chaos/index.html">Chaos engineering</a>: How to use Polly to inject faults and test the resilience of your system.</li>
-<li><a href="extensibility/index.html">Extensibility</a>: How to create and use custom strategies and extensions for Polly.</li>
+<li><a href="chaos/index.html">Chaos engineering</a>: How to use Fences to inject faults and test the resilience of your system.</li>
+<li><a href="extensibility/index.html">Extensibility</a>: How to create and use custom strategies and extensions for Fences.</li>
 </ul>
 <p>You can also find many resources and community contributions, such as:</p>
 <ul>
-<li><a href="https://github.com/App-vNext/Polly/tree/main/samples">Samples</a>: Samples in this repository that serve as an introduction to Polly.</li>
-<li><a href="https://github.com/App-vNext/Polly-Samples">Practical Samples</a>: Practical examples for using various implementations of Polly. Please feel free to contribute to the Polly-Samples repository in order to assist others who are either learning Polly for the first time, or are seeking advanced examples and novel approaches provided by our generous community.</li>
-<li><a href="community/polly-contrib.html">Polly-Contrib</a>: Community projects and libraries that extend and enhance Polly's functionality and ecosystem.</li>
-<li><a href="community/libraries-and-contributions.html">Libraries and contributions</a>: Dependencies and contributors that make Polly possible and awesome.</li>
-<li>Microsoft's <a href="https://github.com/dotnet-architecture/eShopOnContainers">eShopOnContainers project</a>: Sample project demonstrating a .NET Micro-services architecture and using Polly for resilience.</li>
-<li><a href="community/git-workflow.html">Git Workflow</a>: Our suggested Git workflow for contributing to Polly.</li>
+<li><a href="https://github.com/BrighterCommand/Fences/tree/main/samples">Samples</a>: Samples in this repository that serve as an introduction to Fences.</li>
+<li><a href="https://github.com/App-vNext/Polly-Samples">Practical Samples</a>: Practical examples written for Polly. The v8 API is unchanged in Fences, so they apply once the package references and namespaces are swapped.</li>
+<li><a href="community/libraries-and-contributions.html">Libraries and contributions</a>: Dependencies and contributors that make Fences possible and awesome.</li>
+<li><a href="community/git-workflow.html">Git Workflow</a>: Our suggested Git workflow for contributing to Fences.</li>
 </ul>
 <p>You can browse the documentation using the sidebar or visit the <a href="api/index.html">API</a> section for the reference documentation.</p>
 
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/App-vNext/Polly/blob/main/docs/index.md/#L1" class="edit-link">Edit this page</a>
+          <a href="https://github.com/BrighterCommand/Fences/blob/main/docs/index.md/#L1" class="edit-link">Edit this page</a>
         </div>
 
         <div class="next-article d-print-none border-top" id="nextArticle"></div>

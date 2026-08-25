@@ -2,9 +2,9 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-      <title>HTTP client integration samples | Polly </title>
+      <title>HTTP client integration samples | Fences </title>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta name="title" content="HTTP client integration samples | Polly ">
+      <meta name="title" content="HTTP client integration samples | Fences ">
       
       
       <link rel="icon" href="../icon.png">
@@ -16,7 +16,7 @@
       <meta name="docfx:rel" content="../">
       
       
-      <meta name="docfx:docurl" content="https://github.com/App-vNext/Polly/blob/main/docs/community/http-client-integrations.md/#L1">
+      <meta name="docfx:docurl" content="https://github.com/BrighterCommand/Fences/blob/main/docs/community/http-client-integrations.md/#L1">
       <meta name="loc:inThisArticle" content="In this article">
       <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
       <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
@@ -44,8 +44,8 @@
       <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
         <div class="container-xxl flex-nowrap">
           <a class="navbar-brand" href="../index.html">
-            <img id="logo" class="svg" src="../icon.png" alt="Polly">
-            Polly
+            <img id="logo" class="svg" src="../icon.png" alt="Fences">
+            Fences
           </a>
           <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
             <i class="bi bi-three-dots"></i>
@@ -87,8 +87,14 @@
         <article data-uid="">
 <h1 id="http-client-integration-samples">HTTP client integration samples</h1>
 
-<p>Transient failures are inevitable for HTTP based communication as well. It is not a surprise that many developers use Polly with an HTTP client to make their applications more robust.</p>
-<p>Here we have collected some popular HTTP client libraries and show how to integrate them with Polly.</p>
+<p>Transient failures are inevitable for HTTP based communication as well. It is not a surprise that many developers put a resilience library behind an HTTP client to make their applications more robust.</p>
+<div class="IMPORTANT">
+<h5>Important</h5>
+<p><strong>The samples on this page use Polly's API, not Fences', and that is deliberate.</strong></p>
+<p>HTTP client resilience in .NET runs through <a href="https://www.nuget.org/packages/Microsoft.Extensions.Http.Resilience"><code>Microsoft.Extensions.Http.Resilience</code></a>, which has a hard dependency on Polly: its <code>AddResilienceHandler</code> callback is handed a Polly <code>ResiliencePipelineBuilder&lt;HttpResponseMessage&gt;</code>, not a Fences one. <strong>Fences cannot take Polly out of the dependency graph of an application that calls <code>AddResilienceHandler</code> or <code>AddStandardResilienceHandler</code>.</strong> The samples below therefore keep Polly's package references and namespaces, and they work as written.</p>
+<p>See <a href="../migration-from-polly.html">Migrate from Polly</a> for the bounded form of this claim, and <a href="../adr/0002-fork-polly-as-fences.html">ADR 0002</a> for why it is accepted rather than worked around.</p>
+</div>
+<p>Here we have collected some popular HTTP client libraries and show how to integrate them.</p>
 <h2 id="setting-the-stage">Setting the stage</h2>
 <p>In the examples below we will register HTTP clients into a Dependency Injection container.</p>
 <p>The same resilience strategy will be used each time to keep the samples focused on the HTTP client library integration.</p>
@@ -297,7 +303,7 @@ var response = await restClient.ExecuteAsync(request);
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/App-vNext/Polly/blob/main/docs/community/http-client-integrations.md/#L1" class="edit-link">Edit this page</a>
+          <a href="https://github.com/BrighterCommand/Fences/blob/main/docs/community/http-client-integrations.md/#L1" class="edit-link">Edit this page</a>
         </div>
 
         <div class="next-article d-print-none border-top" id="nextArticle"></div>

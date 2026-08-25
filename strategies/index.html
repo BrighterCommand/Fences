@@ -2,9 +2,9 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-      <title>Resilience strategies | Polly </title>
+      <title>Resilience strategies | Fences </title>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta name="title" content="Resilience strategies | Polly ">
+      <meta name="title" content="Resilience strategies | Fences ">
       
       
       <link rel="icon" href="../icon.png">
@@ -16,7 +16,7 @@
       <meta name="docfx:rel" content="../">
       
       
-      <meta name="docfx:docurl" content="https://github.com/App-vNext/Polly/blob/main/docs/strategies/index.md/#L1">
+      <meta name="docfx:docurl" content="https://github.com/BrighterCommand/Fences/blob/main/docs/strategies/index.md/#L1">
       <meta name="loc:inThisArticle" content="In this article">
       <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
       <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
@@ -44,8 +44,8 @@
       <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
         <div class="container-xxl flex-nowrap">
           <a class="navbar-brand" href="../index.html">
-            <img id="logo" class="svg" src="../icon.png" alt="Polly">
-            Polly
+            <img id="logo" class="svg" src="../icon.png" alt="Fences">
+            Fences
           </a>
           <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
             <i class="bi bi-three-dots"></i>
@@ -87,8 +87,8 @@
         <article data-uid="">
 <h1 id="resilience-strategies">Resilience strategies</h1>
 
-<p>Resilience strategies are essential components of Polly, designed to execute user-defined callbacks while adding an extra layer of resilience. These strategies can't be executed directly; they must be run through a <strong>resilience pipeline</strong>. Polly provides an API to construct resilience pipelines by incorporating one or more resilience strategies through the pipeline builders.</p>
-<p>Polly categorizes resilience strategies into two main groups:</p>
+<p>Resilience strategies are essential components of Fences, designed to execute user-defined callbacks while adding an extra layer of resilience. These strategies can't be executed directly; they must be run through a <strong>resilience pipeline</strong>. Fences provides an API to construct resilience pipelines by incorporating one or more resilience strategies through the pipeline builders.</p>
+<p>Fences categorizes resilience strategies into two main groups:</p>
 <ul>
 <li><strong>Reactive</strong>: These strategies handle specific exceptions that are thrown, or results that are returned, by the callbacks executed through the strategy.</li>
 <li><strong>Proactive</strong>: Unlike reactive strategies, proactive strategies do not focus on handling errors by the callbacks might throw or return. They can make proactive decisions to cancel or reject the execution of callbacks (e.g., using a rate limiter or a timeout resilience strategy).</li>
@@ -216,14 +216,14 @@
 <!-- endSnippet -->
 <div class="NOTE">
 <h5>Note</h5>
-<p>The configuration options are automatically validated by Polly and come with sensible defaults. Therefore, you don't have to specify all the properties unless needed.</p>
+<p>The configuration options are automatically validated by Fences and come with sensible defaults. Therefore, you don't have to specify all the properties unless needed.</p>
 </div>
 <h2 id="fault-handling">Fault handling</h2>
 <p>Each reactive strategy provides access to the <code>ShouldHandle</code> predicate property. This property offers a mechanism to decide whether the resilience strategy should manage the fault or result returned after execution.</p>
 <p>Setting up the predicate can be accomplished in the following ways:</p>
 <ul>
 <li><strong>Manually setting the predicate</strong>: Directly configure the predicate. The advised approach involves using <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/operators/switch-expression">switch expressions</a> for maximum flexibility, and also allows the incorporation of asynchronous predicates.</li>
-<li><strong>Employing <code>PredicateBuilder</code></strong>: The <code>PredicateBuilder{&lt;TResult&gt;}</code> classes provide a more straight-forward method to configure the predicates, akin to predicate setups in earlier Polly versions.</li>
+<li><strong>Employing <code>PredicateBuilder</code></strong>: The <code>PredicateBuilder{&lt;TResult&gt;}</code> classes provide a more straight-forward method to configure the predicates, akin to predicate setups in earlier Fences versions.</li>
 </ul>
 <p>The examples below illustrate these:</p>
 <h3 id="predicates">Predicates</h3>
@@ -281,7 +281,7 @@ For example in case of retry you can access the <code>AttemptNumber</code>, as w
 </code></pre>
 <!-- endSnippet -->
 <h3 id="predicate-builder">Predicate builder</h3>
-<p><a class="xref" href="../api/Polly.PredicateBuilder.html">PredicateBuilder</a>, or <a class="xref" href="../api/Polly.PredicateBuilder-1.html">PredicateBuilder&lt;TResult&gt;</a>, is a utility class aimed at simplifying the configuration of predicates:</p>
+<p><a class="xref" href="../api/Paramore.Fences.PredicateBuilder.html">PredicateBuilder</a>, or <a class="xref" href="../api/Paramore.Fences.PredicateBuilder-1.html">PredicateBuilder&lt;TResult&gt;</a>, is a utility class aimed at simplifying the configuration of predicates:</p>
 <!-- snippet: should-handle-predicate-builder -->
 <pre><code class="lang-cs">// Use PredicateBuilder&lt;HttpResponseMessage&gt; to simplify the setup of the ShouldHandle predicate.
 var options = new RetryStrategyOptions&lt;HttpResponseMessage&gt;
@@ -306,7 +306,7 @@ var options = new RetryStrategyOptions&lt;HttpResponseMessage&gt;
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/App-vNext/Polly/blob/main/docs/strategies/index.md/#L1" class="edit-link">Edit this page</a>
+          <a href="https://github.com/BrighterCommand/Fences/blob/main/docs/strategies/index.md/#L1" class="edit-link">Edit this page</a>
         </div>
 
         <div class="next-article d-print-none border-top" id="nextArticle"></div>

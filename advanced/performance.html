@@ -2,9 +2,9 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-      <title>Performance | Polly </title>
+      <title>Performance | Fences </title>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta name="title" content="Performance | Polly ">
+      <meta name="title" content="Performance | Fences ">
       
       
       <link rel="icon" href="../icon.png">
@@ -16,7 +16,7 @@
       <meta name="docfx:rel" content="../">
       
       
-      <meta name="docfx:docurl" content="https://github.com/App-vNext/Polly/blob/main/docs/advanced/performance.md/#L1">
+      <meta name="docfx:docurl" content="https://github.com/BrighterCommand/Fences/blob/main/docs/advanced/performance.md/#L1">
       <meta name="loc:inThisArticle" content="In this article">
       <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
       <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
@@ -44,8 +44,8 @@
       <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
         <div class="container-xxl flex-nowrap">
           <a class="navbar-brand" href="../index.html">
-            <img id="logo" class="svg" src="../icon.png" alt="Polly">
-            Polly
+            <img id="logo" class="svg" src="../icon.png" alt="Fences">
+            Fences
           </a>
           <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
             <i class="bi bi-three-dots"></i>
@@ -87,7 +87,7 @@
         <article data-uid="">
 <h1 id="performance">Performance</h1>
 
-<p>Polly is fast and avoids allocations wherever possible. We use a comprehensive set of <a href="https://github.com/App-vNext/Polly/tree/main/bench/Polly.Core.Benchmarks">performance benchmarks</a> to monitor Polly's performance.</p>
+<p>Fences is fast and avoids allocations wherever possible. We use a comprehensive set of <a href="https://github.com/BrighterCommand/Fences/tree/main/bench/Paramore.Fences.Core.Benchmarks">performance benchmarks</a> to monitor Fences' performance.</p>
 <p>Here's an example of results from an advanced pipeline composed of the following strategies:</p>
 <ul>
 <li>Timeout (outer)</li>
@@ -137,11 +137,11 @@
 </tbody>
 </table>
 <hr>
-<p>Compared to older versions, Polly v8 is both faster and more memory efficient.</p>
+<p>Compared to the v7 API, the v8 API is both faster and more memory efficient.</p>
 <h2 id="performance-tips">Performance tips</h2>
-<p>If you're aiming for the best performance with Polly, consider these tips:</p>
+<p>If you're aiming for the best performance with Fences, consider these tips:</p>
 <h3 id="use-static-lambdas">Use static lambdas</h3>
-<p>Lambdas capturing variables from their outer scope will allocate on every execution. Polly provides tools to avoid this overhead, as shown in the example below:</p>
+<p>Lambdas capturing variables from their outer scope will allocate on every execution. Fences provides tools to avoid this overhead, as shown in the example below:</p>
 <!-- snippet: perf-lambdas -->
 <pre><code class="lang-cs">// This call allocates for each invocation since the &quot;userId&quot; variable is captured from the outer scope.
 await resiliencePipeline.ExecuteAsync(
@@ -187,7 +187,7 @@ new ResiliencePipelineBuilder()
 </code></pre>
 <!-- endSnippet -->
 <h3 id="execute-callbacks-without-throwing-exceptions">Execute callbacks without throwing exceptions</h3>
-<p>Polly provides the <code>ExecuteOutcomeAsync</code> API, returning results as <code>Outcome&lt;T&gt;</code>. The <code>Outcome&lt;T&gt;</code> might contain an exception instance, which you can check without it being thrown. This is beneficial when employing exception-heavy resilience strategies, like circuit breakers.</p>
+<p>Fences provides the <code>ExecuteOutcomeAsync</code> API, returning results as <code>Outcome&lt;T&gt;</code>. The <code>Outcome&lt;T&gt;</code> might contain an exception instance, which you can check without it being thrown. This is beneficial when employing exception-heavy resilience strategies, like circuit breakers.</p>
 <!-- snippet: perf-execute-outcome -->
 <pre><code class="lang-cs">// Execute GetMemberAsync and handle exceptions externally.
 try
@@ -277,7 +277,7 @@ ResilienceContextPool.Shared.Return(context);
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/App-vNext/Polly/blob/main/docs/advanced/performance.md/#L1" class="edit-link">Edit this page</a>
+          <a href="https://github.com/BrighterCommand/Fences/blob/main/docs/advanced/performance.md/#L1" class="edit-link">Edit this page</a>
         </div>
 
         <div class="next-article d-print-none border-top" id="nextArticle"></div>

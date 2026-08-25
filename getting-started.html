@@ -2,9 +2,9 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-      <title>Getting started | Polly </title>
+      <title>Getting started | Fences </title>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta name="title" content="Getting started | Polly ">
+      <meta name="title" content="Getting started | Fences ">
       
       
       <link rel="icon" href="icon.png">
@@ -16,7 +16,7 @@
       <meta name="docfx:rel" content="">
       
       
-      <meta name="docfx:docurl" content="https://github.com/App-vNext/Polly/blob/main/docs/getting-started.md/#L1">
+      <meta name="docfx:docurl" content="https://github.com/BrighterCommand/Fences/blob/main/docs/getting-started.md/#L1">
       <meta name="loc:inThisArticle" content="In this article">
       <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
       <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
@@ -44,8 +44,8 @@
       <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
         <div class="container-xxl flex-nowrap">
           <a class="navbar-brand" href="index.html">
-            <img id="logo" class="svg" src="icon.png" alt="Polly">
-            Polly
+            <img id="logo" class="svg" src="icon.png" alt="Fences">
+            Fences
           </a>
           <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
             <i class="bi bi-three-dots"></i>
@@ -73,9 +73,9 @@
         <article data-uid="">
 <h1 id="getting-started">Getting started</h1>
 
-<p>To use Polly, you must provide a callback and execute it using a <a href="pipelines/index.html"><strong>resilience pipeline</strong></a>. A resilience pipeline is a combination of one or more <a href="strategies/index.html"><strong>resilience strategies</strong></a> such as retry, timeout, and rate limiter. Polly uses <strong>builders</strong> to integrate these strategies into a pipeline.</p>
-<p>To get started, first add the <a href="https://www.nuget.org/packages/Polly.Core/">Polly.Core</a> package to your project by running the following command:</p>
-<pre><code class="lang-sh">dotnet add package Polly.Core
+<p>To use Fences, you must provide a callback and execute it using a <a href="pipelines/index.html"><strong>resilience pipeline</strong></a>. A resilience pipeline is a combination of one or more <a href="strategies/index.html"><strong>resilience strategies</strong></a> such as retry, timeout, and rate limiter. Fences uses <strong>builders</strong> to integrate these strategies into a pipeline.</p>
+<p>To get started, first add the <a href="https://www.nuget.org/packages/Paramore.Fences.Core/">Paramore.Fences.Core</a> package to your project by running the following command:</p>
+<pre><code class="lang-sh">dotnet add package Paramore.Fences.Core --prerelease
 </code></pre>
 <p>You can create a <code>ResiliencePipeline</code> using the <code>ResiliencePipelineBuilder</code> class as shown below:</p>
 <!-- snippet: quick-start -->
@@ -91,12 +91,12 @@ await pipeline.ExecuteAsync(static async token =&gt; { /* Your custom logic goes
 <!-- endSnippet -->
 <div class="NOTE">
 <h5>Note</h5>
-<p>Asynchronous methods in the Polly API return <code>ValueTask</code> or <code>ValueTask&lt;T&gt;</code> instead of <code>Task</code> or <code>Task&lt;T&gt;</code>.
-If you are using Polly in Visual Basic or F#, please read <a href="advanced/use-with-fsharp-and-visual-basic.html">Use with F# and Visual Basic</a> for more information.</p>
+<p>Asynchronous methods in the Fences API return <code>ValueTask</code> or <code>ValueTask&lt;T&gt;</code> instead of <code>Task</code> or <code>Task&lt;T&gt;</code>.
+If you are using Fences in Visual Basic or F#, please read <a href="advanced/use-with-fsharp-and-visual-basic.html">Use with F# and Visual Basic</a> for more information.</p>
 </div>
 <h2 id="dependency-injection">Dependency injection</h2>
-<p>If you prefer to define resilience pipelines using <a href="https://learn.microsoft.com/dotnet/api/microsoft.extensions.dependencyinjection.iservicecollection"><code>IServiceCollection</code></a>, you'll need to install the <a href="https://www.nuget.org/packages/Polly.Extensions/">Polly.Extensions</a> package:</p>
-<pre><code class="lang-sh">dotnet add package Polly.Extensions
+<p>If you prefer to define resilience pipelines using <a href="https://learn.microsoft.com/dotnet/api/microsoft.extensions.dependencyinjection.iservicecollection"><code>IServiceCollection</code></a>, you'll need to install the <a href="https://www.nuget.org/packages/Paramore.Fences.Extensions/">Paramore.Fences.Extensions</a> package:</p>
+<pre><code class="lang-sh">dotnet add package Paramore.Fences.Extensions --prerelease
 </code></pre>
 <p>then you can define your resilience pipeline using the <code>AddResiliencePipeline(...)</code> extension method as shown:</p>
 <!-- snippet: quick-start-di -->
@@ -137,7 +137,7 @@ await pipeline.ExecuteAsync(static async token =&gt;
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/App-vNext/Polly/blob/main/docs/getting-started.md/#L1" class="edit-link">Edit this page</a>
+          <a href="https://github.com/BrighterCommand/Fences/blob/main/docs/getting-started.md/#L1" class="edit-link">Edit this page</a>
         </div>
 
         <div class="next-article d-print-none border-top" id="nextArticle"></div>

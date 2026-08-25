@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+      <title>Fork Polly as Fences | Fences </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Fork Polly as Fences | Fences ">
+      
+      
+      <link rel="icon" href="../icon.png">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="../toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/BrighterCommand/Fences/blob/main/docs/adr/0002-fork-polly-as-fences.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../icon.png" alt="Fences">
+            Fences
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+
+      <div class="content">
+        <div class="actionbar">
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="2-fork-polly-as-fences">2. Fork Polly as Fences</h1>
+
+<p>Date: 2026-08-22</p>
+<h2 id="status">Status</h2>
+<p>Accepted</p>
+<h2 id="context">Context</h2>
+<p>Brighter uses Polly for resilience. Polly, maintained by App vNext, adopted the Open Source
+Maintainers Fee (OSMF). Under that model a commercial consumer of the binaries may owe a fee.</p>
+<p>Brighter's users do not choose Polly — they acquire it transitively, because Brighter references
+it. That is the problem. A dependency our users cannot see and did not select should not be able
+to create a payment obligation for them. Whether or not any particular user would in fact be
+billed, we cannot make the guarantee on their behalf, and a transitive dependency that carries
+an unquantified commercial obligation is not one we can responsibly ship.</p>
+<p>The code is BSD 3-Clause licensed. The licence permits redistribution, with or without
+modification, provided the copyright notice and disclaimer are retained. Building and publishing
+our own binaries from that source is squarely within the grant. The OSMF applies to the
+maintainers' own distribution, not to the licence terms of the source.</p>
+<p>Options considered:</p>
+<ol>
+<li><strong>Drop the resilience dependency.</strong> Brighter would have to grow its own retry, circuit breaker
+and timeout implementations. Large, and a strictly worse outcome for users than a proven
+library.</li>
+<li><strong>Vendor Polly's source into Brighter as internal types.</strong> Removes the package dependency, but
+loses the ability for a user to configure resilience with types they can name, and makes every
+upstream fix a manual port with no shared benefit.</li>
+<li><strong>Republish Polly's binaries unchanged under a new package ID.</strong> Removes the fee exposure but
+keeps <code>Polly.*</code> namespaces. Any application referencing both <code>Polly</code> and our package gets the
+same fully-qualified type from two assemblies — an unresolvable ambiguity, and precisely the
+position a user mid-migration is in.</li>
+<li><strong>Fork and fully rebrand.</strong> Chosen.</li>
+</ol>
+<p>A separate negotiation with the Polly maintainers may yet make the fork unnecessary. The work
+proceeds so that the option exists; publishing to NuGet is deliberately held until that
+conversation resolves.</p>
+<h2 id="decision">Decision</h2>
+<p>We fork <code>App-vNext/Polly</code> at commit <code>47e3b412e8c3b7e6db1629acd98f3e3b6b529d6c</code> (Polly 8.7.0,
+17 August 2026) as <strong>Fences</strong>, a BrighterCommand project, and rebrand it fully.</p>
+<p>The decisions that follow from that:</p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Decision</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>D1</td>
+<td>Full rename: <code>Polly.*</code> → <code>Paramore.Fences.*</code> across namespaces, assemblies, package IDs, project and folder names, and the solution file. Type-forwarding is not available — <code>[TypeForwardedTo]</code> requires the same fully-qualified name and so cannot bridge a namespace change.</td>
+</tr>
+<tr>
+<td>D2</td>
+<td>Package ID = assembly name = root namespace = <code>Paramore.Fences.*</code>, the convention <code>Paramore.Brighter.*</code> and <code>Paramore.Darker.*</code> already follow. <code>Fences.slnx</code> and <code>Fences.snk</code> stay unprefixed: they name the repository, not a package.</td>
+</tr>
+<tr>
+<td>D3</td>
+<td>Versioning starts at <code>9.0.0</code>. It continues the lineage — <code>Fences 9.x</code> reads as &quot;Polly 8.7 plus our changes&quot; — and a major bump is the honest signal for a breaking namespace change. Inherited tags are kept as provenance.</td>
+</tr>
+<tr>
+<td>D4</td>
+<td>Telemetry is renamed: <code>Meter</code>/<code>ActivitySource</code> <code>Polly</code> → <code>Paramore.Fences</code>; metrics <code>resilience.polly.*</code> → <code>resilience.fences.*</code>. Keeping <code>Polly</code> would make a process using both libraries emit indistinguishable metrics from two sources. This is the one change a consumer cannot fix by find/replace on their own source, and it is called out prominently in the migration guide.</td>
+</tr>
+<tr>
+<td>D5</td>
+<td>Strong naming is kept, with a brand-new <code>Fences.snk</code>. Not Brighter's key: a rotation on one product should not churn the others. <code>Polly.snk</code> is deleted, never reused.</td>
+</tr>
+<tr>
+<td>D6</td>
+<td>Authenticode signing is dropped, matching Brighter and Darker, neither of which signs. SBOM generation and build-provenance attestation are kept. Packages that were Authenticode signed under Polly will not be under Fences; the README says so rather than letting migrators discover it.</td>
+</tr>
+<tr>
+<td>D7</td>
+<td>Contributions are gated by Brighter's CLA — which is a <strong>licence grant, not an assignment</strong>: the contributor retains copyright and grants an irrevocable licence — plus the Contributor Covenant code of conduct. Not the .NET Foundation CLA.</td>
+</tr>
+<tr>
+<td>D8</td>
+<td>Documentation is docfx published to GitHub Pages at <code>https://brightercommand.github.io/Fences/</code>. This diverges from Brighter and Darker, which use GitBook, because GitBook cannot generate API reference from source and Fences inherits a working docfx pipeline that can.</td>
+</tr>
+<tr>
+<td>D9</td>
+<td>We lead with the lineage — &quot;Fences is a community fork of Polly&quot; — as nominative use, inside the guardrails below.</td>
+</tr>
+<tr>
+<td>D10</td>
+<td>The icon is a fence palisade in Brighter's palette, so Fences reads as part of the family. No Polly imagery is retained.</td>
+</tr>
+<tr>
+<td>D11</td>
+<td>Ownership is the same four maintainers as Brighter; security reports go to GitHub Security Advisories on <code>BrighterCommand/Fences</code>.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="the-attribution-boundary">The attribution boundary</h3>
+<p>BSD 3-Clause clause 3 forbids using the copyright holder's or contributors' names <em>to endorse or
+promote</em> derived products. Clauses 1 and 2 <strong>require</strong> retaining the copyright notice. Naming
+what you forked is a factual statement, not an endorsement — but only if executed as nominative
+use. The guardrails:</p>
+<ul>
+<li><strong>G1</strong> — wording stays descriptive: &quot;Fences is a community fork of Polly&quot;. Never
+&quot;Polly-approved&quot;, &quot;the official successor to Polly&quot;, &quot;Polly by BrighterCommand&quot;, or &quot;the new
+Polly&quot;.</li>
+<li><strong>G2</strong> — <code>Authors</code> and <code>Company</code> are Brighter Command only, never App vNext or Michael
+Wolfenden. Those fields assert authorship of <em>this</em> package.</li>
+<li><strong>G3</strong> — every prominent lineage mention sits next to a non-affiliation line. This is what
+converts an assertive claim into a safe one; it is not dropped from the package description to
+save characters.</li>
+<li><strong>G4</strong> — no Polly logo, wordmark, colours or visual identity anywhere. Trade dress is separate
+from the copyright licence.</li>
+<li><strong>G5</strong> — <code>Polly</code> and <code>Simmy</code> stay out of <code>PackageTags</code>. A bare keyword carries no descriptive
+context, and nuget.org indexes the description anyway.</li>
+<li><strong>G6</strong> — no domains, social handles or repository names containing &quot;Polly&quot;. Naming <em>inside</em>
+your product is nominative use; naming your <em>channel</em> after theirs is not.</li>
+</ul>
+<p><code>LICENSE</code> keeps <code>Copyright (c) 2015-2025, App vNext</code> verbatim, with our own line added alongside
+for new work. <code>NOTICE.md</code> records the provenance and the non-affiliation. <code>ACKNOWLEDGEMENTS.md</code>
+credits App vNext, Michael Wolfenden and the Polly contributor community.</p>
+<h2 id="consequences">Consequences</h2>
+<p><strong>For consumers.</strong> Migration is <code>using Polly;</code> → <code>using Paramore.Fences;</code>. No public <em>type</em> name
+contains &quot;Polly&quot; — the surface is <code>ResiliencePipeline</code>, <code>RetryStrategyOptions</code>,
+<code>ResilienceContext</code> — so the rename touches namespaces only, and a consumer's change is a
+find/replace on <code>using</code> directives. The exceptions a find/replace will not catch: telemetry
+names (D4), the absence of Authenticode signatures (D6), and dashboards or OTel collector filters
+keyed on <code>resilience.polly.*</code>.</p>
+<p><strong>For history.</strong> <code>CHANGELOG.md</code> keeps Polly's entries in full, headed by a note that 8.7.0 and
+below are Polly's releases, not ours. The rename lands as one scripted, reviewable commit whose
+SHA goes into <code>.git-blame-ignore-revs</code>, so <code>git blame</code> still reaches the real author of each
+line.</p>
+<p><strong>For us.</strong> We take on maintenance of a substantial codebase and lose automatic upstream fixes;
+merging them becomes a manual, per-fix decision. We also take on the obligation to be a good
+downstream: to be accurate about what Fences is, to send fixes upstream where that is welcome,
+and to say plainly that Polly is actively maintained and remains the right choice for many users.
+Fences is a divergence, not a criticism.</p>
+<p><strong>A limit on what the fork achieves.</strong> <code>Microsoft.Extensions.Http.Resilience</code> — Microsoft's
+official HttpClient resilience package, and a common dependency in ASP.NET Core applications — has
+a hard NuGet dependency on <code>Polly.Extensions</code> and <code>Polly.RateLimiting</code> via
+<code>Microsoft.Extensions.Resilience</code>. Its <code>AddResilienceHandler</code> callback receives a
+<code>Polly.ResiliencePipelineBuilder&lt;HttpResponseMessage&gt;</code>, which no Fences strategy can attach to.</p>
+<p>Fences therefore removes <em>Brighter's</em> Polly dependency, but it cannot remove Polly from an
+application that calls <code>AddStandardResilienceHandler</code>. Those users keep Polly binaries in their
+graph regardless of what Brighter does, and whatever OSMF exposure follows from that is unchanged
+by this fork. This does not undermine the decision — Brighter's own transitive imposition on its
+users is the thing we control and the thing we remove — but it does bound the claim, and the
+migration guide must say so plainly rather than implying the fork makes an application
+Polly-free. The two libraries coexist safely; that is the point of the full rename (R5).</p>
+<p>Closing that gap would mean shipping our own <code>AddResilienceHandler</code> equivalent, a
+<code>Paramore.Fences.Http</code> package. That is a candidate for future work, not part of the fork.</p>
+<p><strong>Held.</strong> Nothing is published to nuget.org pending the negotiation with the Polly maintainers.
+Package IDs cannot be deleted once published, only unlisted.</p>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/BrighterCommand/Fences/blob/main/docs/adr/0002-fork-polly-as-fences.md/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

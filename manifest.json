@@ -1,5 +1,5 @@
 {
-  "source_base_path": "/home/runner/work/Polly/Polly/docs",
+  "source_base_path": "/home/runner/work/Fences/Fences/docs",
   "xrefmap": "xrefmap.yml",
   "files": [
     {
@@ -9,6 +9,36 @@
           "relative_path": "index.json"
         }
       }
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "adr/0001-record-architecture-decisions.md",
+      "output": {
+        ".html": {
+          "relative_path": "adr/0001-record-architecture-decisions.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "adr/0002-fork-polly-as-fences.md",
+      "output": {
+        ".html": {
+          "relative_path": "adr/0002-fork-polly-as-fences.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "adr/index.md",
+      "output": {
+        ".html": {
+          "relative_path": "adr/index.html"
+        }
+      },
+      "version": ""
     },
     {
       "type": "Conceptual",
@@ -85,1766 +115,1766 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Polly.CircuitBreaker.BreakDurationGeneratorArguments.yml",
+      "source_relative_path": "api/Paramore.Fences.CircuitBreaker.BreakDurationGeneratorArguments.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Polly.CircuitBreaker.BreakDurationGeneratorArguments.html"
+          "relative_path": "api/Paramore.Fences.CircuitBreaker.BreakDurationGeneratorArguments.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Polly.CircuitBreaker.BreakDurationGeneratorArguments",
-      "Summary": "<p sourcefile=\"api/Polly.CircuitBreaker.BreakDurationGeneratorArguments.yml\" sourcestartlinenumber=\"1\">Represents arguments used to generate a dynamic break duration for a circuit breaker.</p>\n"
+      "Title": "Paramore.Fences.CircuitBreaker.BreakDurationGeneratorArguments",
+      "Summary": "<p sourcefile=\"api/Paramore.Fences.CircuitBreaker.BreakDurationGeneratorArguments.yml\" sourcestartlinenumber=\"1\">Represents arguments used to generate a dynamic break duration for a circuit breaker.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Polly.CircuitBreaker.BrokenCircuitException.yml",
+      "source_relative_path": "api/Paramore.Fences.CircuitBreaker.BrokenCircuitException.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Polly.CircuitBreaker.BrokenCircuitException.html"
+          "relative_path": "api/Paramore.Fences.CircuitBreaker.BrokenCircuitException.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Polly.CircuitBreaker.BrokenCircuitException",
-      "Summary": "<p sourcefile=\"api/Polly.CircuitBreaker.BrokenCircuitException.yml\" sourcestartlinenumber=\"1\">Exception thrown when a circuit is broken.</p>\n"
+      "Title": "Paramore.Fences.CircuitBreaker.BrokenCircuitException",
+      "Summary": "<p sourcefile=\"api/Paramore.Fences.CircuitBreaker.BrokenCircuitException.yml\" sourcestartlinenumber=\"1\">Exception thrown when a circuit is broken.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Polly.CircuitBreaker.CircuitBreakerManualControl.yml",
+      "source_relative_path": "api/Paramore.Fences.CircuitBreaker.CircuitBreakerManualControl.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Polly.CircuitBreaker.CircuitBreakerManualControl.html"
+          "relative_path": "api/Paramore.Fences.CircuitBreaker.CircuitBreakerManualControl.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Polly.CircuitBreaker.CircuitBreakerManualControl",
-      "Summary": "<p sourcefile=\"api/Polly.CircuitBreaker.CircuitBreakerManualControl.yml\" sourcestartlinenumber=\"1\">Allows manual control of the circuit-breaker.</p>\n"
+      "Title": "Paramore.Fences.CircuitBreaker.CircuitBreakerManualControl",
+      "Summary": "<p sourcefile=\"api/Paramore.Fences.CircuitBreaker.CircuitBreakerManualControl.yml\" sourcestartlinenumber=\"1\">Allows manual control of the circuit-breaker.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Polly.CircuitBreaker.CircuitBreakerPredicateArguments-1.yml",
+      "source_relative_path": "api/Paramore.Fences.CircuitBreaker.CircuitBreakerPredicateArguments-1.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Polly.CircuitBreaker.CircuitBreakerPredicateArguments-1.html"
+          "relative_path": "api/Paramore.Fences.CircuitBreaker.CircuitBreakerPredicateArguments-1.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Polly.CircuitBreaker.CircuitBreakerPredicateArguments<TResult>",
-      "Summary": "<p sourcefile=\"api/Polly.CircuitBreaker.CircuitBreakerPredicateArguments-1.yml\" sourcestartlinenumber=\"1\">Arguments used by <xref href=\"Polly.CircuitBreaker.CircuitBreakerStrategyOptions%601.ShouldHandle\" data-throw-if-not-resolved=\"false\"></xref> predicate.</p>\n"
+      "Title": "Paramore.Fences.CircuitBreaker.CircuitBreakerPredicateArguments<TResult>",
+      "Summary": "<p sourcefile=\"api/Paramore.Fences.CircuitBreaker.CircuitBreakerPredicateArguments-1.yml\" sourcestartlinenumber=\"1\">Arguments used by <xref href=\"Paramore.Fences.CircuitBreaker.CircuitBreakerStrategyOptions%601.ShouldHandle\" data-throw-if-not-resolved=\"false\"></xref> predicate.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Polly.CircuitBreaker.CircuitBreakerStateProvider.yml",
+      "source_relative_path": "api/Paramore.Fences.CircuitBreaker.CircuitBreakerStateProvider.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Polly.CircuitBreaker.CircuitBreakerStateProvider.html"
+          "relative_path": "api/Paramore.Fences.CircuitBreaker.CircuitBreakerStateProvider.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Polly.CircuitBreaker.CircuitBreakerStateProvider",
-      "Summary": "<p sourcefile=\"api/Polly.CircuitBreaker.CircuitBreakerStateProvider.yml\" sourcestartlinenumber=\"1\">Allows retrieval of the circuit breaker state.</p>\n"
+      "Title": "Paramore.Fences.CircuitBreaker.CircuitBreakerStateProvider",
+      "Summary": "<p sourcefile=\"api/Paramore.Fences.CircuitBreaker.CircuitBreakerStateProvider.yml\" sourcestartlinenumber=\"1\">Allows retrieval of the circuit breaker state.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Polly.CircuitBreaker.CircuitBreakerStrategyOptions-1.yml",
+      "source_relative_path": "api/Paramore.Fences.CircuitBreaker.CircuitBreakerStrategyOptions-1.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Polly.CircuitBreaker.CircuitBreakerStrategyOptions-1.html"
+          "relative_path": "api/Paramore.Fences.CircuitBreaker.CircuitBreakerStrategyOptions-1.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Polly.CircuitBreaker.CircuitBreakerStrategyOptions<TResult>",
-      "Summary": "<p sourcefile=\"api/Polly.CircuitBreaker.CircuitBreakerStrategyOptions-1.yml\" sourcestartlinenumber=\"1\">The options for circuit breaker resilience strategy.</p>\n"
+      "Title": "Paramore.Fences.CircuitBreaker.CircuitBreakerStrategyOptions<TResult>",
+      "Summary": "<p sourcefile=\"api/Paramore.Fences.CircuitBreaker.CircuitBreakerStrategyOptions-1.yml\" sourcestartlinenumber=\"1\">The options for circuit breaker resilience strategy.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Polly.CircuitBreaker.CircuitBreakerStrategyOptions.yml",
+      "source_relative_path": "api/Paramore.Fences.CircuitBreaker.CircuitBreakerStrategyOptions.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Polly.CircuitBreaker.CircuitBreakerStrategyOptions.html"
+          "relative_path": "api/Paramore.Fences.CircuitBreaker.CircuitBreakerStrategyOptions.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Polly.CircuitBreaker.CircuitBreakerStrategyOptions",
-      "Summary": "<p sourcefile=\"api/Polly.CircuitBreaker.CircuitBreakerStrategyOptions.yml\" sourcestartlinenumber=\"1\">The options for circuit breaker resilience strategy.</p>\n"
+      "Title": "Paramore.Fences.CircuitBreaker.CircuitBreakerStrategyOptions",
+      "Summary": "<p sourcefile=\"api/Paramore.Fences.CircuitBreaker.CircuitBreakerStrategyOptions.yml\" sourcestartlinenumber=\"1\">The options for circuit breaker resilience strategy.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Polly.CircuitBreaker.CircuitState.yml",
+      "source_relative_path": "api/Paramore.Fences.CircuitBreaker.CircuitState.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Polly.CircuitBreaker.CircuitState.html"
+          "relative_path": "api/Paramore.Fences.CircuitBreaker.CircuitState.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Polly.CircuitBreaker.CircuitState",
-      "Summary": "<p sourcefile=\"api/Polly.CircuitBreaker.CircuitState.yml\" sourcestartlinenumber=\"1\">Describes the possible states the circuit of a Circuit Breaker may be in.</p>\n"
+      "Title": "Paramore.Fences.CircuitBreaker.CircuitState",
+      "Summary": "<p sourcefile=\"api/Paramore.Fences.CircuitBreaker.CircuitState.yml\" sourcestartlinenumber=\"1\">Describes the possible states the circuit of a Circuit Breaker may be in.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Polly.CircuitBreaker.IsolatedCircuitException.yml",
+      "source_relative_path": "api/Paramore.Fences.CircuitBreaker.IsolatedCircuitException.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Polly.CircuitBreaker.IsolatedCircuitException.html"
+          "relative_path": "api/Paramore.Fences.CircuitBreaker.IsolatedCircuitException.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Polly.CircuitBreaker.IsolatedCircuitException",
-      "Summary": "<p sourcefile=\"api/Polly.CircuitBreaker.IsolatedCircuitException.yml\" sourcestartlinenumber=\"1\">Exception thrown when a circuit is isolated (held open) by manual override.</p>\n"
+      "Title": "Paramore.Fences.CircuitBreaker.IsolatedCircuitException",
+      "Summary": "<p sourcefile=\"api/Paramore.Fences.CircuitBreaker.IsolatedCircuitException.yml\" sourcestartlinenumber=\"1\">Exception thrown when a circuit is isolated (held open) by manual override.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Polly.CircuitBreaker.OnCircuitClosedArguments-1.yml",
+      "source_relative_path": "api/Paramore.Fences.CircuitBreaker.OnCircuitClosedArguments-1.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Polly.CircuitBreaker.OnCircuitClosedArguments-1.html"
+          "relative_path": "api/Paramore.Fences.CircuitBreaker.OnCircuitClosedArguments-1.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Polly.CircuitBreaker.OnCircuitClosedArguments<TResult>",
-      "Summary": "<p sourcefile=\"api/Polly.CircuitBreaker.OnCircuitClosedArguments-1.yml\" sourcestartlinenumber=\"1\">Arguments used by <xref href=\"Polly.CircuitBreaker.CircuitBreakerStrategyOptions%601.OnClosed\" data-throw-if-not-resolved=\"false\"></xref> event.</p>\n"
+      "Title": "Paramore.Fences.CircuitBreaker.OnCircuitClosedArguments<TResult>",
+      "Summary": "<p sourcefile=\"api/Paramore.Fences.CircuitBreaker.OnCircuitClosedArguments-1.yml\" sourcestartlinenumber=\"1\">Arguments used by <xref href=\"Paramore.Fences.CircuitBreaker.CircuitBreakerStrategyOptions%601.OnClosed\" data-throw-if-not-resolved=\"false\"></xref> event.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Polly.CircuitBreaker.OnCircuitHalfOpenedArguments.yml",
+      "source_relative_path": "api/Paramore.Fences.CircuitBreaker.OnCircuitHalfOpenedArguments.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Polly.CircuitBreaker.OnCircuitHalfOpenedArguments.html"
+          "relative_path": "api/Paramore.Fences.CircuitBreaker.OnCircuitHalfOpenedArguments.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Polly.CircuitBreaker.OnCircuitHalfOpenedArguments",
-      "Summary": "<p sourcefile=\"api/Polly.CircuitBreaker.OnCircuitHalfOpenedArguments.yml\" sourcestartlinenumber=\"1\">Arguments used by <xref href=\"Polly.CircuitBreaker.CircuitBreakerStrategyOptions%601.OnHalfOpened\" data-throw-if-not-resolved=\"false\"></xref> event.</p>\n"
+      "Title": "Paramore.Fences.CircuitBreaker.OnCircuitHalfOpenedArguments",
+      "Summary": "<p sourcefile=\"api/Paramore.Fences.CircuitBreaker.OnCircuitHalfOpenedArguments.yml\" sourcestartlinenumber=\"1\">Arguments used by <xref href=\"Paramore.Fences.CircuitBreaker.CircuitBreakerStrategyOptions%601.OnHalfOpened\" data-throw-if-not-resolved=\"false\"></xref> event.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Polly.CircuitBreaker.OnCircuitOpenedArguments-1.yml",
+      "source_relative_path": "api/Paramore.Fences.CircuitBreaker.OnCircuitOpenedArguments-1.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Polly.CircuitBreaker.OnCircuitOpenedArguments-1.html"
+          "relative_path": "api/Paramore.Fences.CircuitBreaker.OnCircuitOpenedArguments-1.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Polly.CircuitBreaker.OnCircuitOpenedArguments<TResult>",
-      "Summary": "<p sourcefile=\"api/Polly.CircuitBreaker.OnCircuitOpenedArguments-1.yml\" sourcestartlinenumber=\"1\">Arguments used by <xref href=\"Polly.CircuitBreaker.CircuitBreakerStrategyOptions%601.OnOpened\" data-throw-if-not-resolved=\"false\"></xref> event.</p>\n"
+      "Title": "Paramore.Fences.CircuitBreaker.OnCircuitOpenedArguments<TResult>",
+      "Summary": "<p sourcefile=\"api/Paramore.Fences.CircuitBreaker.OnCircuitOpenedArguments-1.yml\" sourcestartlinenumber=\"1\">Arguments used by <xref href=\"Paramore.Fences.CircuitBreaker.CircuitBreakerStrategyOptions%601.OnOpened\" data-throw-if-not-resolved=\"false\"></xref> event.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Polly.CircuitBreaker.yml",
+      "source_relative_path": "api/Paramore.Fences.CircuitBreaker.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Polly.CircuitBreaker.html"
+          "relative_path": "api/Paramore.Fences.CircuitBreaker.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Polly.CircuitBreaker",
+      "Title": "Paramore.Fences.CircuitBreaker",
       "Summary": null
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Polly.CircuitBreakerResiliencePipelineBuilderExtensions.yml",
+      "source_relative_path": "api/Paramore.Fences.CircuitBreakerResiliencePipelineBuilderExtensions.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Polly.CircuitBreakerResiliencePipelineBuilderExtensions.html"
+          "relative_path": "api/Paramore.Fences.CircuitBreakerResiliencePipelineBuilderExtensions.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Polly.CircuitBreakerResiliencePipelineBuilderExtensions",
-      "Summary": "<p sourcefile=\"api/Polly.CircuitBreakerResiliencePipelineBuilderExtensions.yml\" sourcestartlinenumber=\"1\">Circuit breaker extensions for <xref href=\"Polly.ResiliencePipelineBuilder\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+      "Title": "Paramore.Fences.CircuitBreakerResiliencePipelineBuilderExtensions",
+      "Summary": "<p sourcefile=\"api/Paramore.Fences.CircuitBreakerResiliencePipelineBuilderExtensions.yml\" sourcestartlinenumber=\"1\">Circuit breaker extensions for <xref href=\"Paramore.Fences.ResiliencePipelineBuilder\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Polly.DelayBackoffType.yml",
+      "source_relative_path": "api/Paramore.Fences.DelayBackoffType.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Polly.DelayBackoffType.html"
+          "relative_path": "api/Paramore.Fences.DelayBackoffType.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Polly.DelayBackoffType",
-      "Summary": "<p sourcefile=\"api/Polly.DelayBackoffType.yml\" sourcestartlinenumber=\"1\">The backoff type used by the strategies.</p>\n"
+      "Title": "Paramore.Fences.DelayBackoffType",
+      "Summary": "<p sourcefile=\"api/Paramore.Fences.DelayBackoffType.yml\" sourcestartlinenumber=\"1\">The backoff type used by the strategies.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Polly.DependencyInjection.AddResiliencePipelineContext-1.yml",
+      "source_relative_path": "api/Paramore.Fences.DependencyInjection.AddResiliencePipelineContext-1.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Polly.DependencyInjection.AddResiliencePipelineContext-1.html"
+          "relative_path": "api/Paramore.Fences.DependencyInjection.AddResiliencePipelineContext-1.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Polly.DependencyInjection.AddResiliencePipelineContext<TKey>",
-      "Summary": "<p sourcefile=\"api/Polly.DependencyInjection.AddResiliencePipelineContext-1.yml\" sourcestartlinenumber=\"1\">Represents the context for adding a resilience pipeline with the specified key.</p>\n"
+      "Title": "Paramore.Fences.DependencyInjection.AddResiliencePipelineContext<TKey>",
+      "Summary": "<p sourcefile=\"api/Paramore.Fences.DependencyInjection.AddResiliencePipelineContext-1.yml\" sourcestartlinenumber=\"1\">Represents the context for adding a resilience pipeline with the specified key.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Polly.DependencyInjection.AddResiliencePipelinesContext-1.yml",
+      "source_relative_path": "api/Paramore.Fences.DependencyInjection.AddResiliencePipelinesContext-1.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Polly.DependencyInjection.AddResiliencePipelinesContext-1.html"
+          "relative_path": "api/Paramore.Fences.DependencyInjection.AddResiliencePipelinesContext-1.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Polly.DependencyInjection.AddResiliencePipelinesContext<TKey>",
-      "Summary": "<p sourcefile=\"api/Polly.DependencyInjection.AddResiliencePipelinesContext-1.yml\" sourcestartlinenumber=\"1\">Represents the context for configuring resilience pipelines with the specified key.</p>\n"
+      "Title": "Paramore.Fences.DependencyInjection.AddResiliencePipelinesContext<TKey>",
+      "Summary": "<p sourcefile=\"api/Paramore.Fences.DependencyInjection.AddResiliencePipelinesContext-1.yml\" sourcestartlinenumber=\"1\">Represents the context for configuring resilience pipelines with the specified key.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Polly.DependencyInjection.yml",
+      "source_relative_path": "api/Paramore.Fences.DependencyInjection.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Polly.DependencyInjection.html"
+          "relative_path": "api/Paramore.Fences.DependencyInjection.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Polly.DependencyInjection",
+      "Title": "Paramore.Fences.DependencyInjection",
       "Summary": null
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Polly.ExecutionRejectedException.yml",
+      "source_relative_path": "api/Paramore.Fences.ExecutionRejectedException.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Polly.ExecutionRejectedException.html"
+          "relative_path": "api/Paramore.Fences.ExecutionRejectedException.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Polly.ExecutionRejectedException",
-      "Summary": "<p sourcefile=\"api/Polly.ExecutionRejectedException.yml\" sourcestartlinenumber=\"1\">Exception thrown when a policy rejects execution of a delegate.\n<remarks>More specific exceptions which derive from this type, are generally thrown.</remarks></p>\n"
+      "Title": "Paramore.Fences.ExecutionRejectedException",
+      "Summary": "<p sourcefile=\"api/Paramore.Fences.ExecutionRejectedException.yml\" sourcestartlinenumber=\"1\">Exception thrown when a policy rejects execution of a delegate.\n<remarks>More specific exceptions which derive from this type, are generally thrown.</remarks></p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Polly.Fallback.FallbackActionArguments-1.yml",
+      "source_relative_path": "api/Paramore.Fences.Fallback.FallbackActionArguments-1.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Polly.Fallback.FallbackActionArguments-1.html"
+          "relative_path": "api/Paramore.Fences.Fallback.FallbackActionArguments-1.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Polly.Fallback.FallbackActionArguments<TResult>",
-      "Summary": "<p sourcefile=\"api/Polly.Fallback.FallbackActionArguments-1.yml\" sourcestartlinenumber=\"1\">Arguments used by <xref href=\"Polly.Fallback.FallbackStrategyOptions%601.FallbackAction\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+      "Title": "Paramore.Fences.Fallback.FallbackActionArguments<TResult>",
+      "Summary": "<p sourcefile=\"api/Paramore.Fences.Fallback.FallbackActionArguments-1.yml\" sourcestartlinenumber=\"1\">Arguments used by <xref href=\"Paramore.Fences.Fallback.FallbackStrategyOptions%601.FallbackAction\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Polly.Fallback.FallbackPredicateArguments-1.yml",
+      "source_relative_path": "api/Paramore.Fences.Fallback.FallbackPredicateArguments-1.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Polly.Fallback.FallbackPredicateArguments-1.html"
+          "relative_path": "api/Paramore.Fences.Fallback.FallbackPredicateArguments-1.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Polly.Fallback.FallbackPredicateArguments<TResult>",
-      "Summary": "<p sourcefile=\"api/Polly.Fallback.FallbackPredicateArguments-1.yml\" sourcestartlinenumber=\"1\">Represents arguments used in fallback handling scenarios.</p>\n"
+      "Title": "Paramore.Fences.Fallback.FallbackPredicateArguments<TResult>",
+      "Summary": "<p sourcefile=\"api/Paramore.Fences.Fallback.FallbackPredicateArguments-1.yml\" sourcestartlinenumber=\"1\">Represents arguments used in fallback handling scenarios.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Polly.Fallback.FallbackStrategyOptions-1.yml",
+      "source_relative_path": "api/Paramore.Fences.Fallback.FallbackStrategyOptions-1.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Polly.Fallback.FallbackStrategyOptions-1.html"
+          "relative_path": "api/Paramore.Fences.Fallback.FallbackStrategyOptions-1.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Polly.Fallback.FallbackStrategyOptions<TResult>",
-      "Summary": "<p sourcefile=\"api/Polly.Fallback.FallbackStrategyOptions-1.yml\" sourcestartlinenumber=\"1\">Represents the options for configuring a fallback resilience strategy with a specific result type.</p>\n"
+      "Title": "Paramore.Fences.Fallback.FallbackStrategyOptions<TResult>",
+      "Summary": "<p sourcefile=\"api/Paramore.Fences.Fallback.FallbackStrategyOptions-1.yml\" sourcestartlinenumber=\"1\">Represents the options for configuring a fallback resilience strategy with a specific result type.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Polly.Fallback.OnFallbackArguments-1.yml",
+      "source_relative_path": "api/Paramore.Fences.Fallback.OnFallbackArguments-1.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Polly.Fallback.OnFallbackArguments-1.html"
+          "relative_path": "api/Paramore.Fences.Fallback.OnFallbackArguments-1.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Polly.Fallback.OnFallbackArguments<TResult>",
-      "Summary": "<p sourcefile=\"api/Polly.Fallback.OnFallbackArguments-1.yml\" sourcestartlinenumber=\"1\">Represents arguments used in fallback handling scenarios.</p>\n"
+      "Title": "Paramore.Fences.Fallback.OnFallbackArguments<TResult>",
+      "Summary": "<p sourcefile=\"api/Paramore.Fences.Fallback.OnFallbackArguments-1.yml\" sourcestartlinenumber=\"1\">Represents arguments used in fallback handling scenarios.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Polly.Fallback.yml",
+      "source_relative_path": "api/Paramore.Fences.Fallback.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Polly.Fallback.html"
+          "relative_path": "api/Paramore.Fences.Fallback.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Polly.Fallback",
+      "Title": "Paramore.Fences.Fallback",
       "Summary": null
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Polly.FallbackResiliencePipelineBuilderExtensions.yml",
+      "source_relative_path": "api/Paramore.Fences.FallbackResiliencePipelineBuilderExtensions.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Polly.FallbackResiliencePipelineBuilderExtensions.html"
+          "relative_path": "api/Paramore.Fences.FallbackResiliencePipelineBuilderExtensions.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Polly.FallbackResiliencePipelineBuilderExtensions",
-      "Summary": "<p sourcefile=\"api/Polly.FallbackResiliencePipelineBuilderExtensions.yml\" sourcestartlinenumber=\"1\">Extensions for adding fallback to <xref href=\"Polly.ResiliencePipelineBuilder\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+      "Title": "Paramore.Fences.FallbackResiliencePipelineBuilderExtensions",
+      "Summary": "<p sourcefile=\"api/Paramore.Fences.FallbackResiliencePipelineBuilderExtensions.yml\" sourcestartlinenumber=\"1\">Extensions for adding fallback to <xref href=\"Paramore.Fences.ResiliencePipelineBuilder\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Polly.Hedging.HedgingActionGeneratorArguments-1.yml",
+      "source_relative_path": "api/Paramore.Fences.Hedging.HedgingActionGeneratorArguments-1.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Polly.Hedging.HedgingActionGeneratorArguments-1.html"
+          "relative_path": "api/Paramore.Fences.Hedging.HedgingActionGeneratorArguments-1.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Polly.Hedging.HedgingActionGeneratorArguments<TResult>",
-      "Summary": "<p sourcefile=\"api/Polly.Hedging.HedgingActionGeneratorArguments-1.yml\" sourcestartlinenumber=\"1\">Represents arguments used in the hedging resilience strategy.</p>\n"
+      "Title": "Paramore.Fences.Hedging.HedgingActionGeneratorArguments<TResult>",
+      "Summary": "<p sourcefile=\"api/Paramore.Fences.Hedging.HedgingActionGeneratorArguments-1.yml\" sourcestartlinenumber=\"1\">Represents arguments used in the hedging resilience strategy.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Polly.Hedging.HedgingDelayGeneratorArguments.yml",
+      "source_relative_path": "api/Paramore.Fences.Hedging.HedgingDelayGeneratorArguments.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Polly.Hedging.HedgingDelayGeneratorArguments.html"
+          "relative_path": "api/Paramore.Fences.Hedging.HedgingDelayGeneratorArguments.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Polly.Hedging.HedgingDelayGeneratorArguments",
-      "Summary": "<p sourcefile=\"api/Polly.Hedging.HedgingDelayGeneratorArguments.yml\" sourcestartlinenumber=\"1\">Arguments used by hedging delay generator.</p>\n"
+      "Title": "Paramore.Fences.Hedging.HedgingDelayGeneratorArguments",
+      "Summary": "<p sourcefile=\"api/Paramore.Fences.Hedging.HedgingDelayGeneratorArguments.yml\" sourcestartlinenumber=\"1\">Arguments used by hedging delay generator.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Polly.Hedging.HedgingPredicateArguments-1.yml",
+      "source_relative_path": "api/Paramore.Fences.Hedging.HedgingPredicateArguments-1.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Polly.Hedging.HedgingPredicateArguments-1.html"
+          "relative_path": "api/Paramore.Fences.Hedging.HedgingPredicateArguments-1.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Polly.Hedging.HedgingPredicateArguments<TResult>",
-      "Summary": "<p sourcefile=\"api/Polly.Hedging.HedgingPredicateArguments-1.yml\" sourcestartlinenumber=\"1\">Represents arguments used in hedging handling scenarios.</p>\n"
+      "Title": "Paramore.Fences.Hedging.HedgingPredicateArguments<TResult>",
+      "Summary": "<p sourcefile=\"api/Paramore.Fences.Hedging.HedgingPredicateArguments-1.yml\" sourcestartlinenumber=\"1\">Represents arguments used in hedging handling scenarios.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Polly.Hedging.HedgingStrategyOptions-1.yml",
+      "source_relative_path": "api/Paramore.Fences.Hedging.HedgingStrategyOptions-1.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Polly.Hedging.HedgingStrategyOptions-1.html"
+          "relative_path": "api/Paramore.Fences.Hedging.HedgingStrategyOptions-1.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Polly.Hedging.HedgingStrategyOptions<TResult>",
-      "Summary": "<p sourcefile=\"api/Polly.Hedging.HedgingStrategyOptions-1.yml\" sourcestartlinenumber=\"1\">Hedging strategy options.</p>\n"
+      "Title": "Paramore.Fences.Hedging.HedgingStrategyOptions<TResult>",
+      "Summary": "<p sourcefile=\"api/Paramore.Fences.Hedging.HedgingStrategyOptions-1.yml\" sourcestartlinenumber=\"1\">Hedging strategy options.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Polly.Hedging.OnHedgingArguments-1.yml",
+      "source_relative_path": "api/Paramore.Fences.Hedging.OnHedgingArguments-1.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Polly.Hedging.OnHedgingArguments-1.html"
+          "relative_path": "api/Paramore.Fences.Hedging.OnHedgingArguments-1.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Polly.Hedging.OnHedgingArguments<TResult>",
-      "Summary": "<p sourcefile=\"api/Polly.Hedging.OnHedgingArguments-1.yml\" sourcestartlinenumber=\"1\">Represents arguments used by the on-hedging event.</p>\n"
+      "Title": "Paramore.Fences.Hedging.OnHedgingArguments<TResult>",
+      "Summary": "<p sourcefile=\"api/Paramore.Fences.Hedging.OnHedgingArguments-1.yml\" sourcestartlinenumber=\"1\">Represents arguments used by the on-hedging event.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Polly.Hedging.yml",
+      "source_relative_path": "api/Paramore.Fences.Hedging.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Polly.Hedging.html"
+          "relative_path": "api/Paramore.Fences.Hedging.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Polly.Hedging",
+      "Title": "Paramore.Fences.Hedging",
       "Summary": null
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Polly.HedgingResiliencePipelineBuilderExtensions.yml",
+      "source_relative_path": "api/Paramore.Fences.HedgingResiliencePipelineBuilderExtensions.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Polly.HedgingResiliencePipelineBuilderExtensions.html"
+          "relative_path": "api/Paramore.Fences.HedgingResiliencePipelineBuilderExtensions.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Polly.HedgingResiliencePipelineBuilderExtensions",
-      "Summary": "<p sourcefile=\"api/Polly.HedgingResiliencePipelineBuilderExtensions.yml\" sourcestartlinenumber=\"1\">Extensions for adding hedging to <xref href=\"Polly.ResiliencePipelineBuilder\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+      "Title": "Paramore.Fences.HedgingResiliencePipelineBuilderExtensions",
+      "Summary": "<p sourcefile=\"api/Paramore.Fences.HedgingResiliencePipelineBuilderExtensions.yml\" sourcestartlinenumber=\"1\">Extensions for adding hedging to <xref href=\"Paramore.Fences.ResiliencePipelineBuilder\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Polly.Outcome-1.yml",
+      "source_relative_path": "api/Paramore.Fences.Outcome-1.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Polly.Outcome-1.html"
+          "relative_path": "api/Paramore.Fences.Outcome-1.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Polly.Outcome<TResult>",
-      "Summary": "<p sourcefile=\"api/Polly.Outcome-1.yml\" sourcestartlinenumber=\"1\">Represents the outcome of an operation which could be a result of type <code class=\"typeparamref\">TResult</code> or an exception.</p>\n"
+      "Title": "Paramore.Fences.Outcome<TResult>",
+      "Summary": "<p sourcefile=\"api/Paramore.Fences.Outcome-1.yml\" sourcestartlinenumber=\"1\">Represents the outcome of an operation which could be a result of type <code class=\"typeparamref\">TResult</code> or an exception.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Polly.Outcome.yml",
+      "source_relative_path": "api/Paramore.Fences.Outcome.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Polly.Outcome.html"
+          "relative_path": "api/Paramore.Fences.Outcome.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Polly.Outcome",
-      "Summary": "<p sourcefile=\"api/Polly.Outcome.yml\" sourcestartlinenumber=\"1\">Produces instances of <xref href=\"Polly.Outcome%601\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+      "Title": "Paramore.Fences.Outcome",
+      "Summary": "<p sourcefile=\"api/Paramore.Fences.Outcome.yml\" sourcestartlinenumber=\"1\">Produces instances of <xref href=\"Paramore.Fences.Outcome%601\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Polly.PollyServiceCollectionExtensions.yml",
+      "source_relative_path": "api/Paramore.Fences.PredicateBuilder-1.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Polly.PollyServiceCollectionExtensions.html"
+          "relative_path": "api/Paramore.Fences.PredicateBuilder-1.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Polly.PollyServiceCollectionExtensions",
-      "Summary": "<p sourcefile=\"api/Polly.PollyServiceCollectionExtensions.yml\" sourcestartlinenumber=\"1\">Provides extension methods for registering resilience pipelines using the <xref href=\"Microsoft.Extensions.DependencyInjection.IServiceCollection\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+      "Title": "Paramore.Fences.PredicateBuilder<TResult>",
+      "Summary": "<p sourcefile=\"api/Paramore.Fences.PredicateBuilder-1.yml\" sourcestartlinenumber=\"1\">Defines a builder for creating predicates for <code class=\"typeparamref\">TResult</code> and <xref href=\"System.Exception\" data-throw-if-not-resolved=\"false\"></xref> combinations.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Polly.PredicateBuilder-1.yml",
+      "source_relative_path": "api/Paramore.Fences.PredicateBuilder.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Polly.PredicateBuilder-1.html"
+          "relative_path": "api/Paramore.Fences.PredicateBuilder.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Polly.PredicateBuilder<TResult>",
-      "Summary": "<p sourcefile=\"api/Polly.PredicateBuilder-1.yml\" sourcestartlinenumber=\"1\">Defines a builder for creating predicates for <code class=\"typeparamref\">TResult</code> and <xref href=\"System.Exception\" data-throw-if-not-resolved=\"false\"></xref> combinations.</p>\n"
+      "Title": "Paramore.Fences.PredicateBuilder",
+      "Summary": "<p sourcefile=\"api/Paramore.Fences.PredicateBuilder.yml\" sourcestartlinenumber=\"1\">Defines a builder for creating exception predicates.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Polly.PredicateBuilder.yml",
+      "source_relative_path": "api/Paramore.Fences.PredicateResult.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Polly.PredicateBuilder.html"
+          "relative_path": "api/Paramore.Fences.PredicateResult.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Polly.PredicateBuilder",
-      "Summary": "<p sourcefile=\"api/Polly.PredicateBuilder.yml\" sourcestartlinenumber=\"1\">Defines a builder for creating exception predicates.</p>\n"
+      "Title": "Paramore.Fences.PredicateResult",
+      "Summary": "<p sourcefile=\"api/Paramore.Fences.PredicateResult.yml\" sourcestartlinenumber=\"1\">Class that represents the results that can be used in predicates.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Polly.PredicateResult.yml",
+      "source_relative_path": "api/Paramore.Fences.RateLimiterResiliencePipelineBuilderExtensions.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Polly.PredicateResult.html"
+          "relative_path": "api/Paramore.Fences.RateLimiterResiliencePipelineBuilderExtensions.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Polly.PredicateResult",
-      "Summary": "<p sourcefile=\"api/Polly.PredicateResult.yml\" sourcestartlinenumber=\"1\">Class that represents the results that can be used in predicates.</p>\n"
+      "Title": "Paramore.Fences.RateLimiterResiliencePipelineBuilderExtensions",
+      "Summary": "<p sourcefile=\"api/Paramore.Fences.RateLimiterResiliencePipelineBuilderExtensions.yml\" sourcestartlinenumber=\"1\">Extensions for adding rate limiting to <xref href=\"Paramore.Fences.ResiliencePipelineBuilder\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Polly.RateLimiterResiliencePipelineBuilderExtensions.yml",
+      "source_relative_path": "api/Paramore.Fences.RateLimiting.OnRateLimiterRejectedArguments.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Polly.RateLimiterResiliencePipelineBuilderExtensions.html"
+          "relative_path": "api/Paramore.Fences.RateLimiting.OnRateLimiterRejectedArguments.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Polly.RateLimiterResiliencePipelineBuilderExtensions",
-      "Summary": "<p sourcefile=\"api/Polly.RateLimiterResiliencePipelineBuilderExtensions.yml\" sourcestartlinenumber=\"1\">Extensions for adding rate limiting to <xref href=\"Polly.ResiliencePipelineBuilder\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+      "Title": "Paramore.Fences.RateLimiting.OnRateLimiterRejectedArguments",
+      "Summary": "<p sourcefile=\"api/Paramore.Fences.RateLimiting.OnRateLimiterRejectedArguments.yml\" sourcestartlinenumber=\"1\">The arguments used by the <xref href=\"Paramore.Fences.RateLimiting.RateLimiterStrategyOptions.OnRejected\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Polly.RateLimiting.OnRateLimiterRejectedArguments.yml",
+      "source_relative_path": "api/Paramore.Fences.RateLimiting.RateLimiterArguments.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Polly.RateLimiting.OnRateLimiterRejectedArguments.html"
+          "relative_path": "api/Paramore.Fences.RateLimiting.RateLimiterArguments.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Polly.RateLimiting.OnRateLimiterRejectedArguments",
-      "Summary": "<p sourcefile=\"api/Polly.RateLimiting.OnRateLimiterRejectedArguments.yml\" sourcestartlinenumber=\"1\">The arguments used by the <xref href=\"Polly.RateLimiting.RateLimiterStrategyOptions.OnRejected\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+      "Title": "Paramore.Fences.RateLimiting.RateLimiterArguments",
+      "Summary": "<p sourcefile=\"api/Paramore.Fences.RateLimiting.RateLimiterArguments.yml\" sourcestartlinenumber=\"1\">The arguments used by the <xref href=\"Paramore.Fences.RateLimiting.RateLimiterStrategyOptions.RateLimiter\" data-throw-if-not-resolved=\"false\"></xref> delegate.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Polly.RateLimiting.RateLimiterArguments.yml",
+      "source_relative_path": "api/Paramore.Fences.RateLimiting.RateLimiterRejectedException.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Polly.RateLimiting.RateLimiterArguments.html"
+          "relative_path": "api/Paramore.Fences.RateLimiting.RateLimiterRejectedException.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Polly.RateLimiting.RateLimiterArguments",
-      "Summary": "<p sourcefile=\"api/Polly.RateLimiting.RateLimiterArguments.yml\" sourcestartlinenumber=\"1\">The arguments used by the <xref href=\"Polly.RateLimiting.RateLimiterStrategyOptions.RateLimiter\" data-throw-if-not-resolved=\"false\"></xref> delegate.</p>\n"
+      "Title": "Paramore.Fences.RateLimiting.RateLimiterRejectedException",
+      "Summary": "<p sourcefile=\"api/Paramore.Fences.RateLimiting.RateLimiterRejectedException.yml\" sourcestartlinenumber=\"1\">Exception thrown when a rate limiter rejects an execution.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Polly.RateLimiting.RateLimiterRejectedException.yml",
+      "source_relative_path": "api/Paramore.Fences.RateLimiting.RateLimiterStrategyOptions.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Polly.RateLimiting.RateLimiterRejectedException.html"
+          "relative_path": "api/Paramore.Fences.RateLimiting.RateLimiterStrategyOptions.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Polly.RateLimiting.RateLimiterRejectedException",
-      "Summary": "<p sourcefile=\"api/Polly.RateLimiting.RateLimiterRejectedException.yml\" sourcestartlinenumber=\"1\">Exception thrown when a rate limiter rejects an execution.</p>\n"
+      "Title": "Paramore.Fences.RateLimiting.RateLimiterStrategyOptions",
+      "Summary": "<p sourcefile=\"api/Paramore.Fences.RateLimiting.RateLimiterStrategyOptions.yml\" sourcestartlinenumber=\"1\">Options for the rate limiter strategy.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Polly.RateLimiting.RateLimiterStrategyOptions.yml",
+      "source_relative_path": "api/Paramore.Fences.RateLimiting.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Polly.RateLimiting.RateLimiterStrategyOptions.html"
+          "relative_path": "api/Paramore.Fences.RateLimiting.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Polly.RateLimiting.RateLimiterStrategyOptions",
-      "Summary": "<p sourcefile=\"api/Polly.RateLimiting.RateLimiterStrategyOptions.yml\" sourcestartlinenumber=\"1\">Options for the rate limiter strategy.</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Polly.RateLimiting.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Polly.RateLimiting.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "Polly.RateLimiting",
+      "Title": "Paramore.Fences.RateLimiting",
       "Summary": null
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Polly.Registry.ConfigureBuilderContext-1.yml",
+      "source_relative_path": "api/Paramore.Fences.Registry.ConfigureBuilderContext-1.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Polly.Registry.ConfigureBuilderContext-1.html"
+          "relative_path": "api/Paramore.Fences.Registry.ConfigureBuilderContext-1.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Polly.Registry.ConfigureBuilderContext<TKey>",
-      "Summary": "<p sourcefile=\"api/Polly.Registry.ConfigureBuilderContext-1.yml\" sourcestartlinenumber=\"1\">The context used by <xref href=\"Polly.Registry.ResiliencePipelineRegistry%601\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+      "Title": "Paramore.Fences.Registry.ConfigureBuilderContext<TKey>",
+      "Summary": "<p sourcefile=\"api/Paramore.Fences.Registry.ConfigureBuilderContext-1.yml\" sourcestartlinenumber=\"1\">The context used by <xref href=\"Paramore.Fences.Registry.ResiliencePipelineRegistry%601\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Polly.Registry.ConfigureBuilderContextExtensions.yml",
+      "source_relative_path": "api/Paramore.Fences.Registry.ConfigureBuilderContextExtensions.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Polly.Registry.ConfigureBuilderContextExtensions.html"
+          "relative_path": "api/Paramore.Fences.Registry.ConfigureBuilderContextExtensions.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Polly.Registry.ConfigureBuilderContextExtensions",
-      "Summary": "<p sourcefile=\"api/Polly.Registry.ConfigureBuilderContextExtensions.yml\" sourcestartlinenumber=\"1\">Extensions for <xref href=\"Polly.Registry.ConfigureBuilderContext%601\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+      "Title": "Paramore.Fences.Registry.ConfigureBuilderContextExtensions",
+      "Summary": "<p sourcefile=\"api/Paramore.Fences.Registry.ConfigureBuilderContextExtensions.yml\" sourcestartlinenumber=\"1\">Extensions for <xref href=\"Paramore.Fences.Registry.ConfigureBuilderContext%601\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Polly.Registry.ResiliencePipelineProvider-1.yml",
+      "source_relative_path": "api/Paramore.Fences.Registry.ResiliencePipelineProvider-1.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Polly.Registry.ResiliencePipelineProvider-1.html"
+          "relative_path": "api/Paramore.Fences.Registry.ResiliencePipelineProvider-1.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Polly.Registry.ResiliencePipelineProvider<TKey>",
-      "Summary": "<p sourcefile=\"api/Polly.Registry.ResiliencePipelineProvider-1.yml\" sourcestartlinenumber=\"1\">Represents a provider for resilience pipelines that are accessible by <code class=\"typeparamref\">TKey</code>.</p>\n"
+      "Title": "Paramore.Fences.Registry.ResiliencePipelineProvider<TKey>",
+      "Summary": "<p sourcefile=\"api/Paramore.Fences.Registry.ResiliencePipelineProvider-1.yml\" sourcestartlinenumber=\"1\">Represents a provider for resilience pipelines that are accessible by <code class=\"typeparamref\">TKey</code>.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Polly.Registry.ResiliencePipelineRegistry-1.yml",
+      "source_relative_path": "api/Paramore.Fences.Registry.ResiliencePipelineRegistry-1.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Polly.Registry.ResiliencePipelineRegistry-1.html"
+          "relative_path": "api/Paramore.Fences.Registry.ResiliencePipelineRegistry-1.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Polly.Registry.ResiliencePipelineRegistry<TKey>",
-      "Summary": "<p sourcefile=\"api/Polly.Registry.ResiliencePipelineRegistry-1.yml\" sourcestartlinenumber=\"1\">Represents a registry of resilience pipelines and builders that are accessible by <code class=\"typeparamref\">TKey</code>.</p>\n"
+      "Title": "Paramore.Fences.Registry.ResiliencePipelineRegistry<TKey>",
+      "Summary": "<p sourcefile=\"api/Paramore.Fences.Registry.ResiliencePipelineRegistry-1.yml\" sourcestartlinenumber=\"1\">Represents a registry of resilience pipelines and builders that are accessible by <code class=\"typeparamref\">TKey</code>.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Polly.Registry.ResiliencePipelineRegistryOptions-1.yml",
+      "source_relative_path": "api/Paramore.Fences.Registry.ResiliencePipelineRegistryOptions-1.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Polly.Registry.ResiliencePipelineRegistryOptions-1.html"
+          "relative_path": "api/Paramore.Fences.Registry.ResiliencePipelineRegistryOptions-1.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Polly.Registry.ResiliencePipelineRegistryOptions<TKey>",
-      "Summary": "<p sourcefile=\"api/Polly.Registry.ResiliencePipelineRegistryOptions-1.yml\" sourcestartlinenumber=\"1\">An options class used by <xref href=\"Polly.Registry.ResiliencePipelineRegistry%601\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+      "Title": "Paramore.Fences.Registry.ResiliencePipelineRegistryOptions<TKey>",
+      "Summary": "<p sourcefile=\"api/Paramore.Fences.Registry.ResiliencePipelineRegistryOptions-1.yml\" sourcestartlinenumber=\"1\">An options class used by <xref href=\"Paramore.Fences.Registry.ResiliencePipelineRegistry%601\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Polly.Registry.yml",
+      "source_relative_path": "api/Paramore.Fences.Registry.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Polly.Registry.html"
+          "relative_path": "api/Paramore.Fences.Registry.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Polly.Registry",
+      "Title": "Paramore.Fences.Registry",
       "Summary": null
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Polly.ResilienceContext.yml",
+      "source_relative_path": "api/Paramore.Fences.ResilienceContext.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Polly.ResilienceContext.html"
+          "relative_path": "api/Paramore.Fences.ResilienceContext.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Polly.ResilienceContext",
-      "Summary": "<p sourcefile=\"api/Polly.ResilienceContext.yml\" sourcestartlinenumber=\"1\">A context assigned to a single execution of <xref href=\"Polly.ResiliencePipeline\" data-throw-if-not-resolved=\"false\"></xref>. It is created manually or automatically\nwhen the user calls the various extensions on top of <xref href=\"Polly.ResiliencePipeline\" data-throw-if-not-resolved=\"false\"></xref>. After every execution the context should be discarded and returned to the pool.</p>\n"
+      "Title": "Paramore.Fences.ResilienceContext",
+      "Summary": "<p sourcefile=\"api/Paramore.Fences.ResilienceContext.yml\" sourcestartlinenumber=\"1\">A context assigned to a single execution of <xref href=\"Paramore.Fences.ResiliencePipeline\" data-throw-if-not-resolved=\"false\"></xref>. It is created manually or automatically\nwhen the user calls the various extensions on top of <xref href=\"Paramore.Fences.ResiliencePipeline\" data-throw-if-not-resolved=\"false\"></xref>. After every execution the context should be discarded and returned to the pool.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Polly.ResilienceContextCreationArguments.yml",
+      "source_relative_path": "api/Paramore.Fences.ResilienceContextCreationArguments.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Polly.ResilienceContextCreationArguments.html"
+          "relative_path": "api/Paramore.Fences.ResilienceContextCreationArguments.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Polly.ResilienceContextCreationArguments",
-      "Summary": "<p sourcefile=\"api/Polly.ResilienceContextCreationArguments.yml\" sourcestartlinenumber=\"1\">Arguments used by the <xref href=\"Polly.ResilienceContextPool\" data-throw-if-not-resolved=\"false\"></xref> when creating <xref href=\"Polly.ResilienceContext\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+      "Title": "Paramore.Fences.ResilienceContextCreationArguments",
+      "Summary": "<p sourcefile=\"api/Paramore.Fences.ResilienceContextCreationArguments.yml\" sourcestartlinenumber=\"1\">Arguments used by the <xref href=\"Paramore.Fences.ResilienceContextPool\" data-throw-if-not-resolved=\"false\"></xref> when creating <xref href=\"Paramore.Fences.ResilienceContext\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Polly.ResilienceContextPool.yml",
+      "source_relative_path": "api/Paramore.Fences.ResilienceContextPool.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Polly.ResilienceContextPool.html"
+          "relative_path": "api/Paramore.Fences.ResilienceContextPool.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Polly.ResilienceContextPool",
-      "Summary": "<p sourcefile=\"api/Polly.ResilienceContextPool.yml\" sourcestartlinenumber=\"1\">The pool of <xref href=\"Polly.ResilienceContext\" data-throw-if-not-resolved=\"false\"></xref> instances.</p>\n"
+      "Title": "Paramore.Fences.ResilienceContextPool",
+      "Summary": "<p sourcefile=\"api/Paramore.Fences.ResilienceContextPool.yml\" sourcestartlinenumber=\"1\">The pool of <xref href=\"Paramore.Fences.ResilienceContext\" data-throw-if-not-resolved=\"false\"></xref> instances.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Polly.ResiliencePipeline-1.yml",
+      "source_relative_path": "api/Paramore.Fences.ResiliencePipeline-1.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Polly.ResiliencePipeline-1.html"
+          "relative_path": "api/Paramore.Fences.ResiliencePipeline-1.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Polly.ResiliencePipeline<T>",
-      "Summary": "<p sourcefile=\"api/Polly.ResiliencePipeline-1.yml\" sourcestartlinenumber=\"1\">Resilience pipeline is used to execute the user-provided callbacks.</p>\n"
+      "Title": "Paramore.Fences.ResiliencePipeline<T>",
+      "Summary": "<p sourcefile=\"api/Paramore.Fences.ResiliencePipeline-1.yml\" sourcestartlinenumber=\"1\">Resilience pipeline is used to execute the user-provided callbacks.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Polly.ResiliencePipeline.yml",
+      "source_relative_path": "api/Paramore.Fences.ResiliencePipeline.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Polly.ResiliencePipeline.html"
+          "relative_path": "api/Paramore.Fences.ResiliencePipeline.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Polly.ResiliencePipeline",
-      "Summary": "<p sourcefile=\"api/Polly.ResiliencePipeline.yml\" sourcestartlinenumber=\"1\">Resilience pipeline is used to execute the user-provided callbacks.</p>\n"
+      "Title": "Paramore.Fences.ResiliencePipeline",
+      "Summary": "<p sourcefile=\"api/Paramore.Fences.ResiliencePipeline.yml\" sourcestartlinenumber=\"1\">Resilience pipeline is used to execute the user-provided callbacks.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Polly.ResiliencePipelineBuilder-1.yml",
+      "source_relative_path": "api/Paramore.Fences.ResiliencePipelineBuilder-1.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Polly.ResiliencePipelineBuilder-1.html"
+          "relative_path": "api/Paramore.Fences.ResiliencePipelineBuilder-1.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Polly.ResiliencePipelineBuilder<TResult>",
-      "Summary": "<p sourcefile=\"api/Polly.ResiliencePipelineBuilder-1.yml\" sourcestartlinenumber=\"1\">A builder that is used to create an instance of <xref href=\"Polly.ResiliencePipeline%601\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+      "Title": "Paramore.Fences.ResiliencePipelineBuilder<TResult>",
+      "Summary": "<p sourcefile=\"api/Paramore.Fences.ResiliencePipelineBuilder-1.yml\" sourcestartlinenumber=\"1\">A builder that is used to create an instance of <xref href=\"Paramore.Fences.ResiliencePipeline%601\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Polly.ResiliencePipelineBuilder.yml",
+      "source_relative_path": "api/Paramore.Fences.ResiliencePipelineBuilder.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Polly.ResiliencePipelineBuilder.html"
+          "relative_path": "api/Paramore.Fences.ResiliencePipelineBuilder.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Polly.ResiliencePipelineBuilder",
-      "Summary": "<p sourcefile=\"api/Polly.ResiliencePipelineBuilder.yml\" sourcestartlinenumber=\"1\">A builder that is used to create an instance of <xref href=\"Polly.ResiliencePipeline\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+      "Title": "Paramore.Fences.ResiliencePipelineBuilder",
+      "Summary": "<p sourcefile=\"api/Paramore.Fences.ResiliencePipelineBuilder.yml\" sourcestartlinenumber=\"1\">A builder that is used to create an instance of <xref href=\"Paramore.Fences.ResiliencePipeline\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Polly.ResiliencePipelineBuilderBase.yml",
+      "source_relative_path": "api/Paramore.Fences.ResiliencePipelineBuilderBase.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Polly.ResiliencePipelineBuilderBase.html"
+          "relative_path": "api/Paramore.Fences.ResiliencePipelineBuilderBase.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Polly.ResiliencePipelineBuilderBase",
-      "Summary": "<p sourcefile=\"api/Polly.ResiliencePipelineBuilderBase.yml\" sourcestartlinenumber=\"1\">A builder that is used to create an instance of <xref href=\"Polly.ResiliencePipeline\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+      "Title": "Paramore.Fences.ResiliencePipelineBuilderBase",
+      "Summary": "<p sourcefile=\"api/Paramore.Fences.ResiliencePipelineBuilderBase.yml\" sourcestartlinenumber=\"1\">A builder that is used to create an instance of <xref href=\"Paramore.Fences.ResiliencePipeline\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Polly.ResiliencePipelineBuilderExtensions.yml",
+      "source_relative_path": "api/Paramore.Fences.ResiliencePipelineBuilderExtensions.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Polly.ResiliencePipelineBuilderExtensions.html"
+          "relative_path": "api/Paramore.Fences.ResiliencePipelineBuilderExtensions.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Polly.ResiliencePipelineBuilderExtensions",
-      "Summary": "<p sourcefile=\"api/Polly.ResiliencePipelineBuilderExtensions.yml\" sourcestartlinenumber=\"1\">Extensions for <xref href=\"Polly.ResiliencePipelineBuilderBase\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+      "Title": "Paramore.Fences.ResiliencePipelineBuilderExtensions",
+      "Summary": "<p sourcefile=\"api/Paramore.Fences.ResiliencePipelineBuilderExtensions.yml\" sourcestartlinenumber=\"1\">Extensions for <xref href=\"Paramore.Fences.ResiliencePipelineBuilderBase\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Polly.ResilienceProperties.yml",
+      "source_relative_path": "api/Paramore.Fences.ResilienceProperties.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Polly.ResilienceProperties.html"
+          "relative_path": "api/Paramore.Fences.ResilienceProperties.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Polly.ResilienceProperties",
-      "Summary": "<p sourcefile=\"api/Polly.ResilienceProperties.yml\" sourcestartlinenumber=\"1\">Represents a collection of custom resilience properties.</p>\n"
+      "Title": "Paramore.Fences.ResilienceProperties",
+      "Summary": "<p sourcefile=\"api/Paramore.Fences.ResilienceProperties.yml\" sourcestartlinenumber=\"1\">Represents a collection of custom resilience properties.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Polly.ResiliencePropertyKey-1.yml",
+      "source_relative_path": "api/Paramore.Fences.ResiliencePropertyKey-1.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Polly.ResiliencePropertyKey-1.html"
+          "relative_path": "api/Paramore.Fences.ResiliencePropertyKey-1.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Polly.ResiliencePropertyKey<TValue>",
-      "Summary": "<p sourcefile=\"api/Polly.ResiliencePropertyKey-1.yml\" sourcestartlinenumber=\"1\">Represents a key used by <xref href=\"Polly.ResilienceProperties\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+      "Title": "Paramore.Fences.ResiliencePropertyKey<TValue>",
+      "Summary": "<p sourcefile=\"api/Paramore.Fences.ResiliencePropertyKey-1.yml\" sourcestartlinenumber=\"1\">Represents a key used by <xref href=\"Paramore.Fences.ResilienceProperties\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Polly.ResilienceStrategy-1.yml",
+      "source_relative_path": "api/Paramore.Fences.ResilienceServiceCollectionExtensions.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Polly.ResilienceStrategy-1.html"
+          "relative_path": "api/Paramore.Fences.ResilienceServiceCollectionExtensions.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Polly.ResilienceStrategy<TResult>",
-      "Summary": "<p sourcefile=\"api/Polly.ResilienceStrategy-1.yml\" sourcestartlinenumber=\"1\">This base strategy class is used to simplify the implementation of generic (reactive)\nstrategies by limiting the number of generic types the execute method receives.</p>\n"
+      "Title": "Paramore.Fences.ResilienceServiceCollectionExtensions",
+      "Summary": "<p sourcefile=\"api/Paramore.Fences.ResilienceServiceCollectionExtensions.yml\" sourcestartlinenumber=\"1\">Provides extension methods for registering resilience pipelines using the <xref href=\"Microsoft.Extensions.DependencyInjection.IServiceCollection\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Polly.ResilienceStrategy.yml",
+      "source_relative_path": "api/Paramore.Fences.ResilienceStrategy-1.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Polly.ResilienceStrategy.html"
+          "relative_path": "api/Paramore.Fences.ResilienceStrategy-1.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Polly.ResilienceStrategy",
-      "Summary": "<p sourcefile=\"api/Polly.ResilienceStrategy.yml\" sourcestartlinenumber=\"1\">Base class for all proactive resilience strategies.</p>\n"
+      "Title": "Paramore.Fences.ResilienceStrategy<TResult>",
+      "Summary": "<p sourcefile=\"api/Paramore.Fences.ResilienceStrategy-1.yml\" sourcestartlinenumber=\"1\">This base strategy class is used to simplify the implementation of generic (reactive)\nstrategies by limiting the number of generic types the execute method receives.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Polly.ResilienceStrategyOptions.yml",
+      "source_relative_path": "api/Paramore.Fences.ResilienceStrategy.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Polly.ResilienceStrategyOptions.html"
+          "relative_path": "api/Paramore.Fences.ResilienceStrategy.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Polly.ResilienceStrategyOptions",
-      "Summary": "<p sourcefile=\"api/Polly.ResilienceStrategyOptions.yml\" sourcestartlinenumber=\"1\">The options associated with the individual resilience strategy.</p>\n"
+      "Title": "Paramore.Fences.ResilienceStrategy",
+      "Summary": "<p sourcefile=\"api/Paramore.Fences.ResilienceStrategy.yml\" sourcestartlinenumber=\"1\">Base class for all proactive resilience strategies.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Polly.Retry.OnRetryArguments-1.yml",
+      "source_relative_path": "api/Paramore.Fences.ResilienceStrategyOptions.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Polly.Retry.OnRetryArguments-1.html"
+          "relative_path": "api/Paramore.Fences.ResilienceStrategyOptions.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Polly.Retry.OnRetryArguments<TResult>",
-      "Summary": "<p sourcefile=\"api/Polly.Retry.OnRetryArguments-1.yml\" sourcestartlinenumber=\"1\">Represents the arguments used by <xref href=\"Polly.Retry.RetryStrategyOptions%601.OnRetry\" data-throw-if-not-resolved=\"false\"></xref> for handling the retry event.</p>\n"
+      "Title": "Paramore.Fences.ResilienceStrategyOptions",
+      "Summary": "<p sourcefile=\"api/Paramore.Fences.ResilienceStrategyOptions.yml\" sourcestartlinenumber=\"1\">The options associated with the individual resilience strategy.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Polly.Retry.RetryDelayGeneratorArguments-1.yml",
+      "source_relative_path": "api/Paramore.Fences.Retry.OnRetryArguments-1.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Polly.Retry.RetryDelayGeneratorArguments-1.html"
+          "relative_path": "api/Paramore.Fences.Retry.OnRetryArguments-1.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Polly.Retry.RetryDelayGeneratorArguments<TResult>",
-      "Summary": "<p sourcefile=\"api/Polly.Retry.RetryDelayGeneratorArguments-1.yml\" sourcestartlinenumber=\"1\">Represents the arguments used by <xref href=\"Polly.Retry.RetryStrategyOptions%601.DelayGenerator\" data-throw-if-not-resolved=\"false\"></xref> for generating the next retry delay.</p>\n"
+      "Title": "Paramore.Fences.Retry.OnRetryArguments<TResult>",
+      "Summary": "<p sourcefile=\"api/Paramore.Fences.Retry.OnRetryArguments-1.yml\" sourcestartlinenumber=\"1\">Represents the arguments used by <xref href=\"Paramore.Fences.Retry.RetryStrategyOptions%601.OnRetry\" data-throw-if-not-resolved=\"false\"></xref> for handling the retry event.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Polly.Retry.RetryPredicateArguments-1.yml",
+      "source_relative_path": "api/Paramore.Fences.Retry.RetryDelayGeneratorArguments-1.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Polly.Retry.RetryPredicateArguments-1.html"
+          "relative_path": "api/Paramore.Fences.Retry.RetryDelayGeneratorArguments-1.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Polly.Retry.RetryPredicateArguments<TResult>",
-      "Summary": "<p sourcefile=\"api/Polly.Retry.RetryPredicateArguments-1.yml\" sourcestartlinenumber=\"1\">Represents the arguments used by <xref href=\"Polly.Retry.RetryStrategyOptions%601.ShouldHandle\" data-throw-if-not-resolved=\"false\"></xref> for determining whether a retry should be performed.</p>\n"
+      "Title": "Paramore.Fences.Retry.RetryDelayGeneratorArguments<TResult>",
+      "Summary": "<p sourcefile=\"api/Paramore.Fences.Retry.RetryDelayGeneratorArguments-1.yml\" sourcestartlinenumber=\"1\">Represents the arguments used by <xref href=\"Paramore.Fences.Retry.RetryStrategyOptions%601.DelayGenerator\" data-throw-if-not-resolved=\"false\"></xref> for generating the next retry delay.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Polly.Retry.RetryStrategyOptions-1.yml",
+      "source_relative_path": "api/Paramore.Fences.Retry.RetryPredicateArguments-1.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Polly.Retry.RetryStrategyOptions-1.html"
+          "relative_path": "api/Paramore.Fences.Retry.RetryPredicateArguments-1.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Polly.Retry.RetryStrategyOptions<TResult>",
-      "Summary": "<p sourcefile=\"api/Polly.Retry.RetryStrategyOptions-1.yml\" sourcestartlinenumber=\"1\">Represents the options used to configure a retry strategy.</p>\n"
+      "Title": "Paramore.Fences.Retry.RetryPredicateArguments<TResult>",
+      "Summary": "<p sourcefile=\"api/Paramore.Fences.Retry.RetryPredicateArguments-1.yml\" sourcestartlinenumber=\"1\">Represents the arguments used by <xref href=\"Paramore.Fences.Retry.RetryStrategyOptions%601.ShouldHandle\" data-throw-if-not-resolved=\"false\"></xref> for determining whether a retry should be performed.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Polly.Retry.RetryStrategyOptions.yml",
+      "source_relative_path": "api/Paramore.Fences.Retry.RetryStrategyOptions-1.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Polly.Retry.RetryStrategyOptions.html"
+          "relative_path": "api/Paramore.Fences.Retry.RetryStrategyOptions-1.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Polly.Retry.RetryStrategyOptions",
-      "Summary": "<p sourcefile=\"api/Polly.Retry.RetryStrategyOptions.yml\" sourcestartlinenumber=\"1\">Represents the options used to configure a retry strategy.</p>\n"
+      "Title": "Paramore.Fences.Retry.RetryStrategyOptions<TResult>",
+      "Summary": "<p sourcefile=\"api/Paramore.Fences.Retry.RetryStrategyOptions-1.yml\" sourcestartlinenumber=\"1\">Represents the options used to configure a retry strategy.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Polly.Retry.yml",
+      "source_relative_path": "api/Paramore.Fences.Retry.RetryStrategyOptions.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Polly.Retry.html"
+          "relative_path": "api/Paramore.Fences.Retry.RetryStrategyOptions.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Polly.Retry",
+      "Title": "Paramore.Fences.Retry.RetryStrategyOptions",
+      "Summary": "<p sourcefile=\"api/Paramore.Fences.Retry.RetryStrategyOptions.yml\" sourcestartlinenumber=\"1\">Represents the options used to configure a retry strategy.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Paramore.Fences.Retry.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Paramore.Fences.Retry.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Paramore.Fences.Retry",
       "Summary": null
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Polly.RetryResiliencePipelineBuilderExtensions.yml",
+      "source_relative_path": "api/Paramore.Fences.RetryResiliencePipelineBuilderExtensions.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Polly.RetryResiliencePipelineBuilderExtensions.html"
+          "relative_path": "api/Paramore.Fences.RetryResiliencePipelineBuilderExtensions.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Polly.RetryResiliencePipelineBuilderExtensions",
-      "Summary": "<p sourcefile=\"api/Polly.RetryResiliencePipelineBuilderExtensions.yml\" sourcestartlinenumber=\"1\">Extensions for adding retries to <xref href=\"Polly.ResiliencePipelineBuilder\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+      "Title": "Paramore.Fences.RetryResiliencePipelineBuilderExtensions",
+      "Summary": "<p sourcefile=\"api/Paramore.Fences.RetryResiliencePipelineBuilderExtensions.yml\" sourcestartlinenumber=\"1\">Extensions for adding retries to <xref href=\"Paramore.Fences.ResiliencePipelineBuilder\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Polly.Simmy.Behavior.BehaviorGeneratorArguments.yml",
+      "source_relative_path": "api/Paramore.Fences.Simmy.Behavior.BehaviorGeneratorArguments.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Polly.Simmy.Behavior.BehaviorGeneratorArguments.html"
+          "relative_path": "api/Paramore.Fences.Simmy.Behavior.BehaviorGeneratorArguments.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Polly.Simmy.Behavior.BehaviorGeneratorArguments",
-      "Summary": "<p sourcefile=\"api/Polly.Simmy.Behavior.BehaviorGeneratorArguments.yml\" sourcestartlinenumber=\"1\">Arguments used by the behavior chaos strategy to execute a user's delegate custom action.</p>\n"
+      "Title": "Paramore.Fences.Simmy.Behavior.BehaviorGeneratorArguments",
+      "Summary": "<p sourcefile=\"api/Paramore.Fences.Simmy.Behavior.BehaviorGeneratorArguments.yml\" sourcestartlinenumber=\"1\">Arguments used by the behavior chaos strategy to execute a user's delegate custom action.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Polly.Simmy.Behavior.ChaosBehaviorStrategyOptions.yml",
+      "source_relative_path": "api/Paramore.Fences.Simmy.Behavior.ChaosBehaviorStrategyOptions.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Polly.Simmy.Behavior.ChaosBehaviorStrategyOptions.html"
+          "relative_path": "api/Paramore.Fences.Simmy.Behavior.ChaosBehaviorStrategyOptions.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Polly.Simmy.Behavior.ChaosBehaviorStrategyOptions",
-      "Summary": "<p sourcefile=\"api/Polly.Simmy.Behavior.ChaosBehaviorStrategyOptions.yml\" sourcestartlinenumber=\"1\">Represents the options for the behavior chaos strategy.</p>\n"
+      "Title": "Paramore.Fences.Simmy.Behavior.ChaosBehaviorStrategyOptions",
+      "Summary": "<p sourcefile=\"api/Paramore.Fences.Simmy.Behavior.ChaosBehaviorStrategyOptions.yml\" sourcestartlinenumber=\"1\">Represents the options for the behavior chaos strategy.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Polly.Simmy.Behavior.OnBehaviorInjectedArguments.yml",
+      "source_relative_path": "api/Paramore.Fences.Simmy.Behavior.OnBehaviorInjectedArguments.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Polly.Simmy.Behavior.OnBehaviorInjectedArguments.html"
+          "relative_path": "api/Paramore.Fences.Simmy.Behavior.OnBehaviorInjectedArguments.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Polly.Simmy.Behavior.OnBehaviorInjectedArguments",
-      "Summary": "<p sourcefile=\"api/Polly.Simmy.Behavior.OnBehaviorInjectedArguments.yml\" sourcestartlinenumber=\"1\">Arguments used by the behavior chaos strategy to notify that a custom behavior was injected.</p>\n"
+      "Title": "Paramore.Fences.Simmy.Behavior.OnBehaviorInjectedArguments",
+      "Summary": "<p sourcefile=\"api/Paramore.Fences.Simmy.Behavior.OnBehaviorInjectedArguments.yml\" sourcestartlinenumber=\"1\">Arguments used by the behavior chaos strategy to notify that a custom behavior was injected.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Polly.Simmy.Behavior.yml",
+      "source_relative_path": "api/Paramore.Fences.Simmy.Behavior.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Polly.Simmy.Behavior.html"
+          "relative_path": "api/Paramore.Fences.Simmy.Behavior.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Polly.Simmy.Behavior",
+      "Title": "Paramore.Fences.Simmy.Behavior",
       "Summary": null
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Polly.Simmy.ChaosBehaviorPipelineBuilderExtensions.yml",
+      "source_relative_path": "api/Paramore.Fences.Simmy.ChaosBehaviorPipelineBuilderExtensions.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Polly.Simmy.ChaosBehaviorPipelineBuilderExtensions.html"
+          "relative_path": "api/Paramore.Fences.Simmy.ChaosBehaviorPipelineBuilderExtensions.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Polly.Simmy.ChaosBehaviorPipelineBuilderExtensions",
-      "Summary": "<p sourcefile=\"api/Polly.Simmy.ChaosBehaviorPipelineBuilderExtensions.yml\" sourcestartlinenumber=\"1\">Extension methods for adding chaos behaviors to a <xref href=\"Polly.ResiliencePipelineBuilder\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+      "Title": "Paramore.Fences.Simmy.ChaosBehaviorPipelineBuilderExtensions",
+      "Summary": "<p sourcefile=\"api/Paramore.Fences.Simmy.ChaosBehaviorPipelineBuilderExtensions.yml\" sourcestartlinenumber=\"1\">Extension methods for adding chaos behaviors to a <xref href=\"Paramore.Fences.ResiliencePipelineBuilder\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Polly.Simmy.ChaosFaultPipelineBuilderExtensions.yml",
+      "source_relative_path": "api/Paramore.Fences.Simmy.ChaosFaultPipelineBuilderExtensions.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Polly.Simmy.ChaosFaultPipelineBuilderExtensions.html"
+          "relative_path": "api/Paramore.Fences.Simmy.ChaosFaultPipelineBuilderExtensions.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Polly.Simmy.ChaosFaultPipelineBuilderExtensions",
-      "Summary": "<p sourcefile=\"api/Polly.Simmy.ChaosFaultPipelineBuilderExtensions.yml\" sourcestartlinenumber=\"1\">Extension methods for adding chaos fault strategy to a <xref href=\"Polly.ResiliencePipelineBuilder\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+      "Title": "Paramore.Fences.Simmy.ChaosFaultPipelineBuilderExtensions",
+      "Summary": "<p sourcefile=\"api/Paramore.Fences.Simmy.ChaosFaultPipelineBuilderExtensions.yml\" sourcestartlinenumber=\"1\">Extension methods for adding chaos fault strategy to a <xref href=\"Paramore.Fences.ResiliencePipelineBuilder\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Polly.Simmy.ChaosLatencyPipelineBuilderExtensions.yml",
+      "source_relative_path": "api/Paramore.Fences.Simmy.ChaosLatencyPipelineBuilderExtensions.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Polly.Simmy.ChaosLatencyPipelineBuilderExtensions.html"
+          "relative_path": "api/Paramore.Fences.Simmy.ChaosLatencyPipelineBuilderExtensions.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Polly.Simmy.ChaosLatencyPipelineBuilderExtensions",
-      "Summary": "<p sourcefile=\"api/Polly.Simmy.ChaosLatencyPipelineBuilderExtensions.yml\" sourcestartlinenumber=\"1\">Extension methods for adding chaos latency strategies to a <xref href=\"Polly.ResiliencePipelineBuilderBase\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+      "Title": "Paramore.Fences.Simmy.ChaosLatencyPipelineBuilderExtensions",
+      "Summary": "<p sourcefile=\"api/Paramore.Fences.Simmy.ChaosLatencyPipelineBuilderExtensions.yml\" sourcestartlinenumber=\"1\">Extension methods for adding chaos latency strategies to a <xref href=\"Paramore.Fences.ResiliencePipelineBuilderBase\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Polly.Simmy.ChaosOutcomePipelineBuilderExtensions.yml",
+      "source_relative_path": "api/Paramore.Fences.Simmy.ChaosOutcomePipelineBuilderExtensions.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Polly.Simmy.ChaosOutcomePipelineBuilderExtensions.html"
+          "relative_path": "api/Paramore.Fences.Simmy.ChaosOutcomePipelineBuilderExtensions.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Polly.Simmy.ChaosOutcomePipelineBuilderExtensions",
-      "Summary": "<p sourcefile=\"api/Polly.Simmy.ChaosOutcomePipelineBuilderExtensions.yml\" sourcestartlinenumber=\"1\">Extension methods for adding chaos outcome strategy to a <xref href=\"Polly.ResiliencePipelineBuilder\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+      "Title": "Paramore.Fences.Simmy.ChaosOutcomePipelineBuilderExtensions",
+      "Summary": "<p sourcefile=\"api/Paramore.Fences.Simmy.ChaosOutcomePipelineBuilderExtensions.yml\" sourcestartlinenumber=\"1\">Extension methods for adding chaos outcome strategy to a <xref href=\"Paramore.Fences.ResiliencePipelineBuilder\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Polly.Simmy.ChaosStrategy-1.yml",
+      "source_relative_path": "api/Paramore.Fences.Simmy.ChaosStrategy-1.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Polly.Simmy.ChaosStrategy-1.html"
+          "relative_path": "api/Paramore.Fences.Simmy.ChaosStrategy-1.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Polly.Simmy.ChaosStrategy<T>",
-      "Summary": "<p sourcefile=\"api/Polly.Simmy.ChaosStrategy-1.yml\" sourcestartlinenumber=\"1\">Base class for generic (reactive) chaos strategies.</p>\n"
+      "Title": "Paramore.Fences.Simmy.ChaosStrategy<T>",
+      "Summary": "<p sourcefile=\"api/Paramore.Fences.Simmy.ChaosStrategy-1.yml\" sourcestartlinenumber=\"1\">Base class for generic (reactive) chaos strategies.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Polly.Simmy.ChaosStrategy.yml",
+      "source_relative_path": "api/Paramore.Fences.Simmy.ChaosStrategy.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Polly.Simmy.ChaosStrategy.html"
+          "relative_path": "api/Paramore.Fences.Simmy.ChaosStrategy.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Polly.Simmy.ChaosStrategy",
-      "Summary": "<p sourcefile=\"api/Polly.Simmy.ChaosStrategy.yml\" sourcestartlinenumber=\"1\">Base class for chaos strategies.</p>\n"
+      "Title": "Paramore.Fences.Simmy.ChaosStrategy",
+      "Summary": "<p sourcefile=\"api/Paramore.Fences.Simmy.ChaosStrategy.yml\" sourcestartlinenumber=\"1\">Base class for chaos strategies.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Polly.Simmy.ChaosStrategyOptions.yml",
+      "source_relative_path": "api/Paramore.Fences.Simmy.ChaosStrategyOptions.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Polly.Simmy.ChaosStrategyOptions.html"
+          "relative_path": "api/Paramore.Fences.Simmy.ChaosStrategyOptions.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Polly.Simmy.ChaosStrategyOptions",
-      "Summary": "<p sourcefile=\"api/Polly.Simmy.ChaosStrategyOptions.yml\" sourcestartlinenumber=\"1\">The options associated with the <xref href=\"Polly.Simmy.ChaosStrategy\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+      "Title": "Paramore.Fences.Simmy.ChaosStrategyOptions",
+      "Summary": "<p sourcefile=\"api/Paramore.Fences.Simmy.ChaosStrategyOptions.yml\" sourcestartlinenumber=\"1\">The options associated with the <xref href=\"Paramore.Fences.Simmy.ChaosStrategy\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Polly.Simmy.EnabledGeneratorArguments.yml",
+      "source_relative_path": "api/Paramore.Fences.Simmy.EnabledGeneratorArguments.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Polly.Simmy.EnabledGeneratorArguments.html"
+          "relative_path": "api/Paramore.Fences.Simmy.EnabledGeneratorArguments.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Polly.Simmy.EnabledGeneratorArguments",
-      "Summary": "<p sourcefile=\"api/Polly.Simmy.EnabledGeneratorArguments.yml\" sourcestartlinenumber=\"1\">Defines the arguments for the <xref href=\"Polly.Simmy.ChaosStrategyOptions.EnabledGenerator\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+      "Title": "Paramore.Fences.Simmy.EnabledGeneratorArguments",
+      "Summary": "<p sourcefile=\"api/Paramore.Fences.Simmy.EnabledGeneratorArguments.yml\" sourcestartlinenumber=\"1\">Defines the arguments for the <xref href=\"Paramore.Fences.Simmy.ChaosStrategyOptions.EnabledGenerator\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Polly.Simmy.Fault.ChaosFaultStrategyOptions.yml",
+      "source_relative_path": "api/Paramore.Fences.Simmy.Fault.ChaosFaultStrategyOptions.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Polly.Simmy.Fault.ChaosFaultStrategyOptions.html"
+          "relative_path": "api/Paramore.Fences.Simmy.Fault.ChaosFaultStrategyOptions.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Polly.Simmy.Fault.ChaosFaultStrategyOptions",
-      "Summary": "<p sourcefile=\"api/Polly.Simmy.Fault.ChaosFaultStrategyOptions.yml\" sourcestartlinenumber=\"1\">Represents the options for the fault chaos strategy.</p>\n"
+      "Title": "Paramore.Fences.Simmy.Fault.ChaosFaultStrategyOptions",
+      "Summary": "<p sourcefile=\"api/Paramore.Fences.Simmy.Fault.ChaosFaultStrategyOptions.yml\" sourcestartlinenumber=\"1\">Represents the options for the fault chaos strategy.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Polly.Simmy.Fault.FaultGenerator.yml",
+      "source_relative_path": "api/Paramore.Fences.Simmy.Fault.FaultGenerator.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Polly.Simmy.Fault.FaultGenerator.html"
+          "relative_path": "api/Paramore.Fences.Simmy.Fault.FaultGenerator.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Polly.Simmy.Fault.FaultGenerator",
-      "Summary": "<p sourcefile=\"api/Polly.Simmy.Fault.FaultGenerator.yml\" sourcestartlinenumber=\"1\">A generator for creating faults (exceptions) using registered delegate functions.</p>\n"
+      "Title": "Paramore.Fences.Simmy.Fault.FaultGenerator",
+      "Summary": "<p sourcefile=\"api/Paramore.Fences.Simmy.Fault.FaultGenerator.yml\" sourcestartlinenumber=\"1\">A generator for creating faults (exceptions) using registered delegate functions.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Polly.Simmy.Fault.FaultGeneratorArguments.yml",
+      "source_relative_path": "api/Paramore.Fences.Simmy.Fault.FaultGeneratorArguments.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Polly.Simmy.Fault.FaultGeneratorArguments.html"
+          "relative_path": "api/Paramore.Fences.Simmy.Fault.FaultGeneratorArguments.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Polly.Simmy.Fault.FaultGeneratorArguments",
-      "Summary": "<p sourcefile=\"api/Polly.Simmy.Fault.FaultGeneratorArguments.yml\" sourcestartlinenumber=\"1\">Arguments used by the fault chaos strategy to ge the fault that is going to be injected.</p>\n"
+      "Title": "Paramore.Fences.Simmy.Fault.FaultGeneratorArguments",
+      "Summary": "<p sourcefile=\"api/Paramore.Fences.Simmy.Fault.FaultGeneratorArguments.yml\" sourcestartlinenumber=\"1\">Arguments used by the fault chaos strategy to ge the fault that is going to be injected.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Polly.Simmy.Fault.OnFaultInjectedArguments.yml",
+      "source_relative_path": "api/Paramore.Fences.Simmy.Fault.OnFaultInjectedArguments.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Polly.Simmy.Fault.OnFaultInjectedArguments.html"
+          "relative_path": "api/Paramore.Fences.Simmy.Fault.OnFaultInjectedArguments.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Polly.Simmy.Fault.OnFaultInjectedArguments",
-      "Summary": "<p sourcefile=\"api/Polly.Simmy.Fault.OnFaultInjectedArguments.yml\" sourcestartlinenumber=\"1\">Arguments used by the fault chaos strategy to notify that an fault was injected.</p>\n"
+      "Title": "Paramore.Fences.Simmy.Fault.OnFaultInjectedArguments",
+      "Summary": "<p sourcefile=\"api/Paramore.Fences.Simmy.Fault.OnFaultInjectedArguments.yml\" sourcestartlinenumber=\"1\">Arguments used by the fault chaos strategy to notify that an fault was injected.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Polly.Simmy.Fault.yml",
+      "source_relative_path": "api/Paramore.Fences.Simmy.Fault.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Polly.Simmy.Fault.html"
+          "relative_path": "api/Paramore.Fences.Simmy.Fault.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Polly.Simmy.Fault",
+      "Title": "Paramore.Fences.Simmy.Fault",
       "Summary": null
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Polly.Simmy.InjectionRateGeneratorArguments.yml",
+      "source_relative_path": "api/Paramore.Fences.Simmy.InjectionRateGeneratorArguments.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Polly.Simmy.InjectionRateGeneratorArguments.html"
+          "relative_path": "api/Paramore.Fences.Simmy.InjectionRateGeneratorArguments.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Polly.Simmy.InjectionRateGeneratorArguments",
-      "Summary": "<p sourcefile=\"api/Polly.Simmy.InjectionRateGeneratorArguments.yml\" sourcestartlinenumber=\"1\">Defines the arguments for the <xref href=\"Polly.Simmy.ChaosStrategyOptions.InjectionRateGenerator\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+      "Title": "Paramore.Fences.Simmy.InjectionRateGeneratorArguments",
+      "Summary": "<p sourcefile=\"api/Paramore.Fences.Simmy.InjectionRateGeneratorArguments.yml\" sourcestartlinenumber=\"1\">Defines the arguments for the <xref href=\"Paramore.Fences.Simmy.ChaosStrategyOptions.InjectionRateGenerator\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Polly.Simmy.Latency.ChaosLatencyStrategyOptions.yml",
+      "source_relative_path": "api/Paramore.Fences.Simmy.Latency.ChaosLatencyStrategyOptions.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Polly.Simmy.Latency.ChaosLatencyStrategyOptions.html"
+          "relative_path": "api/Paramore.Fences.Simmy.Latency.ChaosLatencyStrategyOptions.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Polly.Simmy.Latency.ChaosLatencyStrategyOptions",
-      "Summary": "<p sourcefile=\"api/Polly.Simmy.Latency.ChaosLatencyStrategyOptions.yml\" sourcestartlinenumber=\"1\">Represents the options for the latency chaos strategy.</p>\n"
+      "Title": "Paramore.Fences.Simmy.Latency.ChaosLatencyStrategyOptions",
+      "Summary": "<p sourcefile=\"api/Paramore.Fences.Simmy.Latency.ChaosLatencyStrategyOptions.yml\" sourcestartlinenumber=\"1\">Represents the options for the latency chaos strategy.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Polly.Simmy.Latency.LatencyGeneratorArguments.yml",
+      "source_relative_path": "api/Paramore.Fences.Simmy.Latency.LatencyGeneratorArguments.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Polly.Simmy.Latency.LatencyGeneratorArguments.html"
+          "relative_path": "api/Paramore.Fences.Simmy.Latency.LatencyGeneratorArguments.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Polly.Simmy.Latency.LatencyGeneratorArguments",
-      "Summary": "<p sourcefile=\"api/Polly.Simmy.Latency.LatencyGeneratorArguments.yml\" sourcestartlinenumber=\"1\">Arguments used by the <xref href=\"Polly.Simmy.Latency.ChaosLatencyStrategyOptions.LatencyGenerator\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+      "Title": "Paramore.Fences.Simmy.Latency.LatencyGeneratorArguments",
+      "Summary": "<p sourcefile=\"api/Paramore.Fences.Simmy.Latency.LatencyGeneratorArguments.yml\" sourcestartlinenumber=\"1\">Arguments used by the <xref href=\"Paramore.Fences.Simmy.Latency.ChaosLatencyStrategyOptions.LatencyGenerator\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Polly.Simmy.Latency.OnLatencyInjectedArguments.yml",
+      "source_relative_path": "api/Paramore.Fences.Simmy.Latency.OnLatencyInjectedArguments.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Polly.Simmy.Latency.OnLatencyInjectedArguments.html"
+          "relative_path": "api/Paramore.Fences.Simmy.Latency.OnLatencyInjectedArguments.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Polly.Simmy.Latency.OnLatencyInjectedArguments",
-      "Summary": "<p sourcefile=\"api/Polly.Simmy.Latency.OnLatencyInjectedArguments.yml\" sourcestartlinenumber=\"1\">Arguments used by the latency chaos strategy to notify that a latency was injected.</p>\n"
+      "Title": "Paramore.Fences.Simmy.Latency.OnLatencyInjectedArguments",
+      "Summary": "<p sourcefile=\"api/Paramore.Fences.Simmy.Latency.OnLatencyInjectedArguments.yml\" sourcestartlinenumber=\"1\">Arguments used by the latency chaos strategy to notify that a latency was injected.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Polly.Simmy.Latency.yml",
+      "source_relative_path": "api/Paramore.Fences.Simmy.Latency.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Polly.Simmy.Latency.html"
+          "relative_path": "api/Paramore.Fences.Simmy.Latency.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Polly.Simmy.Latency",
+      "Title": "Paramore.Fences.Simmy.Latency",
       "Summary": null
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Polly.Simmy.Outcomes.ChaosOutcomeStrategyOptions-1.yml",
+      "source_relative_path": "api/Paramore.Fences.Simmy.Outcomes.ChaosOutcomeStrategyOptions-1.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Polly.Simmy.Outcomes.ChaosOutcomeStrategyOptions-1.html"
+          "relative_path": "api/Paramore.Fences.Simmy.Outcomes.ChaosOutcomeStrategyOptions-1.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Polly.Simmy.Outcomes.ChaosOutcomeStrategyOptions<TResult>",
-      "Summary": "<p sourcefile=\"api/Polly.Simmy.Outcomes.ChaosOutcomeStrategyOptions-1.yml\" sourcestartlinenumber=\"1\">Represents the options for the outcome chaos strategy.</p>\n"
+      "Title": "Paramore.Fences.Simmy.Outcomes.ChaosOutcomeStrategyOptions<TResult>",
+      "Summary": "<p sourcefile=\"api/Paramore.Fences.Simmy.Outcomes.ChaosOutcomeStrategyOptions-1.yml\" sourcestartlinenumber=\"1\">Represents the options for the outcome chaos strategy.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Polly.Simmy.Outcomes.OnOutcomeInjectedArguments-1.yml",
+      "source_relative_path": "api/Paramore.Fences.Simmy.Outcomes.OnOutcomeInjectedArguments-1.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Polly.Simmy.Outcomes.OnOutcomeInjectedArguments-1.html"
+          "relative_path": "api/Paramore.Fences.Simmy.Outcomes.OnOutcomeInjectedArguments-1.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Polly.Simmy.Outcomes.OnOutcomeInjectedArguments<TResult>",
-      "Summary": "<p sourcefile=\"api/Polly.Simmy.Outcomes.OnOutcomeInjectedArguments-1.yml\" sourcestartlinenumber=\"1\">Arguments used by the outcome chaos strategy to notify that an outcome was injected.</p>\n"
+      "Title": "Paramore.Fences.Simmy.Outcomes.OnOutcomeInjectedArguments<TResult>",
+      "Summary": "<p sourcefile=\"api/Paramore.Fences.Simmy.Outcomes.OnOutcomeInjectedArguments-1.yml\" sourcestartlinenumber=\"1\">Arguments used by the outcome chaos strategy to notify that an outcome was injected.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Polly.Simmy.Outcomes.OutcomeGenerator-1.yml",
+      "source_relative_path": "api/Paramore.Fences.Simmy.Outcomes.OutcomeGenerator-1.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Polly.Simmy.Outcomes.OutcomeGenerator-1.html"
+          "relative_path": "api/Paramore.Fences.Simmy.Outcomes.OutcomeGenerator-1.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Polly.Simmy.Outcomes.OutcomeGenerator<TResult>",
-      "Summary": "<p sourcefile=\"api/Polly.Simmy.Outcomes.OutcomeGenerator-1.yml\" sourcestartlinenumber=\"1\">Generator that produces outcomes such as exceptions or results.</p>\n"
+      "Title": "Paramore.Fences.Simmy.Outcomes.OutcomeGenerator<TResult>",
+      "Summary": "<p sourcefile=\"api/Paramore.Fences.Simmy.Outcomes.OutcomeGenerator-1.yml\" sourcestartlinenumber=\"1\">Generator that produces outcomes such as exceptions or results.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Polly.Simmy.Outcomes.OutcomeGeneratorArguments.yml",
+      "source_relative_path": "api/Paramore.Fences.Simmy.Outcomes.OutcomeGeneratorArguments.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Polly.Simmy.Outcomes.OutcomeGeneratorArguments.html"
+          "relative_path": "api/Paramore.Fences.Simmy.Outcomes.OutcomeGeneratorArguments.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Polly.Simmy.Outcomes.OutcomeGeneratorArguments",
-      "Summary": "<p sourcefile=\"api/Polly.Simmy.Outcomes.OutcomeGeneratorArguments.yml\" sourcestartlinenumber=\"1\">Arguments used by <xref href=\"Polly.Simmy.Outcomes.ChaosOutcomeStrategyOptions%601.OutcomeGenerator\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+      "Title": "Paramore.Fences.Simmy.Outcomes.OutcomeGeneratorArguments",
+      "Summary": "<p sourcefile=\"api/Paramore.Fences.Simmy.Outcomes.OutcomeGeneratorArguments.yml\" sourcestartlinenumber=\"1\">Arguments used by <xref href=\"Paramore.Fences.Simmy.Outcomes.ChaosOutcomeStrategyOptions%601.OutcomeGenerator\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Polly.Simmy.Outcomes.yml",
+      "source_relative_path": "api/Paramore.Fences.Simmy.Outcomes.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Polly.Simmy.Outcomes.html"
+          "relative_path": "api/Paramore.Fences.Simmy.Outcomes.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Polly.Simmy.Outcomes",
+      "Title": "Paramore.Fences.Simmy.Outcomes",
       "Summary": null
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Polly.Simmy.yml",
+      "source_relative_path": "api/Paramore.Fences.Simmy.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Polly.Simmy.html"
+          "relative_path": "api/Paramore.Fences.Simmy.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Polly.Simmy",
+      "Title": "Paramore.Fences.Simmy",
       "Summary": null
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Polly.StrategyBuilderContext.yml",
+      "source_relative_path": "api/Paramore.Fences.StrategyBuilderContext.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Polly.StrategyBuilderContext.html"
+          "relative_path": "api/Paramore.Fences.StrategyBuilderContext.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Polly.StrategyBuilderContext",
-      "Summary": "<p sourcefile=\"api/Polly.StrategyBuilderContext.yml\" sourcestartlinenumber=\"1\">The context used for building an individual resilience strategy.</p>\n"
+      "Title": "Paramore.Fences.StrategyBuilderContext",
+      "Summary": "<p sourcefile=\"api/Paramore.Fences.StrategyBuilderContext.yml\" sourcestartlinenumber=\"1\">The context used for building an individual resilience strategy.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Polly.Telemetry.EnrichmentContext-2.yml",
+      "source_relative_path": "api/Paramore.Fences.Telemetry.EnrichmentContext-2.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Polly.Telemetry.EnrichmentContext-2.html"
+          "relative_path": "api/Paramore.Fences.Telemetry.EnrichmentContext-2.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Polly.Telemetry.EnrichmentContext<TResult, TArgs>",
-      "Summary": "<p sourcefile=\"api/Polly.Telemetry.EnrichmentContext-2.yml\" sourcestartlinenumber=\"1\">Enrichment context used when reporting resilience events.</p>\n"
+      "Title": "Paramore.Fences.Telemetry.EnrichmentContext<TResult, TArgs>",
+      "Summary": "<p sourcefile=\"api/Paramore.Fences.Telemetry.EnrichmentContext-2.yml\" sourcestartlinenumber=\"1\">Enrichment context used when reporting resilience events.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Polly.Telemetry.ExecutionAttemptArguments.yml",
+      "source_relative_path": "api/Paramore.Fences.Telemetry.ExecutionAttemptArguments.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Polly.Telemetry.ExecutionAttemptArguments.html"
+          "relative_path": "api/Paramore.Fences.Telemetry.ExecutionAttemptArguments.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Polly.Telemetry.ExecutionAttemptArguments",
-      "Summary": "<p sourcefile=\"api/Polly.Telemetry.ExecutionAttemptArguments.yml\" sourcestartlinenumber=\"1\">Arguments that encapsulate the execution attempt for retries or hedging.</p>\n"
+      "Title": "Paramore.Fences.Telemetry.ExecutionAttemptArguments",
+      "Summary": "<p sourcefile=\"api/Paramore.Fences.Telemetry.ExecutionAttemptArguments.yml\" sourcestartlinenumber=\"1\">Arguments that encapsulate the execution attempt for retries or hedging.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Polly.Telemetry.MeteringEnricher.yml",
+      "source_relative_path": "api/Paramore.Fences.Telemetry.MeteringEnricher.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Polly.Telemetry.MeteringEnricher.html"
+          "relative_path": "api/Paramore.Fences.Telemetry.MeteringEnricher.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Polly.Telemetry.MeteringEnricher",
-      "Summary": "<p sourcefile=\"api/Polly.Telemetry.MeteringEnricher.yml\" sourcestartlinenumber=\"1\">Enricher used to enrich the metrics with additional information.</p>\n"
+      "Title": "Paramore.Fences.Telemetry.MeteringEnricher",
+      "Summary": "<p sourcefile=\"api/Paramore.Fences.Telemetry.MeteringEnricher.yml\" sourcestartlinenumber=\"1\">Enricher used to enrich the metrics with additional information.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Polly.Telemetry.PipelineExecutedArguments.yml",
+      "source_relative_path": "api/Paramore.Fences.Telemetry.PipelineExecutedArguments.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Polly.Telemetry.PipelineExecutedArguments.html"
+          "relative_path": "api/Paramore.Fences.Telemetry.PipelineExecutedArguments.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Polly.Telemetry.PipelineExecutedArguments",
-      "Summary": "<p sourcefile=\"api/Polly.Telemetry.PipelineExecutedArguments.yml\" sourcestartlinenumber=\"1\">Arguments that indicate the pipeline execution finished.</p>\n"
+      "Title": "Paramore.Fences.Telemetry.PipelineExecutedArguments",
+      "Summary": "<p sourcefile=\"api/Paramore.Fences.Telemetry.PipelineExecutedArguments.yml\" sourcestartlinenumber=\"1\">Arguments that indicate the pipeline execution finished.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Polly.Telemetry.PipelineExecutingArguments.yml",
+      "source_relative_path": "api/Paramore.Fences.Telemetry.PipelineExecutingArguments.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Polly.Telemetry.PipelineExecutingArguments.html"
+          "relative_path": "api/Paramore.Fences.Telemetry.PipelineExecutingArguments.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Polly.Telemetry.PipelineExecutingArguments",
-      "Summary": "<p sourcefile=\"api/Polly.Telemetry.PipelineExecutingArguments.yml\" sourcestartlinenumber=\"1\">Arguments that indicate the pipeline execution started.</p>\n"
+      "Title": "Paramore.Fences.Telemetry.PipelineExecutingArguments",
+      "Summary": "<p sourcefile=\"api/Paramore.Fences.Telemetry.PipelineExecutingArguments.yml\" sourcestartlinenumber=\"1\">Arguments that indicate the pipeline execution started.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Polly.Telemetry.ResilienceEvent.yml",
+      "source_relative_path": "api/Paramore.Fences.Telemetry.ResilienceEvent.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Polly.Telemetry.ResilienceEvent.html"
+          "relative_path": "api/Paramore.Fences.Telemetry.ResilienceEvent.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Polly.Telemetry.ResilienceEvent",
-      "Summary": "<p sourcefile=\"api/Polly.Telemetry.ResilienceEvent.yml\" sourcestartlinenumber=\"1\">Represents a resilience event that has been reported.</p>\n"
+      "Title": "Paramore.Fences.Telemetry.ResilienceEvent",
+      "Summary": "<p sourcefile=\"api/Paramore.Fences.Telemetry.ResilienceEvent.yml\" sourcestartlinenumber=\"1\">Represents a resilience event that has been reported.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Polly.Telemetry.ResilienceEventSeverity.yml",
+      "source_relative_path": "api/Paramore.Fences.Telemetry.ResilienceEventSeverity.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Polly.Telemetry.ResilienceEventSeverity.html"
+          "relative_path": "api/Paramore.Fences.Telemetry.ResilienceEventSeverity.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Polly.Telemetry.ResilienceEventSeverity",
-      "Summary": "<p sourcefile=\"api/Polly.Telemetry.ResilienceEventSeverity.yml\" sourcestartlinenumber=\"1\">The severity of reported resilience event.</p>\n"
+      "Title": "Paramore.Fences.Telemetry.ResilienceEventSeverity",
+      "Summary": "<p sourcefile=\"api/Paramore.Fences.Telemetry.ResilienceEventSeverity.yml\" sourcestartlinenumber=\"1\">The severity of reported resilience event.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Polly.Telemetry.ResilienceStrategyTelemetry.yml",
+      "source_relative_path": "api/Paramore.Fences.Telemetry.ResilienceStrategyTelemetry.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Polly.Telemetry.ResilienceStrategyTelemetry.html"
+          "relative_path": "api/Paramore.Fences.Telemetry.ResilienceStrategyTelemetry.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Polly.Telemetry.ResilienceStrategyTelemetry",
-      "Summary": "<p sourcefile=\"api/Polly.Telemetry.ResilienceStrategyTelemetry.yml\" sourcestartlinenumber=\"1\">Resilience telemetry is used by individual resilience strategies to report some important events.</p>\n"
+      "Title": "Paramore.Fences.Telemetry.ResilienceStrategyTelemetry",
+      "Summary": "<p sourcefile=\"api/Paramore.Fences.Telemetry.ResilienceStrategyTelemetry.yml\" sourcestartlinenumber=\"1\">Resilience telemetry is used by individual resilience strategies to report some important events.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Polly.Telemetry.ResilienceTelemetrySource.yml",
+      "source_relative_path": "api/Paramore.Fences.Telemetry.ResilienceTelemetrySource.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Polly.Telemetry.ResilienceTelemetrySource.html"
+          "relative_path": "api/Paramore.Fences.Telemetry.ResilienceTelemetrySource.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Polly.Telemetry.ResilienceTelemetrySource",
-      "Summary": "<p sourcefile=\"api/Polly.Telemetry.ResilienceTelemetrySource.yml\" sourcestartlinenumber=\"1\">The source of resilience telemetry events.</p>\n"
+      "Title": "Paramore.Fences.Telemetry.ResilienceTelemetrySource",
+      "Summary": "<p sourcefile=\"api/Paramore.Fences.Telemetry.ResilienceTelemetrySource.yml\" sourcestartlinenumber=\"1\">The source of resilience telemetry events.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Polly.Telemetry.SeverityProviderArguments.yml",
+      "source_relative_path": "api/Paramore.Fences.Telemetry.SeverityProviderArguments.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Polly.Telemetry.SeverityProviderArguments.html"
+          "relative_path": "api/Paramore.Fences.Telemetry.SeverityProviderArguments.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Polly.Telemetry.SeverityProviderArguments",
-      "Summary": "<p sourcefile=\"api/Polly.Telemetry.SeverityProviderArguments.yml\" sourcestartlinenumber=\"1\">Arguments used by <xref href=\"Polly.Telemetry.TelemetryOptions.SeverityProvider\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+      "Title": "Paramore.Fences.Telemetry.SeverityProviderArguments",
+      "Summary": "<p sourcefile=\"api/Paramore.Fences.Telemetry.SeverityProviderArguments.yml\" sourcestartlinenumber=\"1\">Arguments used by <xref href=\"Paramore.Fences.Telemetry.TelemetryOptions.SeverityProvider\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Polly.Telemetry.TelemetryEventArguments-2.yml",
+      "source_relative_path": "api/Paramore.Fences.Telemetry.TelemetryEventArguments-2.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Polly.Telemetry.TelemetryEventArguments-2.html"
+          "relative_path": "api/Paramore.Fences.Telemetry.TelemetryEventArguments-2.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Polly.Telemetry.TelemetryEventArguments<TResult, TArgs>",
-      "Summary": "<p sourcefile=\"api/Polly.Telemetry.TelemetryEventArguments-2.yml\" sourcestartlinenumber=\"1\">Represents the information about the resilience event.</p>\n"
+      "Title": "Paramore.Fences.Telemetry.TelemetryEventArguments<TResult, TArgs>",
+      "Summary": "<p sourcefile=\"api/Paramore.Fences.Telemetry.TelemetryEventArguments-2.yml\" sourcestartlinenumber=\"1\">Represents the information about the resilience event.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Polly.Telemetry.TelemetryListener.yml",
+      "source_relative_path": "api/Paramore.Fences.Telemetry.TelemetryListener.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Polly.Telemetry.TelemetryListener.html"
+          "relative_path": "api/Paramore.Fences.Telemetry.TelemetryListener.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Polly.Telemetry.TelemetryListener",
-      "Summary": "<p sourcefile=\"api/Polly.Telemetry.TelemetryListener.yml\" sourcestartlinenumber=\"1\">Listener of resilience telemetry events.</p>\n"
+      "Title": "Paramore.Fences.Telemetry.TelemetryListener",
+      "Summary": "<p sourcefile=\"api/Paramore.Fences.Telemetry.TelemetryListener.yml\" sourcestartlinenumber=\"1\">Listener of resilience telemetry events.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Polly.Telemetry.TelemetryOptions.yml",
+      "source_relative_path": "api/Paramore.Fences.Telemetry.TelemetryOptions.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Polly.Telemetry.TelemetryOptions.html"
+          "relative_path": "api/Paramore.Fences.Telemetry.TelemetryOptions.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Polly.Telemetry.TelemetryOptions",
-      "Summary": "<p sourcefile=\"api/Polly.Telemetry.TelemetryOptions.yml\" sourcestartlinenumber=\"1\">The options that are used to configure the telemetry that is produced by the resilience strategies.</p>\n"
+      "Title": "Paramore.Fences.Telemetry.TelemetryOptions",
+      "Summary": "<p sourcefile=\"api/Paramore.Fences.Telemetry.TelemetryOptions.yml\" sourcestartlinenumber=\"1\">The options that are used to configure the telemetry that is produced by the resilience strategies.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Polly.Telemetry.yml",
+      "source_relative_path": "api/Paramore.Fences.Telemetry.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Polly.Telemetry.html"
+          "relative_path": "api/Paramore.Fences.Telemetry.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Polly.Telemetry",
+      "Title": "Paramore.Fences.Telemetry",
       "Summary": null
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Polly.TelemetryResiliencePipelineBuilderExtensions.yml",
+      "source_relative_path": "api/Paramore.Fences.TelemetryResiliencePipelineBuilderExtensions.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Polly.TelemetryResiliencePipelineBuilderExtensions.html"
+          "relative_path": "api/Paramore.Fences.TelemetryResiliencePipelineBuilderExtensions.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Polly.TelemetryResiliencePipelineBuilderExtensions",
-      "Summary": "<p sourcefile=\"api/Polly.TelemetryResiliencePipelineBuilderExtensions.yml\" sourcestartlinenumber=\"1\">The telemetry extensions for the <xref href=\"Polly.ResiliencePipelineBuilder\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+      "Title": "Paramore.Fences.TelemetryResiliencePipelineBuilderExtensions",
+      "Summary": "<p sourcefile=\"api/Paramore.Fences.TelemetryResiliencePipelineBuilderExtensions.yml\" sourcestartlinenumber=\"1\">The telemetry extensions for the <xref href=\"Paramore.Fences.ResiliencePipelineBuilder\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Polly.Testing.ResiliencePipelineDescriptor.yml",
+      "source_relative_path": "api/Paramore.Fences.Testing.ResiliencePipelineDescriptor.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Polly.Testing.ResiliencePipelineDescriptor.html"
+          "relative_path": "api/Paramore.Fences.Testing.ResiliencePipelineDescriptor.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Polly.Testing.ResiliencePipelineDescriptor",
-      "Summary": "<p sourcefile=\"api/Polly.Testing.ResiliencePipelineDescriptor.yml\" sourcestartlinenumber=\"1\">Describes the resilience pipeline.</p>\n"
+      "Title": "Paramore.Fences.Testing.ResiliencePipelineDescriptor",
+      "Summary": "<p sourcefile=\"api/Paramore.Fences.Testing.ResiliencePipelineDescriptor.yml\" sourcestartlinenumber=\"1\">Describes the resilience pipeline.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Polly.Testing.ResiliencePipelineExtensions.yml",
+      "source_relative_path": "api/Paramore.Fences.Testing.ResiliencePipelineExtensions.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Polly.Testing.ResiliencePipelineExtensions.html"
+          "relative_path": "api/Paramore.Fences.Testing.ResiliencePipelineExtensions.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Polly.Testing.ResiliencePipelineExtensions",
-      "Summary": "<p sourcefile=\"api/Polly.Testing.ResiliencePipelineExtensions.yml\" sourcestartlinenumber=\"1\">The test-related extensions for <xref href=\"Polly.ResiliencePipeline\" data-throw-if-not-resolved=\"false\"></xref> and <xref href=\"Polly.ResiliencePipeline%601\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+      "Title": "Paramore.Fences.Testing.ResiliencePipelineExtensions",
+      "Summary": "<p sourcefile=\"api/Paramore.Fences.Testing.ResiliencePipelineExtensions.yml\" sourcestartlinenumber=\"1\">The test-related extensions for <xref href=\"Paramore.Fences.ResiliencePipeline\" data-throw-if-not-resolved=\"false\"></xref> and <xref href=\"Paramore.Fences.ResiliencePipeline%601\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Polly.Testing.ResilienceStrategyDescriptor.yml",
+      "source_relative_path": "api/Paramore.Fences.Testing.ResilienceStrategyDescriptor.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Polly.Testing.ResilienceStrategyDescriptor.html"
+          "relative_path": "api/Paramore.Fences.Testing.ResilienceStrategyDescriptor.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Polly.Testing.ResilienceStrategyDescriptor",
-      "Summary": "<p sourcefile=\"api/Polly.Testing.ResilienceStrategyDescriptor.yml\" sourcestartlinenumber=\"1\">This class provides additional information about a <xref href=\"Polly.ResiliencePipeline\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+      "Title": "Paramore.Fences.Testing.ResilienceStrategyDescriptor",
+      "Summary": "<p sourcefile=\"api/Paramore.Fences.Testing.ResilienceStrategyDescriptor.yml\" sourcestartlinenumber=\"1\">This class provides additional information about a <xref href=\"Paramore.Fences.ResiliencePipeline\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Polly.Testing.yml",
+      "source_relative_path": "api/Paramore.Fences.Testing.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Polly.Testing.html"
+          "relative_path": "api/Paramore.Fences.Testing.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Polly.Testing",
+      "Title": "Paramore.Fences.Testing",
       "Summary": null
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Polly.Timeout.OnTimeoutArguments.yml",
+      "source_relative_path": "api/Paramore.Fences.Timeout.OnTimeoutArguments.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Polly.Timeout.OnTimeoutArguments.html"
+          "relative_path": "api/Paramore.Fences.Timeout.OnTimeoutArguments.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Polly.Timeout.OnTimeoutArguments",
-      "Summary": "<p sourcefile=\"api/Polly.Timeout.OnTimeoutArguments.yml\" sourcestartlinenumber=\"1\">Arguments used by the timeout strategy to notify that a timeout occurred.</p>\n"
+      "Title": "Paramore.Fences.Timeout.OnTimeoutArguments",
+      "Summary": "<p sourcefile=\"api/Paramore.Fences.Timeout.OnTimeoutArguments.yml\" sourcestartlinenumber=\"1\">Arguments used by the timeout strategy to notify that a timeout occurred.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Polly.Timeout.TimeoutGeneratorArguments.yml",
+      "source_relative_path": "api/Paramore.Fences.Timeout.TimeoutGeneratorArguments.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Polly.Timeout.TimeoutGeneratorArguments.html"
+          "relative_path": "api/Paramore.Fences.Timeout.TimeoutGeneratorArguments.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Polly.Timeout.TimeoutGeneratorArguments",
-      "Summary": "<p sourcefile=\"api/Polly.Timeout.TimeoutGeneratorArguments.yml\" sourcestartlinenumber=\"1\">Arguments used by the timeout strategy to retrieve a timeout for current execution.</p>\n"
+      "Title": "Paramore.Fences.Timeout.TimeoutGeneratorArguments",
+      "Summary": "<p sourcefile=\"api/Paramore.Fences.Timeout.TimeoutGeneratorArguments.yml\" sourcestartlinenumber=\"1\">Arguments used by the timeout strategy to retrieve a timeout for current execution.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Polly.Timeout.TimeoutRejectedException.yml",
+      "source_relative_path": "api/Paramore.Fences.Timeout.TimeoutRejectedException.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Polly.Timeout.TimeoutRejectedException.html"
+          "relative_path": "api/Paramore.Fences.Timeout.TimeoutRejectedException.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Polly.Timeout.TimeoutRejectedException",
-      "Summary": "<p sourcefile=\"api/Polly.Timeout.TimeoutRejectedException.yml\" sourcestartlinenumber=\"1\">Exception thrown when a delegate executed through a timeout resilience strategy does not complete, before the configured timeout.</p>\n"
+      "Title": "Paramore.Fences.Timeout.TimeoutRejectedException",
+      "Summary": "<p sourcefile=\"api/Paramore.Fences.Timeout.TimeoutRejectedException.yml\" sourcestartlinenumber=\"1\">Exception thrown when a delegate executed through a timeout resilience strategy does not complete, before the configured timeout.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Polly.Timeout.TimeoutStrategyOptions.yml",
+      "source_relative_path": "api/Paramore.Fences.Timeout.TimeoutStrategyOptions.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Polly.Timeout.TimeoutStrategyOptions.html"
+          "relative_path": "api/Paramore.Fences.Timeout.TimeoutStrategyOptions.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Polly.Timeout.TimeoutStrategyOptions",
-      "Summary": "<p sourcefile=\"api/Polly.Timeout.TimeoutStrategyOptions.yml\" sourcestartlinenumber=\"1\">Represents the options for the timeout strategy.</p>\n"
+      "Title": "Paramore.Fences.Timeout.TimeoutStrategyOptions",
+      "Summary": "<p sourcefile=\"api/Paramore.Fences.Timeout.TimeoutStrategyOptions.yml\" sourcestartlinenumber=\"1\">Represents the options for the timeout strategy.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Polly.Timeout.yml",
+      "source_relative_path": "api/Paramore.Fences.Timeout.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Polly.Timeout.html"
+          "relative_path": "api/Paramore.Fences.Timeout.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Polly.Timeout",
+      "Title": "Paramore.Fences.Timeout",
       "Summary": null
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Polly.TimeoutResiliencePipelineBuilderExtensions.yml",
+      "source_relative_path": "api/Paramore.Fences.TimeoutResiliencePipelineBuilderExtensions.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Polly.TimeoutResiliencePipelineBuilderExtensions.html"
+          "relative_path": "api/Paramore.Fences.TimeoutResiliencePipelineBuilderExtensions.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Polly.TimeoutResiliencePipelineBuilderExtensions",
-      "Summary": "<p sourcefile=\"api/Polly.TimeoutResiliencePipelineBuilderExtensions.yml\" sourcestartlinenumber=\"1\">Extensions for adding timeout to <xref href=\"Polly.ResiliencePipelineBuilder\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+      "Title": "Paramore.Fences.TimeoutResiliencePipelineBuilderExtensions",
+      "Summary": "<p sourcefile=\"api/Paramore.Fences.TimeoutResiliencePipelineBuilderExtensions.yml\" sourcestartlinenumber=\"1\">Extensions for adding timeout to <xref href=\"Paramore.Fences.ResiliencePipelineBuilder\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Polly.yml",
+      "source_relative_path": "api/Paramore.Fences.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Polly.html"
+          "relative_path": "api/Paramore.Fences.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "Polly",
+      "Title": "Paramore.Fences",
       "Summary": null
     },
     {
@@ -1991,16 +2021,6 @@
     },
     {
       "type": "Conceptual",
-      "source_relative_path": "community/cheat-sheets.md",
-      "output": {
-        ".html": {
-          "relative_path": "community/cheat-sheets.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
       "source_relative_path": "community/git-workflow.md",
       "output": {
         ".html": {
@@ -2025,26 +2045,6 @@
       "output": {
         ".html": {
           "relative_path": "community/libraries-and-contributions.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
-      "source_relative_path": "community/polly-contrib.md",
-      "output": {
-        ".html": {
-          "relative_path": "community/polly-contrib.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
-      "source_relative_path": "community/resources.md",
-      "output": {
-        ".html": {
-          "relative_path": "community/resources.html"
         }
       },
       "version": ""
@@ -2146,111 +2146,11 @@
       "version": ""
     },
     {
-      "type": "Resource",
-      "source_relative_path": "media/cheat-sheet-behavior.pdf",
+      "type": "Conceptual",
+      "source_relative_path": "migration-from-polly.md",
       "output": {
-        "resource": {
-          "relative_path": "media/cheat-sheet-behavior.pdf"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "Resource",
-      "source_relative_path": "media/cheat-sheet-circuit-breaker.pdf",
-      "output": {
-        "resource": {
-          "relative_path": "media/cheat-sheet-circuit-breaker.pdf"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "Resource",
-      "source_relative_path": "media/cheat-sheet-fallback.pdf",
-      "output": {
-        "resource": {
-          "relative_path": "media/cheat-sheet-fallback.pdf"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "Resource",
-      "source_relative_path": "media/cheat-sheet-fault.pdf",
-      "output": {
-        "resource": {
-          "relative_path": "media/cheat-sheet-fault.pdf"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "Resource",
-      "source_relative_path": "media/cheat-sheet-hedging.pdf",
-      "output": {
-        "resource": {
-          "relative_path": "media/cheat-sheet-hedging.pdf"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "Resource",
-      "source_relative_path": "media/cheat-sheet-latency.pdf",
-      "output": {
-        "resource": {
-          "relative_path": "media/cheat-sheet-latency.pdf"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "Resource",
-      "source_relative_path": "media/cheat-sheet-outcome.pdf",
-      "output": {
-        "resource": {
-          "relative_path": "media/cheat-sheet-outcome.pdf"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "Resource",
-      "source_relative_path": "media/cheat-sheet-rate-limiter.pdf",
-      "output": {
-        "resource": {
-          "relative_path": "media/cheat-sheet-rate-limiter.pdf"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "Resource",
-      "source_relative_path": "media/cheat-sheet-retry.pdf",
-      "output": {
-        "resource": {
-          "relative_path": "media/cheat-sheet-retry.pdf"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "Resource",
-      "source_relative_path": "media/cheat-sheet-timeout.pdf",
-      "output": {
-        "resource": {
-          "relative_path": "media/cheat-sheet-timeout.pdf"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "Resource",
-      "source_relative_path": "media/simmy-logo.png",
-      "output": {
-        "resource": {
-          "relative_path": "media/simmy-logo.png"
+        ".html": {
+          "relative_path": "migration-from-polly.html"
         }
       },
       "version": ""

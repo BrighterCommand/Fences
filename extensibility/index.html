@@ -2,9 +2,9 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-      <title>Extensibility | Polly </title>
+      <title>Extensibility | Fences </title>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta name="title" content="Extensibility | Polly ">
+      <meta name="title" content="Extensibility | Fences ">
       
       
       <link rel="icon" href="../icon.png">
@@ -16,7 +16,7 @@
       <meta name="docfx:rel" content="../">
       
       
-      <meta name="docfx:docurl" content="https://github.com/App-vNext/Polly/blob/main/docs/extensibility/index.md/#L1">
+      <meta name="docfx:docurl" content="https://github.com/BrighterCommand/Fences/blob/main/docs/extensibility/index.md/#L1">
       <meta name="loc:inThisArticle" content="In this article">
       <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
       <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
@@ -44,8 +44,8 @@
       <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
         <div class="container-xxl flex-nowrap">
           <a class="navbar-brand" href="../index.html">
-            <img id="logo" class="svg" src="../icon.png" alt="Polly">
-            Polly
+            <img id="logo" class="svg" src="../icon.png" alt="Fences">
+            Fences
           </a>
           <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
             <i class="bi bi-three-dots"></i>
@@ -87,7 +87,7 @@
         <article data-uid="">
 <h1 id="extensibility">Extensibility</h1>
 
-<p>This article explains how to extend Polly with new <a href="../strategies/index.html">resilience strategies</a>. Polly identifies two types of resilience strategies:</p>
+<p>This article explains how to extend Fences with new <a href="../strategies/index.html">resilience strategies</a>. Fences identifies two types of resilience strategies:</p>
 <ul>
 <li><strong>Reactive</strong>: These strategies handle specific exceptions that are thrown, or results that are returned, by the callbacks executed through the strategy.</li>
 <li><strong>Proactive</strong>: Unlike reactive strategies, proactive strategies do not focus on handling errors by the callbacks might throw or return. They can make proactive decisions to cancel or reject the execution of callbacks (e.g., using a rate limiter or a timeout resilience strategy).</li>
@@ -96,8 +96,8 @@
 <h2 id="basics-of-extensibility">Basics of extensibility</h2>
 <p>Regardless of whether the strategy is reactive or proactive, every new resilience strategy should include the following components:</p>
 <ul>
-<li>The strategy itself which should inherit from <a class="xref" href="../api/Polly.ResilienceStrategy.html"><code>ResilienceStrategy</code></a></li>
-<li>Options detailing the strategy's configuration. This should inherit from <a class="xref" href="../api/Polly.ResilienceStrategyOptions.html"><code>ResilienceStrategyOptions</code></a>.</li>
+<li>The strategy itself which should inherit from <a class="xref" href="../api/Paramore.Fences.ResilienceStrategy.html"><code>ResilienceStrategy</code></a></li>
+<li>Options detailing the strategy's configuration. This should inherit from <a class="xref" href="../api/Paramore.Fences.ResilienceStrategyOptions.html"><code>ResilienceStrategyOptions</code></a>.</li>
 <li>Extensions for <code>ResiliencePipelineBuilder</code> or <code>ResiliencePipelineBuilder&lt;T&gt;</code> to register the strategy into the pipeline.</li>
 <li>Custom argument types for delegates that contain information about a specific event.</li>
 </ul>
@@ -222,7 +222,7 @@ public readonly struct OnThresholdExceededArguments
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/App-vNext/Polly/blob/main/docs/extensibility/index.md/#L1" class="edit-link">Edit this page</a>
+          <a href="https://github.com/BrighterCommand/Fences/blob/main/docs/extensibility/index.md/#L1" class="edit-link">Edit this page</a>
         </div>
 
         <div class="next-article d-print-none border-top" id="nextArticle"></div>

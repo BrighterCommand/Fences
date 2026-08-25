@@ -2,9 +2,9 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-      <title>Custom policies | Polly </title>
+      <title>Custom policies | Fences </title>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta name="title" content="Custom policies | Polly ">
+      <meta name="title" content="Custom policies | Fences ">
       
       
       <link rel="icon" href="../icon.png">
@@ -16,7 +16,7 @@
       <meta name="docfx:rel" content="../">
       
       
-      <meta name="docfx:docurl" content="https://github.com/App-vNext/Polly/blob/main/docs/v7/extensibility.md/#L1">
+      <meta name="docfx:docurl" content="https://github.com/BrighterCommand/Fences/blob/main/docs/v7/extensibility.md/#L1">
       <meta name="loc:inThisArticle" content="In this article">
       <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
       <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
@@ -44,8 +44,8 @@
       <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
         <div class="container-xxl flex-nowrap">
           <a class="navbar-brand" href="../index.html">
-            <img id="logo" class="svg" src="../icon.png" alt="Polly">
-            Polly
+            <img id="logo" class="svg" src="../icon.png" alt="Fences">
+            Fences
           </a>
           <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
             <i class="bi bi-three-dots"></i>
@@ -73,7 +73,12 @@
         <article data-uid="">
 <h1 id="custom-policies">Custom policies</h1>
 
-<p>From Polly v7.0 it is possible to <a href="https://www.thepollyproject.org/2019/02/13/introducing-custom-polly-policies-and-polly-contrib-custom-policies-part-i/">create your own custom policies</a> outside Polly. These custom policies can integrate in to all the existing goodness from Polly: the <code>Policy.Handle&lt;&gt;()</code> syntax; <code>PolicyWrap</code>; all the execution-dispatch overloads.</p>
+<p>This page covers the <strong>v7 API</strong>, which Fences ships in the <code>Paramore.Fences</code> package. If you are writing new code, prefer the v8 API and see <a href="../extensibility/index.html">Extensibility</a> instead.</p>
+<div class="NOTE">
+<h5>Note</h5>
+<p>The articles linked below were written for Polly, which Fences forked from. They describe the same v7 extensibility model that Fences carries, so they still apply — with <code>Polly</code> read as <code>Paramore.Fences</code> throughout. Fences does not host its own copies, so the links go to Polly's site.</p>
+</div>
+<p>From v7.0 of the policy API it is possible to <a href="https://www.thepollyproject.org/2019/02/13/introducing-custom-polly-policies-and-polly-contrib-custom-policies-part-i/">create your own custom policies</a> outside the library. These custom policies integrate with all the existing machinery: the <code>Policy.Handle&lt;&gt;()</code> syntax; <code>PolicyWrap</code>; all the execution-dispatch overloads.</p>
 <p>For more info see our blog series:</p>
 <ul>
 <li><a href="https://www.thepollyproject.org/2019/02/13/introducing-custom-polly-policies-and-polly-contrib-custom-policies-part-i/">Part I: Introducing custom Polly policies and the Polly.Contrib</a></li>
@@ -81,12 +86,12 @@
 <li><a href="https://www.thepollyproject.org/2019/02/13/authoring-a-reactive-polly-policy-custom-policies-part-iii-2/">Part III: Authoring a reactive custom policy</a> (a policy which react to faults).</li>
 <li><a href="https://www.thepollyproject.org/2019/02/13/custom-policies-for-all-execution-types-custom-policies-part-iv/">Part IV: Custom policies for all execution types</a>: sync and async, generic and non-generic.</li>
 </ul>
-<p>We provide a <a href="https://github.com/Polly-Contrib/Polly.Contrib.CustomPolicyTemplates">starter template for a custom policy</a> for developing your own custom policy.</p>
+<p>Polly-Contrib provides a <a href="https://github.com/Polly-Contrib/Polly.Contrib.CustomPolicyTemplates">starter template for a custom policy</a>. It targets Polly, so its package references need swapping for Fences' before use.</p>
 
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/App-vNext/Polly/blob/main/docs/v7/extensibility.md/#L1" class="edit-link">Edit this page</a>
+          <a href="https://github.com/BrighterCommand/Fences/blob/main/docs/v7/extensibility.md/#L1" class="edit-link">Edit this page</a>
         </div>
 
         <div class="next-article d-print-none border-top" id="nextArticle"></div>

@@ -2,9 +2,9 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-      <title>Circuit breaker resilience strategy | Polly </title>
+      <title>Circuit breaker resilience strategy | Fences </title>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta name="title" content="Circuit breaker resilience strategy | Polly ">
+      <meta name="title" content="Circuit breaker resilience strategy | Fences ">
       
       
       <link rel="icon" href="../icon.png">
@@ -16,7 +16,7 @@
       <meta name="docfx:rel" content="../">
       
       
-      <meta name="docfx:docurl" content="https://github.com/App-vNext/Polly/blob/main/docs/strategies/circuit-breaker.md/#L1">
+      <meta name="docfx:docurl" content="https://github.com/BrighterCommand/Fences/blob/main/docs/strategies/circuit-breaker.md/#L1">
       <meta name="loc:inThisArticle" content="In this article">
       <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
       <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
@@ -44,8 +44,8 @@
       <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
         <div class="container-xxl flex-nowrap">
           <a class="navbar-brand" href="../index.html">
-            <img id="logo" class="svg" src="../icon.png" alt="Polly">
-            Polly
+            <img id="logo" class="svg" src="../icon.png" alt="Fences">
+            Fences
           </a>
           <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
             <i class="bi bi-three-dots"></i>
@@ -91,8 +91,8 @@
 <ul>
 <li><strong>Option(s)</strong>:
 <ul>
-<li><a class="xref" href="../api/Polly.CircuitBreaker.CircuitBreakerStrategyOptions.html"><code>CircuitBreakerStrategyOptions</code></a></li>
-<li><a class="xref" href="../api/Polly.CircuitBreaker.CircuitBreakerStrategyOptions-1.html"><code>CircuitBreakerStrategyOptions&lt;T&gt;</code></a></li>
+<li><a class="xref" href="../api/Paramore.Fences.CircuitBreaker.CircuitBreakerStrategyOptions.html"><code>CircuitBreakerStrategyOptions</code></a></li>
+<li><a class="xref" href="../api/Paramore.Fences.CircuitBreaker.CircuitBreakerStrategyOptions-1.html"><code>CircuitBreakerStrategyOptions&lt;T&gt;</code></a></li>
 </ul>
 </li>
 <li><strong>Extension(s)</strong>:
@@ -103,8 +103,8 @@
 <li><strong>Strategy Type</strong>: Reactive</li>
 <li><strong>Exception(s)</strong>:
 <ul>
-<li><a class="xref" href="../api/Polly.CircuitBreaker.BrokenCircuitException.html"><code>BrokenCircuitException</code></a>: Thrown when a circuit is broken and the action was not executed.</li>
-<li><a class="xref" href="../api/Polly.CircuitBreaker.IsolatedCircuitException.html"><code>IsolatedCircuitException</code></a>: Thrown when a circuit is isolated (held open) by manual override.</li>
+<li><a class="xref" href="../api/Paramore.Fences.CircuitBreaker.BrokenCircuitException.html"><code>BrokenCircuitException</code></a>: Thrown when a circuit is broken and the action was not executed.</li>
+<li><a class="xref" href="../api/Paramore.Fences.CircuitBreaker.IsolatedCircuitException.html"><code>IsolatedCircuitException</code></a>: Thrown when a circuit is isolated (held open) by manual override.</li>
 </ul>
 </li>
 </ul>
@@ -117,7 +117,7 @@
 <h2 id="usage">Usage</h2>
 <!-- snippet: circuit-breaker -->
 <pre><code class="lang-cs">// Circuit breaker with default options.
-// See https://www.pollydocs.org/strategies/circuit-breaker#defaults for defaults.
+// See https://brightercommand.github.io/Fences/strategies/circuit-breaker#defaults for defaults.
 var optionsDefaults = new CircuitBreakerStrategyOptions();
 
 // Circuit breaker with customized options:
@@ -233,7 +233,7 @@ Operation failed too many times please try again later.
 <li><code>TelemetrySource</code>.</li>
 </ul>
 <p>If a <code>TimeSpan</code> value is provided to the optional <code>RetryAfter</code> property then this indicates that circuit is open for at least this time period and you should retry your operation no sooner than the value given.</p>
-<p>The <code>TelemetrySource</code> property is a <a class="xref" href="../api/Polly.Telemetry.ResilienceTelemetrySource.html"><code>ResilienceTelemetrySource</code></a> which allows you retrieve information such as the executed pipeline and strategy. These can be useful if you have multiple circuit breaker strategies in your pipeline and you need to know which strategy caused the <code>BrokenCircuitException</code> to be thrown.</p>
+<p>The <code>TelemetrySource</code> property is a <a class="xref" href="../api/Paramore.Fences.Telemetry.ResilienceTelemetrySource.html"><code>ResilienceTelemetrySource</code></a> which allows you retrieve information such as the executed pipeline and strategy. These can be useful if you have multiple circuit breaker strategies in your pipeline and you need to know which strategy caused the <code>BrokenCircuitException</code> to be thrown.</p>
 <h2 id="defaults">Defaults</h2>
 <table>
 <thead>
@@ -344,7 +344,7 @@ In other words, the circuit will not break even if all of the executions failed 
     CustomException: Exception of type 'CustomException' was thrown.
         at Program.&lt;&gt;c.&lt;&lt;Main&gt;b__0_1&gt;d.MoveNext()
         ...
-        at Polly.ResiliencePipeline.&lt;&gt;c__8`1.&lt;&lt;ExecuteAsync&gt;b__8_0&gt;d.MoveNext() in /_/src/Polly.Core/ResiliencePipeline.AsyncT.cs:line 95
+        at Paramore.Fences.ResiliencePipeline.&lt;&gt;c__8`1.&lt;&lt;ExecuteAsync&gt;b__8_0&gt;d.MoveNext() in /_/src/Paramore.Fences.Core/ResiliencePipeline.AsyncT.cs:line 95
 
 Resilience event occurred. EventName: 'OnCircuitHalfOpened', Source: 'MyPipeline/MyPipelineInstance/MyCircuitBreakerStrategy', Operation Key: 'MyCircuitedOperation', Result: ''
 
@@ -583,7 +583,7 @@ direction LR
 <li><a href="https://web.archive.org/web/20160106203951/http://thatextramile.be/blog/2008/05/the-circuit-breaker">Original Circuit Breaking Article</a></li>
 </ul>
 <h2 id="anti-patterns">Anti-patterns</h2>
-<p>Over the years, many developers have used Polly in various ways. Some of these
+<p>Over the years, many developers have used Fences in various ways. Some of these
 recurring patterns may not be ideal. The sections below highlight anti-patterns to avoid.</p>
 <h3 id="using-different-sleep-duration-between-retry-attempts-based-on-circuit-breaker-state">Using different sleep duration between retry attempts based on Circuit Breaker state</h3>
 <p>Imagine that we have an inner Circuit Breaker and an outer Retry strategies.</p>
@@ -808,7 +808,7 @@ else
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/App-vNext/Polly/blob/main/docs/strategies/circuit-breaker.md/#L1" class="edit-link">Edit this page</a>
+          <a href="https://github.com/BrighterCommand/Fences/blob/main/docs/strategies/circuit-breaker.md/#L1" class="edit-link">Edit this page</a>
         </div>
 
         <div class="next-article d-print-none border-top" id="nextArticle"></div>
