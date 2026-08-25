@@ -1,8 +1,9 @@
 using System.Net.Http;
-using Polly.Retry;
-using Polly.Simmy;
-using Polly.Simmy.Behavior;
-using Polly.Simmy.Latency;
+using Paramore.Fences;
+using Paramore.Fences.Retry;
+using Paramore.Fences.Simmy;
+using Paramore.Fences.Simmy.Behavior;
+using Paramore.Fences.Simmy.Latency;
 
 namespace Snippets.Docs;
 

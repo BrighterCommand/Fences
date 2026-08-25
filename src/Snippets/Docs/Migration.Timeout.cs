@@ -1,4 +1,5 @@
 ﻿using System.Net.Http;
+using Paramore.Fences;
 
 namespace Snippets.Docs;
 

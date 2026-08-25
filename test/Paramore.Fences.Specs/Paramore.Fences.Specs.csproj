@@ -1,0 +1,32 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>net10.0;net9.0;net8.0</TargetFrameworks>
+    <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('Windows'))">$(TargetFrameworks);net481</TargetFrameworks>
+    <Nullable>enable</Nullable>
+    <ProjectType>Test</ProjectType>
+    <Threshold>94,94,91</Threshold>
+    <Include>[Paramore.Fences]*</Include>
+    <IncludeFencesUsings>true</IncludeFencesUsings>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="..\Shared\StrongNameTests.cs" Link="StrongNameTests.cs" />
+    <Compile Include="..\Shared\TestCancellation.cs" Link="TestCancellation.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Using Include="NSubstitute" />
+    <Using Include="Paramore.Fences.Specs.DictionaryHelpers" Static="true" />
+    <Using Include="Paramore.Fences.Specs.Helpers" />
+    <Using Include="Paramore.Fences.Specs.Helpers.Bulkhead" />
+    <Using Include="Paramore.Fences.Specs.Helpers.Caching" />
+    <Using Include="Paramore.Fences.Specs.Helpers.Custom.AddBehaviourIfHandle" />
+    <Using Include="Paramore.Fences.Specs.Helpers.Custom.PreExecute" />
+    <Using Include="Paramore.Fences.Specs.Helpers.RateLimit" />
+    <Using Include="Xunit" />
+    <Using Include="Xunit.Abstractions" />
+    <Using Include="Xunit.Sdk" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Paramore.Fences.TestUtils\Paramore.Fences.TestUtils.csproj" />
+    <ProjectReference Include="..\..\src\Paramore.Fences\Paramore.Fences.csproj" />
+  </ItemGroup>
+</Project>

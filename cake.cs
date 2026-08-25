@@ -16,7 +16,7 @@ var configuration = Argument<string>("configuration", "Release");
 // GLOBAL VARIABLES
 ///////////////////////////////////////////////////////////////////////////////
 
-var projectName = "Polly";
+var projectName = "Paramore.Fences";
 
 var solutions = GetFiles("./**/*.slnx");
 var solutionPaths = solutions.Select(solution => solution.GetDirectory());
@@ -120,7 +120,7 @@ Task("__BuildSolutions")
 Task("__ValidateAot")
     .Does(() =>
 {
-    var aotProject = MakeAbsolute(File("./test/Polly.AotTest/Polly.AotTest.csproj"));
+    var aotProject = MakeAbsolute(File("./test/Paramore.Fences.AotTest/Paramore.Fences.AotTest.csproj"));
     var settings = new DotNetPublishSettings
     {
         Configuration = configuration,
@@ -178,11 +178,11 @@ Task("__CreateNuGetPackages")
 
     string[] packages =
     [
-        System.IO.Path.Combine(srcDir, "Polly.Core", "Polly.Core.csproj"),
-        System.IO.Path.Combine(srcDir, "Polly", "Polly.csproj"),
-        System.IO.Path.Combine(srcDir, "Polly.RateLimiting", "Polly.RateLimiting.csproj"),
-        System.IO.Path.Combine(srcDir, "Polly.Extensions", "Polly.Extensions.csproj"),
-        System.IO.Path.Combine(srcDir, "Polly.Testing", "Polly.Testing.csproj"),
+        System.IO.Path.Combine(srcDir, "Paramore.Fences.Core", "Paramore.Fences.Core.csproj"),
+        System.IO.Path.Combine(srcDir, "Paramore.Fences", "Paramore.Fences.csproj"),
+        System.IO.Path.Combine(srcDir, "Paramore.Fences.RateLimiting", "Paramore.Fences.RateLimiting.csproj"),
+        System.IO.Path.Combine(srcDir, "Paramore.Fences.Extensions", "Paramore.Fences.Extensions.csproj"),
+        System.IO.Path.Combine(srcDir, "Paramore.Fences.Testing", "Paramore.Fences.Testing.csproj"),
     ];
 
     Information("Building NuGet packages");
@@ -237,35 +237,35 @@ Task("MutationTestsCore")
     .IsDependentOn("__Setup")
     .Does((_) =>
 {
-    RunMutationTests(File("./src/Polly.Core/Polly.Core.csproj"), File("./test/Polly.Core.Tests/Polly.Core.Tests.csproj"));
+    RunMutationTests(File("./src/Paramore.Fences.Core/Paramore.Fences.Core.csproj"), File("./test/Paramore.Fences.Core.Tests/Paramore.Fences.Core.Tests.csproj"));
 });
 
 Task("MutationTestsRateLimiting")
     .IsDependentOn("__Setup")
     .Does((_) =>
 {
-    RunMutationTests(File("./src/Polly.RateLimiting/Polly.RateLimiting.csproj"), File("./test/Polly.RateLimiting.Tests/Polly.RateLimiting.Tests.csproj"));
+    RunMutationTests(File("./src/Paramore.Fences.RateLimiting/Paramore.Fences.RateLimiting.csproj"), File("./test/Paramore.Fences.RateLimiting.Tests/Paramore.Fences.RateLimiting.Tests.csproj"));
 });
 
 Task("MutationTestsExtensions")
     .IsDependentOn("__Setup")
     .Does((_) =>
 {
-    RunMutationTests(File("./src/Polly.Extensions/Polly.Extensions.csproj"), File("./test/Polly.Extensions.Tests/Polly.Extensions.Tests.csproj"));
+    RunMutationTests(File("./src/Paramore.Fences.Extensions/Paramore.Fences.Extensions.csproj"), File("./test/Paramore.Fences.Extensions.Tests/Paramore.Fences.Extensions.Tests.csproj"));
 });
 
 Task("MutationTestsTesting")
     .IsDependentOn("__Setup")
     .Does((_) =>
 {
-    RunMutationTests(File("./src/Polly.Testing/Polly.Testing.csproj"), File("./test/Polly.Testing.Tests/Polly.Testing.Tests.csproj"));
+    RunMutationTests(File("./src/Paramore.Fences.Testing/Paramore.Fences.Testing.csproj"), File("./test/Paramore.Fences.Testing.Tests/Paramore.Fences.Testing.Tests.csproj"));
 });
 
 Task("MutationTestsLegacy")
     .IsDependentOn("__Setup")
     .Does((_) =>
 {
-    RunMutationTests(File("./src/Polly/Polly.csproj"), File("./test/Polly.Specs/Polly.Specs.csproj"));
+    RunMutationTests(File("./src/Paramore.Fences/Paramore.Fences.csproj"), File("./test/Paramore.Fences.Specs/Paramore.Fences.Specs.csproj"));
 });
 
 Task("MutationTests")
@@ -311,7 +311,7 @@ void RunMutationTests(FilePath target, FilePath testProject)
     var moduleName = target.GetFilenameWithoutExtension().ToString();
     var strykerConfigPath = strykerConfig.FullPath;
 
-    if (moduleName == "Polly.Testing")
+    if (moduleName == "Paramore.Fences.Testing")
     {
         strykerConfigPath = PatchStrykerConfig(strykerConfigPath, (config) => config.Remove("ignore-mutations"));
     }

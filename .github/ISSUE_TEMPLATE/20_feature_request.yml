@@ -6,7 +6,9 @@ body:
 - type: markdown
   attributes:
     value: |
-      Please check for an existing issue and our documentation at [pollydocs.org](https://www.pollydocs.org/) before submitting a feature request.
+      Please check for an existing issue and [our documentation](https://brightercommand.github.io/Fences/) before submitting a feature request.
+
+      Fences is a community fork of [Polly](https://github.com/App-vNext/Polly) and tracks it closely for now, so a request that would be better made upstream may get a slower answer here.
 - type: textarea
   attributes:
     label: Is your feature request related to a specific problem? Or an existing feature?

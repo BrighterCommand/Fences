@@ -10,9 +10,7 @@ If you want to learn more about chaos engineering:
 
 ## Chaos engineering with Simmy
 
-[Simmy][simmy] is a major new addition to Polly library, adding a chaos engineering and fault-injection dimension to Polly, through the provision of strategies to selectively inject faults, latency, custom behavior or fake results.
-
-![Simmy](../media/simmy-logo.png)
+The chaos strategies add a chaos engineering and fault-injection dimension to Fences, through strategies that selectively inject faults, latency, custom behavior or fake results. They began life as [Simmy][simmy], a Polly-Contrib project, and were absorbed into the v8 API; Fences inherits them, in the `Paramore.Fences.Simmy` namespace.
 
 ## Usage
 
@@ -124,7 +122,7 @@ sequenceDiagram
 > [!NOTE]
 > It is usual to place the chaos strategy as the last strategy in the resilience pipeline.
 > By placing the chaos strategies as last, they subvert the usual outbound call at the last minute, substituting their fault or adding extra latency, etc.
-> The existing resilience strategies - further out in the `ResiliencePipeline` - still apply, so you can test how the Polly resilience strategies you have configured handle the chaos/faults injected by Simmy.
+> The existing resilience strategies - further out in the `ResiliencePipeline` - still apply, so you can test how the Fences resilience strategies you have configured handle the chaos/faults injected by Simmy.
 >
 > The `AddChaosFault` `AddChaosLatency` `AddChaosOutcome` `AddChaosBehavior` will take effect sequentially if you combine them together.
 > In the above example, we use **fault first then latency strategy**, it can save fault waiting time. If you put `AddChaosLatency` before `AddChaosFault`, you will get different behavior.
@@ -134,7 +132,7 @@ sequenceDiagram
 This section highlights the major differences compared to the [`Polly.Contrib.Simmy`](https://github.com/Polly-Contrib/Simmy) library:
 
 - **From `MonkeyPolicy` to `ChaosStrategy`**: We've updated the terminology from `Monkey` to `Chaos` to better align with the well-recognized principles of *chaos engineering*.
-- **Unified configuration options**: The `InjectOptionsBase` and `InjectOptionsAsyncBase` are now consolidated into `ChaosStrategyOptions`. This change brings Simmy in line with the Polly v8 API, offering built-in support for options-based configuration and seamless integration of synchronous and asynchronous executions.
+- **Unified configuration options**: The `InjectOptionsBase` and `InjectOptionsAsyncBase` are now consolidated into `ChaosStrategyOptions`. This change brings the chaos strategies in line with the v8 API, offering built-in support for options-based configuration and seamless integration of synchronous and asynchronous executions.
 - **Chaos strategies enabled by default**: Adding a chaos strategy (previously known as monkey policy) now means it's active right away. This is a departure from earlier versions, where the monkey policy had to be explicitly enabled.
 - **API changes**: The new version of Simmy introduces several API updates. While this list isn't complete, it includes key changes like renaming `Inject` to `AddChaos` and switching from `Result` to `Outcome`. Here are some specific renames:
 
@@ -145,7 +143,7 @@ This section highlights the major differences compared to the [`Polly.Contrib.Si
 | `InjectBehavior`  | `AddChaosBehavior` |
 | `InjectLatency`   | `AddChaosLatency`  |
 
-- **Sync and async unification**: Before, Simmy had various methods to set policies like `InjectLatency`, `InjectLatencyAsync`, `InjectLatency<T>`, and `InjectLatencyAsync<T>`. With the new version based on Polly v8, these methods have been combined into a single `AddChaosLatency` extension that works for both `ResiliencePipelineBuilder` and `ResiliencePipelineBuilder<T>`. These rules are covering all types of chaos strategies (Outcome, Fault, Latency, and Behavior).
+- **Sync and async unification**: Before, Simmy had various methods to set policies like `InjectLatency`, `InjectLatencyAsync`, `InjectLatency<T>`, and `InjectLatencyAsync<T>`. With the version based on the v8 API, these methods have been combined into a single `AddChaosLatency` extension that works for both `ResiliencePipelineBuilder` and `ResiliencePipelineBuilder<T>`. These rules are covering all types of chaos strategies (Outcome, Fault, Latency, and Behavior).
 
 ## Motivation
 
@@ -156,7 +154,7 @@ There are a lot of questions when it comes to chaos engineering and making sure 
 - How will my system behave if X happens?
 - How can I test without waiting for a handled (or even unhandled) exception to happen in my production environment?
 
-Using Polly helps introduce resilience to a project, but we don't want to have to wait for expected or unexpected failures to test it out. A resilience could be wrongly implemented; testing the scenarios is not straightforward; and mocking failure of some dependencies (for example a cloud SaaS or PaaS service) is not always straightforward.
+Using Fences helps introduce resilience to a project, but we don't want to have to wait for expected or unexpected failures to test it out. A resilience could be wrongly implemented; testing the scenarios is not straightforward; and mocking failure of some dependencies (for example a cloud SaaS or PaaS service) is not always straightforward.
 
 ### What is needed to simulate chaotic scenarios?
 
@@ -167,7 +165,7 @@ Using Polly helps introduce resilience to a project, but we don't want to have t
 
 ## Chaos strategies
 
-Chaos strategies (formerly known as Monkey strategies) are in essence a [Resilience strategy](../strategies/index.md#built-in-strategies), which means, as a *Resilience Strategy* is the minimum unit of resilience for Polly, a *Chaos Strategy* is the minimum unit of chaos for Simmy.
+Chaos strategies (formerly known as Monkey strategies) are in essence a [Resilience strategy](../strategies/index.md#built-in-strategies), which means, as a *Resilience Strategy* is the minimum unit of resilience for Fences, a *Chaos Strategy* is the minimum unit of chaos.
 
 ### Built-in strategies
 
@@ -180,7 +178,7 @@ Chaos strategies (formerly known as Monkey strategies) are in essence a [Resilie
 
 ## Common options across strategies
 
-All the strategies' options implement the [`ChaosStrategyOptions`](xref:Polly.Simmy.ChaosStrategyOptions) class as it contains the basic configuration for every chaos strategy.
+All the strategies' options implement the [`ChaosStrategyOptions`](xref:Paramore.Fences.Simmy.ChaosStrategyOptions) class as it contains the basic configuration for every chaos strategy.
 
 > [!IMPORTANT]
 > Please bear in mind that with the V8 API the chaos strategies are enabled by default. So, you can opt-out of them one-by-one either via the `Enabled` or via the `EnabledGenerator` property.
@@ -203,7 +201,7 @@ All the strategies' options implement the [`ChaosStrategyOptions`](xref:Polly.Si
 
 ## Telemetry
 
-The telemetry of chaos strategies is seamlessly integrated with Polly [telemetry infrastructure](../advanced/telemetry.md). The chaos strategies produce the following information events:
+The telemetry of chaos strategies is seamlessly integrated with Fences [telemetry infrastructure](../advanced/telemetry.md). The chaos strategies produce the following information events:
 
 - [`Chaos.OnFault`](fault.md#telemetry)
 - [`Chaos.OnOutcome`](outcome.md#telemetry)

@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>net10.0;net9.0;net8.0</TargetFrameworks>
+    <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('Windows'))">$(TargetFrameworks);net481</TargetFrameworks>
+    <ProjectType>Test</ProjectType>
+    <Nullable>enable</Nullable>
+    <Threshold>100</Threshold>
+    <Include>[Paramore.Fences.Testing]*</Include>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="..\Shared\StrongNameTests.cs" Link="StrongNameTests.cs" />
+    <Compile Include="..\Shared\TestCancellation.cs" Link="TestCancellation.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Paramore.Fences.Extensions\Paramore.Fences.Extensions.csproj" />
+    <ProjectReference Include="..\..\src\Paramore.Fences.RateLimiting\Paramore.Fences.RateLimiting.csproj" />
+    <ProjectReference Include="..\..\src\Paramore.Fences.Testing\Paramore.Fences.Testing.csproj" />
+  </ItemGroup>
+  <ItemGroup Condition="'$([MSBuild]::GetTargetFrameworkIdentifier(`$(TargetFramework)`))' == '.NETFramework'">
+    <PackageReference Include="System.Memory" />
+  </ItemGroup>
+</Project>

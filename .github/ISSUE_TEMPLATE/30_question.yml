@@ -6,8 +6,10 @@ body:
 - type: markdown
   attributes:
     value: |
-      Please check for an existing issue and our documentation at [pollydocs.org](https://www.pollydocs.org/) before asking a question.
-      Also consider asking your question on [Stack Overflow](https://stackoverflow.com/questions/tagged/polly) instead.
+      Please check for an existing issue and [our documentation](https://brightercommand.github.io/Fences/) before asking a question.
+      Also consider starting a [discussion](https://github.com/BrighterCommand/Fences/discussions) instead, which is a better fit for open-ended questions.
+
+      Fences is a community fork of [Polly](https://github.com/App-vNext/Polly). Much of the documentation and most Stack Overflow answers written for Polly still apply, but the package and namespace names differ — see [Migrate from Polly](https://brightercommand.github.io/Fences/migration-from-polly.html).
 - type: textarea
   attributes:
     label: What are you wanting to achieve?

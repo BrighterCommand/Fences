@@ -1,7 +1,8 @@
 ﻿using System.Net.Http;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
-using Polly.Registry;
+using Paramore.Fences;
+using Paramore.Fences.Registry;
 using Snippets.Docs.Utils;
 
 namespace Snippets.Docs;

@@ -1,6 +1,7 @@
 ﻿using System.Net;
 using System.Net.Http;
-using Polly.Fallback;
+using Paramore.Fences;
+using Paramore.Fences.Fallback;
 using Snippets.Docs.Utils;
 
 namespace Snippets.Docs;

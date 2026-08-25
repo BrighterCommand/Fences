@@ -3,8 +3,8 @@
 ## About
 
 - **Option(s)**:
-  - [`RetryStrategyOptions`](xref:Polly.Retry.RetryStrategyOptions)
-  - [`RetryStrategyOptions<T>`](xref:Polly.Retry.RetryStrategyOptions`1)
+  - [`RetryStrategyOptions`](xref:Paramore.Fences.Retry.RetryStrategyOptions)
+  - [`RetryStrategyOptions<T>`](xref:Paramore.Fences.Retry.RetryStrategyOptions`1)
 - **Extension(s)**:
   - `AddRetry`
 - **Exception(s)**: -
@@ -18,7 +18,7 @@ The retry **reactive** resilience strategy re-executes the same callback method 
 <!-- snippet: retry -->
 ```cs
 // Retry using the default options.
-// See https://www.pollydocs.org/strategies/retry#defaults for defaults.
+// See https://brightercommand.github.io/Fences/strategies/retry#defaults for defaults.
 var optionsDefaults = new RetryStrategyOptions();
 
 // For instant retries with no delay
@@ -133,7 +133,7 @@ Execution attempt. Source: 'MyPipeline/MyPipelineInstance/MyRetryStrategy', Oper
     System.Exception: Failed
         at Program.<>c.<Main>b__0_1(ResilienceContext ctx)
         ...
-        at Polly.ResiliencePipeline.<>c.<<ExecuteAsync>b__1_0>d.MoveNext() in /_/src/Polly.Core/ResiliencePipeline.Async.cs:line 67
+        at Paramore.Fences.ResiliencePipeline.<>c.<<ExecuteAsync>b__1_0>d.MoveNext() in /_/src/Paramore.Fences.Core/ResiliencePipeline.Async.cs:line 67
 ```
 
 ### Handled case
@@ -145,20 +145,20 @@ Execution attempt. Source: 'MyPipeline/MyPipelineInstance/MyRetryStrategy', Oper
       System.Exception: Failed
          at Program.<>c.<Main>b__0_1(ResilienceContext ctx)
          ...
-         at Polly.ResiliencePipeline.<>c.<<ExecuteAsync>b__1_0>d.MoveNext() in /_/src/Polly.Core/ResiliencePipeline.Async.cs:line 67
+         at Paramore.Fences.ResiliencePipeline.<>c.<<ExecuteAsync>b__1_0>d.MoveNext() in /_/src/Paramore.Fences.Core/ResiliencePipeline.Async.cs:line 67
 
 Resilience event occurred. EventName: 'OnRetry', Source: 'MyPipeline/MyPipelineInstance/MyRetryStrategy', Operation Key: 'MyRetryableOperation', Result: 'Failed'
     System.Exception: Failed
         at Program.<>c.<Main>b__0_1(ResilienceContext ctx)
         ...
-        at Polly.ResiliencePipeline.<>c.<<ExecuteAsync>b__1_0>d.MoveNext() in /_/src/Polly.Core/ResiliencePipeline.Async.cs:line 67
+        at Paramore.Fences.ResiliencePipeline.<>c.<<ExecuteAsync>b__1_0>d.MoveNext() in /_/src/Paramore.Fences.Core/ResiliencePipeline.Async.cs:line 67
 
 
 Execution attempt. Source: 'MyPipeline/MyPipelineInstance/MyRetryStrategy', Operation Key: 'MyRetryableOperation', Result: 'Failed', Handled: 'True', Attempt: '1', Execution Time: 0.1159ms
       System.Exception: Failed
          at Program.<>c.<Main>b__0_1(ResilienceContext ctx)
          ...
-         at Polly.ResiliencePipeline.<>c.<<ExecuteAsync>b__1_0>d.MoveNext() in /_/src/Polly.Core/ResiliencePipeline.Async.cs:line 67
+         at Paramore.Fences.ResiliencePipeline.<>c.<<ExecuteAsync>b__1_0>d.MoveNext() in /_/src/Paramore.Fences.Core/ResiliencePipeline.Async.cs:line 67
 ```
 
 > [!NOTE]
@@ -188,7 +188,7 @@ There are many properties that may contribute to this calculation:
 > [!IMPORTANT]
 > The summarized description below is an implementation detail. It may change in the future without notice.
 
-The `BackoffType` property's data type is the [`DelayBackoffType`](xref:Polly.DelayBackoffType) enumeration. This primarily controls how the calculation is done.
+The `BackoffType` property's data type is the [`DelayBackoffType`](xref:Paramore.Fences.DelayBackoffType) enumeration. This primarily controls how the calculation is done.
 
 ### Constant
 
@@ -343,8 +343,8 @@ The delays column contains an example series of five values to depict the patter
 ---
 
 > [!TIP]
-> For more details please check out the [`RetryHelper`](https://github.com/App-vNext/Polly/blob/main/src/Polly.Core/Retry/RetryHelper.cs)
-> and the [`RetryResilienceStrategy`](https://github.com/App-vNext/Polly/blob/main/src/Polly.Core/Retry/RetryResilienceStrategy.cs) classes.
+> For more details please check out the [`RetryHelper`](https://github.com/BrighterCommand/Fences/blob/main/src/Paramore.Fences.Core/Retry/RetryHelper.cs)
+> and the [`RetryResilienceStrategy`](https://github.com/BrighterCommand/Fences/blob/main/src/Paramore.Fences.Core/Retry/RetryResilienceStrategy.cs) classes.
 
 ## Diagrams
 
@@ -438,7 +438,7 @@ while (!cancellationToken.IsCancellationRequested)
 
 ## Anti-patterns
 
-Over the years, many developers have used Polly in various ways. Some of these
+Over the years, many developers have used Fences in various ways. Some of these
 recurring patterns may not be ideal. The sections below highlight anti-patterns to avoid.
 
 ### Overusing builder methods
@@ -533,7 +533,7 @@ Use a suitable tool to schedule recurring tasks, such as [*Quartz.Net*](https://
 
 **Reasoning**:
 
-- Polly was not designed to support this scenario; its primary purpose is to help manage **brief** transient failures.
+- Fences was not designed to support this scenario; its primary purpose is to help manage **brief** transient failures.
 - Specialized job scheduling tools are more memory-efficient and can be set up to withstand machine failures by using persistent storage.
 
 ### Combining multiple sleep duration strategies

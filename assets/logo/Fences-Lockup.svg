@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="300" viewBox="0 0 256 300">
+  <defs>
+    <linearGradient id="slate" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#C2C7CC"/><stop offset="1" stop-color="#8795A0"/>
+    </linearGradient>
+    <linearGradient id="rail" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#8795A0"/><stop offset="1" stop-color="#6D7984"/>
+    </linearGradient>
+    <linearGradient id="amber" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#F5A623"/><stop offset="1" stop-color="#ED9520"/>
+    </linearGradient>
+  </defs>
+  <g stroke="#354251" stroke-width="10" stroke-linejoin="round" stroke-linecap="round">
+    <rect x="30" y="100" width="196" height="23" rx="3" fill="url(#rail)"/>
+    <rect x="30" y="152" width="196" height="23" rx="3" fill="url(#rail)"/>
+    <path d="M44,206 L44,80 L66,52 L88,80 L88,206 Z"      fill="url(#slate)"/>
+    <path d="M106,206 L106,80 L128,52 L150,80 L150,206 Z" fill="url(#amber)"/>
+    <path d="M168,206 L168,80 L190,52 L212,80 L212,206 Z" fill="url(#slate)"/>
+  </g>
+  <g font-family="BrandonGrotesque-Bold, Brandon Grotesque, Avenir Next, Helvetica Neue, sans-serif" font-weight="700" font-size="42" letter-spacing="10" text-anchor="middle">
+    <text x="123" y="278" fill="#354251">FE<tspan fill="#F5A623">N</tspan>CES</text>
+  </g>
+</svg>

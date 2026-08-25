@@ -1,4 +1,4 @@
-namespace Polly;
+namespace Paramore.Fences;
 
 internal static class TestCancellation
 {

@@ -10,7 +10,7 @@
       "args": [
         "test"
       ],
-      "cwd": "${workspaceFolder}/src/Polly.Specs",
+      "cwd": "${workspaceFolder}/src/Paramore.Fences.Specs",
       "console": "internalConsole",
       "stopAtEntry": false,
       "internalConsoleOptions": "openOnSessionStart"

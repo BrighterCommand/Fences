@@ -1,10 +1,10 @@
 ﻿#pragma warning disable SA1633 // File should have header
 using System.Net;
 #pragma warning restore SA1633 // File should have header
-using Polly;
-using Polly.Fallback;
-using Polly.Retry;
-using Polly.Timeout;
+using Paramore.Fences;
+using Paramore.Fences.Fallback;
+using Paramore.Fences.Retry;
+using Paramore.Fences.Timeout;
 
 // ----------------------------------------------------------------------------
 // Create a generic resilience pipeline using ResiliencePipelineBuilder<T>

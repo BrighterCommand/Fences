@@ -4,7 +4,7 @@ This document guides you in creating a **Timing resilience strategy** that track
 
 ## Implementation
 
-Proactive resilience strategies are derived from the [`ResilienceStrategy`](xref:Polly.ResilienceStrategy) base class. For this strategy, the implementation is:
+Proactive resilience strategies are derived from the [`ResilienceStrategy`](xref:Paramore.Fences.ResilienceStrategy) base class. For this strategy, the implementation is:
 
 <!-- snippet: ext-proactive-strategy -->
 ```cs
@@ -89,7 +89,7 @@ Arguments should always have an `Arguments` suffix and include a `Context` prope
 
 ## Options
 
-In the previous section, we implemented the `TimingResilienceStrategy`. Now, it's time to integrate it with Polly and its public API.
+In the previous section, we implemented the `TimingResilienceStrategy`. Now, it's time to integrate it with Fences and its public API.
 
 Let's define the public `TimingStrategyOptions` to configure our strategy:
 
@@ -182,6 +182,6 @@ var pipeline = new ResiliencePipelineBuilder()
 
 For further information on proactive resilience strategies, consider exploring these resources:
 
-- [Timing strategy sample](https://github.com/App-vNext/Polly/tree/main/samples/Extensibility/Proactive): A practical example from this guide.
-- [Timeout resilience strategy](https://github.com/App-vNext/Polly/tree/main/src/Polly.Core/Timeout): Discover the built-in timeout resilience strategy implementation.
-- [Rate limiter resilience strategy](https://github.com/App-vNext/Polly/tree/main/src/Polly.RateLimiting): Discover how rate limiter strategy is implemented.
+- [Timing strategy sample](https://github.com/BrighterCommand/Fences/tree/main/samples/Extensibility/Proactive): A practical example from this guide.
+- [Timeout resilience strategy](https://github.com/BrighterCommand/Fences/tree/main/src/Paramore.Fences.Core/Timeout): Discover the built-in timeout resilience strategy implementation.
+- [Rate limiter resilience strategy](https://github.com/BrighterCommand/Fences/tree/main/src/Paramore.Fences.RateLimiting): Discover how rate limiter strategy is implemented.

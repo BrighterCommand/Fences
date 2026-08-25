@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>net10.0;net9.0;net8.0</TargetFrameworks>
+    <RootNamespace>Paramore.Fences</RootNamespace>
+    <ImplicitUsings>true</ImplicitUsings>
+    <ProjectType>Benchmark</ProjectType>
+    <Nullable>enable</Nullable>
+    <OutputType>Exe</OutputType>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Using Include="Paramore.Fences.Core.Benchmarks" />
+    <Using Include="Paramore.Fences.Core.Benchmarks.Utils" />
+    <ProjectReference Include="..\..\src\Paramore.Fences.Core\Paramore.Fences.Core.csproj" />
+    <ProjectReference Include="..\..\src\Paramore.Fences.Extensions\Paramore.Fences.Extensions.csproj" />
+    <ProjectReference Include="..\..\src\Paramore.Fences.RateLimiting\Paramore.Fences.RateLimiting.csproj" />
+    <ProjectReference Include="..\..\src\Paramore.Fences\Paramore.Fences.csproj" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" />
+  </ItemGroup>
+</Project>

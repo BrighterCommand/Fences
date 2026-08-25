@@ -1,12 +1,18 @@
 <Project>
 
   <PropertyGroup>
-    <Company>App vNext</Company>
-    <Copyright>Copyright (c) 2015-$([System.DateTime]::Now.ToString(yyyy)), App vNext</Copyright>
+    <Company>Brighter Command</Company>
+    <!--
+      Authors and Company assert authorship of *this* package, so they are Brighter Command
+      only (D9, guardrail G2). Copyright retains App vNext's notice alongside ours because
+      this is a derivative work and BSD-3-Clause clause 1 requires it; LICENSE, which is
+      packed into every nupkg, carries the same two lines.
+    -->
+    <Copyright>Copyright (c) 2015-2025, App vNext. Copyright (c) 2026-$([System.DateTime]::Now.ToString(yyyy)), Brighter Command.</Copyright>
     <DefaultLanguage>en-US</DefaultLanguage>
     <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <Authors>Michael Wolfenden, App vNext</Authors>
+    <Authors>Brighter Command</Authors>
     <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
     <EmbedUntrackedSources>true</EmbedUntrackedSources> <!-- EmbedUntrackedSources for deterministic build -->
     <ChecksumAlgorithm>SHA256</ChecksumAlgorithm>
@@ -14,7 +20,12 @@
 
   <PropertyGroup Label="NuGet package validation">
     <EnablePackageValidation Condition="'$(EnablePackageValidation)' == ''">true</EnablePackageValidation>
-    <PackageValidationBaselineVersion Condition="'$(PackageValidationBaselineVersion)' == ''">8.5.2</PackageValidationBaselineVersion>
+    <!--
+      No baseline for the first Fences release: 8.5.2 was a Polly package, and no
+      Paramore.Fences.* package has shipped yet, so there is nothing to validate
+      against. Restore fails outright if this points at a package that does not
+      exist. Reinstate it pointing at 9.0.0 once that has shipped. (D3, B3, P3.2)
+    -->
   </PropertyGroup>
 
   <PropertyGroup Label="SourceLink">
@@ -27,8 +38,8 @@
     <PackageIcon>package-icon.png</PackageIcon>
     <NeutralLanguage>en-US</NeutralLanguage>
     <PackageLicenseExpression>BSD-3-Clause</PackageLicenseExpression>
-    <PackageProjectUrl>https://github.com/App-vNext/Polly</PackageProjectUrl>
-    <PackageReleaseNotes>See https://github.com/App-vNext/Polly/blob/main/CHANGELOG.md for details</PackageReleaseNotes>
+    <PackageProjectUrl>https://github.com/BrighterCommand/Fences</PackageProjectUrl>
+    <PackageReleaseNotes>See https://github.com/BrighterCommand/Fences/blob/main/CHANGELOG.md for details</PackageReleaseNotes>
     <PackageReadmeFile>package-readme.md</PackageReadmeFile>
   </PropertyGroup>
 
@@ -44,7 +55,7 @@
 
   <Target Name="AddInternalsVisibleToProject" BeforeTargets="BeforeCompile" Condition=" '@(InternalsVisibleToProject)' != '' ">
     <ItemGroup>
-      <InternalsVisibleTo Include="%(InternalsVisibleToProject.Identity)" PublicKey="$(PollyStrongNamePublicKey)" />
+      <InternalsVisibleTo Include="%(InternalsVisibleToProject.Identity)" PublicKey="$(FencesStrongNamePublicKey)" />
     </ItemGroup>
   </Target>
 

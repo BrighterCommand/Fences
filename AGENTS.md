@@ -1,102 +1,65 @@
-# Coding Agent Instructions
+# AGENTS.md
 
-This file provides guidance to agents when working with code in this repository.
+This file provides guidance to coding agents working in this repository.
 
-## Build Commands
+## How to Use This File
 
-```bash
-# Full build (clean, restore, build, test, package)
-./build.ps1
+This file contains instructions for coding agents. It is not intended to be modified by
+contributors. Human contributors should follow [CONTRIBUTING.md](CONTRIBUTING.md), from which these
+guidelines derive. Where the two disagree, `CONTRIBUTING.md` is right.
 
-# Build only (no tests)
-dotnet build
+## What this repository is
 
-# Run all tests
-dotnet test
+Fences is a .NET resilience library — a community fork of
+[Polly](https://github.com/App-vNext/Polly), maintained by
+[Brighter Command](https://github.com/BrighterCommand). It is not affiliated with, endorsed by, or
+supported by App vNext or the Polly maintainers.
 
-# Run a specific test project
-dotnet test ./test/Polly.Core.Tests/Polly.Core.Tests.csproj
+**Fences shares an organisation with [Brighter](https://github.com/BrighterCommand/Brighter) and
+[Darker](https://github.com/BrighterCommand/Darker), but not their engineering conventions.** Fences
+inherits Polly's, deliberately. Several rules are the exact opposite of Brighter's — constants,
+licence headers, test directory, test naming, `InternalsVisibleTo`. Read
+[Code Style](.agent_instructions/code_style.md) before applying a habit from there.
 
-# Run a single test by filter
-dotnet test ./test/Polly.Core.Tests --filter "FullyQualifiedName~CircuitBreakerTests"
+## Standing rules
 
-# Run tests for a specific framework
-dotnet test ./test/Polly.Core.Tests --framework net10.0
+- **Do not change the public API unless you were asked to.** If you do change it, the entry goes in
+  `src/<Project>/.PublicAPI/PublicAPI.Unshipped.txt`. This is the thing agents get wrong most often
+  here — see [Public API Changes](.agent_instructions/public_api.md).
+- **A bug fix must include a test that fails without the fix.**
+- **Do not add or update dependencies unless you were asked to.**
+- Do not change defaults or make changes beyond what was asked for.
+- Do not use APIs marked `[Obsolete]`.
+- Ensure the code compiles with no warnings and the tests pass before pushing. CI treats warnings
+  as errors.
 
-# Mutation testing
-./build.ps1 -Target MutationTestsCore
-./build.ps1 -Target MutationTestsExtensions
-./build.ps1 -Target MutationTestsLegacy
-./build.ps1 -Target MutationTestsRateLimiting
-./build.ps1 -Target MutationTestsTesting
-```
+## Detailed Instructions
 
-Lint runs in CI via GitHub Actions workflows (actionlint, zizmor, PSScriptAnalyzer).
+Read these as needed:
 
-Linting for C# is enabled through analyzers configured to run during the build process.
+- [Build and Development](.agent_instructions/build_and_development.md) — Cake targets, `build.ps1`,
+  test commands, mutation targets, the analyser escape hatch
+- [Project Structure](.agent_instructions/project_structure.md) — the projects, the target framework
+  matrix, the core abstractions and the strategy taxonomy
+- [Code Style](.agent_instructions/code_style.md) — the conventions, and how they differ from
+  Brighter's
+- [Public API Changes](.agent_instructions/public_api.md) — the `.PublicAPI/` discipline
+- [Testing](.agent_instructions/testing.md) — xUnit, Shouldly, NSubstitute, FsCheck,
+  `FakeTimeProvider`, the 100% mutation threshold
+- [Documentation](.agent_instructions/documentation.md) — XML docs, docfx, the generated snippets,
+  and how to write an ADR
+- [ADR Frontmatter](.agent_instructions/adr_frontmatter.md) — the frontmatter schema and tag
+  vocabulary
+- [Design Principles](.agent_instructions/design_principles.md) — the architecture invariants worth
+  defending
+- [Dependency Management](.agent_instructions/dependency_management.md) — central package
+  management, and the multi-targeting constraint
+- [Release and Versioning](.agent_instructions/release_and_versioning.md) — MinVer, the release
+  scripts, and what they own
 
-## Architecture
+## Workflows
 
-Polly is a .NET resilience library. Version 8+ (`Polly.Core`) is a complete redesign; `Polly` (the root package) is the legacy pre-v8 API kept for backwards compatibility.
-
-### Core abstractions (`src/Polly.Core`)
-
-- **`ResiliencePipeline`** / **`ResiliencePipeline<T>`** — the main user-facing type. Wraps one or more strategies and executes them in sequence.
-- **`ResiliencePipelineBuilder`** / **`ResiliencePipelineBuilder<T>`** — fluent builder used to compose strategies.
-- **`ResilienceStrategy`** / **`ResilienceStrategy<T>`** — base class for all built-in and custom strategies.
-- **`ResilienceContext`** — per-execution context flowing through the pipeline (cancellation token, properties, result type, etc.).
-
-### Built-in strategies
-
-Strategies split into two categories:
-
-**Reactive** (respond to failures):
-
-- `RetryResilienceStrategy` — configurable backoff, jitter, attempt limits
-- `CircuitBreakerResilienceStrategy` — state machine: Closed → Open → HalfOpen
-- `FallbackResilienceStrategy` — returns an alternative value/action on failure
-- `HedgingResilienceStrategy` — fires parallel attempts and returns the fastest success
-
-**Proactive** (prevent overload):
-
-- `TimeoutResilienceStrategy` — bounds execution duration
-- `RateLimiterResilienceStrategy` (in `Polly.RateLimiting`) — wraps `System.Threading.RateLimiting`
-
-Each strategy has a corresponding `*Options` class (e.g., `RetryStrategyOptions`) that holds configuration.
-Predicates for which outcomes to handle are declared via the `PredicateBuilder` fluent API.
-
-### Supporting packages
-
-- **`Polly.Extensions`** — `IServiceCollection` extensions and telemetry/OpenTelemetry support.
-- **`Polly.Testing`** — `ResiliencePipelineDescriptor` and test helpers; accesses internals via `InternalsVisibleTo`.
-
-### Multi-targeting
-
-- `Polly.Core`: targets .NET Framework, .NET and .NET Standard.
-- Test projects: Target all supported versions of .NET plus the latest version of .NET Framework on Windows.
-- Targets for .NET 8 and later support native AoT.
-
-### Build system
-
-- **Cake** (bootstrapped by `build.ps1`) orchestrates the full pipeline via `cake.cs`.
-- **Centralized package management**: all NuGet versions in `Directory.Packages.props`.
-- **`Directory.Build.props` / `eng/Common.props`**: shared MSBuild properties (nullable enabled, warnings-as-errors, strong naming via `Polly.snk`, XML doc generation).
-- **`LegacySupport`**: a shared source project injected into `Polly` at compile time via a custom MSBuild target.
-- **MinVer** provides automatic SemVer versioning from git tags.
-
-### Testing patterns
-
-- **xUnit** for unit tests; **FsCheck** for property-based/fuzz tests.
-- Test projects access internals via `InternalsVisibleTo` declared in `eng/Library.targets` (brought in via the shared MSBuild imports).
-- `Polly.TestUtils` is a shared utilities project referenced by several test projects.
-- `Polly.AotTest` validates AOT compatibility by publishing a trimmed app.
-- Coverage is collected in CI and uploaded to Codecov.
-
-## General guidelines
-
-- Always ensure code compiles with no warnings or errors and tests pass locally before pushing changes.
-- Do not change the public API unless specifically requested.
-- Do not use APIs marked with `[Obsolete]`.
-- Bug fixes should **always** include a test that would fail without the corresponding fix.
-- Do not introduce new dependencies unless specifically requested.
-- Do not update existing dependencies unless specifically requested.
+`.claude/commands/` holds commands that walk an agent through the preferred workflow —
+`/test-first`, `/tidy-first`, `/adr`, `/spec:*` and `/bugfix:*`. See
+[.claude/commands/README.md](.claude/commands/README.md). They are written for Claude Code, but the
+gates they describe apply whatever agent you are.

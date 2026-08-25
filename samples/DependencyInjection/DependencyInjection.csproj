@@ -8,7 +8,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" />
     <PackageReference Include="Microsoft.Extensions.Logging.Console" />
-    <PackageReference Include="Polly.Extensions" />
+    <ProjectReference Include="../../src/Paramore.Fences.Extensions/Paramore.Fences.Extensions.csproj" />
   </ItemGroup>
 
 </Project>

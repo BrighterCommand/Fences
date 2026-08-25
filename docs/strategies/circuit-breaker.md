@@ -3,14 +3,14 @@
 ## About
 
 - **Option(s)**:
-  - [`CircuitBreakerStrategyOptions`](xref:Polly.CircuitBreaker.CircuitBreakerStrategyOptions)
-  - [`CircuitBreakerStrategyOptions<T>`](xref:Polly.CircuitBreaker.CircuitBreakerStrategyOptions`1)
+  - [`CircuitBreakerStrategyOptions`](xref:Paramore.Fences.CircuitBreaker.CircuitBreakerStrategyOptions)
+  - [`CircuitBreakerStrategyOptions<T>`](xref:Paramore.Fences.CircuitBreaker.CircuitBreakerStrategyOptions`1)
 - **Extension(s)**:
   - `AddCircuitBreaker`
 - **Strategy Type**: Reactive
 - **Exception(s)**:
-  - [`BrokenCircuitException`](xref:Polly.CircuitBreaker.BrokenCircuitException): Thrown when a circuit is broken and the action was not executed.
-  - [`IsolatedCircuitException`](xref:Polly.CircuitBreaker.IsolatedCircuitException): Thrown when a circuit is isolated (held open) by manual override.
+  - [`BrokenCircuitException`](xref:Paramore.Fences.CircuitBreaker.BrokenCircuitException): Thrown when a circuit is broken and the action was not executed.
+  - [`IsolatedCircuitException`](xref:Paramore.Fences.CircuitBreaker.IsolatedCircuitException): Thrown when a circuit is isolated (held open) by manual override.
 
 ---
 
@@ -24,7 +24,7 @@ The circuit breaker **reactive** resilience strategy shortcuts the execution if 
 <!-- snippet: circuit-breaker -->
 ```cs
 // Circuit breaker with default options.
-// See https://www.pollydocs.org/strategies/circuit-breaker#defaults for defaults.
+// See https://brightercommand.github.io/Fences/strategies/circuit-breaker#defaults for defaults.
 var optionsDefaults = new CircuitBreakerStrategyOptions();
 
 // Circuit breaker with customized options:
@@ -149,7 +149,7 @@ The `BrokenCircuitException` and the `IsolatedCircuitException` provide access t
 
 If a `TimeSpan` value is provided to the optional `RetryAfter` property then this indicates that circuit is open for at least this time period and you should retry your operation no sooner than the value given.
 
-The `TelemetrySource` property is a [`ResilienceTelemetrySource`](xref:Polly.Telemetry.ResilienceTelemetrySource) which allows you retrieve information such as the executed pipeline and strategy. These can be useful if you have multiple circuit breaker strategies in your pipeline and you need to know which strategy caused the `BrokenCircuitException` to be thrown.
+The `TelemetrySource` property is a [`ResilienceTelemetrySource`](xref:Paramore.Fences.Telemetry.ResilienceTelemetrySource) which allows you retrieve information such as the executed pipeline and strategy. These can be useful if you have multiple circuit breaker strategies in your pipeline and you need to know which strategy caused the `BrokenCircuitException` to be thrown.
 
 ## Defaults
 
@@ -193,7 +193,7 @@ Resilience event occurred. EventName: 'OnCircuitOpened', Source: 'MyPipeline/MyP
     CustomException: Exception of type 'CustomException' was thrown.
         at Program.<>c.<<Main>b__0_1>d.MoveNext()
         ...
-        at Polly.ResiliencePipeline.<>c__8`1.<<ExecuteAsync>b__8_0>d.MoveNext() in /_/src/Polly.Core/ResiliencePipeline.AsyncT.cs:line 95
+        at Paramore.Fences.ResiliencePipeline.<>c__8`1.<<ExecuteAsync>b__8_0>d.MoveNext() in /_/src/Paramore.Fences.Core/ResiliencePipeline.AsyncT.cs:line 95
 
 Resilience event occurred. EventName: 'OnCircuitHalfOpened', Source: 'MyPipeline/MyPipelineInstance/MyCircuitBreakerStrategy', Operation Key: 'MyCircuitedOperation', Result: ''
 
@@ -463,7 +463,7 @@ sequenceDiagram
 
 ## Anti-patterns
 
-Over the years, many developers have used Polly in various ways. Some of these
+Over the years, many developers have used Fences in various ways. Some of these
 recurring patterns may not be ideal. The sections below highlight anti-patterns to avoid.
 
 ### Using different sleep duration between retry attempts based on Circuit Breaker state

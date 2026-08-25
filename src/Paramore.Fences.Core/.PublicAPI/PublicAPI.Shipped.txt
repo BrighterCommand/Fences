@@ -1,0 +1,562 @@
+﻿#nullable enable
+abstract Paramore.Fences.Registry.ResiliencePipelineProvider<TKey>.TryGetPipeline(TKey key, out Paramore.Fences.ResiliencePipeline? pipeline) -> bool
+abstract Paramore.Fences.Registry.ResiliencePipelineProvider<TKey>.TryGetPipeline<TResult>(TKey key, out Paramore.Fences.ResiliencePipeline<TResult>? pipeline) -> bool
+abstract Paramore.Fences.ResilienceContextPool.Get(Paramore.Fences.ResilienceContextCreationArguments arguments) -> Paramore.Fences.ResilienceContext!
+abstract Paramore.Fences.ResilienceContextPool.Return(Paramore.Fences.ResilienceContext! context) -> void
+abstract Paramore.Fences.ResilienceStrategy.ExecuteCore<TResult, TState>(System.Func<Paramore.Fences.ResilienceContext!, TState, System.Threading.Tasks.ValueTask<Paramore.Fences.Outcome<TResult>>>! callback, Paramore.Fences.ResilienceContext! context, TState state) -> System.Threading.Tasks.ValueTask<Paramore.Fences.Outcome<TResult>>
+abstract Paramore.Fences.ResilienceStrategy<TResult>.ExecuteCore<TState>(System.Func<Paramore.Fences.ResilienceContext!, TState, System.Threading.Tasks.ValueTask<Paramore.Fences.Outcome<TResult>>>! callback, Paramore.Fences.ResilienceContext! context, TState state) -> System.Threading.Tasks.ValueTask<Paramore.Fences.Outcome<TResult>>
+abstract Paramore.Fences.Telemetry.TelemetryListener.Write<TResult, TArgs>(in Paramore.Fences.Telemetry.TelemetryEventArguments<TResult, TArgs> args) -> void
+override Paramore.Fences.Outcome<TResult>.ToString() -> string!
+override Paramore.Fences.Registry.ResiliencePipelineRegistry<TKey>.TryGetPipeline(TKey key, out Paramore.Fences.ResiliencePipeline? pipeline) -> bool
+override Paramore.Fences.Registry.ResiliencePipelineRegistry<TKey>.TryGetPipeline<TResult>(TKey key, out Paramore.Fences.ResiliencePipeline<TResult>? pipeline) -> bool
+override Paramore.Fences.ResiliencePropertyKey<TValue>.ToString() -> string!
+override Paramore.Fences.Telemetry.ResilienceEvent.ToString() -> string!
+Paramore.Fences.CircuitBreaker.BreakDurationGeneratorArguments
+Paramore.Fences.CircuitBreaker.BreakDurationGeneratorArguments.BreakDurationGeneratorArguments() -> void
+Paramore.Fences.CircuitBreaker.BreakDurationGeneratorArguments.BreakDurationGeneratorArguments(double failureRate, int failureCount, Paramore.Fences.ResilienceContext! context) -> void
+Paramore.Fences.CircuitBreaker.BreakDurationGeneratorArguments.BreakDurationGeneratorArguments(double failureRate, int failureCount, Paramore.Fences.ResilienceContext! context, int halfOpenAttempts) -> void
+Paramore.Fences.CircuitBreaker.BreakDurationGeneratorArguments.Context.get -> Paramore.Fences.ResilienceContext!
+Paramore.Fences.CircuitBreaker.BreakDurationGeneratorArguments.FailureCount.get -> int
+Paramore.Fences.CircuitBreaker.BreakDurationGeneratorArguments.FailureRate.get -> double
+Paramore.Fences.CircuitBreaker.BreakDurationGeneratorArguments.HalfOpenAttempts.get -> int
+Paramore.Fences.CircuitBreaker.BrokenCircuitException
+Paramore.Fences.CircuitBreaker.BrokenCircuitException.BrokenCircuitException() -> void
+Paramore.Fences.CircuitBreaker.BrokenCircuitException.BrokenCircuitException(string! message) -> void
+Paramore.Fences.CircuitBreaker.BrokenCircuitException.BrokenCircuitException(string! message, System.Exception! inner) -> void
+Paramore.Fences.CircuitBreaker.BrokenCircuitException.BrokenCircuitException(string! message, System.TimeSpan retryAfter) -> void
+Paramore.Fences.CircuitBreaker.BrokenCircuitException.BrokenCircuitException(string! message, System.TimeSpan retryAfter, System.Exception! inner) -> void
+Paramore.Fences.CircuitBreaker.BrokenCircuitException.BrokenCircuitException(System.TimeSpan retryAfter) -> void
+Paramore.Fences.CircuitBreaker.BrokenCircuitException.RetryAfter.get -> System.TimeSpan?
+Paramore.Fences.CircuitBreaker.CircuitBreakerManualControl
+Paramore.Fences.CircuitBreaker.CircuitBreakerManualControl.CircuitBreakerManualControl() -> void
+Paramore.Fences.CircuitBreaker.CircuitBreakerManualControl.CircuitBreakerManualControl(bool isIsolated) -> void
+Paramore.Fences.CircuitBreaker.CircuitBreakerManualControl.CloseAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task!
+Paramore.Fences.CircuitBreaker.CircuitBreakerManualControl.IsolateAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task!
+Paramore.Fences.CircuitBreaker.CircuitBreakerPredicateArguments<TResult>
+Paramore.Fences.CircuitBreaker.CircuitBreakerPredicateArguments<TResult>.CircuitBreakerPredicateArguments() -> void
+Paramore.Fences.CircuitBreaker.CircuitBreakerPredicateArguments<TResult>.CircuitBreakerPredicateArguments(Paramore.Fences.ResilienceContext! context, Paramore.Fences.Outcome<TResult> outcome) -> void
+Paramore.Fences.CircuitBreaker.CircuitBreakerPredicateArguments<TResult>.Context.get -> Paramore.Fences.ResilienceContext!
+Paramore.Fences.CircuitBreaker.CircuitBreakerPredicateArguments<TResult>.Outcome.get -> Paramore.Fences.Outcome<TResult>
+Paramore.Fences.CircuitBreaker.CircuitBreakerStateProvider
+Paramore.Fences.CircuitBreaker.CircuitBreakerStateProvider.CircuitBreakerStateProvider() -> void
+Paramore.Fences.CircuitBreaker.CircuitBreakerStateProvider.CircuitState.get -> Paramore.Fences.CircuitBreaker.CircuitState
+Paramore.Fences.CircuitBreaker.CircuitBreakerStrategyOptions
+Paramore.Fences.CircuitBreaker.CircuitBreakerStrategyOptions.CircuitBreakerStrategyOptions() -> void
+Paramore.Fences.CircuitBreaker.CircuitBreakerStrategyOptions<TResult>
+Paramore.Fences.CircuitBreaker.CircuitBreakerStrategyOptions<TResult>.BreakDuration.get -> System.TimeSpan
+Paramore.Fences.CircuitBreaker.CircuitBreakerStrategyOptions<TResult>.BreakDuration.set -> void
+Paramore.Fences.CircuitBreaker.CircuitBreakerStrategyOptions<TResult>.BreakDurationGenerator.get -> System.Func<Paramore.Fences.CircuitBreaker.BreakDurationGeneratorArguments, System.Threading.Tasks.ValueTask<System.TimeSpan>>?
+Paramore.Fences.CircuitBreaker.CircuitBreakerStrategyOptions<TResult>.BreakDurationGenerator.set -> void
+Paramore.Fences.CircuitBreaker.CircuitBreakerStrategyOptions<TResult>.CircuitBreakerStrategyOptions() -> void
+Paramore.Fences.CircuitBreaker.CircuitBreakerStrategyOptions<TResult>.FailureRatio.get -> double
+Paramore.Fences.CircuitBreaker.CircuitBreakerStrategyOptions<TResult>.FailureRatio.set -> void
+Paramore.Fences.CircuitBreaker.CircuitBreakerStrategyOptions<TResult>.ManualControl.get -> Paramore.Fences.CircuitBreaker.CircuitBreakerManualControl?
+Paramore.Fences.CircuitBreaker.CircuitBreakerStrategyOptions<TResult>.ManualControl.set -> void
+Paramore.Fences.CircuitBreaker.CircuitBreakerStrategyOptions<TResult>.MinimumThroughput.get -> int
+Paramore.Fences.CircuitBreaker.CircuitBreakerStrategyOptions<TResult>.MinimumThroughput.set -> void
+Paramore.Fences.CircuitBreaker.CircuitBreakerStrategyOptions<TResult>.OnClosed.get -> System.Func<Paramore.Fences.CircuitBreaker.OnCircuitClosedArguments<TResult>, System.Threading.Tasks.ValueTask>?
+Paramore.Fences.CircuitBreaker.CircuitBreakerStrategyOptions<TResult>.OnClosed.set -> void
+Paramore.Fences.CircuitBreaker.CircuitBreakerStrategyOptions<TResult>.OnHalfOpened.get -> System.Func<Paramore.Fences.CircuitBreaker.OnCircuitHalfOpenedArguments, System.Threading.Tasks.ValueTask>?
+Paramore.Fences.CircuitBreaker.CircuitBreakerStrategyOptions<TResult>.OnHalfOpened.set -> void
+Paramore.Fences.CircuitBreaker.CircuitBreakerStrategyOptions<TResult>.OnOpened.get -> System.Func<Paramore.Fences.CircuitBreaker.OnCircuitOpenedArguments<TResult>, System.Threading.Tasks.ValueTask>?
+Paramore.Fences.CircuitBreaker.CircuitBreakerStrategyOptions<TResult>.OnOpened.set -> void
+Paramore.Fences.CircuitBreaker.CircuitBreakerStrategyOptions<TResult>.SamplingDuration.get -> System.TimeSpan
+Paramore.Fences.CircuitBreaker.CircuitBreakerStrategyOptions<TResult>.SamplingDuration.set -> void
+Paramore.Fences.CircuitBreaker.CircuitBreakerStrategyOptions<TResult>.ShouldHandle.get -> System.Func<Paramore.Fences.CircuitBreaker.CircuitBreakerPredicateArguments<TResult>, System.Threading.Tasks.ValueTask<bool>>!
+Paramore.Fences.CircuitBreaker.CircuitBreakerStrategyOptions<TResult>.ShouldHandle.set -> void
+Paramore.Fences.CircuitBreaker.CircuitBreakerStrategyOptions<TResult>.StateProvider.get -> Paramore.Fences.CircuitBreaker.CircuitBreakerStateProvider?
+Paramore.Fences.CircuitBreaker.CircuitBreakerStrategyOptions<TResult>.StateProvider.set -> void
+Paramore.Fences.CircuitBreaker.CircuitState
+Paramore.Fences.CircuitBreaker.CircuitState.Closed = 0 -> Paramore.Fences.CircuitBreaker.CircuitState
+Paramore.Fences.CircuitBreaker.CircuitState.HalfOpen = 2 -> Paramore.Fences.CircuitBreaker.CircuitState
+Paramore.Fences.CircuitBreaker.CircuitState.Isolated = 3 -> Paramore.Fences.CircuitBreaker.CircuitState
+Paramore.Fences.CircuitBreaker.CircuitState.Open = 1 -> Paramore.Fences.CircuitBreaker.CircuitState
+Paramore.Fences.CircuitBreaker.IsolatedCircuitException
+Paramore.Fences.CircuitBreaker.IsolatedCircuitException.IsolatedCircuitException() -> void
+Paramore.Fences.CircuitBreaker.IsolatedCircuitException.IsolatedCircuitException(string! message) -> void
+Paramore.Fences.CircuitBreaker.IsolatedCircuitException.IsolatedCircuitException(string! message, System.Exception! innerException) -> void
+Paramore.Fences.CircuitBreaker.OnCircuitClosedArguments<TResult>
+Paramore.Fences.CircuitBreaker.OnCircuitClosedArguments<TResult>.Context.get -> Paramore.Fences.ResilienceContext!
+Paramore.Fences.CircuitBreaker.OnCircuitClosedArguments<TResult>.IsManual.get -> bool
+Paramore.Fences.CircuitBreaker.OnCircuitClosedArguments<TResult>.OnCircuitClosedArguments() -> void
+Paramore.Fences.CircuitBreaker.OnCircuitClosedArguments<TResult>.OnCircuitClosedArguments(Paramore.Fences.ResilienceContext! context, Paramore.Fences.Outcome<TResult> outcome, bool isManual) -> void
+Paramore.Fences.CircuitBreaker.OnCircuitClosedArguments<TResult>.Outcome.get -> Paramore.Fences.Outcome<TResult>
+Paramore.Fences.CircuitBreaker.OnCircuitHalfOpenedArguments
+Paramore.Fences.CircuitBreaker.OnCircuitHalfOpenedArguments.Context.get -> Paramore.Fences.ResilienceContext!
+Paramore.Fences.CircuitBreaker.OnCircuitHalfOpenedArguments.OnCircuitHalfOpenedArguments() -> void
+Paramore.Fences.CircuitBreaker.OnCircuitHalfOpenedArguments.OnCircuitHalfOpenedArguments(Paramore.Fences.ResilienceContext! context) -> void
+Paramore.Fences.CircuitBreaker.OnCircuitOpenedArguments<TResult>
+Paramore.Fences.CircuitBreaker.OnCircuitOpenedArguments<TResult>.BreakDuration.get -> System.TimeSpan
+Paramore.Fences.CircuitBreaker.OnCircuitOpenedArguments<TResult>.Context.get -> Paramore.Fences.ResilienceContext!
+Paramore.Fences.CircuitBreaker.OnCircuitOpenedArguments<TResult>.IsManual.get -> bool
+Paramore.Fences.CircuitBreaker.OnCircuitOpenedArguments<TResult>.OnCircuitOpenedArguments() -> void
+Paramore.Fences.CircuitBreaker.OnCircuitOpenedArguments<TResult>.OnCircuitOpenedArguments(Paramore.Fences.ResilienceContext! context, Paramore.Fences.Outcome<TResult> outcome, System.TimeSpan breakDuration, bool isManual) -> void
+Paramore.Fences.CircuitBreaker.OnCircuitOpenedArguments<TResult>.Outcome.get -> Paramore.Fences.Outcome<TResult>
+Paramore.Fences.CircuitBreakerResiliencePipelineBuilderExtensions
+Paramore.Fences.DelayBackoffType
+Paramore.Fences.DelayBackoffType.Constant = 0 -> Paramore.Fences.DelayBackoffType
+Paramore.Fences.DelayBackoffType.Exponential = 2 -> Paramore.Fences.DelayBackoffType
+Paramore.Fences.DelayBackoffType.Linear = 1 -> Paramore.Fences.DelayBackoffType
+Paramore.Fences.ExecutionRejectedException
+Paramore.Fences.ExecutionRejectedException.ExecutionRejectedException() -> void
+Paramore.Fences.ExecutionRejectedException.ExecutionRejectedException(string! message) -> void
+Paramore.Fences.ExecutionRejectedException.ExecutionRejectedException(string! message, System.Exception! inner) -> void
+Paramore.Fences.Fallback.FallbackActionArguments<TResult>
+Paramore.Fences.Fallback.FallbackActionArguments<TResult>.Context.get -> Paramore.Fences.ResilienceContext!
+Paramore.Fences.Fallback.FallbackActionArguments<TResult>.FallbackActionArguments() -> void
+Paramore.Fences.Fallback.FallbackActionArguments<TResult>.FallbackActionArguments(Paramore.Fences.ResilienceContext! context, Paramore.Fences.Outcome<TResult> outcome) -> void
+Paramore.Fences.Fallback.FallbackActionArguments<TResult>.Outcome.get -> Paramore.Fences.Outcome<TResult>
+Paramore.Fences.Fallback.FallbackPredicateArguments<TResult>
+Paramore.Fences.Fallback.FallbackPredicateArguments<TResult>.Context.get -> Paramore.Fences.ResilienceContext!
+Paramore.Fences.Fallback.FallbackPredicateArguments<TResult>.FallbackPredicateArguments() -> void
+Paramore.Fences.Fallback.FallbackPredicateArguments<TResult>.FallbackPredicateArguments(Paramore.Fences.ResilienceContext! context, Paramore.Fences.Outcome<TResult> outcome) -> void
+Paramore.Fences.Fallback.FallbackPredicateArguments<TResult>.Outcome.get -> Paramore.Fences.Outcome<TResult>
+Paramore.Fences.Fallback.FallbackStrategyOptions<TResult>
+Paramore.Fences.Fallback.FallbackStrategyOptions<TResult>.FallbackAction.get -> System.Func<Paramore.Fences.Fallback.FallbackActionArguments<TResult>, System.Threading.Tasks.ValueTask<Paramore.Fences.Outcome<TResult>>>?
+Paramore.Fences.Fallback.FallbackStrategyOptions<TResult>.FallbackAction.set -> void
+Paramore.Fences.Fallback.FallbackStrategyOptions<TResult>.FallbackStrategyOptions() -> void
+Paramore.Fences.Fallback.FallbackStrategyOptions<TResult>.OnFallback.get -> System.Func<Paramore.Fences.Fallback.OnFallbackArguments<TResult>, System.Threading.Tasks.ValueTask>?
+Paramore.Fences.Fallback.FallbackStrategyOptions<TResult>.OnFallback.set -> void
+Paramore.Fences.Fallback.FallbackStrategyOptions<TResult>.ShouldHandle.get -> System.Func<Paramore.Fences.Fallback.FallbackPredicateArguments<TResult>, System.Threading.Tasks.ValueTask<bool>>!
+Paramore.Fences.Fallback.FallbackStrategyOptions<TResult>.ShouldHandle.set -> void
+Paramore.Fences.Fallback.OnFallbackArguments<TResult>
+Paramore.Fences.Fallback.OnFallbackArguments<TResult>.Context.get -> Paramore.Fences.ResilienceContext!
+Paramore.Fences.Fallback.OnFallbackArguments<TResult>.OnFallbackArguments() -> void
+Paramore.Fences.Fallback.OnFallbackArguments<TResult>.OnFallbackArguments(Paramore.Fences.ResilienceContext! context, Paramore.Fences.Outcome<TResult> outcome) -> void
+Paramore.Fences.Fallback.OnFallbackArguments<TResult>.Outcome.get -> Paramore.Fences.Outcome<TResult>
+Paramore.Fences.FallbackResiliencePipelineBuilderExtensions
+Paramore.Fences.Hedging.HedgingActionGeneratorArguments<TResult>
+Paramore.Fences.Hedging.HedgingActionGeneratorArguments<TResult>.ActionContext.get -> Paramore.Fences.ResilienceContext!
+Paramore.Fences.Hedging.HedgingActionGeneratorArguments<TResult>.AttemptNumber.get -> int
+Paramore.Fences.Hedging.HedgingActionGeneratorArguments<TResult>.Callback.get -> System.Func<Paramore.Fences.ResilienceContext!, System.Threading.Tasks.ValueTask<Paramore.Fences.Outcome<TResult>>>!
+Paramore.Fences.Hedging.HedgingActionGeneratorArguments<TResult>.HedgingActionGeneratorArguments() -> void
+Paramore.Fences.Hedging.HedgingActionGeneratorArguments<TResult>.HedgingActionGeneratorArguments(Paramore.Fences.ResilienceContext! primaryContext, Paramore.Fences.ResilienceContext! actionContext, int attemptNumber, System.Func<Paramore.Fences.ResilienceContext!, System.Threading.Tasks.ValueTask<Paramore.Fences.Outcome<TResult>>>! callback) -> void
+Paramore.Fences.Hedging.HedgingActionGeneratorArguments<TResult>.PrimaryContext.get -> Paramore.Fences.ResilienceContext!
+Paramore.Fences.Hedging.HedgingDelayGeneratorArguments
+Paramore.Fences.Hedging.HedgingDelayGeneratorArguments.AttemptNumber.get -> int
+Paramore.Fences.Hedging.HedgingDelayGeneratorArguments.Context.get -> Paramore.Fences.ResilienceContext!
+Paramore.Fences.Hedging.HedgingDelayGeneratorArguments.HedgingDelayGeneratorArguments() -> void
+Paramore.Fences.Hedging.HedgingDelayGeneratorArguments.HedgingDelayGeneratorArguments(Paramore.Fences.ResilienceContext! context, int attemptNumber) -> void
+Paramore.Fences.Hedging.HedgingPredicateArguments<TResult>
+Paramore.Fences.Hedging.HedgingPredicateArguments<TResult>.AttemptNumber.get -> int?
+Paramore.Fences.Hedging.HedgingPredicateArguments<TResult>.Context.get -> Paramore.Fences.ResilienceContext!
+Paramore.Fences.Hedging.HedgingPredicateArguments<TResult>.HedgingPredicateArguments() -> void
+Paramore.Fences.Hedging.HedgingPredicateArguments<TResult>.HedgingPredicateArguments(Paramore.Fences.ResilienceContext! context, Paramore.Fences.Outcome<TResult> outcome) -> void
+Paramore.Fences.Hedging.HedgingPredicateArguments<TResult>.HedgingPredicateArguments(Paramore.Fences.ResilienceContext! context, Paramore.Fences.Outcome<TResult> outcome, int attemptNumber) -> void
+Paramore.Fences.Hedging.HedgingPredicateArguments<TResult>.Outcome.get -> Paramore.Fences.Outcome<TResult>
+Paramore.Fences.Hedging.HedgingStrategyOptions<TResult>
+Paramore.Fences.Hedging.HedgingStrategyOptions<TResult>.ActionGenerator.get -> System.Func<Paramore.Fences.Hedging.HedgingActionGeneratorArguments<TResult>, System.Func<System.Threading.Tasks.ValueTask<Paramore.Fences.Outcome<TResult>>>?>!
+Paramore.Fences.Hedging.HedgingStrategyOptions<TResult>.ActionGenerator.set -> void
+Paramore.Fences.Hedging.HedgingStrategyOptions<TResult>.Delay.get -> System.TimeSpan
+Paramore.Fences.Hedging.HedgingStrategyOptions<TResult>.Delay.set -> void
+Paramore.Fences.Hedging.HedgingStrategyOptions<TResult>.DelayGenerator.get -> System.Func<Paramore.Fences.Hedging.HedgingDelayGeneratorArguments, System.Threading.Tasks.ValueTask<System.TimeSpan>>?
+Paramore.Fences.Hedging.HedgingStrategyOptions<TResult>.DelayGenerator.set -> void
+Paramore.Fences.Hedging.HedgingStrategyOptions<TResult>.HedgingStrategyOptions() -> void
+Paramore.Fences.Hedging.HedgingStrategyOptions<TResult>.MaxHedgedAttempts.get -> int
+Paramore.Fences.Hedging.HedgingStrategyOptions<TResult>.MaxHedgedAttempts.set -> void
+Paramore.Fences.Hedging.HedgingStrategyOptions<TResult>.OnHedging.get -> System.Func<Paramore.Fences.Hedging.OnHedgingArguments<TResult>, System.Threading.Tasks.ValueTask>?
+Paramore.Fences.Hedging.HedgingStrategyOptions<TResult>.OnHedging.set -> void
+Paramore.Fences.Hedging.HedgingStrategyOptions<TResult>.ShouldHandle.get -> System.Func<Paramore.Fences.Hedging.HedgingPredicateArguments<TResult>, System.Threading.Tasks.ValueTask<bool>>!
+Paramore.Fences.Hedging.HedgingStrategyOptions<TResult>.ShouldHandle.set -> void
+Paramore.Fences.Hedging.OnHedgingArguments<TResult>
+Paramore.Fences.Hedging.OnHedgingArguments<TResult>.ActionContext.get -> Paramore.Fences.ResilienceContext!
+Paramore.Fences.Hedging.OnHedgingArguments<TResult>.AttemptNumber.get -> int
+Paramore.Fences.Hedging.OnHedgingArguments<TResult>.OnHedgingArguments() -> void
+Paramore.Fences.Hedging.OnHedgingArguments<TResult>.OnHedgingArguments(Paramore.Fences.ResilienceContext! primaryContext, Paramore.Fences.ResilienceContext! actionContext, int attemptNumber) -> void
+Paramore.Fences.Hedging.OnHedgingArguments<TResult>.PrimaryContext.get -> Paramore.Fences.ResilienceContext!
+Paramore.Fences.HedgingResiliencePipelineBuilderExtensions
+Paramore.Fences.LegacySupport
+Paramore.Fences.Outcome
+Paramore.Fences.Outcome<TResult>
+Paramore.Fences.Outcome<TResult>.Exception.get -> System.Exception?
+Paramore.Fences.Outcome<TResult>.Outcome() -> void
+Paramore.Fences.Outcome<TResult>.Result.get -> TResult?
+Paramore.Fences.Outcome<TResult>.ThrowIfException() -> void
+Paramore.Fences.PredicateBuilder
+Paramore.Fences.PredicateBuilder.PredicateBuilder() -> void
+Paramore.Fences.PredicateBuilder<TResult>
+Paramore.Fences.PredicateBuilder<TResult>.Build() -> System.Predicate<Paramore.Fences.Outcome<TResult>>!
+Paramore.Fences.PredicateBuilder<TResult>.Handle<TException>() -> Paramore.Fences.PredicateBuilder<TResult>!
+Paramore.Fences.PredicateBuilder<TResult>.Handle<TException>(System.Func<TException!, bool>! predicate) -> Paramore.Fences.PredicateBuilder<TResult>!
+Paramore.Fences.PredicateBuilder<TResult>.HandleInner<TException>() -> Paramore.Fences.PredicateBuilder<TResult>!
+Paramore.Fences.PredicateBuilder<TResult>.HandleInner<TException>(System.Func<TException!, bool>! predicate) -> Paramore.Fences.PredicateBuilder<TResult>!
+Paramore.Fences.PredicateBuilder<TResult>.HandleResult(System.Func<TResult, bool>! predicate) -> Paramore.Fences.PredicateBuilder<TResult>!
+Paramore.Fences.PredicateBuilder<TResult>.HandleResult(TResult result, System.Collections.Generic.IEqualityComparer<TResult>? comparer = null) -> Paramore.Fences.PredicateBuilder<TResult>!
+Paramore.Fences.PredicateBuilder<TResult>.PredicateBuilder() -> void
+Paramore.Fences.PredicateResult
+Paramore.Fences.Registry.ConfigureBuilderContext<TKey>
+Paramore.Fences.Registry.ConfigureBuilderContext<TKey>.AddReloadToken(System.Threading.CancellationToken cancellationToken) -> void
+Paramore.Fences.Registry.ConfigureBuilderContext<TKey>.OnPipelineDisposed(System.Action! callback) -> void
+Paramore.Fences.Registry.ConfigureBuilderContext<TKey>.PipelineKey.get -> TKey
+Paramore.Fences.Registry.ResiliencePipelineProvider<TKey>
+Paramore.Fences.Registry.ResiliencePipelineProvider<TKey>.ResiliencePipelineProvider() -> void
+Paramore.Fences.Registry.ResiliencePipelineRegistry<TKey>
+Paramore.Fences.Registry.ResiliencePipelineRegistry<TKey>.Dispose() -> void
+Paramore.Fences.Registry.ResiliencePipelineRegistry<TKey>.DisposeAsync() -> System.Threading.Tasks.ValueTask
+Paramore.Fences.Registry.ResiliencePipelineRegistry<TKey>.GetOrAddPipeline(TKey key, System.Action<Paramore.Fences.ResiliencePipelineBuilder!, Paramore.Fences.Registry.ConfigureBuilderContext<TKey>!>! configure) -> Paramore.Fences.ResiliencePipeline!
+Paramore.Fences.Registry.ResiliencePipelineRegistry<TKey>.GetOrAddPipeline(TKey key, System.Action<Paramore.Fences.ResiliencePipelineBuilder!>! configure) -> Paramore.Fences.ResiliencePipeline!
+Paramore.Fences.Registry.ResiliencePipelineRegistry<TKey>.GetOrAddPipeline<TResult>(TKey key, System.Action<Paramore.Fences.ResiliencePipelineBuilder<TResult>!, Paramore.Fences.Registry.ConfigureBuilderContext<TKey>!>! configure) -> Paramore.Fences.ResiliencePipeline<TResult>!
+Paramore.Fences.Registry.ResiliencePipelineRegistry<TKey>.GetOrAddPipeline<TResult>(TKey key, System.Action<Paramore.Fences.ResiliencePipelineBuilder<TResult>!>! configure) -> Paramore.Fences.ResiliencePipeline<TResult>!
+Paramore.Fences.Registry.ResiliencePipelineRegistry<TKey>.ResiliencePipelineRegistry() -> void
+Paramore.Fences.Registry.ResiliencePipelineRegistry<TKey>.ResiliencePipelineRegistry(Paramore.Fences.Registry.ResiliencePipelineRegistryOptions<TKey>! options) -> void
+Paramore.Fences.Registry.ResiliencePipelineRegistry<TKey>.TryAddBuilder(TKey key, System.Action<Paramore.Fences.ResiliencePipelineBuilder!, Paramore.Fences.Registry.ConfigureBuilderContext<TKey>!>! configure) -> bool
+Paramore.Fences.Registry.ResiliencePipelineRegistry<TKey>.TryAddBuilder<TResult>(TKey key, System.Action<Paramore.Fences.ResiliencePipelineBuilder<TResult>!, Paramore.Fences.Registry.ConfigureBuilderContext<TKey>!>! configure) -> bool
+Paramore.Fences.Registry.ResiliencePipelineRegistryOptions<TKey>
+Paramore.Fences.Registry.ResiliencePipelineRegistryOptions<TKey>.BuilderComparer.get -> System.Collections.Generic.IEqualityComparer<TKey>!
+Paramore.Fences.Registry.ResiliencePipelineRegistryOptions<TKey>.BuilderComparer.set -> void
+Paramore.Fences.Registry.ResiliencePipelineRegistryOptions<TKey>.BuilderFactory.get -> System.Func<Paramore.Fences.ResiliencePipelineBuilder!>!
+Paramore.Fences.Registry.ResiliencePipelineRegistryOptions<TKey>.BuilderFactory.set -> void
+Paramore.Fences.Registry.ResiliencePipelineRegistryOptions<TKey>.BuilderNameFormatter.get -> System.Func<TKey, string!>!
+Paramore.Fences.Registry.ResiliencePipelineRegistryOptions<TKey>.BuilderNameFormatter.set -> void
+Paramore.Fences.Registry.ResiliencePipelineRegistryOptions<TKey>.InstanceNameFormatter.get -> System.Func<TKey, string!>?
+Paramore.Fences.Registry.ResiliencePipelineRegistryOptions<TKey>.InstanceNameFormatter.set -> void
+Paramore.Fences.Registry.ResiliencePipelineRegistryOptions<TKey>.PipelineComparer.get -> System.Collections.Generic.IEqualityComparer<TKey>!
+Paramore.Fences.Registry.ResiliencePipelineRegistryOptions<TKey>.PipelineComparer.set -> void
+Paramore.Fences.Registry.ResiliencePipelineRegistryOptions<TKey>.ResiliencePipelineRegistryOptions() -> void
+Paramore.Fences.ResilienceContext
+Paramore.Fences.ResilienceContext.CancellationToken.get -> System.Threading.CancellationToken
+Paramore.Fences.ResilienceContext.ContinueOnCapturedContext.get -> bool
+Paramore.Fences.ResilienceContext.OperationKey.get -> string?
+Paramore.Fences.ResilienceContext.Properties.get -> Paramore.Fences.ResilienceProperties!
+Paramore.Fences.ResilienceContextCreationArguments
+Paramore.Fences.ResilienceContextCreationArguments.CancellationToken.get -> System.Threading.CancellationToken
+Paramore.Fences.ResilienceContextCreationArguments.ContinueOnCapturedContext.get -> bool?
+Paramore.Fences.ResilienceContextCreationArguments.OperationKey.get -> string?
+Paramore.Fences.ResilienceContextCreationArguments.ResilienceContextCreationArguments() -> void
+Paramore.Fences.ResilienceContextCreationArguments.ResilienceContextCreationArguments(string? operationKey, bool? continueOnCapturedContext, System.Threading.CancellationToken cancellationToken) -> void
+Paramore.Fences.ResilienceContextPool
+Paramore.Fences.ResilienceContextPool.Get(bool continueOnCapturedContext, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Paramore.Fences.ResilienceContext!
+Paramore.Fences.ResilienceContextPool.Get(string? operationKey, bool? continueOnCapturedContext, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Paramore.Fences.ResilienceContext!
+Paramore.Fences.ResilienceContextPool.Get(string? operationKey, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Paramore.Fences.ResilienceContext!
+Paramore.Fences.ResilienceContextPool.Get(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> Paramore.Fences.ResilienceContext!
+Paramore.Fences.ResilienceContextPool.ResilienceContextPool() -> void
+Paramore.Fences.ResiliencePipeline
+Paramore.Fences.ResiliencePipeline.Execute(System.Action! callback) -> void
+Paramore.Fences.ResiliencePipeline.Execute(System.Action<Paramore.Fences.ResilienceContext!>! callback, Paramore.Fences.ResilienceContext! context) -> void
+Paramore.Fences.ResiliencePipeline.Execute(System.Action<System.Threading.CancellationToken>! callback, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> void
+Paramore.Fences.ResiliencePipeline.Execute<TResult, TState>(System.Func<Paramore.Fences.ResilienceContext!, TState, TResult>! callback, Paramore.Fences.ResilienceContext! context, TState state) -> TResult
+Paramore.Fences.ResiliencePipeline.Execute<TResult, TState>(System.Func<TState, System.Threading.CancellationToken, TResult>! callback, TState state, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> TResult
+Paramore.Fences.ResiliencePipeline.Execute<TResult, TState>(System.Func<TState, TResult>! callback, TState state) -> TResult
+Paramore.Fences.ResiliencePipeline.Execute<TResult>(System.Func<Paramore.Fences.ResilienceContext!, TResult>! callback, Paramore.Fences.ResilienceContext! context) -> TResult
+Paramore.Fences.ResiliencePipeline.Execute<TResult>(System.Func<System.Threading.CancellationToken, TResult>! callback, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> TResult
+Paramore.Fences.ResiliencePipeline.Execute<TResult>(System.Func<TResult>! callback) -> TResult
+Paramore.Fences.ResiliencePipeline.Execute<TState>(System.Action<Paramore.Fences.ResilienceContext!, TState>! callback, Paramore.Fences.ResilienceContext! context, TState state) -> void
+Paramore.Fences.ResiliencePipeline.Execute<TState>(System.Action<TState, System.Threading.CancellationToken>! callback, TState state, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> void
+Paramore.Fences.ResiliencePipeline.Execute<TState>(System.Action<TState>! callback, TState state) -> void
+Paramore.Fences.ResiliencePipeline.ExecuteAsync(System.Func<Paramore.Fences.ResilienceContext!, System.Threading.Tasks.ValueTask>! callback, Paramore.Fences.ResilienceContext! context) -> System.Threading.Tasks.ValueTask
+Paramore.Fences.ResiliencePipeline.ExecuteAsync(System.Func<System.Threading.CancellationToken, System.Threading.Tasks.ValueTask>! callback, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask
+Paramore.Fences.ResiliencePipeline.ExecuteAsync<TResult, TState>(System.Func<Paramore.Fences.ResilienceContext!, TState, System.Threading.Tasks.ValueTask<TResult>>! callback, Paramore.Fences.ResilienceContext! context, TState state) -> System.Threading.Tasks.ValueTask<TResult>
+Paramore.Fences.ResiliencePipeline.ExecuteAsync<TResult, TState>(System.Func<TState, System.Threading.CancellationToken, System.Threading.Tasks.ValueTask<TResult>>! callback, TState state, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<TResult>
+Paramore.Fences.ResiliencePipeline.ExecuteAsync<TResult>(System.Func<Paramore.Fences.ResilienceContext!, System.Threading.Tasks.ValueTask<TResult>>! callback, Paramore.Fences.ResilienceContext! context) -> System.Threading.Tasks.ValueTask<TResult>
+Paramore.Fences.ResiliencePipeline.ExecuteAsync<TResult>(System.Func<System.Threading.CancellationToken, System.Threading.Tasks.ValueTask<TResult>>! callback, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<TResult>
+Paramore.Fences.ResiliencePipeline.ExecuteAsync<TState>(System.Func<Paramore.Fences.ResilienceContext!, TState, System.Threading.Tasks.ValueTask>! callback, Paramore.Fences.ResilienceContext! context, TState state) -> System.Threading.Tasks.ValueTask
+Paramore.Fences.ResiliencePipeline.ExecuteAsync<TState>(System.Func<TState, System.Threading.CancellationToken, System.Threading.Tasks.ValueTask>! callback, TState state, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask
+Paramore.Fences.ResiliencePipeline.ExecuteOutcomeAsync<TResult, TState>(System.Func<Paramore.Fences.ResilienceContext!, TState, System.Threading.Tasks.ValueTask<Paramore.Fences.Outcome<TResult>>>! callback, Paramore.Fences.ResilienceContext! context, TState state) -> System.Threading.Tasks.ValueTask<Paramore.Fences.Outcome<TResult>>
+Paramore.Fences.ResiliencePipeline<T>
+Paramore.Fences.ResiliencePipeline<T>.Execute<TResult, TState>(System.Func<Paramore.Fences.ResilienceContext!, TState, TResult>! callback, Paramore.Fences.ResilienceContext! context, TState state) -> TResult
+Paramore.Fences.ResiliencePipeline<T>.Execute<TResult, TState>(System.Func<TState, System.Threading.CancellationToken, TResult>! callback, TState state, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> TResult
+Paramore.Fences.ResiliencePipeline<T>.Execute<TResult, TState>(System.Func<TState, TResult>! callback, TState state) -> TResult
+Paramore.Fences.ResiliencePipeline<T>.Execute<TResult>(System.Func<Paramore.Fences.ResilienceContext!, TResult>! callback, Paramore.Fences.ResilienceContext! context) -> TResult
+Paramore.Fences.ResiliencePipeline<T>.Execute<TResult>(System.Func<System.Threading.CancellationToken, TResult>! callback, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> TResult
+Paramore.Fences.ResiliencePipeline<T>.Execute<TResult>(System.Func<TResult>! callback) -> TResult
+Paramore.Fences.ResiliencePipeline<T>.ExecuteAsync<TResult, TState>(System.Func<Paramore.Fences.ResilienceContext!, TState, System.Threading.Tasks.ValueTask<TResult>>! callback, Paramore.Fences.ResilienceContext! context, TState state) -> System.Threading.Tasks.ValueTask<TResult>
+Paramore.Fences.ResiliencePipeline<T>.ExecuteAsync<TResult, TState>(System.Func<TState, System.Threading.CancellationToken, System.Threading.Tasks.ValueTask<TResult>>! callback, TState state, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<TResult>
+Paramore.Fences.ResiliencePipeline<T>.ExecuteAsync<TResult>(System.Func<Paramore.Fences.ResilienceContext!, System.Threading.Tasks.ValueTask<TResult>>! callback, Paramore.Fences.ResilienceContext! context) -> System.Threading.Tasks.ValueTask<TResult>
+Paramore.Fences.ResiliencePipeline<T>.ExecuteAsync<TResult>(System.Func<System.Threading.CancellationToken, System.Threading.Tasks.ValueTask<TResult>>! callback, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<TResult>
+Paramore.Fences.ResiliencePipeline<T>.ExecuteOutcomeAsync<TResult, TState>(System.Func<Paramore.Fences.ResilienceContext!, TState, System.Threading.Tasks.ValueTask<Paramore.Fences.Outcome<TResult>>>! callback, Paramore.Fences.ResilienceContext! context, TState state) -> System.Threading.Tasks.ValueTask<Paramore.Fences.Outcome<TResult>>
+Paramore.Fences.ResiliencePipelineBuilder
+Paramore.Fences.ResiliencePipelineBuilder.Build() -> Paramore.Fences.ResiliencePipeline!
+Paramore.Fences.ResiliencePipelineBuilder.ResiliencePipelineBuilder() -> void
+Paramore.Fences.ResiliencePipelineBuilder<TResult>
+Paramore.Fences.ResiliencePipelineBuilder<TResult>.Build() -> Paramore.Fences.ResiliencePipeline<TResult>!
+Paramore.Fences.ResiliencePipelineBuilder<TResult>.ResiliencePipelineBuilder() -> void
+Paramore.Fences.ResiliencePipelineBuilderBase
+Paramore.Fences.ResiliencePipelineBuilderBase.ContextPool.get -> Paramore.Fences.ResilienceContextPool?
+Paramore.Fences.ResiliencePipelineBuilderBase.ContextPool.set -> void
+Paramore.Fences.ResiliencePipelineBuilderBase.InstanceName.get -> string?
+Paramore.Fences.ResiliencePipelineBuilderBase.InstanceName.set -> void
+Paramore.Fences.ResiliencePipelineBuilderBase.Name.get -> string?
+Paramore.Fences.ResiliencePipelineBuilderBase.Name.set -> void
+Paramore.Fences.ResiliencePipelineBuilderBase.TelemetryListener.get -> Paramore.Fences.Telemetry.TelemetryListener?
+Paramore.Fences.ResiliencePipelineBuilderBase.TelemetryListener.set -> void
+Paramore.Fences.ResiliencePipelineBuilderBase.TimeProvider.get -> System.TimeProvider?
+Paramore.Fences.ResiliencePipelineBuilderBase.TimeProvider.set -> void
+Paramore.Fences.ResiliencePipelineBuilderExtensions
+Paramore.Fences.ResilienceProperties
+Paramore.Fences.ResilienceProperties.GetValue<TValue>(Paramore.Fences.ResiliencePropertyKey<TValue> key, TValue defaultValue) -> TValue
+Paramore.Fences.ResilienceProperties.ResilienceProperties() -> void
+Paramore.Fences.ResilienceProperties.Set<TValue>(Paramore.Fences.ResiliencePropertyKey<TValue> key, TValue value) -> void
+Paramore.Fences.ResilienceProperties.TryGetValue<TValue>(Paramore.Fences.ResiliencePropertyKey<TValue> key, out TValue value) -> bool
+Paramore.Fences.ResiliencePropertyKey<TValue>
+Paramore.Fences.ResiliencePropertyKey<TValue>.Key.get -> string!
+Paramore.Fences.ResiliencePropertyKey<TValue>.ResiliencePropertyKey() -> void
+Paramore.Fences.ResiliencePropertyKey<TValue>.ResiliencePropertyKey(string! key) -> void
+Paramore.Fences.ResilienceStrategy
+Paramore.Fences.ResilienceStrategy.ResilienceStrategy() -> void
+Paramore.Fences.ResilienceStrategy<TResult>
+Paramore.Fences.ResilienceStrategy<TResult>.ResilienceStrategy() -> void
+Paramore.Fences.ResilienceStrategyOptions
+Paramore.Fences.ResilienceStrategyOptions.Name.get -> string?
+Paramore.Fences.ResilienceStrategyOptions.Name.set -> void
+Paramore.Fences.ResilienceStrategyOptions.ResilienceStrategyOptions() -> void
+Paramore.Fences.Retry.OnRetryArguments<TResult>
+Paramore.Fences.Retry.OnRetryArguments<TResult>.AttemptNumber.get -> int
+Paramore.Fences.Retry.OnRetryArguments<TResult>.Context.get -> Paramore.Fences.ResilienceContext!
+Paramore.Fences.Retry.OnRetryArguments<TResult>.Duration.get -> System.TimeSpan
+Paramore.Fences.Retry.OnRetryArguments<TResult>.OnRetryArguments() -> void
+Paramore.Fences.Retry.OnRetryArguments<TResult>.OnRetryArguments(Paramore.Fences.ResilienceContext! context, Paramore.Fences.Outcome<TResult> outcome, int attemptNumber, System.TimeSpan retryDelay, System.TimeSpan duration) -> void
+Paramore.Fences.Retry.OnRetryArguments<TResult>.Outcome.get -> Paramore.Fences.Outcome<TResult>
+Paramore.Fences.Retry.OnRetryArguments<TResult>.RetryDelay.get -> System.TimeSpan
+Paramore.Fences.Retry.RetryDelayGeneratorArguments<TResult>
+Paramore.Fences.Retry.RetryDelayGeneratorArguments<TResult>.AttemptNumber.get -> int
+Paramore.Fences.Retry.RetryDelayGeneratorArguments<TResult>.Context.get -> Paramore.Fences.ResilienceContext!
+Paramore.Fences.Retry.RetryDelayGeneratorArguments<TResult>.Outcome.get -> Paramore.Fences.Outcome<TResult>
+Paramore.Fences.Retry.RetryDelayGeneratorArguments<TResult>.RetryDelayGeneratorArguments() -> void
+Paramore.Fences.Retry.RetryDelayGeneratorArguments<TResult>.RetryDelayGeneratorArguments(Paramore.Fences.ResilienceContext! context, Paramore.Fences.Outcome<TResult> outcome, int attemptNumber) -> void
+Paramore.Fences.Retry.RetryPredicateArguments<TResult>
+Paramore.Fences.Retry.RetryPredicateArguments<TResult>.AttemptNumber.get -> int
+Paramore.Fences.Retry.RetryPredicateArguments<TResult>.Context.get -> Paramore.Fences.ResilienceContext!
+Paramore.Fences.Retry.RetryPredicateArguments<TResult>.Outcome.get -> Paramore.Fences.Outcome<TResult>
+Paramore.Fences.Retry.RetryPredicateArguments<TResult>.RetryPredicateArguments() -> void
+Paramore.Fences.Retry.RetryPredicateArguments<TResult>.RetryPredicateArguments(Paramore.Fences.ResilienceContext! context, Paramore.Fences.Outcome<TResult> outcome, int attemptNumber) -> void
+Paramore.Fences.Retry.RetryStrategyOptions
+Paramore.Fences.Retry.RetryStrategyOptions.RetryStrategyOptions() -> void
+Paramore.Fences.Retry.RetryStrategyOptions<TResult>
+Paramore.Fences.Retry.RetryStrategyOptions<TResult>.BackoffType.get -> Paramore.Fences.DelayBackoffType
+Paramore.Fences.Retry.RetryStrategyOptions<TResult>.BackoffType.set -> void
+Paramore.Fences.Retry.RetryStrategyOptions<TResult>.Delay.get -> System.TimeSpan
+Paramore.Fences.Retry.RetryStrategyOptions<TResult>.Delay.set -> void
+Paramore.Fences.Retry.RetryStrategyOptions<TResult>.DelayGenerator.get -> System.Func<Paramore.Fences.Retry.RetryDelayGeneratorArguments<TResult>, System.Threading.Tasks.ValueTask<System.TimeSpan?>>?
+Paramore.Fences.Retry.RetryStrategyOptions<TResult>.DelayGenerator.set -> void
+Paramore.Fences.Retry.RetryStrategyOptions<TResult>.MaxDelay.get -> System.TimeSpan?
+Paramore.Fences.Retry.RetryStrategyOptions<TResult>.MaxDelay.set -> void
+Paramore.Fences.Retry.RetryStrategyOptions<TResult>.MaxRetryAttempts.get -> int
+Paramore.Fences.Retry.RetryStrategyOptions<TResult>.MaxRetryAttempts.set -> void
+Paramore.Fences.Retry.RetryStrategyOptions<TResult>.OnRetry.get -> System.Func<Paramore.Fences.Retry.OnRetryArguments<TResult>, System.Threading.Tasks.ValueTask>?
+Paramore.Fences.Retry.RetryStrategyOptions<TResult>.OnRetry.set -> void
+Paramore.Fences.Retry.RetryStrategyOptions<TResult>.Randomizer.get -> System.Func<double>!
+Paramore.Fences.Retry.RetryStrategyOptions<TResult>.Randomizer.set -> void
+Paramore.Fences.Retry.RetryStrategyOptions<TResult>.RetryStrategyOptions() -> void
+Paramore.Fences.Retry.RetryStrategyOptions<TResult>.ShouldHandle.get -> System.Func<Paramore.Fences.Retry.RetryPredicateArguments<TResult>, System.Threading.Tasks.ValueTask<bool>>!
+Paramore.Fences.Retry.RetryStrategyOptions<TResult>.ShouldHandle.set -> void
+Paramore.Fences.Retry.RetryStrategyOptions<TResult>.UseJitter.get -> bool
+Paramore.Fences.Retry.RetryStrategyOptions<TResult>.UseJitter.set -> void
+Paramore.Fences.RetryResiliencePipelineBuilderExtensions
+Paramore.Fences.Simmy.Behavior.BehaviorGeneratorArguments
+Paramore.Fences.Simmy.Behavior.BehaviorGeneratorArguments.BehaviorGeneratorArguments() -> void
+Paramore.Fences.Simmy.Behavior.BehaviorGeneratorArguments.BehaviorGeneratorArguments(Paramore.Fences.ResilienceContext! context) -> void
+Paramore.Fences.Simmy.Behavior.BehaviorGeneratorArguments.Context.get -> Paramore.Fences.ResilienceContext!
+Paramore.Fences.Simmy.Behavior.ChaosBehaviorStrategyOptions
+Paramore.Fences.Simmy.Behavior.ChaosBehaviorStrategyOptions.BehaviorGenerator.get -> System.Func<Paramore.Fences.Simmy.Behavior.BehaviorGeneratorArguments, System.Threading.Tasks.ValueTask>?
+Paramore.Fences.Simmy.Behavior.ChaosBehaviorStrategyOptions.BehaviorGenerator.set -> void
+Paramore.Fences.Simmy.Behavior.ChaosBehaviorStrategyOptions.ChaosBehaviorStrategyOptions() -> void
+Paramore.Fences.Simmy.Behavior.ChaosBehaviorStrategyOptions.OnBehaviorInjected.get -> System.Func<Paramore.Fences.Simmy.Behavior.OnBehaviorInjectedArguments, System.Threading.Tasks.ValueTask>?
+Paramore.Fences.Simmy.Behavior.ChaosBehaviorStrategyOptions.OnBehaviorInjected.set -> void
+Paramore.Fences.Simmy.Behavior.OnBehaviorInjectedArguments
+Paramore.Fences.Simmy.Behavior.OnBehaviorInjectedArguments.Context.get -> Paramore.Fences.ResilienceContext!
+Paramore.Fences.Simmy.Behavior.OnBehaviorInjectedArguments.OnBehaviorInjectedArguments() -> void
+Paramore.Fences.Simmy.Behavior.OnBehaviorInjectedArguments.OnBehaviorInjectedArguments(Paramore.Fences.ResilienceContext! context) -> void
+Paramore.Fences.Simmy.ChaosBehaviorPipelineBuilderExtensions
+Paramore.Fences.Simmy.ChaosFaultPipelineBuilderExtensions
+Paramore.Fences.Simmy.ChaosLatencyPipelineBuilderExtensions
+Paramore.Fences.Simmy.ChaosOutcomePipelineBuilderExtensions
+Paramore.Fences.Simmy.ChaosStrategy
+Paramore.Fences.Simmy.ChaosStrategy.ChaosStrategy(Paramore.Fences.Simmy.ChaosStrategyOptions! options) -> void
+Paramore.Fences.Simmy.ChaosStrategy.ShouldInjectAsync(Paramore.Fences.ResilienceContext! context) -> System.Threading.Tasks.ValueTask<bool>
+Paramore.Fences.Simmy.ChaosStrategy<T>
+Paramore.Fences.Simmy.ChaosStrategy<T>.ChaosStrategy(Paramore.Fences.Simmy.ChaosStrategyOptions! options) -> void
+Paramore.Fences.Simmy.ChaosStrategy<T>.ShouldInjectAsync(Paramore.Fences.ResilienceContext! context) -> System.Threading.Tasks.ValueTask<bool>
+Paramore.Fences.Simmy.ChaosStrategyOptions
+Paramore.Fences.Simmy.ChaosStrategyOptions.ChaosStrategyOptions() -> void
+Paramore.Fences.Simmy.ChaosStrategyOptions.Enabled.get -> bool
+Paramore.Fences.Simmy.ChaosStrategyOptions.Enabled.set -> void
+Paramore.Fences.Simmy.ChaosStrategyOptions.EnabledGenerator.get -> System.Func<Paramore.Fences.Simmy.EnabledGeneratorArguments, System.Threading.Tasks.ValueTask<bool>>?
+Paramore.Fences.Simmy.ChaosStrategyOptions.EnabledGenerator.set -> void
+Paramore.Fences.Simmy.ChaosStrategyOptions.InjectionRate.get -> double
+Paramore.Fences.Simmy.ChaosStrategyOptions.InjectionRate.set -> void
+Paramore.Fences.Simmy.ChaosStrategyOptions.InjectionRateGenerator.get -> System.Func<Paramore.Fences.Simmy.InjectionRateGeneratorArguments, System.Threading.Tasks.ValueTask<double>>?
+Paramore.Fences.Simmy.ChaosStrategyOptions.InjectionRateGenerator.set -> void
+Paramore.Fences.Simmy.ChaosStrategyOptions.Randomizer.get -> System.Func<double>!
+Paramore.Fences.Simmy.ChaosStrategyOptions.Randomizer.set -> void
+Paramore.Fences.Simmy.EnabledGeneratorArguments
+Paramore.Fences.Simmy.EnabledGeneratorArguments.Context.get -> Paramore.Fences.ResilienceContext!
+Paramore.Fences.Simmy.EnabledGeneratorArguments.EnabledGeneratorArguments() -> void
+Paramore.Fences.Simmy.EnabledGeneratorArguments.EnabledGeneratorArguments(Paramore.Fences.ResilienceContext! context) -> void
+Paramore.Fences.Simmy.Fault.ChaosFaultStrategyOptions
+Paramore.Fences.Simmy.Fault.ChaosFaultStrategyOptions.ChaosFaultStrategyOptions() -> void
+Paramore.Fences.Simmy.Fault.ChaosFaultStrategyOptions.FaultGenerator.get -> System.Func<Paramore.Fences.Simmy.Fault.FaultGeneratorArguments, System.Threading.Tasks.ValueTask<System.Exception?>>?
+Paramore.Fences.Simmy.Fault.ChaosFaultStrategyOptions.FaultGenerator.set -> void
+Paramore.Fences.Simmy.Fault.ChaosFaultStrategyOptions.OnFaultInjected.get -> System.Func<Paramore.Fences.Simmy.Fault.OnFaultInjectedArguments, System.Threading.Tasks.ValueTask>?
+Paramore.Fences.Simmy.Fault.ChaosFaultStrategyOptions.OnFaultInjected.set -> void
+Paramore.Fences.Simmy.Fault.FaultGenerator
+Paramore.Fences.Simmy.Fault.FaultGenerator.AddException(System.Func<Paramore.Fences.ResilienceContext!, System.Exception!>! generator, int weight = 100) -> Paramore.Fences.Simmy.Fault.FaultGenerator!
+Paramore.Fences.Simmy.Fault.FaultGenerator.AddException(System.Func<System.Exception!>! generator, int weight = 100) -> Paramore.Fences.Simmy.Fault.FaultGenerator!
+Paramore.Fences.Simmy.Fault.FaultGenerator.AddException<TException>(int weight = 100) -> Paramore.Fences.Simmy.Fault.FaultGenerator!
+Paramore.Fences.Simmy.Fault.FaultGenerator.FaultGenerator() -> void
+Paramore.Fences.Simmy.Fault.FaultGeneratorArguments
+Paramore.Fences.Simmy.Fault.FaultGeneratorArguments.Context.get -> Paramore.Fences.ResilienceContext!
+Paramore.Fences.Simmy.Fault.FaultGeneratorArguments.FaultGeneratorArguments() -> void
+Paramore.Fences.Simmy.Fault.FaultGeneratorArguments.FaultGeneratorArguments(Paramore.Fences.ResilienceContext! context) -> void
+Paramore.Fences.Simmy.Fault.OnFaultInjectedArguments
+Paramore.Fences.Simmy.Fault.OnFaultInjectedArguments.Context.get -> Paramore.Fences.ResilienceContext!
+Paramore.Fences.Simmy.Fault.OnFaultInjectedArguments.Fault.get -> System.Exception!
+Paramore.Fences.Simmy.Fault.OnFaultInjectedArguments.OnFaultInjectedArguments() -> void
+Paramore.Fences.Simmy.Fault.OnFaultInjectedArguments.OnFaultInjectedArguments(Paramore.Fences.ResilienceContext! context, System.Exception! fault) -> void
+Paramore.Fences.Simmy.InjectionRateGeneratorArguments
+Paramore.Fences.Simmy.InjectionRateGeneratorArguments.Context.get -> Paramore.Fences.ResilienceContext!
+Paramore.Fences.Simmy.InjectionRateGeneratorArguments.InjectionRateGeneratorArguments() -> void
+Paramore.Fences.Simmy.InjectionRateGeneratorArguments.InjectionRateGeneratorArguments(Paramore.Fences.ResilienceContext! context) -> void
+Paramore.Fences.Simmy.Latency.ChaosLatencyStrategyOptions
+Paramore.Fences.Simmy.Latency.ChaosLatencyStrategyOptions.ChaosLatencyStrategyOptions() -> void
+Paramore.Fences.Simmy.Latency.ChaosLatencyStrategyOptions.Latency.get -> System.TimeSpan
+Paramore.Fences.Simmy.Latency.ChaosLatencyStrategyOptions.Latency.set -> void
+Paramore.Fences.Simmy.Latency.ChaosLatencyStrategyOptions.LatencyGenerator.get -> System.Func<Paramore.Fences.Simmy.Latency.LatencyGeneratorArguments, System.Threading.Tasks.ValueTask<System.TimeSpan>>?
+Paramore.Fences.Simmy.Latency.ChaosLatencyStrategyOptions.LatencyGenerator.set -> void
+Paramore.Fences.Simmy.Latency.ChaosLatencyStrategyOptions.OnLatencyInjected.get -> System.Func<Paramore.Fences.Simmy.Latency.OnLatencyInjectedArguments, System.Threading.Tasks.ValueTask>?
+Paramore.Fences.Simmy.Latency.ChaosLatencyStrategyOptions.OnLatencyInjected.set -> void
+Paramore.Fences.Simmy.Latency.LatencyGeneratorArguments
+Paramore.Fences.Simmy.Latency.LatencyGeneratorArguments.Context.get -> Paramore.Fences.ResilienceContext!
+Paramore.Fences.Simmy.Latency.LatencyGeneratorArguments.LatencyGeneratorArguments() -> void
+Paramore.Fences.Simmy.Latency.LatencyGeneratorArguments.LatencyGeneratorArguments(Paramore.Fences.ResilienceContext! context) -> void
+Paramore.Fences.Simmy.Latency.OnLatencyInjectedArguments
+Paramore.Fences.Simmy.Latency.OnLatencyInjectedArguments.Context.get -> Paramore.Fences.ResilienceContext!
+Paramore.Fences.Simmy.Latency.OnLatencyInjectedArguments.Latency.get -> System.TimeSpan
+Paramore.Fences.Simmy.Latency.OnLatencyInjectedArguments.OnLatencyInjectedArguments() -> void
+Paramore.Fences.Simmy.Latency.OnLatencyInjectedArguments.OnLatencyInjectedArguments(Paramore.Fences.ResilienceContext! context, System.TimeSpan latency) -> void
+Paramore.Fences.Simmy.Outcomes.ChaosOutcomeStrategyOptions<TResult>
+Paramore.Fences.Simmy.Outcomes.ChaosOutcomeStrategyOptions<TResult>.ChaosOutcomeStrategyOptions() -> void
+Paramore.Fences.Simmy.Outcomes.ChaosOutcomeStrategyOptions<TResult>.OnOutcomeInjected.get -> System.Func<Paramore.Fences.Simmy.Outcomes.OnOutcomeInjectedArguments<TResult>, System.Threading.Tasks.ValueTask>?
+Paramore.Fences.Simmy.Outcomes.ChaosOutcomeStrategyOptions<TResult>.OnOutcomeInjected.set -> void
+Paramore.Fences.Simmy.Outcomes.ChaosOutcomeStrategyOptions<TResult>.OutcomeGenerator.get -> System.Func<Paramore.Fences.Simmy.Outcomes.OutcomeGeneratorArguments, System.Threading.Tasks.ValueTask<Paramore.Fences.Outcome<TResult>?>>?
+Paramore.Fences.Simmy.Outcomes.ChaosOutcomeStrategyOptions<TResult>.OutcomeGenerator.set -> void
+Paramore.Fences.Simmy.Outcomes.OnOutcomeInjectedArguments<TResult>
+Paramore.Fences.Simmy.Outcomes.OnOutcomeInjectedArguments<TResult>.Context.get -> Paramore.Fences.ResilienceContext!
+Paramore.Fences.Simmy.Outcomes.OnOutcomeInjectedArguments<TResult>.OnOutcomeInjectedArguments() -> void
+Paramore.Fences.Simmy.Outcomes.OnOutcomeInjectedArguments<TResult>.OnOutcomeInjectedArguments(Paramore.Fences.ResilienceContext! context, Paramore.Fences.Outcome<TResult> outcome) -> void
+Paramore.Fences.Simmy.Outcomes.OnOutcomeInjectedArguments<TResult>.Outcome.get -> Paramore.Fences.Outcome<TResult>
+Paramore.Fences.Simmy.Outcomes.OutcomeGenerator<TResult>
+Paramore.Fences.Simmy.Outcomes.OutcomeGenerator<TResult>.AddException(System.Func<Paramore.Fences.ResilienceContext!, System.Exception!>! generator, int weight = 100) -> Paramore.Fences.Simmy.Outcomes.OutcomeGenerator<TResult>!
+Paramore.Fences.Simmy.Outcomes.OutcomeGenerator<TResult>.AddException(System.Func<System.Exception!>! generator, int weight = 100) -> Paramore.Fences.Simmy.Outcomes.OutcomeGenerator<TResult>!
+Paramore.Fences.Simmy.Outcomes.OutcomeGenerator<TResult>.AddException<TException>(int weight = 100) -> Paramore.Fences.Simmy.Outcomes.OutcomeGenerator<TResult>!
+Paramore.Fences.Simmy.Outcomes.OutcomeGenerator<TResult>.AddResult(System.Func<Paramore.Fences.ResilienceContext!, TResult>! generator, int weight = 100) -> Paramore.Fences.Simmy.Outcomes.OutcomeGenerator<TResult>!
+Paramore.Fences.Simmy.Outcomes.OutcomeGenerator<TResult>.AddResult(System.Func<TResult>! generator, int weight = 100) -> Paramore.Fences.Simmy.Outcomes.OutcomeGenerator<TResult>!
+Paramore.Fences.Simmy.Outcomes.OutcomeGenerator<TResult>.OutcomeGenerator() -> void
+Paramore.Fences.Simmy.Outcomes.OutcomeGeneratorArguments
+Paramore.Fences.Simmy.Outcomes.OutcomeGeneratorArguments.Context.get -> Paramore.Fences.ResilienceContext!
+Paramore.Fences.Simmy.Outcomes.OutcomeGeneratorArguments.OutcomeGeneratorArguments() -> void
+Paramore.Fences.Simmy.Outcomes.OutcomeGeneratorArguments.OutcomeGeneratorArguments(Paramore.Fences.ResilienceContext! context) -> void
+Paramore.Fences.StrategyBuilderContext
+Paramore.Fences.StrategyBuilderContext.Telemetry.get -> Paramore.Fences.Telemetry.ResilienceStrategyTelemetry!
+Paramore.Fences.StrategyBuilderContext.TimeProvider.get -> System.TimeProvider!
+Paramore.Fences.Telemetry.ExecutionAttemptArguments
+Paramore.Fences.Telemetry.ExecutionAttemptArguments.AttemptNumber.get -> int
+Paramore.Fences.Telemetry.ExecutionAttemptArguments.Duration.get -> System.TimeSpan
+Paramore.Fences.Telemetry.ExecutionAttemptArguments.ExecutionAttemptArguments() -> void
+Paramore.Fences.Telemetry.ExecutionAttemptArguments.ExecutionAttemptArguments(int attemptNumber, System.TimeSpan duration, bool handled) -> void
+Paramore.Fences.Telemetry.ExecutionAttemptArguments.Handled.get -> bool
+Paramore.Fences.Telemetry.PipelineExecutedArguments
+Paramore.Fences.Telemetry.PipelineExecutedArguments.Duration.get -> System.TimeSpan
+Paramore.Fences.Telemetry.PipelineExecutedArguments.PipelineExecutedArguments() -> void
+Paramore.Fences.Telemetry.PipelineExecutedArguments.PipelineExecutedArguments(System.TimeSpan duration) -> void
+Paramore.Fences.Telemetry.PipelineExecutingArguments
+Paramore.Fences.Telemetry.PipelineExecutingArguments.PipelineExecutingArguments() -> void
+Paramore.Fences.Telemetry.ResilienceEvent
+Paramore.Fences.Telemetry.ResilienceEvent.EventName.get -> string!
+Paramore.Fences.Telemetry.ResilienceEvent.ResilienceEvent() -> void
+Paramore.Fences.Telemetry.ResilienceEvent.ResilienceEvent(Paramore.Fences.Telemetry.ResilienceEventSeverity severity, string! eventName) -> void
+Paramore.Fences.Telemetry.ResilienceEvent.Severity.get -> Paramore.Fences.Telemetry.ResilienceEventSeverity
+Paramore.Fences.Telemetry.ResilienceEventSeverity
+Paramore.Fences.Telemetry.ResilienceEventSeverity.Critical = 5 -> Paramore.Fences.Telemetry.ResilienceEventSeverity
+Paramore.Fences.Telemetry.ResilienceEventSeverity.Debug = 1 -> Paramore.Fences.Telemetry.ResilienceEventSeverity
+Paramore.Fences.Telemetry.ResilienceEventSeverity.Error = 4 -> Paramore.Fences.Telemetry.ResilienceEventSeverity
+Paramore.Fences.Telemetry.ResilienceEventSeverity.Information = 2 -> Paramore.Fences.Telemetry.ResilienceEventSeverity
+Paramore.Fences.Telemetry.ResilienceEventSeverity.None = 0 -> Paramore.Fences.Telemetry.ResilienceEventSeverity
+Paramore.Fences.Telemetry.ResilienceEventSeverity.Warning = 3 -> Paramore.Fences.Telemetry.ResilienceEventSeverity
+Paramore.Fences.Telemetry.ResilienceStrategyTelemetry
+Paramore.Fences.Telemetry.ResilienceStrategyTelemetry.Report<TArgs, TResult>(Paramore.Fences.Telemetry.ResilienceEvent resilienceEvent, Paramore.Fences.ResilienceContext! context, Paramore.Fences.Outcome<TResult> outcome, TArgs args) -> void
+Paramore.Fences.Telemetry.ResilienceStrategyTelemetry.Report<TArgs>(Paramore.Fences.Telemetry.ResilienceEvent resilienceEvent, Paramore.Fences.ResilienceContext! context, TArgs args) -> void
+Paramore.Fences.Telemetry.ResilienceStrategyTelemetry.SetTelemetrySource(Paramore.Fences.ExecutionRejectedException! exception) -> void
+Paramore.Fences.Telemetry.ResilienceTelemetrySource
+Paramore.Fences.Telemetry.ResilienceTelemetrySource.PipelineInstanceName.get -> string?
+Paramore.Fences.Telemetry.ResilienceTelemetrySource.PipelineName.get -> string?
+Paramore.Fences.Telemetry.ResilienceTelemetrySource.ResilienceTelemetrySource(string? pipelineName, string? pipelineInstanceName, string? strategyName) -> void
+Paramore.Fences.Telemetry.ResilienceTelemetrySource.StrategyName.get -> string?
+Paramore.Fences.Telemetry.TelemetryEventArguments<TResult, TArgs>
+Paramore.Fences.Telemetry.TelemetryEventArguments<TResult, TArgs>.Arguments.get -> TArgs
+Paramore.Fences.Telemetry.TelemetryEventArguments<TResult, TArgs>.Context.get -> Paramore.Fences.ResilienceContext!
+Paramore.Fences.Telemetry.TelemetryEventArguments<TResult, TArgs>.Event.get -> Paramore.Fences.Telemetry.ResilienceEvent
+Paramore.Fences.Telemetry.TelemetryEventArguments<TResult, TArgs>.Outcome.get -> Paramore.Fences.Outcome<TResult>?
+Paramore.Fences.Telemetry.TelemetryEventArguments<TResult, TArgs>.Source.get -> Paramore.Fences.Telemetry.ResilienceTelemetrySource!
+Paramore.Fences.Telemetry.TelemetryEventArguments<TResult, TArgs>.TelemetryEventArguments() -> void
+Paramore.Fences.Telemetry.TelemetryEventArguments<TResult, TArgs>.TelemetryEventArguments(Paramore.Fences.Telemetry.ResilienceTelemetrySource! source, Paramore.Fences.Telemetry.ResilienceEvent resilienceEvent, Paramore.Fences.ResilienceContext! context, TArgs args, Paramore.Fences.Outcome<TResult>? outcome) -> void
+Paramore.Fences.Telemetry.TelemetryListener
+Paramore.Fences.Telemetry.TelemetryListener.TelemetryListener() -> void
+Paramore.Fences.Timeout.OnTimeoutArguments
+Paramore.Fences.Timeout.OnTimeoutArguments.Context.get -> Paramore.Fences.ResilienceContext!
+Paramore.Fences.Timeout.OnTimeoutArguments.OnTimeoutArguments() -> void
+Paramore.Fences.Timeout.OnTimeoutArguments.OnTimeoutArguments(Paramore.Fences.ResilienceContext! context, System.TimeSpan timeout) -> void
+Paramore.Fences.Timeout.OnTimeoutArguments.Timeout.get -> System.TimeSpan
+Paramore.Fences.Timeout.TimeoutGeneratorArguments
+Paramore.Fences.Timeout.TimeoutGeneratorArguments.Context.get -> Paramore.Fences.ResilienceContext!
+Paramore.Fences.Timeout.TimeoutGeneratorArguments.TimeoutGeneratorArguments() -> void
+Paramore.Fences.Timeout.TimeoutGeneratorArguments.TimeoutGeneratorArguments(Paramore.Fences.ResilienceContext! context) -> void
+Paramore.Fences.Timeout.TimeoutRejectedException
+Paramore.Fences.Timeout.TimeoutRejectedException.Timeout.get -> System.TimeSpan
+Paramore.Fences.Timeout.TimeoutRejectedException.TimeoutRejectedException() -> void
+Paramore.Fences.Timeout.TimeoutRejectedException.TimeoutRejectedException(string! message) -> void
+Paramore.Fences.Timeout.TimeoutRejectedException.TimeoutRejectedException(string! message, System.Exception! innerException) -> void
+Paramore.Fences.Timeout.TimeoutRejectedException.TimeoutRejectedException(string! message, System.TimeSpan timeout) -> void
+Paramore.Fences.Timeout.TimeoutRejectedException.TimeoutRejectedException(string! message, System.TimeSpan timeout, System.Exception! innerException) -> void
+Paramore.Fences.Timeout.TimeoutRejectedException.TimeoutRejectedException(System.TimeSpan timeout) -> void
+Paramore.Fences.Timeout.TimeoutStrategyOptions
+Paramore.Fences.Timeout.TimeoutStrategyOptions.OnTimeout.get -> System.Func<Paramore.Fences.Timeout.OnTimeoutArguments, System.Threading.Tasks.ValueTask>?
+Paramore.Fences.Timeout.TimeoutStrategyOptions.OnTimeout.set -> void
+Paramore.Fences.Timeout.TimeoutStrategyOptions.Timeout.get -> System.TimeSpan
+Paramore.Fences.Timeout.TimeoutStrategyOptions.Timeout.set -> void
+Paramore.Fences.Timeout.TimeoutStrategyOptions.TimeoutGenerator.get -> System.Func<Paramore.Fences.Timeout.TimeoutGeneratorArguments, System.Threading.Tasks.ValueTask<System.TimeSpan>>?
+Paramore.Fences.Timeout.TimeoutStrategyOptions.TimeoutGenerator.set -> void
+Paramore.Fences.Timeout.TimeoutStrategyOptions.TimeoutStrategyOptions() -> void
+Paramore.Fences.TimeoutResiliencePipelineBuilderExtensions
+static Paramore.Fences.CircuitBreakerResiliencePipelineBuilderExtensions.AddCircuitBreaker(this Paramore.Fences.ResiliencePipelineBuilder! builder, Paramore.Fences.CircuitBreaker.CircuitBreakerStrategyOptions! options) -> Paramore.Fences.ResiliencePipelineBuilder!
+static Paramore.Fences.CircuitBreakerResiliencePipelineBuilderExtensions.AddCircuitBreaker<TResult>(this Paramore.Fences.ResiliencePipelineBuilder<TResult>! builder, Paramore.Fences.CircuitBreaker.CircuitBreakerStrategyOptions<TResult>! options) -> Paramore.Fences.ResiliencePipelineBuilder<TResult>!
+static Paramore.Fences.FallbackResiliencePipelineBuilderExtensions.AddFallback<TResult>(this Paramore.Fences.ResiliencePipelineBuilder<TResult>! builder, Paramore.Fences.Fallback.FallbackStrategyOptions<TResult>! options) -> Paramore.Fences.ResiliencePipelineBuilder<TResult>!
+static Paramore.Fences.HedgingResiliencePipelineBuilderExtensions.AddHedging<TResult>(this Paramore.Fences.ResiliencePipelineBuilder<TResult>! builder, Paramore.Fences.Hedging.HedgingStrategyOptions<TResult>! options) -> Paramore.Fences.ResiliencePipelineBuilder<TResult>!
+static Paramore.Fences.LegacySupport.SetProperties(this Paramore.Fences.ResilienceProperties! resilienceProperties, System.Collections.Generic.IDictionary<string!, object?>! properties, out System.Collections.Generic.IDictionary<string!, object?>! oldProperties) -> void
+static Paramore.Fences.Outcome.FromException<TResult>(System.Exception! exception) -> Paramore.Fences.Outcome<TResult>
+static Paramore.Fences.Outcome.FromExceptionAsValueTask<TResult>(System.Exception! exception) -> System.Threading.Tasks.ValueTask<Paramore.Fences.Outcome<TResult>>
+static Paramore.Fences.Outcome.FromResult<TResult>(TResult? value) -> Paramore.Fences.Outcome<TResult>
+static Paramore.Fences.Outcome.FromResultAsValueTask<TResult>(TResult value) -> System.Threading.Tasks.ValueTask<Paramore.Fences.Outcome<TResult>>
+static Paramore.Fences.PredicateBuilder<TResult>.implicit operator System.Func<Paramore.Fences.CircuitBreaker.CircuitBreakerPredicateArguments<TResult>, System.Threading.Tasks.ValueTask<bool>>!(Paramore.Fences.PredicateBuilder<TResult>! builder) -> System.Func<Paramore.Fences.CircuitBreaker.CircuitBreakerPredicateArguments<TResult>, System.Threading.Tasks.ValueTask<bool>>!
+static Paramore.Fences.PredicateBuilder<TResult>.implicit operator System.Func<Paramore.Fences.Fallback.FallbackPredicateArguments<TResult>, System.Threading.Tasks.ValueTask<bool>>!(Paramore.Fences.PredicateBuilder<TResult>! builder) -> System.Func<Paramore.Fences.Fallback.FallbackPredicateArguments<TResult>, System.Threading.Tasks.ValueTask<bool>>!
+static Paramore.Fences.PredicateBuilder<TResult>.implicit operator System.Func<Paramore.Fences.Hedging.HedgingPredicateArguments<TResult>, System.Threading.Tasks.ValueTask<bool>>!(Paramore.Fences.PredicateBuilder<TResult>! builder) -> System.Func<Paramore.Fences.Hedging.HedgingPredicateArguments<TResult>, System.Threading.Tasks.ValueTask<bool>>!
+static Paramore.Fences.PredicateBuilder<TResult>.implicit operator System.Func<Paramore.Fences.Retry.RetryPredicateArguments<TResult>, System.Threading.Tasks.ValueTask<bool>>!(Paramore.Fences.PredicateBuilder<TResult>! builder) -> System.Func<Paramore.Fences.Retry.RetryPredicateArguments<TResult>, System.Threading.Tasks.ValueTask<bool>>!
+static Paramore.Fences.PredicateResult.False() -> System.Threading.Tasks.ValueTask<bool>
+static Paramore.Fences.PredicateResult.True() -> System.Threading.Tasks.ValueTask<bool>
+static Paramore.Fences.ResilienceContextPool.Shared.get -> Paramore.Fences.ResilienceContextPool!
+static Paramore.Fences.ResiliencePipelineBuilderExtensions.AddPipeline<TBuilder>(this TBuilder! builder, Paramore.Fences.ResiliencePipeline! pipeline) -> TBuilder!
+static Paramore.Fences.ResiliencePipelineBuilderExtensions.AddPipeline<TResult>(this Paramore.Fences.ResiliencePipelineBuilder<TResult>! builder, Paramore.Fences.ResiliencePipeline<TResult>! pipeline) -> Paramore.Fences.ResiliencePipelineBuilder<TResult>!
+static Paramore.Fences.ResiliencePipelineBuilderExtensions.AddStrategy(this Paramore.Fences.ResiliencePipelineBuilder! builder, System.Func<Paramore.Fences.StrategyBuilderContext!, Paramore.Fences.ResilienceStrategy<object!>!>! factory) -> Paramore.Fences.ResiliencePipelineBuilder!
+static Paramore.Fences.ResiliencePipelineBuilderExtensions.AddStrategy(this Paramore.Fences.ResiliencePipelineBuilder! builder, System.Func<Paramore.Fences.StrategyBuilderContext!, Paramore.Fences.ResilienceStrategy<object!>!>! factory, Paramore.Fences.ResilienceStrategyOptions! options) -> Paramore.Fences.ResiliencePipelineBuilder!
+static Paramore.Fences.ResiliencePipelineBuilderExtensions.AddStrategy<TBuilder>(this TBuilder! builder, System.Func<Paramore.Fences.StrategyBuilderContext!, Paramore.Fences.ResilienceStrategy!>! factory) -> TBuilder!
+static Paramore.Fences.ResiliencePipelineBuilderExtensions.AddStrategy<TBuilder>(this TBuilder! builder, System.Func<Paramore.Fences.StrategyBuilderContext!, Paramore.Fences.ResilienceStrategy!>! factory, Paramore.Fences.ResilienceStrategyOptions! options) -> TBuilder!
+static Paramore.Fences.ResiliencePipelineBuilderExtensions.AddStrategy<TResult>(this Paramore.Fences.ResiliencePipelineBuilder<TResult>! builder, System.Func<Paramore.Fences.StrategyBuilderContext!, Paramore.Fences.ResilienceStrategy<TResult>!>! factory) -> Paramore.Fences.ResiliencePipelineBuilder<TResult>!
+static Paramore.Fences.ResiliencePipelineBuilderExtensions.AddStrategy<TResult>(this Paramore.Fences.ResiliencePipelineBuilder<TResult>! builder, System.Func<Paramore.Fences.StrategyBuilderContext!, Paramore.Fences.ResilienceStrategy<TResult>!>! factory, Paramore.Fences.ResilienceStrategyOptions! options) -> Paramore.Fences.ResiliencePipelineBuilder<TResult>!
+static Paramore.Fences.RetryResiliencePipelineBuilderExtensions.AddRetry(this Paramore.Fences.ResiliencePipelineBuilder! builder, Paramore.Fences.Retry.RetryStrategyOptions! options) -> Paramore.Fences.ResiliencePipelineBuilder!
+static Paramore.Fences.RetryResiliencePipelineBuilderExtensions.AddRetry<TResult>(this Paramore.Fences.ResiliencePipelineBuilder<TResult>! builder, Paramore.Fences.Retry.RetryStrategyOptions<TResult>! options) -> Paramore.Fences.ResiliencePipelineBuilder<TResult>!
+static Paramore.Fences.Simmy.ChaosBehaviorPipelineBuilderExtensions.AddChaosBehavior<TBuilder>(this TBuilder! builder, double injectionRate, System.Func<System.Threading.CancellationToken, System.Threading.Tasks.ValueTask>! behavior) -> TBuilder!
+static Paramore.Fences.Simmy.ChaosBehaviorPipelineBuilderExtensions.AddChaosBehavior<TBuilder>(this TBuilder! builder, Paramore.Fences.Simmy.Behavior.ChaosBehaviorStrategyOptions! options) -> TBuilder!
+static Paramore.Fences.Simmy.ChaosFaultPipelineBuilderExtensions.AddChaosFault<TBuilder>(this TBuilder! builder, double injectionRate, System.Func<System.Exception?>! faultGenerator) -> TBuilder!
+static Paramore.Fences.Simmy.ChaosFaultPipelineBuilderExtensions.AddChaosFault<TBuilder>(this TBuilder! builder, Paramore.Fences.Simmy.Fault.ChaosFaultStrategyOptions! options) -> TBuilder!
+static Paramore.Fences.Simmy.ChaosLatencyPipelineBuilderExtensions.AddChaosLatency<TBuilder>(this TBuilder! builder, double injectionRate, System.TimeSpan latency) -> TBuilder!
+static Paramore.Fences.Simmy.ChaosLatencyPipelineBuilderExtensions.AddChaosLatency<TBuilder>(this TBuilder! builder, Paramore.Fences.Simmy.Latency.ChaosLatencyStrategyOptions! options) -> TBuilder!
+static Paramore.Fences.Simmy.ChaosOutcomePipelineBuilderExtensions.AddChaosOutcome<TResult>(this Paramore.Fences.ResiliencePipelineBuilder<TResult>! builder, double injectionRate, System.Func<TResult?>! resultGenerator) -> Paramore.Fences.ResiliencePipelineBuilder<TResult>!
+static Paramore.Fences.Simmy.ChaosOutcomePipelineBuilderExtensions.AddChaosOutcome<TResult>(this Paramore.Fences.ResiliencePipelineBuilder<TResult>! builder, Paramore.Fences.Simmy.Outcomes.ChaosOutcomeStrategyOptions<TResult>! options) -> Paramore.Fences.ResiliencePipelineBuilder<TResult>!
+static Paramore.Fences.Simmy.Fault.FaultGenerator.implicit operator System.Func<Paramore.Fences.Simmy.Fault.FaultGeneratorArguments, System.Threading.Tasks.ValueTask<System.Exception?>>!(Paramore.Fences.Simmy.Fault.FaultGenerator! generator) -> System.Func<Paramore.Fences.Simmy.Fault.FaultGeneratorArguments, System.Threading.Tasks.ValueTask<System.Exception?>>!
+static Paramore.Fences.Simmy.Outcomes.OutcomeGenerator<TResult>.implicit operator System.Func<Paramore.Fences.Simmy.Outcomes.OutcomeGeneratorArguments, System.Threading.Tasks.ValueTask<Paramore.Fences.Outcome<TResult>?>>!(Paramore.Fences.Simmy.Outcomes.OutcomeGenerator<TResult>! generator) -> System.Func<Paramore.Fences.Simmy.Outcomes.OutcomeGeneratorArguments, System.Threading.Tasks.ValueTask<Paramore.Fences.Outcome<TResult>?>>!
+static Paramore.Fences.TimeoutResiliencePipelineBuilderExtensions.AddTimeout<TBuilder>(this TBuilder! builder, Paramore.Fences.Timeout.TimeoutStrategyOptions! options) -> TBuilder!
+static Paramore.Fences.TimeoutResiliencePipelineBuilderExtensions.AddTimeout<TBuilder>(this TBuilder! builder, System.TimeSpan timeout) -> TBuilder!
+static readonly Paramore.Fences.ResiliencePipeline.Empty -> Paramore.Fences.ResiliencePipeline!
+static readonly Paramore.Fences.ResiliencePipeline<T>.Empty -> Paramore.Fences.ResiliencePipeline<T>!
+virtual Paramore.Fences.ExecutionRejectedException.TelemetrySource.get -> Paramore.Fences.Telemetry.ResilienceTelemetrySource?
+virtual Paramore.Fences.Registry.ResiliencePipelineProvider<TKey>.GetPipeline(TKey key) -> Paramore.Fences.ResiliencePipeline!
+virtual Paramore.Fences.Registry.ResiliencePipelineProvider<TKey>.GetPipeline<TResult>(TKey key) -> Paramore.Fences.ResiliencePipeline<TResult>!

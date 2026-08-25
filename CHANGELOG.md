@@ -2,7 +2,18 @@
 
 <!-- markdownlint-disable MD034 -->
 
+> **Fences was forked from [Polly](https://github.com/App-vNext/Polly) at version 8.7.0.**
+> Every entry for **8.7.0 and below is the changelog of Polly**, not of Fences: those releases
+> were made by App vNext, the links point at upstream pull requests, and they are kept here in
+> full as the honest record of where this code came from. Fences' own releases start at 9.0.0
+> and are listed above them. See [`NOTICE.md`](NOTICE.md) and
+> [`ACKNOWLEDGEMENTS.md`](ACKNOWLEDGEMENTS.md).
+
 <!-- next-release -->
+
+<!-- Fences releases (9.0.0 and above) are added above this line by eng/update-changelog.ps1. -->
+
+## Polly — upstream releases, 8.7.0 and below
 
 ## 8.7.0
 

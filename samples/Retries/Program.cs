@@ -1,6 +1,6 @@
 ﻿using System.Net;
-using Polly;
-using Polly.Retry;
+using Paramore.Fences;
+using Paramore.Fences.Retry;
 using Retries;
 
 var helper = new ExecuteHelper();

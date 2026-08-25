@@ -1,13 +1,13 @@
 <Project>
   <PropertyGroup>
     <AccelerateBuildsInVisualStudio>true</AccelerateBuildsInVisualStudio>
-    <AssemblyOriginatorKeyFile>$(MSBuildThisFileDirectory)..\Polly.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>$(MSBuildThisFileDirectory)..\Fences.snk</AssemblyOriginatorKeyFile>
     <ImplicitUsings>enable</ImplicitUsings>
     <LangVersion>latest</LangVersion>
     <NoWarn>$(NoWarn);S8969;S8970</NoWarn>
     <NuGetAuditMode>direct</NuGetAuditMode>
     <SignAssembly>true</SignAssembly>
-    <PollyStrongNamePublicKey Condition=" '$(SignAssembly)' == 'true' ">0024000004800000940000000602000000240000525341310004000001000100150819e3494f97263a3abdd18e5e0c47b04e6c0ede44a6c51d50b545d403ceeb7cbb32d18dbbbcdd1d88a87d7b73206b126be134b0609c36aa3cb31dd2e47e393293102809b8d77f192f3188618a42e651c14ebf05f8f5b76aa91b431642b23497ed82b65d63791cdaa31d4282a2d6cbabc3fe0745b6b6690c417cabf6a1349c</PollyStrongNamePublicKey>
+    <FencesStrongNamePublicKey Condition=" '$(SignAssembly)' == 'true' ">0024000004800000140100000602000000240000525341310008000001000100ab8c96f5fc6e22e0a4611b0580a11a377a76aaa6b894ee8ae576fd4b866f287aa9800c7b87098a438846ba28812c5f3924fd246e9b293a21a9d426b1077e718665b86cb3ca3b0ac237d86685ca3ae82ceea4908c2491d440c4dbcf655ffa1e3b5af3deb49de66bcd125057d1d09674ea38bcfe6fabb2b9c1fe3f28d285f36e0201e305b3ca0938b484a2a9450445f93e83d32dad0cf8db815c092103c36c78c298028e8733f05cc78f87b2931274ed37a9defad74c0738fa18d104994e304ea722891ba8b1d95cd5fb48683e4077ba77ecd101fffc784cff6316d722b1503562bcb6fedc853cc4962f5c2f92c28b23de5cf4852bc6e08dfa3af67f747bf1dfc5</FencesStrongNamePublicKey>
   </PropertyGroup>
 
   <ItemGroup Condition="'$(LegacySupport)' == 'true' AND !$([MSBuild]::IsTargetFrameworkCompatible($(TargetFramework), 'netcoreapp3.1'))">
@@ -19,7 +19,7 @@
   </ItemGroup>
 
   <PropertyGroup Label="MinVer">
-    <MinVerMinimumMajorMinor>8.7</MinVerMinimumMajorMinor>
+    <MinVerMinimumMajorMinor>9.0</MinVerMinimumMajorMinor>
   </PropertyGroup>
 
 </Project>

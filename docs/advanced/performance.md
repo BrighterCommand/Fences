@@ -1,6 +1,6 @@
 # Performance
 
-Polly is fast and avoids allocations wherever possible. We use a comprehensive set of [performance benchmarks](https://github.com/App-vNext/Polly/tree/main/bench/Polly.Core.Benchmarks) to monitor Polly's performance.
+Fences is fast and avoids allocations wherever possible. We use a comprehensive set of [performance benchmarks](https://github.com/BrighterCommand/Fences/tree/main/bench/Paramore.Fences.Core.Benchmarks) to monitor Fences' performance.
 
 Here's an example of results from an advanced pipeline composed of the following strategies:
 
@@ -19,15 +19,15 @@ Here's an example of results from an advanced pipeline composed of the following
 
 ---
 
-Compared to older versions, Polly v8 is both faster and more memory efficient.
+Compared to the v7 API, the v8 API is both faster and more memory efficient.
 
 ## Performance tips
 
-If you're aiming for the best performance with Polly, consider these tips:
+If you're aiming for the best performance with Fences, consider these tips:
 
 ### Use static lambdas
 
-Lambdas capturing variables from their outer scope will allocate on every execution. Polly provides tools to avoid this overhead, as shown in the example below:
+Lambdas capturing variables from their outer scope will allocate on every execution. Fences provides tools to avoid this overhead, as shown in the example below:
 
 <!-- snippet: perf-lambdas -->
 ```cs
@@ -81,7 +81,7 @@ new ResiliencePipelineBuilder()
 
 ### Execute callbacks without throwing exceptions
 
-Polly provides the `ExecuteOutcomeAsync` API, returning results as `Outcome<T>`. The `Outcome<T>` might contain an exception instance, which you can check without it being thrown. This is beneficial when employing exception-heavy resilience strategies, like circuit breakers.
+Fences provides the `ExecuteOutcomeAsync` API, returning results as `Outcome<T>`. The `Outcome<T>` might contain an exception instance, which you can check without it being thrown. This is beneficial when employing exception-heavy resilience strategies, like circuit breakers.
 
 <!-- snippet: perf-execute-outcome -->
 ```cs

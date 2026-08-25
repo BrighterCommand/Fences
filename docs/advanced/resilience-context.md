@@ -1,6 +1,6 @@
 # Resilience context
 
-The `ResilienceContext` class in Polly provides an execution-scoped instance that accompanies each execution through a Polly resilience pipeline and across all strategies in the pipeline. This class serves to share context and facilitate information exchange between the pre-execution, mid-execution, and post-execution phases.
+The `ResilienceContext` class in Fences provides an execution-scoped instance that accompanies each execution through a Fences resilience pipeline and across all strategies in the pipeline. This class serves to share context and facilitate information exchange between the pre-execution, mid-execution, and post-execution phases.
 
 The resilience context exposes several properties:
 
@@ -107,7 +107,7 @@ sequenceDiagram
 ## Resilient context pooling
 
 <!-- Overview -->
-The `ResilienceContext` object is resource-intensive to create, and recreating it for each execution would negatively impact performance. To address this issue, Polly provides a `ResilienceContextPool`. This pool allows you to obtain and reuse `ResilienceContext` instances. Once you've finished using a context instance, you can return it to the pool. This action will reset the context to its initial state, making it available for reuse.
+The `ResilienceContext` object is resource-intensive to create, and recreating it for each execution would negatively impact performance. To address this issue, Fences provides a `ResilienceContextPool`. This pool allows you to obtain and reuse `ResilienceContext` instances. Once you've finished using a context instance, you can return it to the pool. This action will reset the context to its initial state, making it available for reuse.
 
 <!-- Methods -->
 The `ResilienceContextPool` offers several `Get` methods. These methods not only allow you to retrieve a `ResilienceContext` instance, but also enable you to initialize some of its properties at the time of retrieval.

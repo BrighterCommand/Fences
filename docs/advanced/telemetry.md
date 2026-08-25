@@ -1,13 +1,13 @@
 # Telemetry
 
-Starting with version 8, Polly provides telemetry for all built-in standard and chaos resilience strategies.
+Starting with version 8, Fences provides telemetry for all built-in standard and chaos resilience strategies.
 
 ## Usage
 
-To enable telemetry in Polly, add the `Polly.Extensions` package to your project:
+To enable telemetry in Fences, add the `Paramore.Fences.Extensions` package to your project:
 
 ```sh
-dotnet add package Polly.Extensions
+dotnet add package Paramore.Fences.Extensions --prerelease
 ```
 
 Afterwards, you can use the `ConfigureTelemetry(...)` extension method on the `ResiliencePipelineBuilder`:
@@ -75,7 +75,7 @@ var serviceCollection = new ServiceCollection()
 
 ## Metrics
 
-The metrics are emitted under the `Polly` meter name. The subsequent sections provide insights into the metrics produced by Polly. Please note that any custom enriched tags are not depicted in the following tables.
+The metrics are emitted under the `Fences` meter name. The subsequent sections provide insights into the metrics produced by Fences. Please note that any custom enriched tags are not depicted in the following tables.
 
 Every telemetry event has the following optional tags:
 
@@ -116,9 +116,9 @@ pipeline.Execute(
 > [!NOTE]
 > Beware of using very large or unbounded combinations of tag values for the tags above. See [best practices](https://learn.microsoft.com/dotnet/core/diagnostics/metrics-instrumentation#best-practices-3) for more details.
 
-These values are subsequently reflected in the following metering instruments exposed by Polly:
+These values are subsequently reflected in the following metering instruments exposed by Fences:
 
-### Instrument: `resilience.polly.strategy.events`
+### Instrument: `resilience.fences.strategy.events`
 
 - Type: *Counter*
 - Numerical type of measurement: *int*
@@ -153,7 +153,7 @@ The `event.name` tag is reported by individual resilience strategies. The built-
 - [`Chaos.OnLatency`](../chaos/latency.md#telemetry)
 - [`Chaos.OnBehavior`](../chaos/behavior.md#telemetry)
 
-### Instrument: `resilience.polly.strategy.attempt.duration`
+### Instrument: `resilience.fences.strategy.attempt.duration`
 
 - Type: *Histogram*
 - Unit: *milliseconds*
@@ -174,7 +174,7 @@ Tags:
 | `attempt.number`    | The execution attempt number, starting at 0 (0, 1, 2, etc.).                                                                            |
 | `attempt.handled`   | Indicates if the execution outcome was handled. A handled outcome indicates execution failure and the need for retry (`true`, `false`). |
 
-### Instrument: `resilience.polly.pipeline.duration`
+### Instrument: `resilience.fences.pipeline.duration`
 
 - Type: *Histogram*
 - Unit: *milliseconds*
@@ -192,7 +192,7 @@ Tags:
 
 ### Metering enrichment
 
-Polly API lets you add extra tags to any resilience event created by resilience strategies. To do this, derive from the <xref:Polly.Telemetry.MeteringEnricher> class and add your custom enricher to the <xref:Polly.Telemetry.TelemetryOptions.MeteringEnrichers> list.
+Fences API lets you add extra tags to any resilience event created by resilience strategies. To do this, derive from the <xref:Paramore.Fences.Telemetry.MeteringEnricher> class and add your custom enricher to the <xref:Paramore.Fences.Telemetry.TelemetryOptions.MeteringEnrichers> list.
 
 The custom enricher:
 
@@ -232,7 +232,7 @@ var pipeline = new ResiliencePipelineBuilder()
 
 ## Logs
 
-Logs are registered under the `Polly` logger name. Here are some examples of the logs:
+Logs are registered under the `Fences` logger name. Here are some examples of the logs:
 
 ``` text
 // This log is recorded whenever a resilience event occurs. EventId = 0
@@ -250,15 +250,15 @@ Execution attempt. Source: '{PipelineName}/{PipelineInstance}/{StrategyName}', O
 
 ## Emitting telemetry events
 
-Each resilience strategy can generate telemetry data through the [`ResilienceStrategyTelemetry`](xref:Polly.Telemetry.ResilienceStrategyTelemetry) API. Polly encapsulates event details as [`TelemetryEventArguments`](xref:Polly.Telemetry.TelemetryEventArguments`2) and emits them via `TelemetryListener`.
+Each resilience strategy can generate telemetry data through the [`ResilienceStrategyTelemetry`](xref:Paramore.Fences.Telemetry.ResilienceStrategyTelemetry) API. Fences encapsulates event details as [`TelemetryEventArguments`](xref:Paramore.Fences.Telemetry.TelemetryEventArguments`2) and emits them via `TelemetryListener`.
 
 To leverage this telemetry data, users should assign a `TelemetryListener` instance to `ResiliencePipelineBuilder.TelemetryListener` and then consume the `TelemetryEventArguments`.
 
-For common scenarios, it is expected that users would make use of `Polly.Extensions`. This extension enables telemetry configuration through the `ResiliencePipelineBuilder.ConfigureTelemetry(...)` method, which processes `TelemetryEventArguments` to generate logs and metrics.
+For common scenarios, it is expected that users would make use of `Paramore.Fences.Extensions`. This extension enables telemetry configuration through the `ResiliencePipelineBuilder.ConfigureTelemetry(...)` method, which processes `TelemetryEventArguments` to generate logs and metrics.
 
 ## Customizing the severity of telemetry events
 
-To customize the severity of telemetry events, set the [`SeverityProvider`](xref:Polly.Telemetry.TelemetryOptions.SeverityProvider) delegate that allows changing the default severity of resilience events:
+To customize the severity of telemetry events, set the [`SeverityProvider`](xref:Paramore.Fences.Telemetry.TelemetryOptions.SeverityProvider) delegate that allows changing the default severity of resilience events:
 
 <!-- snippet: telemetry-severity-override -->
 ```cs
