@@ -1,6 +1,6 @@
 # Specification-Driven Development Commands
 
-This directory contains Claude Code commands that implement a specification-driven development workflow for Fences contributions. These commands help you follow Fences's preferred contribution workflow: **Issue → Requirements → ADR(s) → Tasks → Tests → Code**.
+This directory contains Claude Code commands that implement a specification-driven development workflow for Fences contributions. These commands help you follow Fences' preferred contribution workflow: **Issue → Requirements → ADR(s) → Tasks → Tests → Code**.
 
 ## Overview
 
@@ -738,7 +738,7 @@ Instead of one large ADR covering everything, create focused ADRs:
 
 ## Contributing to Fences
 
-These commands align with Fences's contribution guidelines (see [CONTRIBUTING.md](../../../CONTRIBUTING.md)):
+These commands align with Fences' contribution guidelines (see [CONTRIBUTING.md](../../../CONTRIBUTING.md)):
 
 - ADRs are required for new capabilities
 - ADRs should focus on WHY over implementation details

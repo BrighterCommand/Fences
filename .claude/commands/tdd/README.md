@@ -18,7 +18,7 @@ Guides you through the Red-Green-Refactor TDD cycle with a **mandatory approval 
 
 **Workflow:**
 
-1. **🔴 RED Phase**: Claude writes a failing test following Fences's testing conventions
+1. **🔴 RED Phase**: Claude writes a failing test following Fences' testing conventions
    - Naming: `Member_Scenario_Outcome` — **not** Brighter's `When_X_Then_Y`
    - Tests grouped by the type under test, in `[TypeUnderTest]Tests.cs`
    - Arrange/Act/Assert structure
@@ -33,7 +33,7 @@ Guides you through the Red-Green-Refactor TDD cycle with a **mandatory approval 
 3. **🟢 GREEN Phase**: Claude implements minimum code to pass the test
    - Only writes what's needed for this specific test
    - No speculative code
-   - Follows Fences's code style and documentation standards
+   - Follows Fences' code style and documentation standards
 
 4. **🔵 REFACTOR Phase**: Claude suggests design improvements (optional)
    - Structural changes only (no behavior changes)

@@ -133,7 +133,7 @@ else
 ```
 <!-- endSnippet -->
 
-Use `ExecuteOutcomeAsync(...)` in high-performance scenarios where you wish to avoid re-throwing exceptions. Keep in mind that Fences's resilience strategies also make use of the `Outcome` struct to prevent unnecessary exception throwing.
+Use `ExecuteOutcomeAsync(...)` in high-performance scenarios where you wish to avoid re-throwing exceptions. Keep in mind that the Fences resilience strategies also make use of the `Outcome` struct to prevent unnecessary exception throwing.
 
 ### Context vs State
 

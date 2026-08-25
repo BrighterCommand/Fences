@@ -1017,7 +1017,7 @@ this could not be verified locally** — it is reasoned from the pipeline's filt
 
 ### Phase 5 — Agentic workflow support
 
-Goal: parity with Brighter's `/spec:*` and `/bugfix:*` flows, but with **Fences's own** coding
+Goal: parity with Brighter's `/spec:*` and `/bugfix:*` flows, but with **Fences' own** coding
 conventions in `.agent_instructions/` — inferred from this repo, not imported from Brighter.
 
 #### 5a. `.agent_instructions/` (new directory)

@@ -4,7 +4,7 @@ namespace Paramore.Fences.Specs.Timeout;
 
 /// <summary>
 /// Provides common functionality for timeout specs, which abstracts out both SystemClock.Sleep, and SystemClock.CancelTokenAfter.
-/// <remarks>Paramore.Fences's TimeoutPolicy uses timing-out CancellationTokens to drive timeouts.
+/// <remarks>Paramore.Fences' TimeoutPolicy uses timing-out CancellationTokens to drive timeouts.
 /// For tests, rather than letting .NET's timers drive the timing out of CancellationTokens, we override SystemClock.CancelTokenAfter and SystemClock.Sleep to make the tests run fast.
 /// </remarks>
 /// </summary>

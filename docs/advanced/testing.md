@@ -1,6 +1,6 @@
 # Testing
 
-This document explains how to test Fences's resilience pipelines. You should not test how the resilience pipelines operate internally, but rather test your own settings or custom delegates.
+This document explains how to test resilience pipelines in Fences. You should not test how the resilience pipelines operate internally, but rather test your own settings or custom delegates.
 
 To make the testing process simpler, Fences offers the [`Paramore.Fences.Testing`](https://www.nuget.org/packages/Paramore.Fences.Testing/) package. This package has a range of APIs designed to help you test the setup and combination of resilience pipelines in your user code.
 

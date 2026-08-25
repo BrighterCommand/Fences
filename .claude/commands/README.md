@@ -1,6 +1,6 @@
 # Claude Code Skills for Fences Development
 
-This directory contains Claude Code skills (slash commands) that enforce Fences's engineering practices and streamline common development workflows.
+This directory contains Claude Code skills (slash commands) that enforce Fences' engineering practices and streamline common development workflows.
 
 ## Quick Start
 
@@ -481,7 +481,7 @@ Complete! Two commits created for easier review.
 
 ## Summary
 
-These skills enforce Fences's mandatory engineering practices:
+These skills enforce Fences' mandatory engineering practices:
 
 | Skill | Enforces | Creates |
 | --- | --- | --- |

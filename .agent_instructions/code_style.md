@@ -1,6 +1,6 @@
 # Code Style
 
-**These conventions are Fences's own. They come from Polly, and they are not Brighter's.** If you
+**These conventions are Fences' own. They come from Polly, and they are not Brighter's.** If you
 also work on Brighter or Darker, read this before applying a habit from there — several rules are
 the exact opposite.
 

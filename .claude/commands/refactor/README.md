@@ -1,6 +1,6 @@
 # Refactoring Commands
 
-This directory contains Claude Code commands for safe, disciplined refactoring following Fences's code style principles.
+This directory contains Claude Code commands for safe, disciplined refactoring following Fences' code style principles.
 
 ## Commands
 

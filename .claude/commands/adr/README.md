@@ -6,7 +6,7 @@ This directory contains Claude Code commands for creating and managing Architect
 
 ### `/adr <title>`
 
-Creates a new Architecture Decision Record following Fences's template and conventions.
+Creates a new Architecture Decision Record following Fences' template and conventions.
 
 **Purpose**: Streamlines the process of creating properly formatted and numbered ADRs, ensuring consistency and completeness.
 

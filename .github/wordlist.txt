@@ -1,3 +1,4 @@
+accessors
 acs
 actionlint
 adr
@@ -37,6 +38,7 @@ behavioural
 BenchmarkDotNet
 bootstrapped
 brighter
+Brighter's
 brightercommand
 BSD
 bugfix
@@ -48,6 +50,7 @@ checkbox
 checkboxes
 circuitbreaker
 CLA
+CLI
 codebase
 codecov
 colours
@@ -72,6 +75,7 @@ enum
 eshoponcontainers
 extensibility
 FakeItEasy
+Fences
 FluentAssertions
 flurl
 frontmatter
@@ -92,15 +96,18 @@ iancooper
 ietf
 impl
 init
+instantiation
 IntelliSense
 interop
 interoperation
+invariants
 jetbrains
 jitter
 jittered
 json
 judgement
 labelled
+learnings
 lf
 licence
 loggingpolicy
@@ -116,6 +123,7 @@ moq
 msbuild
 multi
 namespace
+namespaces
 natively
 ndc
 newline
@@ -129,6 +137,7 @@ nuget
 nullable
 nupkg
 Nygard
+Nygard's
 OIDC
 opentelemetry
 org
@@ -166,7 +175,9 @@ readme
 rebase
 rebased
 rebasing
+rebrand
 recognise
+regenerable
 repo
 reportgenerator
 resharper
@@ -185,6 +196,8 @@ sdk
 sed
 semver
 serializers
+sexualized
+SHA
 Shouldly
 silverlight
 simmy
@@ -213,9 +226,11 @@ tokenised
 toolset
 ui
 unhandled
+usings
 uwp
 valuetask
 vnext
+vNext's
 waitandretry
 webfetch
 websearch

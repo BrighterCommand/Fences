@@ -20,7 +20,7 @@ $ARGUMENTS
 
 **Test Requirements:**
 
-1. **Naming Convention**: Method names use `Member_Scenario_Outcome` — for example `Ctor_EnsureDefaults`, `ExecuteAsync_CanceledBeforeExecution_EnsureNotExecuted`. Class names are the type under test plus `Tests`, e.g. `RetryResilienceStrategyTests`. Do **not** use Fences's `When_X_Then_Y` style.
+1. **Naming Convention**: Method names use `Member_Scenario_Outcome` — for example `Ctor_EnsureDefaults`, `ExecuteAsync_CanceledBeforeExecution_EnsureNotExecuted`. Class names are the type under test plus `Tests`, e.g. `RetryResilienceStrategyTests`. Do **not** use Fences' `When_X_Then_Y` style.
 2. **File Structure**: Group tests by the type under test, in `[TypeUnderTest]Tests.cs`. Fences does not use one-test-per-file — `SA1402` is switched off and the existing suites hold many tests per class.
 3. **Test Structure**: Use Arrange/Act/Assert with explicit comments
 4. **Evident Data**: Highlight only the data that impacts the test outcome

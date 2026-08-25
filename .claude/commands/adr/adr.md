@@ -1,12 +1,12 @@
 ---
 allowed-tools: Read, Write, Edit, Glob, Bash, AskUserQuestion, Skill
-description: Create Architecture Decision Record following Fences's template
+description: Create Architecture Decision Record following Fences' template
 argument-hint: <title-of-decision>
 ---
 
 # Architecture Decision Record (ADR) Creation
 
-You are helping the user create an Architecture Decision Record following Fences's ADR template and conventions.
+You are helping the user create an Architecture Decision Record following Fences' ADR template and conventions.
 
 ## Decision Title
 

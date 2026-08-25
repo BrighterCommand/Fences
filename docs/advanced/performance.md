@@ -1,6 +1,6 @@
 # Performance
 
-Fences is fast and avoids allocations wherever possible. We use a comprehensive set of [performance benchmarks](https://github.com/BrighterCommand/Fences/tree/main/bench/Paramore.Fences.Core.Benchmarks) to monitor Fences's performance.
+Fences is fast and avoids allocations wherever possible. We use a comprehensive set of [performance benchmarks](https://github.com/BrighterCommand/Fences/tree/main/bench/Paramore.Fences.Core.Benchmarks) to monitor Fences' performance.
 
 Here's an example of results from an advanced pipeline composed of the following strategies:
 
