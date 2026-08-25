@@ -117,6 +117,7 @@ mdsnippets
 mermaid
 metadata
 middleware
+migrators
 minver
 mkdir
 moq
@@ -162,6 +163,7 @@ preardon
 prerelease
 proactive
 Pryce
+Pryce's
 PSScriptAnalyzer
 pyspelling
 rabbitmq
@@ -186,6 +188,7 @@ rethrow
 rethrows
 retryable
 reusability
+reviewable
 runnable
 runtime
 saas
@@ -226,6 +229,9 @@ tokenised
 toolset
 ui
 unhandled
+unprefixed
+unquantified
+unresolvable
 usings
 uwp
 valuetask

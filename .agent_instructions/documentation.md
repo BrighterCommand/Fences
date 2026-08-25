@@ -313,9 +313,22 @@ CI runs both over **every** `*.md` file in the repository, including this one an
   npx --yes markdownlint-cli2@0.23.2 --config .markdownlint.json "**/*.md" "!**/BenchmarkDotNet.Artifacts/**/*.md" "!fork-migration-plan.md"
   ```
 
-- A spell check against `.github/wordlist.txt`, configured by `.github/spellcheck.yml`. It uses
-  `aspell`, which is often not installed locally, so this is the one gate that is usually not
-  verifiable before you push.
+- A spell check against `.github/wordlist.txt`, configured by `.github/spellcheck.yml`. **It can be
+  run locally — do so rather than discovering the failures in CI:**
+
+  ```bash
+  brew install aspell
+  python3 -m venv /tmp/spellvenv
+  /tmp/spellvenv/bin/pip install pyspelling pymdown-extensions
+  /tmp/spellvenv/bin/python -m pyspelling -c .github/spellcheck.yml
+  ```
+
+  `pymdown-extensions` is required — `spellcheck.yml` asks for `pymdownx.superfences`, and
+  `pyspelling` fails with `ModuleNotFoundError` without it.
+
+  **Ignore any failure in a file `git ls-files` does not list.** `pyspelling` walks the working
+  tree, so it reads gitignored files such as `PROMPT.md` and `baseline/`, which CI never checks
+  out. Filter its output by tracked files or you will chase words that do not matter.
 
 The spell check pipeline skips URLs, fenced code blocks and inline backticks. **Wrapping a technical
 term in backticks is always cheaper than arguing with the dictionary.** If a word genuinely belongs
