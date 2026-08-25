@@ -142,3 +142,6 @@ baseline/
 
 # Per-developer Claude Code settings. The shared settings live in .claude/settings.json.
 .claude/settings.local.json
+
+# pyspelling compiles .github/wordlist.txt into this when the spell check runs locally
+dictionary.dic
