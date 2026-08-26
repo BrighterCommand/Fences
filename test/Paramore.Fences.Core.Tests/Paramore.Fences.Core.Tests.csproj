@@ -1,0 +1,38 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>net10.0;net9.0;net8.0</TargetFrameworks>
+    <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('Windows'))">$(TargetFrameworks);net481</TargetFrameworks>
+    <TestTfmsInParallel Condition="$([MSBuild]::IsOSPlatform('Windows'))">false</TestTfmsInParallel>
+    <ProjectType>Test</ProjectType>
+    <Nullable>enable</Nullable>
+    <Threshold>100</Threshold>
+    <NoWarn>$(NoWarn);S6966</NoWarn>
+    <Include>[Paramore.Fences.Core]*</Include>
+    <SuppressTfmSupportBuildWarnings>true</SuppressTfmSupportBuildWarnings>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="..\Shared\StrongNameTests.cs" Link="StrongNameTests.cs" />
+    <Compile Include="..\Shared\TestCancellation.cs" Link="TestCancellation.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="FsCheck.Xunit" />
+    <PackageReference Include="Microsoft.Bcl.TimeProvider" />
+    <PackageReference Include="Microsoft.Extensions.TimeProvider.Testing" />
+    <PackageReference Include="Polly.Contrib.WaitAndRetry" />
+  </ItemGroup>
+  <ItemGroup Condition="'$([MSBuild]::GetTargetFrameworkIdentifier(`$(TargetFramework)`))' == '.NETFramework'">
+    <PackageReference Include="System.Memory" />
+  </ItemGroup>
+  <ItemGroup Condition="!$([MSBuild]::IsTargetFrameworkCompatible($(TargetFramework), 'net9.0'))">
+    <PackageReference Update="Microsoft.Bcl.TimeProvider" VersionOverride="8.0.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Paramore.Fences.Core\Paramore.Fences.Core.csproj" />
+    <ProjectReference Include="..\..\src\Paramore.Fences.Testing\Paramore.Fences.Testing.csproj" />
+    <ProjectReference Include="..\Paramore.Fences.TestUtils\Paramore.Fences.TestUtils.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Using Include="Paramore.Fences.Core.Tests.Helpers" />
+    <Using Include="Paramore.Fences.TestUtils" />
+  </ItemGroup>
+</Project>

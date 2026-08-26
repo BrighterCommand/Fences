@@ -3,7 +3,7 @@
 ## About
 
 - **Option(s)**:
-  - [`ChaosOutcomeStrategyOptions<T>`](xref:Polly.Simmy.Outcomes.ChaosOutcomeStrategyOptions`1)
+  - [`ChaosOutcomeStrategyOptions<T>`](xref:Paramore.Fences.Simmy.Outcomes.ChaosOutcomeStrategyOptions`1)
 - **Extension(s)**:
   - `AddChaosOutcome`
 - **Exception(s)**: -

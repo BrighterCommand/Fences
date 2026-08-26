@@ -1,5 +1,6 @@
 using System.Net.Http;
-using Polly.CircuitBreaker;
+using Paramore.Fences;
+using Paramore.Fences.CircuitBreaker;
 using Snippets.Docs.Utils;
 
 namespace Snippets.Docs;

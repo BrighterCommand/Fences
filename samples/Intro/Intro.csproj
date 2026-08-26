@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Polly.Core" />
+    <ProjectReference Include="../../src/Paramore.Fences.Core/Paramore.Fences.Core.csproj" />
   </ItemGroup>
 
 </Project>

@@ -3,10 +3,11 @@ using System.Threading.RateLimiting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Polly.CircuitBreaker;
-using Polly.Registry;
-using Polly.Retry;
-using Polly.Timeout;
+using Paramore.Fences;
+using Paramore.Fences.CircuitBreaker;
+using Paramore.Fences.Registry;
+using Paramore.Fences.Retry;
+using Paramore.Fences.Timeout;
 
 namespace Snippets.Docs;
 

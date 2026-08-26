@@ -1,9 +1,9 @@
-# Polly Incident Response Checklist
+# Fences Incident Response Checklist
 
 <!-- markdownlint-disable MD024 -->
 
 This document is a checklist to help you through the _Incident Response Process_ (IRP) for a security
-vulnerability reported in Polly. It is designed to help you triage, mitigate, scope, disclose, and
+vulnerability reported in Fences. It is designed to help you triage, mitigate, scope, disclose, and
 learn from the report, as appropriate.
 
 This template should be copied into a privately created [security advisory][advisories] and used to
@@ -55,13 +55,19 @@ For example:
 - [ ] Understand the vulnerability/situation
 - [ ] Update the vulnerability with the current understanding
 - [ ] Determine the severity
-- [ ] Determine which Polly packages are affected (Polly, Polly.Core, etc.)
-- [ ] Determine which Polly versions are affected (e.g. 8.6.1)
-- [ ] Determine whether any prominent dependent projects are affected (e.g. [ASP.NET Core][aspnetcore], etc.)
+- [ ] Determine which Fences packages are affected (`Paramore.Fences`, `Paramore.Fences.Core`, etc.)
+- [ ] Determine which Fences versions are affected (e.g. 9.0.0)
+- [ ] Determine whether any prominent dependent projects are affected (e.g. [Brighter][brighter], etc.)
+- [ ] Determine whether the vulnerability is **inherited from [Polly][polly]**, i.e. it exists in the
+      code as it stood before the fork
+  - [ ] If yes, [Polly][polly] and everything downstream of it (including [ASP.NET Core][aspnetcore]
+        via `Microsoft.Extensions.Http.Resilience`) is likely affected too
+  - [ ] If yes, report it privately to the Polly maintainers through
+        [their advisories page][polly-advisories] and plan to coordinate disclosure
 - [ ] Determine which platforms and/or operating systems are affected, if relevant
 - [ ] Determine the pull request/commit where the vulnerability was first introduced
 - [ ] Has the vulnerability been caused by, or caused, any of our secrets to be leaked?
-- [ ] Coordinate with other maintainers if needed ([Slack][slack] can be used for real-time discussion if needed)
+- [ ] Coordinate with the other maintainers if needed — use the advisory itself, or direct messages on GitHub, not a public channel
 - [ ] Decide if the reported vulnerability is valid
   - [ ] Close if non-actionable or not within scope
   - [ ] Proceed to mitigation if actionable/confirmed
@@ -132,7 +138,7 @@ Once a mitigation plan is in place, work will start to prepare any fixes.
 > What did you learn during this phase?
 
 - The vulnerability was first mitigated on: `YYYY-MM-DD`
-- The vulnerability affected: `Polly|Polly.Core|etc`
+- The vulnerability affected: `Paramore.Fences|Paramore.Fences.Core|etc`
 - Is there a link to the mitigation work? `<URL>`
 
 ---
@@ -146,8 +152,8 @@ Once a mitigation plan is in place, work will start to prepare any fixes.
 
 For example:
 
-> We have run an analysis and identified this vulnerability affects a version
-> downloaded 17 million times and is a dependency of ASP.NET Core 8.0.0 and later.
+> We have run an analysis and identified this vulnerability affects every published version
+> of `Paramore.Fences.Core`, and is reachable from the default retry configuration.
 
 ### ✅ Tasks
 
@@ -164,8 +170,10 @@ Scoping is the process of interrogating data to determine if a vulnerability was
 - [ ] Confirm who was affected or might have been affected
 - [ ] Do we need to coordinate with any dependent projects?
   - [ ] If yes, which projects? `<URL>`
-  - [ ] If ASP.NET Core, is affected, should we contact [MSRC][msrc]?
-    - [ ] If yes, contact MSRC and provide details of the vulnerability and await their response
+  - [ ] If the vulnerability is inherited from Polly, are the Polly maintainers ready to disclose
+        in step with us?
+    - [ ] If [ASP.NET Core][aspnetcore] is affected through Polly, should [MSRC][msrc] be contacted?
+      - [ ] If yes, contact MSRC and provide details of the vulnerability and await their response
 - [ ] Does the mitigation need to be backported to previous versions?
   - [ ] If yes, which versions? `<URL>`
     - [ ] If yes, prepare a branch for each version
@@ -208,15 +216,15 @@ Scoping is the process of interrogating data to determine if a vulnerability was
 - [ ] Is any blog post for users ready to be published?
 - [ ] Do we have a root cause analysis ready to be published if needed?
 - [ ] Does the reporter of the vulnerability wish to be acknowledged in the advisory?
-- [ ] What version(s) of Polly will the fix be released in (e.g. is it a patch, minor, major)?
+- [ ] What version(s) of Fences will the fix be released in (e.g. is it a patch, minor, major)?
 - [ ] Is the advisory ready to be published?
 
 > [!TIP]
 > Things that should be completed to start the disclosure process.
 
-- [ ] Create new commits in the public Polly repository to prepare the fix from the private fork
+- [ ] Create new commits in the public Fences repository to prepare the fix from the private fork
   - [ ] Rewrite commit messages to be minimally descriptive (i.e. what was changed, not why)
-- [ ] Create a pull request to merge the fix into the public Polly repository for any relevant branches
+- [ ] Create a pull request to merge the fix into the public Fences repository for any relevant branches
   - [ ] The pull request should be minimally descriptive (i.e. what was changed, not why)
 - [ ] Once all pull request(s) are merged, run the [release workflow][release-workflow] to prepare
       the draft GitHub release(s) for the fixed version(s).
@@ -224,7 +232,7 @@ Scoping is the process of interrogating data to determine if a vulnerability was
 - [ ] Once everything is ready, publish the GitHub releases, which will start the build/publish process to NuGet.org
 - [ ] Wait for the [published][published] workflow(s) to complete, which signify that the NuGet packages are available for download
 - [ ] Publish the advisory
-- [ ] Create a [discussion][discussion] to magnify the advistory and for users to ask questions about the advisory
+- [ ] Create a [discussion][discussion] to magnify the advisory and for users to ask questions about it
 - [ ] Publish any blog post that was prepared
 - [ ] Amplify the advisory on social media, such as on Bluesky, etc.
 
@@ -259,7 +267,7 @@ Scoping is the process of interrogating data to determine if a vulnerability was
 ### ✅ Tasks
 
 > [!TIP]
-> Things that should be completed before the incident reponse is completed.
+> Things that should be completed before the incident response is completed.
 
 - [ ] Do we need to update any documentation?
 - [ ] Is there anything in the IRP that could be improved?
@@ -276,15 +284,17 @@ Scoping is the process of interrogating data to determine if a vulnerability was
 - Is there a link to any post-incident review? `<URL>`
 - What changes have we made a result of this incident? `<URL>`
 
-[advisories]: https://github.com/App-vNext/Polly/security/advisories "Polly Security Advisories"
+[advisories]: https://github.com/BrighterCommand/Fences/security/advisories "Fences Security Advisories"
 [aspnetcore]: https://github.com/dotnet/aspnetcore "ASP.NET Core"
+[brighter]: https://github.com/BrighterCommand/Brighter "Brighter"
 [azure-status]: https://azure.status.microsoft/status "Azure Status"
 [cia]: https://www.energy.gov/femp/operational-technology-cybersecurity-energy-systems#cia "Confidentiality Integrity Availability Triad"
-[discussion]: https://github.com/App-vNext/Polly/discussions "Polly Discussions"
+[discussion]: https://github.com/BrighterCommand/Fences/discussions "Fences Discussions"
 [github-status]: https://www.githubstatus.com/ "GitHub Status"
 [msrc]: https://msrc.microsoft.com/ "Microsoft Security Response Center"
 [nuget-status]: https://status.nuget.org/ "NuGet Status"
+[polly]: https://github.com/App-vNext/Polly "Polly"
+[polly-advisories]: https://github.com/App-vNext/Polly/security/advisories "Polly Security Advisories"
 [private-fork]: https://docs.github.com/code-security/security-advisories/working-with-repository-security-advisories/collaborating-in-a-temporary-private-fork-to-resolve-a-repository-security-vulnerability "Collaborating in a temporary private fork to resolve a repository security vulnerability"
-[published]: https://github.com/App-vNext/Polly/actions/workflows/nuget-packages-published.yml "NuGet Packages Published Workflow"
-[release-workflow]: https://github.com/App-vNext/Polly/actions/workflows/release.yml "Polly Release Workflow"
-[slack]: https://pollytalk.slack.com "Polly Slack Community"
+[published]: https://github.com/BrighterCommand/Fences/actions/workflows/nuget-packages-published.yml "NuGet Packages Published Workflow"
+[release-workflow]: https://github.com/BrighterCommand/Fences/actions/workflows/release.yml "Fences Release Workflow"

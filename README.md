@@ -1,38 +1,60 @@
 # Fences
 
-> [!IMPORTANT]
-> Fences is a fork of https://github.com/App-vNext/Polly/. It is a detached fork intended to avoid the Open Source Maintainers Fee (OSMF) now charged for Polly.
-> This fork is under construction and won't offer binaries until it has been renamed. 
->
-> 
-
 Fences is a .NET resilience and transient-fault-handling library that allows developers to express resilience strategies such as Retry, Circuit Breaker, Hedging, Timeout, Rate Limiter and Fallback in a fluent and thread-safe manner.
 
+Fences is a community fork of [Polly](https://github.com/App-vNext/Polly), maintained by [Brighter Command](https://github.com/BrighterCommand). It is not affiliated with, endorsed by, or supported by App vNext or the Polly maintainers. The fork was taken from Polly 8.7.0 to avoid the Open Source Maintainers Fee now charged for Polly; see [ADR 0002](docs/adr/0002-fork-polly-as-fences.md) for the reasoning and [`NOTICE.md`](NOTICE.md) for provenance and attribution.
+
 > [!IMPORTANT]
-> This documentation describes the new Fences v8 API. If you are using the v7 API, please refer to the [previous version](https://github.com/BrigherCommand/Fences/tree/7.2.4) of the documentation.
+> **Fences is pre-release, and its future is not yet settled.**
+>
+> Packages are published to NuGet as `9.0.0-alpha001` and onwards. They exist to secure the package identifiers and to gather early feedback, not to carry a compatibility promise. The API is Polly 8.7.0's and is not expected to churn, but nothing is guaranteed until `9.0.0`.
+>
+> Fences exists only because of the Open Source Maintainers Fee (OSMF) that App vNext now charges for Polly. **If that decision is reversed, Brighter Command may retire the fork and go back to Polly.** We expect to know by the end of August 2026. Adopting Fences now is low-risk in either direction - going back is the same package-reference and namespace change described below, in reverse - but adopt it knowing that.
 
-## NuGet Packages
+This README describes the v8 API. The pre-v8 API is still shipped, in the `Paramore.Fences` package; see the [v7 documentation](docs/v7/).
 
-| **Package** | **Latest Version** | **About** |
-| :---------- | :----------------- | :-------- |
-| `Fences.Core` |  | The core abstractions and [built-in strategies]) |
-| `Fences.Extensions` |  | [Telemetry] |
-| `Fences.RateLimiting` |  | Integration with [`System.Threading.RateLimiting`] APIs. |
-| `Fences.Testing` | [![NuGet]() | [Testing support]() |
-| `Fences` | [ | This package contains the legacy API exposed by versions of the Fences library before version 8. |
+## NuGet packages
+
+All five are published as **pre-release only**. `dotnet add package` will not find them without `--prerelease` or an explicit version.
+
+| **Package** | **Replaces** | **About** |
+| :---------- | :----------- | :-------- |
+| `Paramore.Fences.Core` | `Polly.Core` | The core abstractions and [built-in strategies](docs/strategies/). |
+| `Paramore.Fences.Extensions` | `Polly.Extensions` | Dependency injection and [telemetry](docs/advanced/telemetry.md). |
+| `Paramore.Fences.RateLimiting` | `Polly.RateLimiting` | Integration with the [`System.Threading.RateLimiting`](https://www.nuget.org/packages/System.Threading.RateLimiting) APIs. |
+| `Paramore.Fences.Testing` | `Polly.Testing` | [Testing support](docs/advanced/testing.md). |
+| `Paramore.Fences` | `Polly` | The legacy API exposed by versions before version 8. |
+
+The library, the repository and the documentation site are all called **Fences**. Only the package and assembly identifiers carry the `Paramore` prefix, which is the identifier family the rest of the Brighter Command projects use.
 
 ## Documentation
 
-This README aims to give a quick overview of some Fences features - including enough to get you started with any resilience strategy. For more detail on any resilience strategy, and many other aspects of Fences, also check out TBD.
+This README aims to give a quick overview of some Fences features - including enough to get you started with any resilience strategy. For more detail on any resilience strategy, and many other aspects of Fences, see the [documentation](docs/), which is also published at [brightercommand.github.io/Fences](https://brightercommand.github.io/Fences/).
+
+## Migrating from Polly
+
+For a project on Polly 8.7.0, moving to Fences is a change of package reference and namespace, not a rewrite:
+
+```diff
+-<PackageReference Include="Polly.Core" Version="8.7.0" />
++<PackageReference Include="Paramore.Fences.Core" Version="9.0.0-alpha001" />
+```
+
+```diff
+-using Polly;
++using Paramore.Fences;
+```
+
+Every namespace maps one-for-one, and exactly one public type was renamed. The one thing a find-and-replace over your own source will not fix is the telemetry names, which changed from `Polly` and `resilience.polly.*` to `Paramore.Fences` and `resilience.fences.*`. See [Migrate from Polly](docs/migration-from-polly.md) for the full mapping, and for the one case Fences cannot help with - `Microsoft.Extensions.Http.Resilience` keeps Polly in your dependency graph regardless.
 
 ## Quick start
 
-To use Fences, you must provide a callback and execute it using [**resilience pipeline**](). A resilience pipeline combines one or more [**resilience strategies**](), such as retry, timeout, and rate limiter. Fences uses **builders** to integrate these strategies into a pipeline.
+To use Fences, you must provide a callback and execute it using a [**resilience pipeline**](docs/pipelines/). A resilience pipeline combines one or more [**resilience strategies**](docs/strategies/), such as retry, timeout, and rate limiter. Fences uses **builders** to integrate these strategies into a pipeline.
 
-To get started, first add the [Fences.Core]() package to your project by running the following command:
+To get started, first add the `Paramore.Fences.Core` package to your project by running the following command:
 
 ```sh
-dotnet add package Fences.Core
+dotnet add package Paramore.Fences.Core --prerelease
 ```
 
 You can create a `ResiliencePipeline` using the `ResiliencePipelineBuilder` class as shown below:
@@ -52,10 +74,10 @@ await pipeline.ExecuteAsync(static async token => { /* Your custom logic goes he
 
 ### Dependency injection
 
-If you prefer to define resilience pipelines using [`IServiceCollection`](https://learn.microsoft.com/dotnet/api/microsoft.extensions.dependencyinjection.iservicecollection), you'll need to install the [Fences.Extensions]() package:
+If you prefer to define resilience pipelines using [`IServiceCollection`](https://learn.microsoft.com/dotnet/api/microsoft.extensions.dependencyinjection.iservicecollection), you'll need to install the `Paramore.Fences.Extensions` package:
 
 ```sh
-dotnet add package Fences.Extensions
+dotnet add package Paramore.Fences.Extensions --prerelease
 ```
 
 You can then define your resilience pipeline using the `AddResiliencePipeline(...)` extension method as shown:
@@ -94,7 +116,7 @@ await pipeline.ExecuteAsync(static async token =>
 
 ## Resilience strategies
 
-Fences provides a variety of resilience strategies. Alongside the comprehensive guides for each strategy, the wiki also includes an [overview of the role each strategy plays in resilience engineering]().
+Fences provides a variety of resilience strategies. Alongside the comprehensive guides for each strategy, the documentation also includes an [overview of the role each strategy plays in resilience engineering](docs/strategies/).
 
 Fences categorizes resilience strategies into two main groups:
 
@@ -118,14 +140,14 @@ Unlike reactive strategies, proactive strategies don't focus on handling errors;
 | [**Timeout**](#timeout) | Beyond a certain wait, a success result is unlikely. | *Don't wait forever* | Guarantees the caller won't have to wait beyond the timeout. |
 | [**Rate Limiter**](#rate-limiter) | Limiting the rate at which a system handles requests is another way to control load. <br/> <br/> This can apply to the way your system accepts incoming calls, and/or to the way you call downstream services. | *Slow down a bit, will you?* | Constrains executions to not exceed a certain rate. |
 
-Visit [resilience strategies]( docs to explore how to configure individual resilience strategies in more detail.
+Visit [resilience strategies](docs/strategies/) to explore how to configure individual resilience strategies in more detail.
 
 ### Retry
 
 <!-- snippet: retry -->
 ```cs
 // Retry using the default options.
-// See TBD for defaults.
+// See https://brightercommand.github.io/Fences/strategies/retry#defaults for defaults.
 var optionsDefaults = new RetryStrategyOptions();
 
 // For instant retries with no delay
@@ -207,14 +229,14 @@ new ResiliencePipelineBuilder<HttpResponseMessage>().AddRetry(optionsExtractDela
 
 If all retries fail, a retry strategy rethrows the final exception back to the calling code.
 
-For more details, visit the [retry strategy]() documentation.
+For more details, visit the [retry strategy](docs/strategies/retry.md) documentation.
 
 ### Circuit Breaker
 
 <!-- snippet: circuit-breaker -->
 ```cs
 // Circuit breaker with default options.
-// See https://www.pollydocs.org/strategies/circuit-breaker#defaults for defaults.
+// See https://brightercommand.github.io/Fences/strategies/circuit-breaker#defaults for defaults.
 var optionsDefaults = new CircuitBreakerStrategyOptions();
 
 // Circuit breaker with customized options:
@@ -282,7 +304,7 @@ new ResiliencePipelineBuilder<HttpResponseMessage>().AddCircuitBreaker(optionsSt
 ```
 <!-- endSnippet -->
 
-For more details, visit the [circuit breaker strategy](https://www.pollydocs.org/strategies/circuit-breaker) documentation.
+For more details, visit the [circuit breaker strategy](docs/strategies/circuit-breaker.md) documentation.
 
 ### Fallback
 
@@ -333,14 +355,14 @@ new ResiliencePipelineBuilder<UserAvatar>().AddFallback(optionsOnFallback);
 ```
 <!-- endSnippet -->
 
-For more details, visit the [fallback strategy](https://www.pollydocs.org/strategies/fallback) documentation.
+For more details, visit the [fallback strategy](docs/strategies/fallback.md) documentation.
 
 ### Hedging
 
 <!-- snippet: hedging -->
 ```cs
 // Hedging with default options.
-// See https://www.pollydocs.org/strategies/hedging#defaults for defaults.
+// See https://brightercommand.github.io/Fences/strategies/hedging#defaults for defaults.
 var optionsDefaults = new HedgingStrategyOptions<HttpResponseMessage>();
 
 // A customized hedging strategy that retries up to 3 times if the execution
@@ -379,7 +401,7 @@ new ResiliencePipelineBuilder<HttpResponseMessage>().AddHedging(optionsDefaults)
 
 If all hedged attempts fail, the hedging strategy will either re-throw the original exception or return the original failed result to the caller.
 
-For more details, visit the [hedging strategy](https://www.pollydocs.org/strategies/hedging) documentation.
+For more details, visit the [hedging strategy](docs/strategies/hedging.md) documentation.
 
 ### Timeout
 
@@ -391,7 +413,7 @@ The timeout resilience strategy assumes delegates you execute support [co-operat
 new ResiliencePipelineBuilder().AddTimeout(TimeSpan.FromSeconds(3));
 
 // Timeout using the default options.
-// See https://www.pollydocs.org/strategies/timeout#defaults for defaults.
+// See https://brightercommand.github.io/Fences/strategies/timeout#defaults for defaults.
 var optionsDefaults = new TimeoutStrategyOptions();
 
 // To add a timeout using a custom timeout generator function
@@ -426,14 +448,14 @@ new ResiliencePipelineBuilder().AddTimeout(optionsDefaults);
 
 Timeout strategies throw `TimeoutRejectedException` when a timeout occurs.
 
-For more details, visit the [timeout strategy](https://www.pollydocs.org/strategies/timeout) documentation.
+For more details, visit the [timeout strategy](docs/strategies/timeout.md) documentation.
 
 ### Rate Limiter
 
 <!-- snippet: rate-limiter -->
 ```cs
 // Add rate limiter with default options.
-// See https://www.pollydocs.org/strategies/rate-limiter#defaults for defaults.
+// See https://brightercommand.github.io/Fences/strategies/rate-limiter#defaults for defaults.
 new ResiliencePipelineBuilder()
     .AddRateLimiter(new RateLimiterStrategyOptions());
 
@@ -455,24 +477,25 @@ new ResiliencePipelineBuilder()
 
 Rate limiter strategy throws `RateLimiterRejectedException` if execution is rejected.
 
-For more details, visit the [rate limiter strategy](https://www.pollydocs.org/strategies/rate-limiter) documentation.
+For more details, visit the [rate limiter strategy](docs/strategies/rate-limiter.md) documentation.
 
 ## Chaos engineering
 
-Starting with version `8.3.0`, Polly has integrated [Simmy](https://github.com/Polly-Contrib/Simmy), a chaos engineering library, directly into its core. For more information, please refer to the dedicated [chaos engineering documentation](https://www.pollydocs.org/chaos/).
+[Simmy](https://github.com/Polly-Contrib/Simmy), a chaos engineering library, was integrated directly into the core in Polly 8.3.0, and Fences inherits it. For more information, please refer to the dedicated [chaos engineering documentation](docs/chaos/).
 
 ## Next steps
 
-To learn more about Polly, visit [pollydocs.org][polly-docs].
+To learn more about Fences, visit the [documentation](docs/).
 
 ## Samples
 
-- [Samples](samples/README.md): Samples in this repository that serve as an introduction to Polly.
-- [Polly-Samples](https://github.com/App-vNext/Polly-Samples): Contains practical examples for using various implementations of Polly. Please feel free to contribute to the Polly-Samples repository in order to assist others who are either learning Polly for the first time, or are seeking advanced examples and novel approaches provided by our generous community.
-- Microsoft's [eShopOnContainers project](https://github.com/dotnet/eShop): Sample project demonstrating a .NET Micro-services architecture and using Polly for resilience.
+- [Samples](samples/README.md): Samples in this repository that serve as an introduction to Fences.
+- [Polly-Samples](https://github.com/App-vNext/Polly-Samples): Practical examples written for Polly. The v8 API is unchanged in Fences, so they apply once the package references and namespaces are swapped.
 
+## Contributing
+
+See [`CONTRIBUTING.md`](CONTRIBUTING.md). Fences is maintained by [Brighter Command](https://github.com/BrighterCommand), alongside [Brighter](https://github.com/BrighterCommand/Brighter) and [Darker](https://github.com/BrighterCommand/Darker).
 
 ## License
 
-Licensed under the terms of the [New BSD License](https://opensource.org/license/bsd-3-clause/)
-
+Licensed under the terms of the [New BSD License](https://opensource.org/license/bsd-3-clause/), the same licence as Polly. App vNext's copyright notice is retained in [`LICENSE`](LICENSE) as that licence requires; see [`ACKNOWLEDGEMENTS.md`](ACKNOWLEDGEMENTS.md) for credit to Polly's authors and contributors.

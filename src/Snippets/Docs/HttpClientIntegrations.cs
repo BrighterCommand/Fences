@@ -2,12 +2,18 @@ using System.Net;
 using System.Net.Http;
 using Flurl.Http;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Http.Resilience;
+using Polly;
 using Polly.Retry;
 using Refit;
 using RestSharp;
 
 namespace Snippets.Docs;
 
+// Microsoft.Extensions.Http.Resilience is built on Polly - its AddResilienceHandler
+// callback receives a Polly.ResiliencePipelineBuilder<HttpResponseMessage>, not a
+// Fences one. These snippets therefore use Polly's API throughout, deliberately.
+// Fences does not replace Microsoft.Extensions.Http.Resilience; the two coexist.
 internal static class HttpClientIntegrations
 {
     private const string HttpClientName = "httpclient";
@@ -118,6 +124,33 @@ internal static class HttpClientIntegrations
         // Use the RestClient by making a request
         var request = new RestRequest("/408", Method.Get);
         var response = await restClient.ExecuteAsync(request);
+        #endregion
+    }
+
+    public static async ValueTask Pattern_CircuitPerEndpoint()
+    {
+        var services = new ServiceCollection();
+
+        #region circuit-breaker-pattern-cb-per-endpoint
+
+        services
+          .AddHttpClient("my-client")
+          .AddResilienceHandler("circuit-breaker", builder =>
+          {
+              builder.AddCircuitBreaker(new());
+          })
+          .SelectPipelineByAuthority(); // This call ensures that circuit breaker is cached by each URL authority
+
+        #endregion
+
+        IHttpClientFactory httpClientFactory = null!;
+
+        #region circuit-breaker-pattern-cb-per-endpoint-usage
+
+        HttpClient client = httpClientFactory.CreateClient("my-client");
+
+        await client.GetAsync(new Uri("https://downstream1.com/some-path"));
+
         #endregion
     }
 }

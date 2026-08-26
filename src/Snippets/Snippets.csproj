@@ -19,10 +19,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Polly.Extensions\Polly.Extensions.csproj" />
-    <ProjectReference Include="..\Polly.RateLimiting\Polly.RateLimiting.csproj" />
-    <ProjectReference Include="..\Polly.Testing\Polly.Testing.csproj" />
-    <ProjectReference Include="..\Polly\Polly.csproj" />
+    <ProjectReference Include="..\Paramore.Fences.Extensions\Paramore.Fences.Extensions.csproj" />
+    <ProjectReference Include="..\Paramore.Fences.RateLimiting\Paramore.Fences.RateLimiting.csproj" />
+    <ProjectReference Include="..\Paramore.Fences.Testing\Paramore.Fences.Testing.csproj" />
+    <ProjectReference Include="..\Paramore.Fences\Paramore.Fences.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -37,7 +37,14 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" />
-    <Using Include="Polly" />
+    <!--
+      Polly is a direct dependency here on purpose: Microsoft.Extensions.Http.Resilience
+      is built on Polly, so the HttpClient snippets demonstrate Fences and Polly
+      side by side. There is deliberately no `<Using Include="Paramore.Fences" />`
+      - both libraries export types with the same names, so each file imports the
+      one it means.
+    -->
+    <PackageReference Include="Polly.Core" />
   </ItemGroup>
 
 </Project>

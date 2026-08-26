@@ -1,4 +1,4 @@
-﻿using Polly;
+﻿using Paramore.Fences;
 using System.ComponentModel.DataAnnotations;
 
 namespace Extensibility.Reactive;

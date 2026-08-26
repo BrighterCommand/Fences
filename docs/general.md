@@ -2,13 +2,13 @@
 
 ## Supported targets
 
-Polly targets .NET Standard 2.0+ ([coverage](https://docs.microsoft.com/dotnet/standard/net-standard#net-implementation-support): .NET Core 2.0+, .NET Core 3.0, .NET 6.0+ and later Mono, Xamarin and UWP targets). The NuGet package also includes direct targets for .NET Framework 4.6.1 and 4.7.2.
+Fences targets .NET Standard 2.0+ ([coverage](https://docs.microsoft.com/dotnet/standard/net-standard#net-implementation-support): .NET Core 2.0+, .NET Core 3.0, .NET 6.0+ and later Mono, Xamarin and UWP targets). The NuGet package also includes direct targets for .NET Framework 4.6.1 and 4.7.2.
 
-For details of supported compilation targets by version, see the [supported targets](https://github.com/App-vNext/Polly/wiki/Supported-targets) grid.
+The exact target frameworks for each package are declared in the `.csproj` files under [`src/`](https://github.com/BrighterCommand/Fences/tree/main/src).
 
 ## Asynchronous support
 
-Polly provides native support for asynchronous operations through all its resilience strategies by offering the `ExecuteAsync` methods on the `ResiliencePipeline` class.
+Fences provides native support for asynchronous operations through all its resilience strategies by offering the `ExecuteAsync` methods on the `ResiliencePipeline` class.
 
 ### SynchronizationContext
 
@@ -36,7 +36,7 @@ ResilienceContextPool.Shared.Return(context);
 
 ### Cancellation support
 
-Asynchronous pipeline execution in Polly supports cancellation. This is facilitated through the `ExecuteAsync(...)` method overloads that accept a `CancellationToken`, or by initializing the `ResilienceContext` class with the `CancellationToken` property.
+Asynchronous pipeline execution in Fences supports cancellation. This is facilitated through the `ExecuteAsync(...)` method overloads that accept a `CancellationToken`, or by initializing the `ResilienceContext` class with the `CancellationToken` property.
 
 The `CancellationToken` you pass to the `ExecuteAsync(...)` method serves multiple functions:
 
@@ -62,7 +62,7 @@ await pipeline.ExecuteAsync(
 
 ## Thread safety
 
-All Polly resilience strategies are fully thread-safe. You can safely re-use strategies at multiple call sites, and execute through strategies concurrently on different threads.
+All Fences resilience strategies are fully thread-safe. You can safely re-use strategies at multiple call sites, and execute through strategies concurrently on different threads.
 
 > [!IMPORTANT]
 > While the internal operation of the strategy is thread-safe, this does not automatically make delegates you execute through the strategy thread-safe: if delegates you execute through the strategy are not thread-safe, they remain not thread-safe.

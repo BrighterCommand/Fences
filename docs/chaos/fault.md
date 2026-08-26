@@ -3,7 +3,7 @@
 ## About
 
 - **Option(s)**:
-  - [`ChaosFaultStrategyOptions`](xref:Polly.Simmy.Fault.ChaosFaultStrategyOptions)
+  - [`ChaosFaultStrategyOptions`](xref:Paramore.Fences.Simmy.Fault.ChaosFaultStrategyOptions)
 - **Extensions**:
   - `AddChaosFault`
 - **Exception(s)**: -

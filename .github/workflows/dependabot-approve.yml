@@ -10,23 +10,14 @@ jobs:
     if: github.event.repository.fork == false && github.event.pull_request.user.login == 'dependabot[bot]'
 
     permissions:
-      contents: read
+      contents: write
+      pull-requests: write
 
     steps:
 
       - name: Get dependabot metadata
         uses: dependabot/fetch-metadata@25dd0e34f4fe68f24cc83900b1fe3fe149efef98 # v3.1.0
         id: dependabot-metadata
-
-      - name: Generate GitHub application token
-        id: generate-application-token
-        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
-        with:
-          client-id: ${{ secrets.POLLY_REVIEWER_BOT_APP_ID }}
-          private-key: ${{ secrets.POLLY_REVIEWER_BOT_KEY }}
-          permission-contents: write
-          permission-pull-requests: write
-          permission-workflows: write
 
       - name: Checkout code
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -49,17 +40,16 @@ jobs:
           contains(steps.dependabot-metadata.outputs.dependency-names, 'actions/setup-dotnet') ||
           contains(steps.dependabot-metadata.outputs.dependency-names, 'actions/stale') ||
           contains(steps.dependabot-metadata.outputs.dependency-names, 'actions/upload-artifact') ||
-          contains(steps.dependabot-metadata.outputs.dependency-names, 'codecov/codecov-action') ||
           contains(steps.dependabot-metadata.outputs.dependency-names, 'dependabot/fetch-metadata') ||
           contains(steps.dependabot-metadata.outputs.dependency-names, 'github/codeql-action') ||
           contains(steps.dependabot-metadata.outputs.dependency-names, 'Microsoft.NET.Test.Sdk') ||
-          contains(steps.dependabot-metadata.outputs.dependency-names, 'Polly') ||
-          contains(steps.dependabot-metadata.outputs.dependency-names, 'Polly.Core') ||
-          contains(steps.dependabot-metadata.outputs.dependency-names, 'Polly.Extensions') ||
+          contains(steps.dependabot-metadata.outputs.dependency-names, 'Paramore.Fences') ||
+          contains(steps.dependabot-metadata.outputs.dependency-names, 'Paramore.Fences.Core') ||
+          contains(steps.dependabot-metadata.outputs.dependency-names, 'Paramore.Fences.Extensions') ||
           contains(steps.dependabot-metadata.outputs.dependency-names, 'xunit') ||
           contains(steps.dependabot-metadata.outputs.dependency-names, 'xunit.runner.visualstudio')
         env:
-          GH_TOKEN: ${{ steps.generate-application-token.outputs.token }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PR_URL: ${{ github.event.pull_request.html_url }}
         run: |
           gh pr checkout "${PR_URL}"

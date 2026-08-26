@@ -1,0 +1,53 @@
+name: cla
+
+# The CLA assistant has to see the pull request author, and has to be able to write the signature
+# file back to this repository, so it needs a token with write access. That means
+# `pull_request_target`. Nothing from the pull request head is ever checked out or executed here —
+# the only action that runs is the pinned assistant below.
+
+on: # zizmor: ignore[dangerous-triggers] Nothing from the pull request head is checked out or executed
+  issue_comment:
+    types:
+      - created
+  pull_request_target:
+    types:
+      - opened
+      - closed
+      - synchronize
+
+permissions: {}
+
+jobs:
+  cla:
+    runs-on: ubuntu-24.04
+    if: |
+      github.event.repository.fork == false &&
+      (github.event_name == 'pull_request_target' ||
+       github.event.comment.body == 'recheck' ||
+       github.event.comment.body == 'I have read the CLA Document and I hereby sign the CLA')
+
+    permissions:
+      actions: write
+      contents: write
+      pull-requests: write
+      statuses: write
+
+    steps:
+
+    - name: Check the contributor has signed the CLA
+      uses: contributor-assistant/github-action@ca4a40a7d1004f18d9960b404b97e5f30a505a08 # v2.6.1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        allowlist: dependabot[bot],github-actions[bot]
+        branch: cla-signatures
+        create-file-commit-message: 'chore: create the CLA signature file'
+        custom-notsigned-prcomment: >
+          Thank you for your contribution to Fences. Before we can merge it, please read our
+          [Contributor License Agreement](https://github.com/BrighterCommand/Fences/blob/main/CLA.txt).
+          You keep the copyright in your contribution; you grant us an irrevocable licence to use
+          it. To agree, post a comment on this pull request containing exactly:
+        custom-pr-sign-comment: 'I have read the CLA Document and I hereby sign the CLA'
+        path-to-document: https://github.com/BrighterCommand/Fences/blob/main/CLA.txt
+        path-to-signatures: signatures/version1/cla.json
+        signed-commit-message: 'chore: $contributorName has signed the CLA in $owner/$repo#$pullRequestNo'

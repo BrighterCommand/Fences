@@ -1,8 +1,8 @@
 # Resilience strategies
 
-Resilience strategies are essential components of Polly, designed to execute user-defined callbacks while adding an extra layer of resilience. These strategies can't be executed directly; they must be run through a **resilience pipeline**. Polly provides an API to construct resilience pipelines by incorporating one or more resilience strategies through the pipeline builders.
+Resilience strategies are essential components of Fences, designed to execute user-defined callbacks while adding an extra layer of resilience. These strategies can't be executed directly; they must be run through a **resilience pipeline**. Fences provides an API to construct resilience pipelines by incorporating one or more resilience strategies through the pipeline builders.
 
-Polly categorizes resilience strategies into two main groups:
+Fences categorizes resilience strategies into two main groups:
 
 - **Reactive**: These strategies handle specific exceptions that are thrown, or results that are returned, by the callbacks executed through the strategy.
 - **Proactive**: Unlike reactive strategies, proactive strategies do not focus on handling errors by the callbacks might throw or return. They can make proactive decisions to cancel or reject the execution of callbacks (e.g., using a rate limiter or a timeout resilience strategy).
@@ -57,7 +57,7 @@ ResiliencePipeline pipeline = new ResiliencePipelineBuilder()
 <!-- endSnippet -->
 
 > [!NOTE]
-> The configuration options are automatically validated by Polly and come with sensible defaults. Therefore, you don't have to specify all the properties unless needed.
+> The configuration options are automatically validated by Fences and come with sensible defaults. Therefore, you don't have to specify all the properties unless needed.
 
 ## Fault handling
 
@@ -66,7 +66,7 @@ Each reactive strategy provides access to the `ShouldHandle` predicate property.
 Setting up the predicate can be accomplished in the following ways:
 
 - **Manually setting the predicate**: Directly configure the predicate. The advised approach involves using [switch expressions](https://learn.microsoft.com/dotnet/csharp/language-reference/operators/switch-expression) for maximum flexibility, and also allows the incorporation of asynchronous predicates.
-- **Employing `PredicateBuilder`**: The `PredicateBuilder{<TResult>}` classes provide a more straight-forward method to configure the predicates, akin to predicate setups in earlier Polly versions.
+- **Employing `PredicateBuilder`**: The `PredicateBuilder{<TResult>}` classes provide a more straight-forward method to configure the predicates, akin to predicate setups in earlier Fences versions.
 
 The examples below illustrate these:
 
@@ -129,7 +129,7 @@ var options = new RetryStrategyOptions<HttpResponseMessage>
 
 ### Predicate builder
 
-<xref:Polly.PredicateBuilder>, or <xref:Polly.PredicateBuilder`1>, is a utility class aimed at simplifying the configuration of predicates:
+<xref:Paramore.Fences.PredicateBuilder>, or <xref:Paramore.Fences.PredicateBuilder`1>, is a utility class aimed at simplifying the configuration of predicates:
 
 <!-- snippet: should-handle-predicate-builder -->
 ```cs

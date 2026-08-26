@@ -1,8 +1,9 @@
 ﻿using System.Net.Http;
 using System.Threading.RateLimiting;
-using Polly.RateLimiting;
-using Polly.Registry;
-using Polly.Retry;
+using Paramore.Fences;
+using Paramore.Fences.RateLimiting;
+using Paramore.Fences.Registry;
+using Paramore.Fences.Retry;
 
 namespace Snippets.Docs;
 

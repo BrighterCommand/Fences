@@ -1,6 +1,6 @@
 # Dependency injection
 
-Starting with version 8, Polly provides features that make the integration of Polly
+Starting with version 8, Fences provides features that make the integration of Fences
 with the .NET [`IServiceCollection`](https://learn.microsoft.com/dotnet/api/microsoft.extensions.dependencyinjection.iservicecollection)
 Dependency Injection (DI) container more streamlined. This is a thin layer atop the
 [resilience pipeline registry](../pipelines/resilience-pipeline-registry.md) which
@@ -8,11 +8,11 @@ manages resilience pipelines.
 
 ## Usage
 
-To use the DI functionality, add the [`Polly.Extensions`](https://www.nuget.org/packages/Polly.Extensions)
+To use the DI functionality, add the [`Paramore.Fences.Extensions`](https://www.nuget.org/packages/Paramore.Fences.Extensions)
 package to your project:
 
 ```sh
-dotnet add package Polly.Extensions
+dotnet add package Paramore.Fences.Extensions --prerelease
 ```
 
 Afterwards, you can use the `AddResiliencePipeline(...)` extension method to set
@@ -103,7 +103,7 @@ await pipeline.ExecuteAsync(
 ## Keyed services
 
 .NET 8 introduced support for [keyed services](https://learn.microsoft.com/dotnet/core/extensions/dependency-injection#keyed-services).
-Starting from version 8.3.0, Polly supports the retrieval of `ResiliencePipeline` or `ResiliencePipeline<T>` using keyed services.
+Starting from version 8.3.0, Fences supports the retrieval of `ResiliencePipeline` or `ResiliencePipeline<T>` using keyed services.
 
 To begin, define your resilience pipeline:
 
@@ -339,7 +339,7 @@ ResiliencePipeline instanceB = pipelineProvider.GetPipeline(new MyPipelineKey("m
 
 ## Anti-patterns
 
-Over the years, many developers have used Polly in various ways. Some of these
+Over the years, many developers have used Fences in various ways. Some of these
 recurring patterns may not be ideal. The sections below highlight anti-patterns to avoid.
 
 ### Accessing the `IServiceCollection` instead of `IServiceProvider`

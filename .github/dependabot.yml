@@ -27,9 +27,9 @@ updates:
         - Microsoft.Extensions.Http.Resilience
         - Microsoft.Extensions.Logging.Console
         - Microsoft.Extensions.Options.ConfigurationExtensions
-    polly:
+    fences:
       patterns:
-        - Polly*
+        - Paramore.Fences*
     xunit:
       patterns:
         - xunit*

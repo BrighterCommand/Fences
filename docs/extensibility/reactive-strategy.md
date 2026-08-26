@@ -4,7 +4,7 @@ This document describes how to set up a **Result reporting resilience strategy**
 
 ## Implementation
 
-Reactive resilience strategies inherit from the [`ResilienceStrategy<T>`](xref:Polly.ResilienceStrategy`1) base class. The implementation for this specific strategy:
+Reactive resilience strategies inherit from the [`ResilienceStrategy<T>`](xref:Paramore.Fences.ResilienceStrategy`1) base class. The implementation for this specific strategy:
 
 <!-- snippet: ext-reactive-strategy -->
 ```cs
@@ -105,7 +105,7 @@ Using arguments in callbacks supports a more maintainable and extensible API.
 
 ## Options
 
-In the previous section, we implemented the `ResultReportingResilienceStrategy<T>`. Now, we need to integrate it with Polly and its public API.
+In the previous section, we implemented the `ResultReportingResilienceStrategy<T>`. Now, we need to integrate it with Fences and its public API.
 
 Define the public `ResultReportingStrategyOptions<TResult>` class to configure our strategy:
 
@@ -255,6 +255,6 @@ new ResiliencePipelineBuilder()
 
 For further information about reactive resilience strategies, consider exploring these resources:
 
-- [Result reporting strategy sample](https://github.com/App-vNext/Polly/tree/main/samples/Extensibility/Reactive): A practical example from this guide.
-- [Retry resilience strategy](https://github.com/App-vNext/Polly/tree/main/src/Polly.Core/Retry): Discover the built-in retry resilience strategy implementation.
-- [Fallback resilience strategy](https://github.com/App-vNext/Polly/tree/main/src/Polly.Core/Fallback): Discover the built-in fallback resilience strategy implementation.
+- [Result reporting strategy sample](https://github.com/BrighterCommand/Fences/tree/main/samples/Extensibility/Reactive): A practical example from this guide.
+- [Retry resilience strategy](https://github.com/BrighterCommand/Fences/tree/main/src/Paramore.Fences.Core/Retry): Discover the built-in retry resilience strategy implementation.
+- [Fallback resilience strategy](https://github.com/BrighterCommand/Fences/tree/main/src/Paramore.Fences.Core/Fallback): Discover the built-in fallback resilience strategy implementation.

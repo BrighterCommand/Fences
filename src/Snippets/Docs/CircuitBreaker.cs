@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Net;
 using System.Net.Http;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Http.Resilience;
-using Polly.CircuitBreaker;
+using Paramore.Fences;
+using Paramore.Fences.CircuitBreaker;
 using Snippets.Docs.Utils;
 
 namespace Snippets.Docs;
@@ -15,7 +14,7 @@ internal static class CircuitBreaker
         #region circuit-breaker
 
         // Circuit breaker with default options.
-        // See https://www.pollydocs.org/strategies/circuit-breaker#defaults for defaults.
+        // See https://brightercommand.github.io/Fences/strategies/circuit-breaker#defaults for defaults.
         var optionsDefaults = new CircuitBreakerStrategyOptions();
 
         // Circuit breaker with customized options:
@@ -205,33 +204,6 @@ internal static class CircuitBreaker
         // Used in the downstream 1 client
         var downstream1Uri = new Uri("https://downstream1.com");
         await uriToCbMappings[downstream1Uri].ExecuteAsync(CallXYZOnDownstream1, CancellationToken.None);
-        #endregion
-    }
-
-    public static async ValueTask Pattern_CircuitPerEndpoint()
-    {
-        var services = new ServiceCollection();
-
-        #region circuit-breaker-pattern-cb-per-endpoint
-
-        services
-          .AddHttpClient("my-client")
-          .AddResilienceHandler("circuit-breaker", builder =>
-          {
-              builder.AddCircuitBreaker(new());
-          })
-          .SelectPipelineByAuthority(); // This call ensures that circuit breaker is cached by each URL authority
-
-        #endregion
-
-        IHttpClientFactory httpClientFactory = null!;
-
-        #region circuit-breaker-pattern-cb-per-endpoint-usage
-
-        HttpClient client = httpClientFactory.CreateClient("my-client");
-
-        await client.GetAsync(new Uri("https://downstream1.com/some-path"));
-
         #endregion
     }
 

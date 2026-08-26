@@ -1,6 +1,6 @@
-﻿using Polly;
-using Polly.Retry;
-using Polly.Timeout;
+﻿using Paramore.Fences;
+using Paramore.Fences.Retry;
+using Paramore.Fences.Timeout;
 
 // ------------------------------------------------------------------------
 // 1. Create a simple resilience pipeline using ResiliencePipelineBuilder

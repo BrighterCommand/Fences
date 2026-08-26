@@ -1,5 +1,5 @@
-﻿using Polly;
-using Polly.Telemetry;
+﻿using Paramore.Fences;
+using Paramore.Fences.Telemetry;
 using System.Diagnostics;
 
 namespace Extensibility.Proactive;
