@@ -4,7 +4,7 @@ Fences is a .NET resilience and transient-fault-handling library that allows dev
 
 Fences is a community fork of [Polly](https://github.com/App-vNext/Polly), maintained by [Brighter Command](https://github.com/BrighterCommand). It is not affiliated with, endorsed by, or supported by App vNext or the Polly maintainers.
 
-[![Build status](https://github.com/BrighterCommand/Fences/actions/workflows/build.yml/badge.svg?branch=main&event=push)](https://github.com/BrighterCommand/Fences/actions/workflows/build.yml?query=branch%3Amain+event%3Apush)
+[![NuGet version](https://img.shields.io/nuget/v/Paramore.Fences?logo=nuget&label=NuGet&color=blue)](https://www.nuget.org/packages/Paramore.Fences/) [![Build status](https://github.com/BrighterCommand/Fences/actions/workflows/build.yml/badge.svg?branch=main&event=push)](https://github.com/BrighterCommand/Fences/actions/workflows/build.yml?query=branch%3Amain+event%3Apush)
 
 ![Fences logo](https://raw.githubusercontent.com/BrighterCommand/Fences/main/images/fences-264.png)
 
