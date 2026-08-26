@@ -1,0 +1,43 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>net8.0;net6.0;netstandard2.0;net472;net462</TargetFrameworks>
+    <AssemblyTitle>Paramore.Fences.Extensions</AssemblyTitle>
+    <RootNamespace>Paramore.Fences</RootNamespace>
+    <Nullable>enable</Nullable>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <ProjectType>Library</ProjectType>
+    <MutationScore>100</MutationScore>
+    <LegacySupport>true</LegacySupport>
+  </PropertyGroup>
+  <PropertyGroup Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net8.0'))">
+    <IsAotCompatible>true</IsAotCompatible>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <Description>Fences is a community fork of Polly, maintained by Brighter Command. It is not affiliated with, endorsed by, or supported by App vNext or the Polly maintainers. Paramore.Fences.Extensions adds support for dependency injection and telemetry to the Paramore.Fences.Core library.</Description>
+    <PackageTags>Fences Paramore Exception Handling Resilience Transient Fault Policy DI DependencyInjection IOC InversionOfControl Metrics Observability Telemetry</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\Paramore.Fences.Core\ResilienceValidationContext.cs" Link="Utils\ResilienceValidationContext.cs" />
+    <Compile Include="..\Paramore.Fences.Core\Utils\Guard.cs" Link="Utils\Guard.cs" />
+    <Compile Include="..\Paramore.Fences.Core\Utils\ObjectPool.cs" Link="Utils\ObjectPool.cs" />
+    <Compile Include="..\Paramore.Fences.Core\Utils\ValidationHelper.cs" Link="Utils\ValidationHelper.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Using Remove="System.Net.Http" />
+    <InternalsVisibleToProject Include="Paramore.Fences.Extensions.Tests" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Paramore.Fences.Core\Paramore.Fences.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Options" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" />
+    <PackageReference Include="System.Diagnostics.DiagnosticSource" Condition="!$([MSBuild]::IsTargetFrameworkCompatible($(TargetFramework), 'net6.0'))" />
+    <Reference Include="System.Net.Http" Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'" />
+  </ItemGroup>
+</Project>

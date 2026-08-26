@@ -3,15 +3,15 @@
 ## About
 
 - **Option(s)**:
-  - [`RateLimiterStrategyOptions`](xref:Polly.RateLimiting.RateLimiterStrategyOptions)
+  - [`RateLimiterStrategyOptions`](xref:Paramore.Fences.RateLimiting.RateLimiterStrategyOptions)
 - **Extension(s)**:
   - `AddRateLimiter`,
   - `AddConcurrencyLimiter`
 - **Exception(s)**:
-  - [`RateLimiterRejectedException`](xref:Polly.RateLimiting.RateLimiterRejectedException): Thrown when a rate limiter rejects an execution.
+  - [`RateLimiterRejectedException`](xref:Paramore.Fences.RateLimiting.RateLimiterRejectedException): Thrown when a rate limiter rejects an execution.
 
 > [!NOTE]
-> The rate limiter strategy resides inside the [Polly.RateLimiting](https://www.nuget.org/packages/Polly.RateLimiting) package, not in ([Polly.Core](https://www.nuget.org/packages/Polly.Core)) like other strategies.
+> The rate limiter strategy resides inside the [Paramore.Fences.RateLimiting](https://www.nuget.org/packages/Paramore.Fences.RateLimiting) package, not in ([Paramore.Fences.Core](https://www.nuget.org/packages/Paramore.Fences.Core)) like other strategies.
 
 ---
 
@@ -27,7 +27,7 @@ Further reading:
 <!-- snippet: rate-limiter -->
 ```cs
 // Add rate limiter with default options.
-// See https://www.pollydocs.org/strategies/rate-limiter#defaults for defaults.
+// See https://brightercommand.github.io/Fences/strategies/rate-limiter#defaults for defaults.
 new ResiliencePipelineBuilder()
     .AddRateLimiter(new RateLimiterStrategyOptions());
 
@@ -130,7 +130,7 @@ The `RateLimiterRejectedException` has a `RetryAfter` and a `TelemetrySource` pr
 > [!NOTE]
 > The `RetryAfter` value is not available inside the `OnRejected` callback.
 
- The `TelemetrySource` property is a [`ResilienceTelemetrySource`](xref:Polly.Telemetry.ResilienceTelemetrySource) which allows you retrieve information such as the executed pipeline and strategy. These can be useful if you have multiple limiter strategies in your pipeline (for example both a rate and concurrency limiter) and you need to know which strategy caused the `RateLimiterRejectedException` to be thrown.
+ The `TelemetrySource` property is a [`ResilienceTelemetrySource`](xref:Paramore.Fences.Telemetry.ResilienceTelemetrySource) which allows you retrieve information such as the executed pipeline and strategy. These can be useful if you have multiple limiter strategies in your pipeline (for example both a rate and concurrency limiter) and you need to know which strategy caused the `RateLimiterRejectedException` to be thrown.
 
 ## Defaults
 
@@ -296,7 +296,7 @@ sequenceDiagram
 
 ## Disposal of rate limiters
 
-The `RateLimiter` is a disposable resource. When you explicitly create a `RateLimiter` instance, it's good practice to dispose of it once it's no longer needed. This is usually not an issue when manually creating resilience pipelines using the `ResiliencePipelineBuilder`. However, when dynamic reloads are enabled, failing to dispose of discarded rate limiters can lead to excessive resource consumption. Fortunately, Polly provides a way to dispose of discarded rate limiters, as demonstrated in the example below:
+The `RateLimiter` is a disposable resource. When you explicitly create a `RateLimiter` instance, it's good practice to dispose of it once it's no longer needed. This is usually not an issue when manually creating resilience pipelines using the `ResiliencePipelineBuilder`. However, when dynamic reloads are enabled, failing to dispose of discarded rate limiters can lead to excessive resource consumption. Fortunately, Fences provides a way to dispose of discarded rate limiters, as demonstrated in the example below:
 
 <!-- snippet: rate-limiter-disposal -->
 ```cs

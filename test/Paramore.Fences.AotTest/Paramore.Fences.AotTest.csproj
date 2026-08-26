@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <Nullable>enable</Nullable>
+    <OutputType>Exe</OutputType>
+    <PublishAot>true</PublishAot>
+    <SKIP_FENCES_ANALYZERS>true</SKIP_FENCES_ANALYZERS>
+    <SelfContained>true</SelfContained>
+    <TargetFramework>net10.0</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Paramore.Fences.Core\Paramore.Fences.Core.csproj" />
+    <ProjectReference Include="..\..\src\Paramore.Fences.Extensions\Paramore.Fences.Extensions.csproj" />
+    <ProjectReference Include="..\..\src\Paramore.Fences.RateLimiting\Paramore.Fences.RateLimiting.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <TrimmerRootAssembly Include="Paramore.Fences.Core" />
+    <TrimmerRootAssembly Include="Paramore.Fences.Extensions" />
+    <TrimmerRootAssembly Include="Paramore.Fences.RateLimiting" />
+  </ItemGroup>
+</Project>

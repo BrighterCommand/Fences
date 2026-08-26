@@ -4,6 +4,9 @@
 - name: Getting started
   href: getting-started.md
 
+- name: Migrate from Polly
+  href: migration-from-polly.md
+
 - name: Migrate to v8
   href: migration-v8.md
 

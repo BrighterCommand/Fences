@@ -1,0 +1,17 @@
+namespace Paramore.Fences;
+
+/// <summary>
+/// The options associated with the individual resilience strategy.
+/// </summary>
+public abstract class ResilienceStrategyOptions
+{
+    /// <summary>
+    /// Gets or sets the name of the strategy.
+    /// </summary>
+    /// <remarks>
+    /// This name uniquely identifies a particular instance of a specific strategy and is also included
+    /// in the telemetry that is produced by the individual resilience strategies.
+    /// </remarks>
+    /// <value>The default value is <see langword="null"/>.</value>
+    public string? Name { get; set; }
+}

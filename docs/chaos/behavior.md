@@ -3,7 +3,7 @@
 ## About
 
 - **Option(s)**:
-  - [`ChaosBehaviorStrategyOptions`](xref:Polly.Simmy.Behavior.ChaosBehaviorStrategyOptions)
+  - [`ChaosBehaviorStrategyOptions`](xref:Paramore.Fences.Simmy.Behavior.ChaosBehaviorStrategyOptions)
 - **Extension(s)**:
   - `AddChaosBehavior`
 - **Exception(s)**: -

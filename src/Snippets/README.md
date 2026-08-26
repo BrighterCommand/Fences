@@ -1,6 +1,6 @@
 # Snippets
 
-Various code-snippets used in the Polly documentation. Run the following command in the root directory to update the snippets in the docs:
+Various code-snippets used in the Fences documentation. Run the following command in the root directory to update the snippets in the docs:
 
 ```powershell
 dotnet mdsnippets
@@ -8,7 +8,7 @@ dotnet mdsnippets
 
 Visit the [MarkdownSnippets][MarkdownSnippets] GitHub repository for more details.
 
-## How to use snippets in Polly documentation
+## How to use snippets in Fences documentation
 
 First, locate the relevant `.cs` file where the snippet resides. For instance, `retry.md` refers to snippets found in the `Retry.cs` file.
 

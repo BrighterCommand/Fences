@@ -1,6 +1,7 @@
 ﻿using System.Net;
 using System.Net.Http;
-using Polly.Hedging;
+using Paramore.Fences;
+using Paramore.Fences.Hedging;
 using Snippets.Docs.Utils;
 
 namespace Snippets.Docs;
@@ -14,7 +15,7 @@ internal static class Hedging
         #region hedging
 
         // Hedging with default options.
-        // See https://www.pollydocs.org/strategies/hedging#defaults for defaults.
+        // See https://brightercommand.github.io/Fences/strategies/hedging#defaults for defaults.
         var optionsDefaults = new HedgingStrategyOptions<HttpResponseMessage>();
 
         // A customized hedging strategy that retries up to 3 times if the execution

@@ -1,4 +1,6 @@
-﻿namespace Snippets.Docs;
+﻿using Paramore.Fences;
+
+namespace Snippets.Docs;
 
 internal static class General
 {

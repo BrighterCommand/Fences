@@ -1,7 +1,7 @@
 # Use with F# and Visual Basic
 
-Asynchronous methods in the Polly.Core API return either `ValueTask` or `ValueTask<T>`
-instead of `Task` or `Task<T>`. This is because Polly v8 was designed to be optimized
+Asynchronous methods in the Paramore.Fences.Core API return either `ValueTask` or `ValueTask<T>`
+instead of `Task` or `Task<T>`. This is because the v8 API was designed to be optimized
 for high performance and uses `ValueTask` to avoid unnecessary allocations.
 
 One downside to this choice is that in Visual Basic and F#, it is not possible to directly
@@ -25,7 +25,7 @@ open System
 open System.Threading
 open System.Threading.Tasks
 open IcedTasks
-open Polly
+open Paramore.Fences
 
 let getBestFilmAsync token =
     task {
@@ -49,7 +49,7 @@ let demo () =
         pipeline.Execute(fun () -> printfn "Hello, world!")
 
         // Asynchronously
-        // Note that Polly expects a ValueTask to be returned, so the function uses the valueTask builder
+        // Note that Fences expects a ValueTask to be returned, so the function uses the valueTask builder
         // from IcedTasks to make it easier to use ValueTask. See https://github.com/TheAngryByrd/IcedTasks.
         do! pipeline.ExecuteAsync(
             fun token ->
@@ -65,7 +65,7 @@ let demo () =
         let someResult = pipeline.Execute(fun token -> "some-result")
 
         // Asynchronously with result
-        // Note that Polly expects a ValueTask<T> to be returned, so the function uses the valueTask builder
+        // Note that Fences expects a ValueTask<T> to be returned, so the function uses the valueTask builder
         // from IcedTasks to make it easier to use ValueTask<T>. See https://github.com/TheAngryByrd/IcedTasks.
         let! bestFilm = pipeline.ExecuteAsync(
             fun token ->
@@ -86,7 +86,7 @@ let demo () =
 
 ```vb
 Imports System.Threading
-Imports Polly
+Imports Paramore.Fences
 
 Module Program
     Sub Main()
@@ -105,7 +105,7 @@ Module Program
                          End Sub)
 
         ' Asynchronously
-        ' Note that the function is wrapped in a ValueTask for Polly to use as VB.NET cannot
+        ' Note that the function is wrapped in a ValueTask for Fences to use as VB.NET cannot
         ' await ValueTask directly, and AsTask() is used to convert the ValueTask returned by
         ' ExecuteAsync() to a Task so it can be awaited.
         Await pipeline.ExecuteAsync(Function(token)
@@ -119,7 +119,7 @@ Module Program
                                           End Function)
 
         ' Asynchronously with result
-        ' Note that the function is wrapped in a ValueTask(Of String) for Polly to use as VB.NET cannot
+        ' Note that the function is wrapped in a ValueTask(Of String) for Fences to use as VB.NET cannot
         ' await ValueTask directly, and AsTask() is used to convert the ValueTask(Of String) returned by
         ' ExecuteAsync() to a Task(Of String) so it can be awaited.
         Dim bestFilm = Await pipeline.ExecuteAsync(Function(token)
@@ -147,5 +147,5 @@ End Module
 
 [fsharp-fslang-design-118]: https://github.com/fsharp/fslang-design/discussions/118
 [valuetask-astask]: https://learn.microsoft.com/dotnet/api/system.threading.tasks.valuetask.astask
-[sample-fsharp]: https://github.com/App-vNext/Polly/tree/main/samples/Intro.FSharp
-[sample-vb]: https://github.com/App-vNext/Polly/tree/main/samples/Intro.VisualBasic
+[sample-fsharp]: https://github.com/BrighterCommand/Fences/tree/main/samples/Intro.FSharp
+[sample-vb]: https://github.com/BrighterCommand/Fences/tree/main/samples/Intro.VisualBasic

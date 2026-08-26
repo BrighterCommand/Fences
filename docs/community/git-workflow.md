@@ -1,10 +1,10 @@
 # Git Workflow
 
-Our recommended process for working with Polly is:
+Our recommended process for working with Fences is:
 
 1. [Fork](https://docs.github.com/get-started/quickstart/fork-a-repo) our repository on GitHub
 2. Clone your fork locally
-3. Configure the upstream (`git remote add upstream https://github.com/App-vNext/Polly.git`)
+3. Configure the upstream (`git remote add upstream https://github.com/BrighterCommand/Fences.git`)
 4. Switch to the default branch (i.e. `main`) using `git checkout main`
 5. Create a new local branch for your changes (`git checkout -b my-branch`).
 6. Work on your changes

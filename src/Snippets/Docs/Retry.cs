@@ -3,10 +3,11 @@ using System.Globalization;
 using System.Net.Http;
 using System.Net.Sockets;
 using System.Text.Json;
-using Polly.CircuitBreaker;
-using Polly.RateLimit;
-using Polly.Retry;
-using Polly.Timeout;
+using Paramore.Fences;
+using Paramore.Fences.CircuitBreaker;
+using Paramore.Fences.RateLimit;
+using Paramore.Fences.Retry;
+using Paramore.Fences.Timeout;
 using Snippets.Docs.Utils;
 
 namespace Snippets.Docs;
@@ -18,7 +19,7 @@ internal static class Retry
         #region retry
 
         // Retry using the default options.
-        // See https://www.pollydocs.org/strategies/retry#defaults for defaults.
+        // See https://brightercommand.github.io/Fences/strategies/retry#defaults for defaults.
         var optionsDefaults = new RetryStrategyOptions();
 
         // For instant retries with no delay

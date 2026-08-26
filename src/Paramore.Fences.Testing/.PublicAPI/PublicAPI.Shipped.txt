@@ -1,0 +1,11 @@
+﻿#nullable enable
+Paramore.Fences.Testing.ResiliencePipelineDescriptor
+Paramore.Fences.Testing.ResiliencePipelineDescriptor.FirstStrategy.get -> Paramore.Fences.Testing.ResilienceStrategyDescriptor!
+Paramore.Fences.Testing.ResiliencePipelineDescriptor.IsReloadable.get -> bool
+Paramore.Fences.Testing.ResiliencePipelineDescriptor.Strategies.get -> System.Collections.Generic.IReadOnlyList<Paramore.Fences.Testing.ResilienceStrategyDescriptor!>!
+Paramore.Fences.Testing.ResiliencePipelineExtensions
+Paramore.Fences.Testing.ResilienceStrategyDescriptor
+Paramore.Fences.Testing.ResilienceStrategyDescriptor.Options.get -> Paramore.Fences.ResilienceStrategyOptions?
+Paramore.Fences.Testing.ResilienceStrategyDescriptor.StrategyInstance.get -> object!
+static Paramore.Fences.Testing.ResiliencePipelineExtensions.GetPipelineDescriptor(this Paramore.Fences.ResiliencePipeline! pipeline) -> Paramore.Fences.Testing.ResiliencePipelineDescriptor!
+static Paramore.Fences.Testing.ResiliencePipelineExtensions.GetPipelineDescriptor<TResult>(this Paramore.Fences.ResiliencePipeline<TResult>! pipeline) -> Paramore.Fences.Testing.ResiliencePipelineDescriptor!

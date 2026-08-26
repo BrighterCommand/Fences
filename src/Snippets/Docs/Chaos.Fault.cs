@@ -1,7 +1,8 @@
 using System.Net.Http;
-using Polly.Retry;
-using Polly.Simmy;
-using Polly.Simmy.Fault;
+using Paramore.Fences;
+using Paramore.Fences.Retry;
+using Paramore.Fences.Simmy;
+using Paramore.Fences.Simmy.Fault;
 
 namespace Snippets.Docs;
 

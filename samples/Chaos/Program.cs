@@ -1,3 +1,9 @@
+// Microsoft.Extensions.Http.Resilience is built on Polly: AddResilienceHandler
+// hands its callback a Polly.ResiliencePipelineBuilder<HttpResponseMessage>, so
+// the chaos strategies configured on it below are Polly's, not Fences'. Fences
+// does not replace Microsoft.Extensions.Http.Resilience - the two coexist, and
+// this sample shows what that looks like. For chaos on a Fences pipeline, build
+// a Paramore.Fences.ResiliencePipelineBuilder directly.
 using Chaos;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Http.Resilience;

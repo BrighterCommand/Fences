@@ -1,11 +1,11 @@
 # Getting started
 
-To use Polly, you must provide a callback and execute it using a [**resilience pipeline**](pipelines/index.md). A resilience pipeline is a combination of one or more [**resilience strategies**](strategies/index.md) such as retry, timeout, and rate limiter. Polly uses **builders** to integrate these strategies into a pipeline.
+To use Fences, you must provide a callback and execute it using a [**resilience pipeline**](pipelines/index.md). A resilience pipeline is a combination of one or more [**resilience strategies**](strategies/index.md) such as retry, timeout, and rate limiter. Fences uses **builders** to integrate these strategies into a pipeline.
 
-To get started, first add the [Polly.Core](https://www.nuget.org/packages/Polly.Core/) package to your project by running the following command:
+To get started, first add the [Paramore.Fences.Core](https://www.nuget.org/packages/Paramore.Fences.Core/) package to your project by running the following command:
 
 ```sh
-dotnet add package Polly.Core
+dotnet add package Paramore.Fences.Core --prerelease
 ```
 
 You can create a `ResiliencePipeline` using the `ResiliencePipelineBuilder` class as shown below:
@@ -24,15 +24,15 @@ await pipeline.ExecuteAsync(static async token => { /* Your custom logic goes he
 <!-- endSnippet -->
 
 > [!NOTE]
-> Asynchronous methods in the Polly API return `ValueTask` or `ValueTask<T>` instead of `Task` or `Task<T>`.
-> If you are using Polly in Visual Basic or F#, please read [Use with F# and Visual Basic](advanced/use-with-fsharp-and-visual-basic.md) for more information.
+> Asynchronous methods in the Fences API return `ValueTask` or `ValueTask<T>` instead of `Task` or `Task<T>`.
+> If you are using Fences in Visual Basic or F#, please read [Use with F# and Visual Basic](advanced/use-with-fsharp-and-visual-basic.md) for more information.
 
 ## Dependency injection
 
-If you prefer to define resilience pipelines using [`IServiceCollection`](https://learn.microsoft.com/dotnet/api/microsoft.extensions.dependencyinjection.iservicecollection), you'll need to install the [Polly.Extensions](https://www.nuget.org/packages/Polly.Extensions/) package:
+If you prefer to define resilience pipelines using [`IServiceCollection`](https://learn.microsoft.com/dotnet/api/microsoft.extensions.dependencyinjection.iservicecollection), you'll need to install the [Paramore.Fences.Extensions](https://www.nuget.org/packages/Paramore.Fences.Extensions/) package:
 
 ```sh
-dotnet add package Polly.Extensions
+dotnet add package Paramore.Fences.Extensions --prerelease
 ```
 
 then you can define your resilience pipeline using the `AddResiliencePipeline(...)` extension method as shown:

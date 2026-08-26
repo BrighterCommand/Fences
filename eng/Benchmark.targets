@@ -1,7 +1,7 @@
 <Project>
   <PropertyGroup>
     <NoWarn>$(NoWarn);SA1600</NoWarn>
-    <IncludePollyUsings>true</IncludePollyUsings>
+    <IncludeFencesUsings>true</IncludeFencesUsings>
   </PropertyGroup>
 
   <ItemGroup>

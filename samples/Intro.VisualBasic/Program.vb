@@ -1,5 +1,5 @@
 Imports System.Threading
-Imports Polly
+Imports Paramore.Fences
 
 Module Program
     Sub Main()
@@ -18,7 +18,7 @@ Module Program
                          End Sub)
 
         ' Asynchronously
-        ' Note that the function is wrapped in a ValueTask for Polly to use as VB.NET cannot
+        ' Note that the function is wrapped in a ValueTask for Paramore.Fences to use as VB.NET cannot
         ' await ValueTask directly, and AsTask() is used to convert the ValueTask returned by
         ' ExecuteAsync() to a Task so it can be awaited.
         Await pipeline.ExecuteAsync(Function(token)
@@ -32,7 +32,7 @@ Module Program
                                           End Function)
 
         ' Asynchronously with result
-        ' Note that the function is wrapped in a ValueTask(Of String) for Polly to use as VB.NET cannot
+        ' Note that the function is wrapped in a ValueTask(Of String) for Paramore.Fences to use as VB.NET cannot
         ' await ValueTask directly, and AsTask() is used to convert the ValueTask(Of String) returned by
         ' ExecuteAsync() to a Task(Of String) so it can be awaited.
         Dim bestFilm = Await pipeline.ExecuteAsync(Function(token)

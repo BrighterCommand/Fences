@@ -3,7 +3,7 @@
 ## About
 
 - **Option(s)**:
-  - [`ChaosLatencyStrategyOptions`](xref:Polly.Simmy.Latency.ChaosLatencyStrategyOptions)
+  - [`ChaosLatencyStrategyOptions`](xref:Paramore.Fences.Simmy.Latency.ChaosLatencyStrategyOptions)
 - **Extension(s)**:
   - `AddChaosLatency`
 - **Exception(s)**: -
@@ -17,7 +17,7 @@ The latency **proactive** chaos strategy is designed to introduce controlled del
 <!-- snippet: chaos-latency-usage -->
 ```cs
 // Latency using the default options.
-// See https://www.pollydocs.org/chaos/latency#defaults for defaults.
+// See https://brightercommand.github.io/Fences/chaos/latency#defaults for defaults.
 var optionsDefault = new ChaosLatencyStrategyOptions();
 
 // 10% of invocations will be randomly affected

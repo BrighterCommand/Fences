@@ -2,13 +2,6 @@
   "version": 1,
   "isRoot": true,
   "tools": {
-    "authenticodelint": {
-      "version": "0.13.0",
-      "commands": [
-        "authlint"
-      ],
-      "rollForward": false
-    },
     "cake.tool": {
       "version": "6.2.0",
       "commands": [
@@ -44,24 +37,10 @@
       ],
       "rollForward": false
     },
-    "MartinCostello.WaitForNuGetPackage": {
-      "version": "1.3.2",
-      "commands": [
-        "dotnet-wait-for-package"
-      ],
-      "rollForward": false
-    },
     "meziantou.framework.nugetpackagevalidation.tool": {
       "version": "2.0.2",
       "commands": [
         "meziantou.validate-nuget-package"
-      ],
-      "rollForward": false
-    },
-    "sign": {
-      "version": "0.9.1-beta.26371.2",
-      "commands": [
-        "sign"
       ],
       "rollForward": false
     }

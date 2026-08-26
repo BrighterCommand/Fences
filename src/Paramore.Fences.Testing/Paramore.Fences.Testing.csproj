@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net8.0;netstandard2.0</TargetFrameworks>
+    <AssemblyTitle>Paramore.Fences.Testing</AssemblyTitle>
+    <RootNamespace>Paramore.Fences.Testing</RootNamespace>
+    <Nullable>enable</Nullable>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <ProjectType>Library</ProjectType>
+    <MutationScore>100</MutationScore>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <Description>Fences is a community fork of Polly, maintained by Brighter Command. It is not affiliated with, endorsed by, or supported by App vNext or the Polly maintainers. Paramore.Fences.Testing exposes APIs and utilities that can be used to assert on the composition of Paramore.Fences.Core resilience pipelines.</Description>
+    <PackageTags>Fences Paramore Exception Handling Resilience Transient Fault Policy Testing</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Paramore.Fences.Core\Paramore.Fences.Core.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,6 +1,7 @@
 ﻿using System.Threading.RateLimiting;
 using Microsoft.Extensions.DependencyInjection;
-using Polly.RateLimiting;
+using Paramore.Fences;
+using Paramore.Fences.RateLimiting;
 
 namespace Snippets.Docs;
 
@@ -11,7 +12,7 @@ internal static class RateLimiter
         #region rate-limiter
 
         // Add rate limiter with default options.
-        // See https://www.pollydocs.org/strategies/rate-limiter#defaults for defaults.
+        // See https://brightercommand.github.io/Fences/strategies/rate-limiter#defaults for defaults.
         new ResiliencePipelineBuilder()
             .AddRateLimiter(new RateLimiterStrategyOptions());
 
