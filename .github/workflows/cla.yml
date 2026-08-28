@@ -39,7 +39,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        allowlist: dependabot[bot],github-actions[bot]
+        allowlist: dependabot[bot],github-actions[bot],iancooper
         branch: cla-signatures
         create-file-commit-message: 'chore: create the CLA signature file'
         custom-notsigned-prcomment: >
