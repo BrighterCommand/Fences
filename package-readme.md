@@ -8,11 +8,19 @@ Fences is a community fork of [Polly](https://github.com/App-vNext/Polly), maint
 
 ![Fences logo](https://raw.githubusercontent.com/BrighterCommand/Fences/main/images/fences-264.png)
 
-## This is a pre-release
+## Why Fences exists
 
-Every `9.0.0-alpha*` package is published to secure the package identifiers and to gather early feedback. The API is Polly 8.7.0's and is not expected to churn, but nothing carries a compatibility promise until `9.0.0`.
+**Polly's source is BSD 3-Clause licensed, and it stays open source.** That licence lets anyone redistribute it, in source or binary form, provided the copyright notice and disclaimer are retained. Building and publishing our own binaries from that source is squarely within the grant.
 
-Fences exists only because of the Open Source Maintainers Fee (OSMF) that App vNext now charges for Polly. **If that decision is reversed, Brighter Command may retire the fork and go back to Polly.** We expect to know by the end of August 2026. Going back would be the same package-reference and namespace change as coming across, in reverse, but adopt this knowing it.
+The Open Source Maintainers Fee (OSMF) is App vNext's policy for the binaries **they** publish: a commercial consumer of those binaries may owe a fee above a revenue threshold. It governs their distribution, not the licence on the source, and it does not reach binaries built by anyone else.
+
+**That freedom is the OSMF's own argument.** The case made for charging for binaries is that it stays within open source precisely because the source remains open and anyone is free to build and publish binaries of their own. It is one door, and it opens both ways: the principle that makes the fee compatible with open source is the same one that makes Fences legitimate.
+
+**Fences is the binary somebody else builds.** We compile from the BSD 3-Clause source, publish under our own branding, and **we do not apply the OSMF. Fences binaries are free, for everyone - no revenue threshold, no fee.**
+
+We track the Polly API today and expect to keep doing so. But Fences is under Brighter Command's stewardship now, so a future major version may diverge from Polly and stop being API-compatible. We will say so plainly when it does.
+
+None of this is a criticism of App vNext, who have maintained Polly for years and are entitled to be paid for their work. Publishing our own binaries is exactly what the licence they chose allows.
 
 ## Migrating from Polly
 

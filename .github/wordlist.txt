@@ -144,6 +144,7 @@ opentelemetry
 org
 organisation
 OSMF
+OSMF's
 oss
 OTel
 paas

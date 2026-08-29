@@ -4,18 +4,25 @@ Fences is a .NET resilience and transient-fault-handling library that allows dev
 
 Fences is a community fork of [Polly](https://github.com/App-vNext/Polly), maintained by [Brighter Command](https://github.com/BrighterCommand). It is not affiliated with, endorsed by, or supported by App vNext or the Polly maintainers. The fork was taken from Polly 8.7.0 to avoid the Open Source Maintainers Fee now charged for Polly; see [ADR 0002](docs/adr/0002-fork-polly-as-fences.md) for the reasoning and [`NOTICE.md`](NOTICE.md) for provenance and attribution.
 
-> [!IMPORTANT]
-> **Fences is pre-release, and its future is not yet settled.**
->
-> Packages are published to NuGet as `9.0.0-alpha001` and onwards. They exist to secure the package identifiers and to gather early feedback, not to carry a compatibility promise. The API is Polly 8.7.0's and is not expected to churn, but nothing is guaranteed until `9.0.0`.
->
-> Fences exists only because of the Open Source Maintainers Fee (OSMF) that App vNext now charges for Polly. **If that decision is reversed, Brighter Command may retire the fork and go back to Polly.** We expect to know by the end of August 2026. Adopting Fences now is low-risk in either direction - going back is the same package-reference and namespace change described below, in reverse - but adopt it knowing that.
+## Why Fences exists
+
+**Polly's source is BSD 3-Clause licensed, and it stays open source.** That licence lets anyone redistribute it, in source or binary form, provided the copyright notice and disclaimer are retained - which [`NOTICE.md`](NOTICE.md) and [`LICENSE`](LICENSE) do. Building and publishing our own binaries from that source is squarely within the grant.
+
+The Open Source Maintainers Fee (OSMF) is App vNext's policy for the binaries **they** publish: a commercial consumer of those binaries may owe a fee above a revenue threshold. It governs their distribution. It does not change the licence on the source, and it does not reach binaries built by anyone else.
+
+**That freedom is the OSMF's own argument.** The case made for charging for binaries is that it stays within open source precisely because the source remains open and anyone is free to build and publish binaries of their own. That is what separates the model from proprietary licensing, and we think the argument is sound. But it is one door, and it opens both ways: the principle that makes the fee compatible with open source is the same principle that makes Fences legitimate. We are not going around the OSMF - we are walking through the door it holds open.
+
+**Fences is the binary somebody else builds.** We compile from the BSD 3-Clause source, publish under our own branding, and **we do not apply the OSMF. Fences binaries are free, for everyone - no revenue threshold, no fee.** If you use Polly and would rather not pay the fee, Fences is a drop-in alternative: change your package references and your namespaces, as described below.
+
+We track the Polly API today and expect to keep doing so, and we may take up changes made upstream. But Fences is under Brighter Command's stewardship now and will evolve to suit its users, so a future major version may diverge from Polly and stop being API-compatible. We will say so plainly when it does; it will not arrive in a patch.
+
+None of this is a criticism of App vNext, who have maintained Polly for years and are entitled to be paid for their work. Publishing our own binaries is exactly what the licence they chose allows. See [ADR 0002](docs/adr/0002-fork-polly-as-fences.md) for the full reasoning.
 
 This README describes the v8 API. The pre-v8 API is still shipped, in the `Paramore.Fences` package; see the [v7 documentation](docs/v7/).
 
 ## NuGet packages
 
-All five are published as **pre-release only**. `dotnet add package` will not find them without `--prerelease` or an explicit version.
+All five are published as stable releases from `9.0.0` onwards.
 
 | **Package** | **Replaces** | **About** |
 | :---------- | :----------- | :-------- |
@@ -37,7 +44,7 @@ For a project on Polly 8.7.0, moving to Fences is a change of package reference 
 
 ```diff
 -<PackageReference Include="Polly.Core" Version="8.7.0" />
-+<PackageReference Include="Paramore.Fences.Core" Version="9.0.0-alpha001" />
++<PackageReference Include="Paramore.Fences.Core" Version="9.0.0" />
 ```
 
 ```diff
@@ -54,7 +61,7 @@ To use Fences, you must provide a callback and execute it using a [**resilience 
 To get started, first add the `Paramore.Fences.Core` package to your project by running the following command:
 
 ```sh
-dotnet add package Paramore.Fences.Core --prerelease
+dotnet add package Paramore.Fences.Core
 ```
 
 You can create a `ResiliencePipeline` using the `ResiliencePipelineBuilder` class as shown below:
@@ -77,7 +84,7 @@ await pipeline.ExecuteAsync(static async token => { /* Your custom logic goes he
 If you prefer to define resilience pipelines using [`IServiceCollection`](https://learn.microsoft.com/dotnet/api/microsoft.extensions.dependencyinjection.iservicecollection), you'll need to install the `Paramore.Fences.Extensions` package:
 
 ```sh
-dotnet add package Paramore.Fences.Extensions --prerelease
+dotnet add package Paramore.Fences.Extensions
 ```
 
 You can then define your resilience pipeline using the `AddResiliencePipeline(...)` extension method as shown:
