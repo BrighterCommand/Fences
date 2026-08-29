@@ -11,6 +11,18 @@
 
 <!-- next-release -->
 
+## 9.0.0
+
+* Package identifiers are now `Paramore.Fences.*`: `Polly.Core` becomes `Paramore.Fences.Core`, `Polly.Extensions` becomes `Paramore.Fences.Extensions`, `Polly.RateLimiting` becomes `Paramore.Fences.RateLimiting`, `Polly.Testing` becomes `Paramore.Fences.Testing`, and `Polly` — the pre-v8 legacy API — becomes `Paramore.Fences`.
+* Namespaces are now `Paramore.Fences.*`. `using Polly;` becomes `using Paramore.Fences;`, and every namespace maps one-for-one.
+* `PollyServiceCollectionExtensions` is renamed to `ResilienceServiceCollectionExtensions`. This is the only public type whose name changed. It holds extension methods, so callers write `services.AddResiliencePipeline(...)` and rarely name the class.
+* Telemetry names changed, and a find-and-replace over your own source will not fix them: the meter and activity source `Polly` becomes `Paramore.Fences`, and the metrics `resilience.polly.pipeline.duration`, `resilience.polly.strategy.events` and `resilience.polly.strategy.attempt.duration` become `resilience.fences.*`. Dashboards, alerts and collector configuration need updating by hand.
+* Assemblies are signed with a new strong-name key, public key token `6998A40D28482B6D`. Anything binding to Polly's old token needs rebuilding rather than redirecting.
+* Authenticode signing is dropped, matching the other Brighter Command projects.
+* Binaries are published free of charge under the BSD 3-Clause licence, with no revenue threshold and no fee.
+* Documentation is rewritten for Fences and published at https://brightercommand.github.io/Fences/
+* Packages are published from CI only, through NuGet trusted publishing, with build provenance attestation.
+
 <!-- Fences releases (9.0.0 and above) are added above this line by eng/update-changelog.ps1. -->
 
 ## Polly — upstream releases, 8.7.0 and below
