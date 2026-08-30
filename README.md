@@ -6,23 +6,23 @@ Fences is a community fork of [Polly](https://github.com/App-vNext/Polly), maint
 
 ## Why Fences exists
 
-**Polly's source is BSD 3-Clause licensed, and it stays open source.** That licence lets anyone redistribute it, in source or binary form, provided the copyright notice and disclaimer are retained - which [`NOTICE.md`](NOTICE.md) and [`LICENSE`](LICENSE) do. Building and publishing our own binaries from that source is squarely within the grant.
+**Polly's source is BSD 3-Clause licensed, and it stays open source.** That license lets anyone redistribute it, in source or binary form, provided the copyright notice and disclaimer are retained - which [`NOTICE.md`](NOTICE.md) and [`LICENSE`](LICENSE) do. Building and publishing our own binaries from that source is squarely within the grant.
 
-The Open Source Maintainers Fee (OSMF) is App vNext's policy for the binaries **they** publish: a commercial consumer of those binaries may owe a fee above a revenue threshold. It governs their distribution. It does not change the licence on the source, and it does not reach binaries built by anyone else.
+The Open Source Maintainers Fee (OSMF) is App vNext's policy for the binaries **they** publish: a commercial consumer of those binaries may owe a fee above a revenue threshold. It governs their distribution. It does not change the source license, and it does not reach binaries built by anyone else.
 
-**That freedom is the OSMF's own argument.** The case made for charging for binaries is that it stays within open source precisely because the source remains open and anyone is free to build and publish binaries of their own. That is what separates the model from proprietary licensing, and we think the argument is sound. But it is one door, and it opens both ways: the principle that makes the fee compatible with open source is the same principle that makes Fences legitimate. We are not going around the OSMF - we are walking through the door it holds open.
+**That freedom is the OSMF's own argument.** The case for charging for binaries is that it stays within open source precisely because the source remains open and anyone is free to build and publish their own binaries. That is what separates the model from proprietary licensing. But it is one door, and it opens both ways: the principle that makes the fee compatible with open source is the same principle that makes Fences legitimate. We are not going around the OSMF - we are walking through the door it holds open.
 
-**Fences is the binary somebody else builds.** We compile from the BSD 3-Clause source, publish under our own branding, and **we do not apply the OSMF. Fences binaries are free, for everyone - no revenue threshold, no fee.** If you use Polly and would rather not pay the fee, Fences is a drop-in alternative: change your package references and your namespaces, as described below.
+**Fences is the binary somebody else builds.** We compile from the BSD 3-Clause source, publish under our own branding, and **we do not apply the OSMF. Fences binaries are free for everyone - no revenue threshold, no fee.** If you use Polly and would rather not pay the fee, Fences is a drop-in alternative: change your package references and your namespaces, as described below.
 
-We track the Polly API today and expect to keep doing so, and we may take up changes made upstream. But Fences is under Brighter Command's stewardship now and will evolve to suit its users, so a future major version may diverge from Polly and stop being API-compatible. We will say so plainly when it does; it will not arrive in a patch.
+We track the Polly API today and expect to keep doing so, and we may adopt upstream changes. But Fences is under Brighter Command's stewardship now and will evolve to suit its users, so a future major version may diverge from Polly and stop being API-compatible. We will say so plainly when it does; it will not arrive in a patch.
 
-None of this is a criticism of App vNext, who have maintained Polly for years and are entitled to be paid for their work. Publishing our own binaries is exactly what the licence they chose allows. See [ADR 0002](docs/adr/0002-fork-polly-as-fences.md) for the full reasoning.
+This is not a criticism of App vNext contributors, who have maintained Polly for years. Publishing our own binaries is exactly what the license they chose invites us to do, and we have responded to that by doing so. See [ADR 0002](docs/adr/0002-fork-polly-as-fences.md) for the full reasoning.
 
-This README describes the v8 API. The pre-v8 API is still shipped, in the `Paramore.Fences` package; see the [v7 documentation](docs/v7/).
+This README describes the v8 API. The pre-v8 API is still shipped in the `Paramore.Fences` package; see the [v7 documentation](docs/v7/).
 
 ## NuGet packages
 
-All five are published as stable releases from `9.0.0` onwards.
+All five are published as stable releases starting with `9.0.0`.
 
 | **Package** | **Replaces** | **About** |
 | :---------- | :----------- | :-------- |
