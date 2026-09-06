@@ -162,6 +162,81 @@ Task("__RunTests")
     }
 });
 
+Task("__ValidateCoverageReports")
+    .Does(() =>
+{
+    var coverageReportsDir = System.IO.Path.Combine(artifactsDir, Directory("coverage-reports"));
+    var projects = GetFiles("./test/**/*{Tests,Specs}.csproj");
+    var missing = new List<string>();
+
+    foreach (var proj in projects)
+    {
+        var testProjectName = proj.GetFilenameWithoutExtension().ToString();
+
+        foreach (var framework in CoverageCollectedFrameworks(proj))
+        {
+            var report = System.IO.Path.Combine(coverageReportsDir, testProjectName, framework, "Cobertura.xml");
+
+            if (!FileExists(report))
+            {
+                missing.Add(report);
+            }
+        }
+    }
+
+    if (missing.Count > 0)
+    {
+        throw new InvalidOperationException(
+            $"Every target framework must keep its own coverage report, but {missing.Count} are missing:"
+            + Environment.NewLine
+            + string.Join(Environment.NewLine, missing));
+    }
+});
+
+Task("__ValidateCoverageReportOnThresholdFailure")
+    .Does(() =>
+{
+    var project = MakeAbsolute(File("./test/Paramore.Fences.Testing.Tests/Paramore.Fences.Testing.Tests.csproj"));
+    var reportDir = MakeAbsolute(Directory(System.IO.Path.Combine(artifactsDir, Directory("coverage-threshold-check"))));
+
+    CleanDirectory(reportDir);
+
+    Information("Running one test project against an unreachable coverage threshold. The coverage errors below are expected.");
+
+    var thresholdFailed = false;
+
+    try
+    {
+        // A threshold no run can meet fails the gate once coverage has been calculated,
+        // which is the point at which the report must already have been written.
+        DotNetTest(project.FullPath, new DotNetTestSettings
+        {
+            Configuration = configuration,
+            Framework = "net10.0",
+            NoBuild = true,
+            MSBuildSettings = new DotNetMSBuildSettings()
+                .WithProperty("Threshold", "101")
+                .WithProperty("ReportGeneratorTargetDirectory", reportDir.FullPath),
+            ToolTimeout = System.TimeSpan.FromMinutes(10),
+        });
+    }
+    catch (Cake.Core.CakeException)
+    {
+        thresholdFailed = true;
+    }
+
+    if (!thresholdFailed)
+    {
+        throw new InvalidOperationException("Expected an unreachable coverage threshold to fail the build, but it passed.");
+    }
+
+    if (!GetFiles($"{reportDir.FullPath}/**/Cobertura.xml").Any())
+    {
+        throw new InvalidOperationException(
+            $"A failing coverage threshold must still produce a coverage report, but none was written to {reportDir}.");
+    }
+});
+
 Task("__CreateNuGetPackages")
     .Does(() =>
 {
@@ -220,6 +295,8 @@ Task("Build")
     .IsDependentOn("__CommonBuild")
     .IsDependentOn("__ValidateAot")
     .IsDependentOn("__RunTests")
+    .IsDependentOn("__ValidateCoverageReports")
+    .IsDependentOn("__ValidateCoverageReportOnThresholdFailure")
     .IsDependentOn("__CreateNuGetPackages");
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -299,6 +376,16 @@ string PatchStrykerConfig(string path, Action<Newtonsoft.Json.Linq.JObject> patc
     System.IO.File.WriteAllText(tempPath, config.ToString());
 
     return tempPath;
+}
+
+// Coverage is collected for every target framework except .NET Framework - see eng/Test.targets.
+IEnumerable<string> CoverageCollectedFrameworks(FilePath testProject)
+{
+    var frameworks = XmlPeek(testProject, "/Project/PropertyGroup/TargetFrameworks/text()", new XmlPeekSettings { SuppressWarning = true });
+
+    return frameworks
+        .Split(';', StringSplitOptions.RemoveEmptyEntries)
+        .Where(framework => !framework.StartsWith("net4", StringComparison.Ordinal));
 }
 
 void RunMutationTests(FilePath target, FilePath testProject)
