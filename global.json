@@ -5,6 +5,6 @@
     "allowPrerelease": false
   },
   "msbuild-sdks": {
-    "Cake.Sdk": "6.2.0"
+    "Cake.Sdk": "6.3.0"
   }
 }
