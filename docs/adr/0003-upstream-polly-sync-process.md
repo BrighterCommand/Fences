@@ -1,7 +1,7 @@
 ---
 id: 0003-upstream-polly-sync-process
 title: "Upstream Polly Sync Process"
-status: Proposed
+status: Accepted
 author:
   - "iancooper"
 created: 2026-09-20
@@ -18,7 +18,7 @@ Date: 2026-09-20
 
 ## Status
 
-Proposed
+Accepted
 
 ## Context
 
