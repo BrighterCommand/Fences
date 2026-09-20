@@ -68,7 +68,6 @@
       "Bash(git push -f:*)",
       "Bash(git reset --hard:*)",
       "Bash(git clean -fdx:*)",
-      "Bash(gh pr merge:*)",
       "Bash(gh release create:*)",
       "Bash(gh release upload:*)",
       "Bash(curl:*)",
