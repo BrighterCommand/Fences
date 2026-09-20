@@ -18,8 +18,16 @@ once per clone:
 ```sh
 git remote add upstream https://github.com/App-vNext/Polly.git
 git fetch upstream
-git branch polly-upstream 47e3b412e8c3b7e6db1629acd98f3e3b6b529d6c   # the ADR 0002 fork point, first time only
+git branch polly-upstream 173d6d1d2e28a4697f1ac1d22da68f77ff19a0c9   # last synced 2026-08-24, not the ADR 0002 fork point
 ```
+
+**Not the ADR 0002 fork point (`47e3b412`).** A hand-sync ran on 2026-08-24, before this runbook
+existed, carrying the repo from `47e3b412` to upstream `173d6d1d` — five Dependabot-only commits
+(codeql-action, xunit, dotnet, `Microsoft.NET.Test.Sdk`, `Refit.HttpClientFactory`), applied by
+hand to `Directory.Packages.props` and two workflow files, now on `main` via the rename branch
+(`259da7550`, merged in PR #2). Bootstrapping from `47e3b412` would surface those five again on
+the first Step 1 diff; they'd land in the auto-skip bucket regardless (D5), so it isn't a
+correctness bug, just noise this saves.
 
 On later syncs, `polly-upstream` already exists and points at the last synced commit — skip the
 `git branch` line.
