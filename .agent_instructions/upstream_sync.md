@@ -96,11 +96,26 @@ For each commit triaged "port":
 2. Apply the ADR 0002 rename to anything the change touches: `Polly.*` → `Paramore.Fences.*`
    namespaces, `Polly.PollyServiceCollectionExtensions` → `FencesServiceCollectionExtensions` if
    relevant, and any `Polly`-branded string constants.
-3. Reference the upstream SHA in the commit message, e.g.
+3. **Check API compatibility (ADR 0003, D7).** Rebrand, don't redesign: once the rename fixups
+   from step 2 are applied, the ported change's public types, members and signatures should match
+   what upstream shipped. This is what keeps the ADR 0002 promise true — upgrading Fences stays a
+   `using Polly;` → `using Paramore.Fences;` find/replace — for every commit synced after the fork,
+   not just the ones that were already there. If a commit genuinely can't be ported without
+   breaking that — upstream redesigned a public signature, removed something Fences already
+   shipped, or introduced an overload that collides with a Fences-only addition — do not resolve
+   the tension unilaterally:
+   - Add a short comment in the code at the point of divergence stating what upstream did and why
+     Fences doesn't (or doesn't yet) match it, referencing the tracking issue number. This is a
+     legitimate "why" comment under `CLAUDE.md`'s comment policy — the divergence from upstream is
+     exactly the kind of non-obvious constraint worth recording.
+   - Flag the same divergence in the tracking issue (Step 3) instead of the "port" bucket, so a
+     maintainer decides whether to accept the drift, find another shape that satisfies both, or
+     defer the port.
+4. Reference the upstream SHA in the commit message, e.g.
    `Port App-vNext/Polly@482bdf82: return null from FaultGenerator when no fault is generated`.
-4. Append a `CHANGELOG.md` entry in Fences' own voice. Never rewrite the existing history in that
+5. Append a `CHANGELOG.md` entry in Fences' own voice. Never rewrite the existing history in that
    file — Polly's entries for 8.7.0 and below stay exactly as they are.
-5. Follow the normal verification gates in `CLAUDE.md` before merging: analyser-clean build, tests
+6. Follow the normal verification gates in `CLAUDE.md` before merging: analyser-clean build, tests
    passing, a `.PublicAPI/` entry if the change is public, mutation score not regressed.
 
 ### Why this isn't a `git cherry-pick`
