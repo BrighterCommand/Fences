@@ -56,6 +56,8 @@ Read these as needed:
   management, and the multi-targeting constraint
 - [Release and Versioning](.agent_instructions/release_and_versioning.md) — MinVer, the release
   scripts, and what they own
+- [Upstream Polly Sync](.agent_instructions/upstream_sync.md) — the licence gate and the runbook
+  for pulling changes from `App-vNext/Polly` ([ADR 0003](docs/adr/0003-upstream-polly-sync-process.md))
 
 ## Workflows
 

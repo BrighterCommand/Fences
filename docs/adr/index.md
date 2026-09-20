@@ -15,5 +15,6 @@ Identity is the `id` (filename stem), not the leading number — numbers may rep
 | --- | --- | --- | --- | --- |
 | `0001-record-architecture-decisions` | Record architecture decisions | Accepted | meta | Fences will use Architecture Decision Records (as described by Michael Nygard) to record the architectural decisions made on the project, matching the convention already used by Brighter. |
 | `0002-fork-polly-as-fences` | Fork Polly as Fences | Accepted | meta, licensing, packaging | Brighter depends on Polly, and Polly's adoption of the Open Source Maintainers Fee creates a risk that Brighter's users are billed for binaries they obtain through us. We fork Polly 8.7.0 as Paramore.Fences, publish our own binaries, and rebrand fully to remove trademark and confusion risk. |
+| `0003-upstream-polly-sync-process` | Upstream Polly Sync Process | Proposed | meta, licensing, governance | Every upstream sync from App-vNext/Polly runs a mandatory licence-text gate before any diff, triage or port step; a read-only upstream remote and polly-upstream tracking branch bound each sync's diff to what changed since the last one, and dependency-bump commits are skipped by default. |
 
-_2 ADRs indexed._
+_3 ADRs indexed._
