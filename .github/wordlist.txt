@@ -2,6 +2,7 @@ accessors
 acs
 actionlint
 adr
+ADR's
 adrs
 agentic
 alloc
@@ -59,8 +60,10 @@ config
 contrib
 Costello
 coverlet
+creatable
 dedupe
 dependabot
+Dependabot's
 dependencyinjection
 deserialization
 DevJonny
@@ -76,6 +79,7 @@ eshoponcontainers
 extensibility
 FakeItEasy
 Fences
+fixup
 FluentAssertions
 flurl
 frontmatter
@@ -119,6 +123,7 @@ metadata
 middleware
 migrators
 minver
+mitigations
 mkdir
 moq
 msbuild
@@ -179,6 +184,7 @@ rebase
 rebased
 rebasing
 rebrand
+rebrands
 recognise
 regenerable
 repo
@@ -190,6 +196,7 @@ rethrows
 retryable
 reusability
 reviewable
+runbook
 runnable
 runtime
 saas
@@ -229,10 +236,13 @@ tokenise
 tokenised
 toolset
 ui
+unexecuted
 unhandled
+unported
 unprefixed
 unquantified
 unresolvable
+Upstream's
 usings
 uwp
 valuetask
