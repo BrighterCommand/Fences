@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+      <title>Upstream Polly Sync Process | Fences </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Upstream Polly Sync Process | Fences ">
+      
+      
+      <link rel="icon" href="../icon.png">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="../toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/BrighterCommand/Fences/blob/main/docs/adr/0003-upstream-polly-sync-process.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../icon.png" alt="Fences">
+            Fences
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+
+      <div class="content">
+        <div class="actionbar">
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="3-upstream-polly-sync-process">3. Upstream Polly Sync Process</h1>
+
+<p>Date: 2026-09-20</p>
+<h2 id="status">Status</h2>
+<p>Accepted</p>
+<h2 id="context">Context</h2>
+<p>ADR 0002 forked <code>App-vNext/Polly</code> at commit <code>47e3b41</code> (Polly 8.7.0). A fork taken at one commit is
+a snapshot, not a subscription: 34 commits and a full release, 8.8.0, had already landed upstream
+by the time anyone checked, discovered only by hand while writing issue #28.
+<code>fork-migration-plan.md</code>'s risk R2 already commits us to catching up — a read-only <code>upstream</code>
+remote and a <code>polly-upstream</code> tracking branch — but that commitment was never executed, said
+nothing about cadence or what to skip, and said nothing about what happens if the licence that
+makes pulling from upstream safe ever changes.</p>
+<p>Fences intends to keep pulling from upstream for as long as its licence permits it. That makes
+syncing recurring work, and the ad hoc rediscovery that produced issue #28 is not a repeatable
+process: nothing forced the licence check to happen before the reading and porting, and nothing
+carried the triage judgement from one sync to the next.</p>
+<h2 id="decision">Decision</h2>
+<p><strong>Every upstream sync runs a mandatory licence gate before any diff, triage or port step, and the
+remaining steps are structured to make each sync cheaper than the last.</strong></p>
+<p>Porting rebrands; it does not redesign. ADR 0002 promised a consumer that upgrading from Polly to
+Fences is a <code>using</code> find/replace, because the public API is otherwise identical. Every later sync
+has to keep that promise, not just the original fork — so a ported commit changes namespaces, not
+shapes, and any upstream change that cannot honour that is surfaced, not silently absorbed.</p>
+<p>The gate and the steps:</p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Decision</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>D1</td>
+<td>Step 0 of every sync fetches <code>LICENSE</code> at the tip of <code>App-vNext/Polly</code>'s <code>main</code> and compares it, byte for byte, against the copy recorded in this repository at fork time. Any difference halts the sync before it reads a single commit.</td>
+</tr>
+<tr>
+<td>D2</td>
+<td>A licence-gate failure is not a routine finding. It opens or updates a tracking issue asking whether Fences may still pull from upstream, and no later sync step runs until a maintainer resolves it.</td>
+</tr>
+<tr>
+<td>D3</td>
+<td>The gate checks the licence text itself, not the Open Source Maintainers Fee (OSMF). The OSMF governs App vNext's own binary distribution and does not alter the BSD-3-Clause grant Fences relies on (<code>README.md</code>, &quot;The Open Source Maintainers Fee&quot;). An OSMF policy change alone does not trip the gate.</td>
+</tr>
+<tr>
+<td>D4</td>
+<td>A read-only <code>upstream</code> remote (<code>https://github.com/App-vNext/Polly.git</code>) and a <code>polly-upstream</code> branch track the last commit successfully synced. Each sync diffs from that pointer, not from the original fork point, so the diff shrinks to only what changed since the last sync.</td>
+</tr>
+<tr>
+<td>D5</td>
+<td>A commit whose message matches Dependabot's <code>Bump &lt;dep&gt; from &lt;x&gt; to &lt;y&gt;</code> convention defaults to &quot;skip&quot; without individual review, because Fences tracks its own dependencies independently through its own Dependabot configuration. Every other commit needs a person to bucket it.</td>
+</tr>
+<tr>
+<td>D6</td>
+<td>Findings land in one recurring tracking issue, updated at each sync, rather than a new issue written from scratch: the licence-gate result, the commits since the last sync, and the skip/port/needs-review buckets.</td>
+</tr>
+<tr>
+<td>D7</td>
+<td>A ported commit rebrands namespaces, assemblies and package IDs to <code>Paramore.Fences.*</code> per ADR 0002's D1, but otherwise keeps Polly's public types, members and signatures unchanged, so the ADR 0002 find/replace promise holds for every sync, not only the original fork. Where an upstream commit cannot be ported without breaking that compatibility, the port does not quietly diverge to fit: the divergence is recorded as a code comment at the point it occurs and flagged in the tracking issue for a maintainer to decide.</td>
+</tr>
+<tr>
+<td>D8</td>
+<td>A ported commit also references the upstream SHA in its commit message and adds a <code>CHANGELOG.md</code> entry in Fences' own voice. <code>CHANGELOG.md</code> itself is never rewritten.</td>
+</tr>
+<tr>
+<td>D9</td>
+<td><code>polly-upstream</code> advances to the SHA just triaged at the end of each sync, so D4's diff starts there next time.</td>
+</tr>
+<tr>
+<td>D10</td>
+<td>The runbook for D1 to D9 lives in <code>.agent_instructions/upstream_sync.md</code>, not in this ADR or in session state, so a contributor or agent can run a sync without re-deriving the process.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="where-the-pieces-live">Where the pieces live</h3>
+<ul>
+<li><code>.agent_instructions/upstream_sync.md</code> — the executable runbook: the licence-diff command, the
+<code>git remote</code>/branch setup, the compare query, and the triage rules.</li>
+<li>The <code>upstream</code> remote and <code>polly-upstream</code> branch — local git state, not committed, re-creatable
+from the runbook.</li>
+<li>The recurring tracking issue — the record of what has and has not been ported.</li>
+</ul>
+<h2 id="consequences">Consequences</h2>
+<h3 id="positive">Positive</h3>
+<ul>
+<li>The one check that actually matters — whether the source is still under a licence that permits
+this — runs first and cannot be skipped by accident, because it blocks every later step rather
+than being one finding among many.</li>
+<li>Each sync costs less than the last: the diff is bounded to what changed since the previous sync,
+and dependency-bump commits are triaged automatically.</li>
+<li>The triage rules and fixup checklist survive between sessions and between contributors, in a
+durable file rather than a chat transcript.</li>
+<li>The ADR 0002 promise — a Fences upgrade is a <code>using</code> find/replace — keeps holding as upstream
+moves, because D7 makes preserving it part of every port rather than something checked once at
+the fork and never again.</li>
+</ul>
+<h3 id="negative">Negative</h3>
+<ul>
+<li>A licence-gate failure stops all syncing, including any commit that would otherwise be an easy,
+wanted fix, until a maintainer reviews it. That is deliberate, but it means good fixes wait
+behind a legal question they have nothing to do with.</li>
+<li>The <code>polly-upstream</code> pointer is local git state. If the branch is deleted or the clone is lost,
+the next sync must reconstruct the last-synced SHA from the tracking issue rather than reading it
+directly.</li>
+<li>Skipping Dependabot-pattern commits by default can miss a dependency bump that carries a security
+fix. D5 accepts that risk because Fences already runs Dependabot against its own manifest
+independently.</li>
+<li>D7's compatibility check adds work to every port: a commit cannot be applied and forgotten, it
+must be checked against Polly's public surface first. An upstream commit that redesigns an API
+can sit flagged in the tracking issue, unported, for as long as the divergence is unresolved.</li>
+</ul>
+<h3 id="risks-and-mitigations">Risks and Mitigations</h3>
+<table>
+<thead>
+<tr>
+<th>Risk</th>
+<th>Mitigation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A sync runs manually and the operator skips the licence check because &quot;it was fine last time&quot;.</td>
+<td>D1 makes the licence check step 0 in the runbook, before any command produces something worth looking at — there is nothing to triage until it passes.</td>
+</tr>
+<tr>
+<td>Upstream's licence changes in a way that is easy to miss, such as a new file added alongside <code>LICENSE</code> rather than <code>LICENSE</code> itself changing.</td>
+<td>D1 is a starting point, not a complete legal review. D2 routes any detected change to a maintainer instead of letting the sync process decide on its own whether new terms are acceptable.</td>
+</tr>
+<tr>
+<td>The <code>polly-upstream</code> tracking branch drifts from what was actually ported, because a sync's D9 step is forgotten.</td>
+<td>D6's recurring issue records the last-ported SHA independently of the branch, so the branch can be re-pointed from the issue if it drifts.</td>
+</tr>
+<tr>
+<td>Nobody runs a sync for months and the backlog becomes too large to triage in one sitting.</td>
+<td>Out of scope for this ADR. Cadence — scheduled automation versus a manual runbook — is an implementation choice left to <code>.agent_instructions/upstream_sync.md</code>, which can be revised without a new ADR.</td>
+</tr>
+<tr>
+<td>A ported commit reshapes Polly's public API and the port is applied without anyone noticing the ADR 0002 find/replace promise no longer holds for that surface.</td>
+<td>D7 makes the comment-at-divergence step part of the port itself, not a separate audit, and requires the tracking issue to carry the flag until a maintainer decides.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="alternatives-considered">Alternatives Considered</h2>
+<p><strong>1. Sync on demand, with no recorded process.</strong> What issue #28 already did once. Rejected because
+it reconstructs the triage rules and the licence question from scratch each time, and no step
+guarantees the licence is checked before commits are read and ported.</p>
+<p><strong>2. Mirror upstream automatically with no gate — a scheduled job that opens a pull request for
+every new commit.</strong> Rejected because it treats a licence change the same as a dependency bump:
+something a maintainer approves after the fact, rather than something that stops the pipeline
+before it acts. A fork whose entire justification is &quot;the source licence permits this&quot; cannot keep
+pulling from a source once that licence has changed, even briefly.</p>
+<p><strong>3. Track upstream releases only, by tag, not <code>main</code>.</strong> Simpler, and 8.8.0 is a real signal that
+upstream has moved. Rejected as the sole trigger because an unreleased fix on <code>main</code>, such as the
+<code>FaultGenerator</code> change in #3220, can be worth porting before the next tagged release, and because
+a licence change is not guaranteed to coincide with a release.</p>
+<p><strong>4. Port upstream API changes as upstream wrote them, accepting drift from Polly's shape where
+Fences' own design has since diverged.</strong> Rejected because it breaks the ADR 0002 promise that a
+Fences upgrade is a <code>using</code> find/replace: a consumer who checked that promise once, at the fork,
+should not have to re-check it after every later sync. D7 pays that cost per commit instead.</p>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="0002-fork-polly-as-fences.html">ADR 0002: Fork Polly as Fences</a> — the decision this ADR's sync
+process maintains.</li>
+<li><code>fork-migration-plan.md</code> §5, risk R2 — the original, unexecuted mitigation this ADR fulfils.</li>
+<li><code>.agent_instructions/upstream_sync.md</code> — the runbook these decisions require.</li>
+<li>Issue #28 — the first sync this process was designed for; a historical anchor, not a source of
+rationale.</li>
+</ul>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/BrighterCommand/Fences/blob/main/docs/adr/0003-upstream-polly-sync-process.md/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

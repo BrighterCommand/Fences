@@ -106,9 +106,16 @@ ADR, rerun the generator documented in
 <td>meta, licensing, packaging</td>
 <td>Brighter depends on Polly, and Polly's adoption of the Open Source Maintainers Fee creates a risk that Brighter's users are billed for binaries they obtain through us. We fork Polly 8.7.0 as Paramore.Fences, publish our own binaries, and rebrand fully to remove trademark and confusion risk.</td>
 </tr>
+<tr>
+<td><code>0003-upstream-polly-sync-process</code></td>
+<td>Upstream Polly Sync Process</td>
+<td>Accepted</td>
+<td>meta, licensing, governance</td>
+<td>Every upstream sync from App-vNext/Polly runs a mandatory licence-text gate before any diff, triage or port step; ported commits rebrand to Fences namespaces while preserving Polly's public API shape, with any unavoidable incompatibility called out at the point it occurs and in the tracking issue; a read-only upstream remote and polly-upstream tracking branch bound each sync's diff to what changed since the last one, and dependency-bump commits are skipped by default.</td>
+</tr>
 </tbody>
 </table>
-<p><em>2 ADRs indexed.</em></p>
+<p><em>3 ADRs indexed.</em></p>
 
 </article>
 

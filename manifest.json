@@ -32,6 +32,16 @@
     },
     {
       "type": "Conceptual",
+      "source_relative_path": "adr/0003-upstream-polly-sync-process.md",
+      "output": {
+        ".html": {
+          "relative_path": "adr/0003-upstream-polly-sync-process.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
       "source_relative_path": "adr/index.md",
       "output": {
         ".html": {
