@@ -33,7 +33,7 @@
     <ReportGeneratorOutputMarkdown Condition=" '$(ReportGeneratorOutputMarkdown)' == '' AND '$(GITHUB_SHA)' != '' ">true</ReportGeneratorOutputMarkdown>
     <ReportGeneratorReportTypes>Cobertura;HTML</ReportGeneratorReportTypes>
     <ReportGeneratorReportTypes Condition=" '$(ReportGeneratorOutputMarkdown)' == 'true' ">$(ReportGeneratorReportTypes);MarkdownSummaryGitHub</ReportGeneratorReportTypes>
-    <ReportGeneratorTargetDirectory>$([System.IO.Path]::Combine('$(MSBuildThisFileDirectory)', '../artifacts/', 'coverage-reports', '$(MSBuildProjectName)'))</ReportGeneratorTargetDirectory>
+    <ReportGeneratorTargetDirectory>$([System.IO.Path]::Combine('$(MSBuildThisFileDirectory)', '../artifacts/', 'coverage-reports', '$(MSBuildProjectName)', '$(TargetFramework)'))</ReportGeneratorTargetDirectory>
     <_MarkdownSummaryFile>$([System.IO.Path]::Combine($(ReportGeneratorTargetDirectory), 'SummaryGithub.md'))</_MarkdownSummaryFile>
     <_MarkdownSummaryPrefix>&lt;details&gt;&lt;summary&gt;:chart_with_upwards_trend: &lt;b&gt;$(AssemblyName) Code Coverage report&lt;/b&gt; %28$(TargetFramework)%29&lt;/summary&gt;</_MarkdownSummaryPrefix>
     <_MarkdownSummarySuffix>&lt;/details&gt;</_MarkdownSummarySuffix>
@@ -69,8 +69,21 @@
     </Task>
   </UsingTask>
 
-  <Target Name="GenerateCoverageReports" AfterTargets="GenerateCoverageResultAfterTest" Condition=" '$(CollectCoverage)' == 'true' ">
-    <ReportGenerator ReportFiles="@(CoverletReport)" ReportTypes="$(ReportGeneratorReportTypes)" Tag="$(TargetFramework)" TargetDirectory="$(ReportGeneratorTargetDirectory)" Title="$(AssemblyName)" VerbosityLevel="Warning" />
+  <!--
+    Calculate coverage here rather than leaving it to coverlet's own hook, so that a failing
+    threshold still leaves a report behind to diagnose it with. ErrorAndContinue logs the threshold
+    failure and still fails the build, but lets report generation run first.
+  -->
+  <Target Name="GenerateCoverageResultAfterTest" AfterTargets="VSTest" Condition=" '$(CollectCoverage)' == 'true' AND '$(TargetFramework)' != '' ">
+    <CallTarget ContinueOnError="ErrorAndContinue" Targets="GenerateCoverageResult" />
+    <!--
+      Read the report coverlet wrote rather than @(CoverletReport): that item is an output of the
+      task which enforces the threshold, so it is empty on precisely the runs we most need a report.
+    -->
+    <ItemGroup>
+      <_CoverletReportFile Include="$(CoverletOutput)coverage.$(TargetFramework).cobertura.xml" />
+    </ItemGroup>
+    <ReportGenerator ReportFiles="@(_CoverletReportFile)" ReportTypes="$(ReportGeneratorReportTypes)" Tag="$(TargetFramework)" TargetDirectory="$(ReportGeneratorTargetDirectory)" Title="$(AssemblyName)" VerbosityLevel="Warning" />
     <PropertyGroup Condition=" '$(ReportGeneratorOutputMarkdown)' == 'true' AND Exists('$(_MarkdownSummaryFile)') ">
       <_ReportSummaryContent>$(_MarkdownSummaryPrefix)</_ReportSummaryContent>
       <_ReportSummaryContent>$(_ReportSummaryContent)$([System.Environment]::NewLine)</_ReportSummaryContent>
