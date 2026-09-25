@@ -130,8 +130,12 @@ For each commit triaged "port":
 1. Apply the change by hand (a straight `git cherry-pick` will conflict on nearly every file it
    touches — see *Why this isn't a `git cherry-pick`* below).
 2. Apply the ADR 0002 rename to anything the change touches: `Polly.*` → `Paramore.Fences.*`
-   namespaces, `Polly.PollyServiceCollectionExtensions` → `FencesServiceCollectionExtensions` if
-   relevant, and any `Polly`-branded string constants.
+   namespaces, `Polly.PollyServiceCollectionExtensions` →
+   `Paramore.Fences.ResilienceServiceCollectionExtensions` if relevant, and any `Polly`-branded
+   string constants (the meter and activity source `Polly` → `Paramore.Fences`, metric names
+   `resilience.polly.*` → `resilience.fences.*`). Upstream test and source paths map the same way:
+   `src/Polly.Core/…` → `src/Paramore.Fences.Core/…`, `test/Polly.Specs/…` →
+   `test/Paramore.Fences.Specs/…`.
 3. **Check API compatibility (ADR 0003, D7).** Rebrand, don't redesign: once the rename fixups
    from step 2 are applied, the ported change's public types, members and signatures should match
    what upstream shipped. This is what keeps the ADR 0002 promise true — upgrading Fences stays a
