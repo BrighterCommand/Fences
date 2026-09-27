@@ -153,8 +153,14 @@ For each commit triaged "port":
      defer the port.
 4. Reference the upstream SHA in the commit message, e.g.
    `Port App-vNext/Polly@482bdf82: return null from FaultGenerator when no fault is generated`.
-5. Append a `CHANGELOG.md` entry in Fences' own voice. Never rewrite the existing history in that
-   file — Polly's entries for 8.7.0 and below stay exactly as they are.
+5. Give the PR a user-facing title in Fences' own voice. **That title is the `CHANGELOG.md`
+   entry**, so do not edit `CHANGELOG.md` by hand. At release, `after-release.yml` runs
+   `eng/update-changelog.ps1`, which builds the version's section from the GitHub release notes
+   (one bullet per merged PR title) and inserts it below `<!-- next-release -->`. There is no
+   unreleased section to append to. Describe what changes for a Fences user, e.g. "Return null
+   from FaultGenerator when no fault is generated", not "Port App-vNext/Polly@482bdf82"; the
+   upstream SHA belongs in the commit message (step 4) and the PR body. Never rewrite the existing
+   history in `CHANGELOG.md`: Polly's entries for 8.7.0 and below stay exactly as they are.
 6. Follow the normal verification gates in `CLAUDE.md` before merging: analyser-clean build, tests
    passing, a `.PublicAPI/` entry if the change is public, mutation score not regressed.
 
