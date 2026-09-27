@@ -19,7 +19,13 @@ once per clone:
 git remote add upstream https://github.com/App-vNext/Polly.git
 git fetch upstream
 git branch polly-upstream 173d6d1d2e28a4697f1ac1d22da68f77ff19a0c9   # last synced 2026-08-24, not the ADR 0002 fork point
+gh repo set-default BrighterCommand/Fences
 ```
+
+**Do not skip the `gh repo set-default` line.** Once a clone has a remote named `upstream`, `gh`
+resolves `gh issue`, `gh pr` and friends against *that* repository — `App-vNext/Polly` — unless a
+default is set. Without it, Step 3's report would be posted to Polly's issue tracker, not Fences'.
+Check with `gh repo set-default --view`.
 
 **Not the ADR 0002 fork point (`47e3b412`).** A hand-sync ran on 2026-08-24, before this runbook
 existed, carrying the repo from `47e3b412` to upstream `173d6d1d` — five Dependabot-only commits
@@ -39,9 +45,15 @@ today:
 
 ```sh
 git show 47e3b412e8c3b7e6db1629acd98f3e3b6b529d6c:LICENSE > /tmp/polly-license-at-fork.txt
-curl -s https://raw.githubusercontent.com/App-vNext/Polly/main/LICENSE > /tmp/polly-license-now.txt
+gh api 'repos/App-vNext/Polly/contents/LICENSE?ref=main' --jq .content | base64 -d > /tmp/polly-license-now.txt
+wc -c /tmp/polly-license-at-fork.txt /tmp/polly-license-now.txt
 diff /tmp/polly-license-at-fork.txt /tmp/polly-license-now.txt
 ```
+
+`gh api`, not `curl`: this repository's `.claude/settings.json` denies `curl`, so an agent cannot
+run a `curl` form of this step. Keep the path quoted — unquoted, zsh treats the `?` as a glob,
+the fetch never runs, and the "now" file comes out empty. The `wc -c` line is there to catch
+exactly that: an empty file produces a large diff that looks like a gate failure but is not one.
 
 **Empty diff — proceed to Step 1.** Any output at all — stop and follow *If the licence gate
 fails*, below.
@@ -63,10 +75,20 @@ gate failure.
 ## Step 1 — Diff since the last sync
 
 ```sh
-gh api repos/App-vNext/Polly/compare/$(git rev-parse polly-upstream)...upstream/main \
+gh api "repos/App-vNext/Polly/compare/$(git rev-parse polly-upstream)...main" \
   --jq '.ahead_by, .behind_by'
-gh api repos/App-vNext/Polly/compare/$(git rev-parse polly-upstream)...upstream/main \
+gh api "repos/App-vNext/Polly/compare/$(git rev-parse polly-upstream)...main" \
   --jq '.commits[] | .sha[0:8] + " " + (.commit.message | split("\n")[0])'
+```
+
+The head of the comparison is `main`, the branch name on GitHub — not `upstream/main`, which is a
+local remote-tracking ref GitHub has never heard of and answers with a 404. After
+`git fetch upstream`, the same numbers are available locally, which is a useful cross-check:
+
+```sh
+git rev-list --count polly-upstream..upstream/main   # ahead_by
+git rev-list --count upstream/main..polly-upstream   # behind_by
+git log --reverse --format='%h %ad %s' --date=short polly-upstream..upstream/main
 ```
 
 `ahead_by` is the number of new upstream commits to triage. `behind_by` should be `0` — if it
@@ -83,6 +105,12 @@ Bucket each commit from Step 1:
   and similar tooling bumps. Fences tracks these independently via its own
   `.github/dependabot.yml`; porting the upstream bump would just be a second, redundant path to
   the same version.
+- **Dependabot group bumps need a person, but are usually quick.** Dependabot's grouped updates
+  are titled `Bump the <group> group with <n> updates` and do not match the pattern above, so
+  under ADR 0003 D5 they are not auto-skipped. Check the group's contents; if it is only
+  dependency versions, record it as skip-with-reason ("Dependabot group; Fences tracks its own").
+  Widening the automatic pattern to cover them would change D5, so it needs an ADR amendment, not
+  a runbook edit.
 - **Needs a person.** Everything else: behavioural changes, new strategies, bug fixes, test
   changes, platform-support changes (e.g. a new target framework). Read the commit, decide
   port / decide-later / skip-with-reason, and record the decision — do not leave a commit
@@ -102,8 +130,12 @@ For each commit triaged "port":
 1. Apply the change by hand (a straight `git cherry-pick` will conflict on nearly every file it
    touches — see *Why this isn't a `git cherry-pick`* below).
 2. Apply the ADR 0002 rename to anything the change touches: `Polly.*` → `Paramore.Fences.*`
-   namespaces, `Polly.PollyServiceCollectionExtensions` → `FencesServiceCollectionExtensions` if
-   relevant, and any `Polly`-branded string constants.
+   namespaces, `Polly.PollyServiceCollectionExtensions` →
+   `Paramore.Fences.ResilienceServiceCollectionExtensions` if relevant, and any `Polly`-branded
+   string constants (the meter and activity source `Polly` → `Paramore.Fences`, metric names
+   `resilience.polly.*` → `resilience.fences.*`). Upstream test and source paths map the same way:
+   `src/Polly.Core/…` → `src/Paramore.Fences.Core/…`, `test/Polly.Specs/…` →
+   `test/Paramore.Fences.Specs/…`.
 3. **Check API compatibility (ADR 0003, D7).** Rebrand, don't redesign: once the rename fixups
    from step 2 are applied, the ported change's public types, members and signatures should match
    what upstream shipped. This is what keeps the ADR 0002 promise true — upgrading Fences stays a
