@@ -39,6 +39,33 @@ public class FaultGeneratorTests
         Generate(generator).ShouldBeOfType<InvalidOperationException>();
     }
 
+    [Fact]
+    public void ImplicitConversion_NoExceptionRegistered_ReturnsNull()
+    {
+        // Arrange
+        var generator = new FaultGenerator();
+
+        // Act
+        var fault = Generate(generator);
+
+        // Assert
+        fault.ShouldBeNull();
+    }
+
+    [Fact]
+    public void ImplicitConversion_AllWeightsZero_ReturnsNull()
+    {
+        // Arrange
+        var generator = new FaultGenerator();
+        generator.AddException<InvalidOperationException>(weight: 0);
+
+        // Act
+        var fault = Generate(generator);
+
+        // Assert
+        fault.ShouldBeNull();
+    }
+
     private static Exception? Generate(FaultGenerator generator)
     {
         Func<FaultGeneratorArguments, ValueTask<Exception?>> func = generator;
