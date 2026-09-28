@@ -20,6 +20,10 @@ Date: 2026-09-20
 
 Accepted
 
+Amended 2026-09-27: D8 originally said a port "adds a `CHANGELOG.md` entry". `CHANGELOG.md` is
+generated at release from pull request titles, with no unreleased section to add to, so D8 now makes
+the port's pull request title the entry. Found during the first sync (#28).
+
 ## Context
 
 ADR 0002 forked `App-vNext/Polly` at commit `47e3b41` (Polly 8.7.0). A fork taken at one commit is
@@ -56,7 +60,7 @@ The gate and the steps:
 | D5 | A commit whose message matches Dependabot's `Bump <dep> from <x> to <y>` convention defaults to "skip" without individual review, because Fences tracks its own dependencies independently through its own Dependabot configuration. Every other commit needs a person to bucket it. |
 | D6 | Findings land in one recurring tracking issue, updated at each sync, rather than a new issue written from scratch: the licence-gate result, the commits since the last sync, and the skip/port/needs-review buckets. |
 | D7 | A ported commit rebrands namespaces, assemblies and package IDs to `Paramore.Fences.*` per ADR 0002's D1, but otherwise keeps Polly's public types, members and signatures unchanged, so the ADR 0002 find/replace promise holds for every sync, not only the original fork. Where an upstream commit cannot be ported without breaking that compatibility, the port does not quietly diverge to fit: the divergence is recorded as a code comment at the point it occurs and flagged in the tracking issue for a maintainer to decide. |
-| D8 | A ported commit also references the upstream SHA in its commit message and adds a `CHANGELOG.md` entry in Fences' own voice. `CHANGELOG.md` itself is never rewritten. |
+| D8 | A ported commit also references the upstream SHA in its commit message, and its pull request's title, written in Fences' own voice, is its `CHANGELOG.md` entry: the release process generates each version's section from merged pull request titles, so ports do not edit `CHANGELOG.md` by hand. The existing history in `CHANGELOG.md` is never rewritten. |
 | D9 | `polly-upstream` advances to the SHA just triaged at the end of each sync, so D4's diff starts there next time. |
 | D10 | The runbook for D1 to D9 lives in `.agent_instructions/upstream_sync.md`, not in this ADR or in session state, so a contributor or agent can run a sync without re-deriving the process. |
 
