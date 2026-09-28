@@ -76,6 +76,9 @@
 <p>Date: 2026-09-20</p>
 <h2 id="status">Status</h2>
 <p>Accepted</p>
+<p>Amended 2026-09-27: D8 originally said a port &quot;adds a <code>CHANGELOG.md</code> entry&quot;. <code>CHANGELOG.md</code> is
+generated at release from pull request titles, with no unreleased section to add to, so D8 now makes
+the port's pull request title the entry. Found during the first sync (#28).</p>
 <h2 id="context">Context</h2>
 <p>ADR 0002 forked <code>App-vNext/Polly</code> at commit <code>47e3b41</code> (Polly 8.7.0). A fork taken at one commit is
 a snapshot, not a subscription: 34 commits and a full release, 8.8.0, had already landed upstream
@@ -134,7 +137,7 @@ shapes, and any upstream change that cannot honour that is surfaced, not silentl
 </tr>
 <tr>
 <td>D8</td>
-<td>A ported commit also references the upstream SHA in its commit message and adds a <code>CHANGELOG.md</code> entry in Fences' own voice. <code>CHANGELOG.md</code> itself is never rewritten.</td>
+<td>A ported commit also references the upstream SHA in its commit message, and its pull request's title, written in Fences' own voice, is its <code>CHANGELOG.md</code> entry: the release process generates each version's section from merged pull request titles, so ports do not edit <code>CHANGELOG.md</code> by hand. The existing history in <code>CHANGELOG.md</code> is never rewritten.</td>
 </tr>
 <tr>
 <td>D9</td>
