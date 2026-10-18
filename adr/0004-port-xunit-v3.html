@@ -1,0 +1,1187 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+      <title>Port upstream&#39;s xunit v3 and Microsoft Testing Platform v2 test setup | Fences </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Port upstream&#39;s xunit v3 and Microsoft Testing Platform v2 test setup | Fences ">
+      
+      
+      <link rel="icon" href="../icon.png">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="../toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/BrighterCommand/Fences/blob/main/docs/adr/0004-port-xunit-v3.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../icon.png" alt="Fences">
+            Fences
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+
+      <div class="content">
+        <div class="actionbar">
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="4-port-upstreams-xunit-v3-and-microsoft-testing-platform-v2-test-setup">4. Port upstream's xunit v3 and Microsoft Testing Platform v2 test setup</h1>
+
+<p>Date: 2026-10-12</p>
+<h2 id="status">Status</h2>
+<p>Accepted</p>
+<h2 id="context">Context</h2>
+<p>Fences' tests run on xunit v2 and VSTest, and coverlet 6.0.4 collects and enforces coverage. Upstream Polly
+moved to xunit v3 and Microsoft.Testing.Platform (MTP) v2 in App-vNext/Polly@1a80392b. Since then, every
+upstream commit that touches tests, build scripts, coverage or Stryker assumes the new setup. Fences cannot
+port those commits one at a time without re-engineering each one. Coverlet's figures are also not
+reproducible across runs (#14), and on Windows the coverage gate never sees <code>net481</code> at all.</p>
+<h3 id="scope">Scope</h3>
+<p><strong>Parent requirement:</strong> <a href="../../specs/001-port-xunit-v3/requirements.md">specs/001-port-xunit-v3/requirements.md</a></p>
+<h4 id="in-scope">In scope</h4>
+<ul>
+<li>FR-1: every test project becomes an MTP executable on xunit v3, and <code>global.json</code> selects MTP as the
+<code>dotnet test</code> runner.</li>
+<li>FR-2: the package and tool changes in the requirement's closed table, at the current version under its
+major-version and Dependabot rules.</li>
+<li>FR-3: <code>eng/Test.targets</code> tells the CodeCoverage extension to write one Cobertura file per project per
+TFM, <code>net481</code> included on Windows.</li>
+<li>FR-4: a new Cake task, <code>__GenerateCoverageReports</code>, runs the <code>reportgenerator</code> tool once per coverage
+file. It runs before the threshold check, so the reports survive a failing check.</li>
+<li>FR-5: a new Cake task, <code>__VerifyCoverageThresholds</code>, decides pass or fail per project per TFM. It
+carries one Fences divergence: a missing coverage file fails the check.</li>
+<li>FR-6: the Specs threshold rises to <code>96,95,93</code>. A remaining gap is investigated as a porting omission
+first.</li>
+<li>FR-7: upstream's test changes are applied to Fences' own files, rebranded, with upstream's test names.</li>
+<li>FR-8: upstream's four <code>src/</code> edits and the polyfill deletion are ported, with no public API change.</li>
+<li>FR-9: <code>eng/stryker-config.json</code> selects the MTP runner. The mutation workflow sets <code>MinVerSkip</code> on CI.</li>
+<li>FR-10: the GitHub reporter replaces the VSTest loggers. The existing upload step keeps publishing
+<code>artifacts/coverage-reports</code>.</li>
+<li>FR-11: the contributor documentation moves to <code>dotnet test --project</code>, and to xunit v3's
+<code>--filter-class</code> in place of <code>FullyQualifiedName~</code>.</li>
+<li>FR-12: a separate commit ports f35bc00d's three Specs edits.</li>
+<li>FR-13, FR-14, FR-15: delivery order, the mutation baseline and the reproducibility evidence. The
+Implementation Approach lists all three.</li>
+<li>NFR-1 to NFR-6: no new analyser warnings, no public API change, no <code>src/</code> behaviour change, a
+build-duration bound, no skipped tests, and in-process tests only.</li>
+<li>NFR-7: the port matches upstream, rebranded, except for the closed list of four divergences that this
+ADR records.</li>
+</ul>
+<h4 id="out-of-scope">Out of scope</h4>
+<ul>
+<li>Porting any other upstream commit. The sync process is <a href="0003-upstream-polly-sync-process.html">ADR 0003</a>.
+The non-Specs half of f35bc00d has already been ported (#44).</li>
+<li>Dependency changes outside FR-2, for example <code>Cake.Sdk</code> or <code>Microsoft.Extensions.*</code>. Fences tracks
+these with its own Dependabot setup (ADR 0003 D5).</li>
+<li>A separate HTML coverage report for each TFM. The parent requirement excludes it, and no ADR covers it.</li>
+<li>Renaming test methods, changing Stryker's scope or thresholds, and changing TFMs. The parent
+requirement excludes these, and no ADR covers them.</li>
+<li>The root cause of the <code>mutations-core</code> hang (#46), and any external coverage service. The parent
+requirement excludes both.</li>
+<li>Public API changes. None is expected. If one is needed, ADR 0003 D7 governs it.</li>
+</ul>
+<h3 id="fences-cannot-follow-upstreams-test-changes-and-its-coverage-gate-does-not-see-every-framework">Fences cannot follow upstream's test changes, and its coverage gate does not see every framework</h3>
+<table>
+<thead>
+<tr>
+<th>Concern</th>
+<th>Fences today</th>
+<th>Upstream since 1a80392b</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Test framework and host</td>
+<td>xunit 2.9.3 on VSTest (<code>Microsoft.NET.Test.Sdk</code>)</td>
+<td>xunit v3 (<code>xunit.v3.mtp-v2</code>) on MTP v2. Each test project is an <code>Exe</code></td>
+</tr>
+<tr>
+<td>Coverage collector</td>
+<td><code>coverlet.msbuild</code> 6.0.4, inside <code>dotnet test</code></td>
+<td><code>Microsoft.Testing.Extensions.CodeCoverage</code>, an MTP extension</td>
+</tr>
+<tr>
+<td>Coverage on <code>net481</code> (Windows)</td>
+<td>Not collected. <code>eng/Test.targets</code> turns coverage off for .NET Framework</td>
+<td>Collected and checked</td>
+</tr>
+<tr>
+<td>Coverage files</td>
+<td>Coverlet output inside each project</td>
+<td><code>artifacts/coverage/&lt;Project&gt;/coverage.&lt;tfm&gt;.xml</code></td>
+</tr>
+<tr>
+<td>Report generation</td>
+<td>ReportGenerator MSBuild task, run after each TFM's test run</td>
+<td><code>reportgenerator</code> local tool, run by a Cake task after all tests finish</td>
+</tr>
+<tr>
+<td>Threshold enforcement</td>
+<td>Coverlet, during each <code>dotnet test</code> run</td>
+<td>A Cake task that reads every coverage file after the reports exist</td>
+</tr>
+<tr>
+<td>Reports when the gate fails</td>
+<td>Can be missing (the failure PR #19 fixes)</td>
+<td>Always written, because report generation runs first</td>
+</tr>
+<tr>
+<td>CI test reporting</td>
+<td>VSTest <code>junit</code> and <code>GitHubActions</code> loggers</td>
+<td>MTP <code>--report-github</code>, with passed tests omitted</td>
+</tr>
+<tr>
+<td>Mutation runner</td>
+<td>Stryker 4.16.0, VSTest runner</td>
+<td>Stryker 5.0.0, <code>&quot;test-runner&quot;: &quot;mtp&quot;</code>, <code>MinVerSkip</code> on CI</td>
+</tr>
+</tbody>
+</table>
+<p>Fences differs from upstream on every row of that table. So every later upstream commit that edits a test
+helper, a Cake task or <code>eng/Test.targets</code> is a re-engineering task, not a rebrand. ADR 0003 D7 makes
+rebranding the norm. Upstream's own f35bc00d shows the cost: #44 ported its build-props half, but its Specs
+half edits three files that only exist after 1a80392b, so that half cannot land.</p>
+<p>The coverage gate also has two gaps. Coverlet's figures vary between runs on the same commit, which #14
+records. A TFM whose coverage is never collected looks the same as a TFM that passed, because nothing
+lists the TFMs that should have been checked. On Windows, that gap is permanent for <code>net481</code>.</p>
+<h3 id="the-forces">The forces</h3>
+<ul>
+<li>ADR 0003 D7 says porting rebrands and does not redesign. A Fences-shaped redesign would make every later
+upstream commit to these files a manual merge.</li>
+<li>NFR-7 closes the list of divergences at four. Any other difference from upstream needs the requirements
+to change first.</li>
+<li>FR-2 authorises dependency changes for this port only. ADR 0003 D5 skips dependency bumps by default, and
+CLAUDE.md's verification gate 6 is waived only for FR-2's rows (C-3).</li>
+<li>C-4 says thresholds are never lowered. C-6 keeps the TFMs as they are. C-7 keeps Stryker on <code>net10.0</code>,
+<code>Debug</code>, with thresholds of 100.</li>
+<li>#14 shows that a TFM which silently drops out of coverage hides a regression. Upstream's check skips a
+missing file or directory.</li>
+<li>The <code>build</code> job has a 20-minute timeout (<code>.github/workflows/build.yml:27</code>). Collecting <code>net481</code> coverage
+on Windows adds work inside that limit (NFR-4).</li>
+<li>Upstream's Cake scripts in Fences differ from the 1a80392b parent only by rebranding, so the upstream
+diff applies cleanly. The same is true of <code>eng/Test.targets</code>.</li>
+<li><code>build.ps1</code> passes only <code>--target</code>, <code>--configuration</code> and <code>--verbosity</code> to Cake. It cannot run a single
+task without that task's dependencies.</li>
+</ul>
+<h2 id="decision">Decision</h2>
+<p><strong>Fences adopts upstream's xunit v3, MTP v2, coverage and Stryker setup from App-vNext/Polly@1a80392b,
+rebranded, and diverges from it only by the four divergences that NFR-7 lists.</strong></p>
+<p>The port lands as one upstream-SHA commit that applies 1a80392b as written, with names rebranded. One or
+more Fences-only commits follow it. These make the threshold check fail on a missing coverage file, update
+the contributor documentation, and close any Fences-specific coverage gap. A final commit ports f35bc00d's
+Specs edits. Everything else matches upstream, including the shared HTML report directory, the
+threshold-message format and the failure modes.</p>
+<p>The closed list of divergences:</p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Divergence</th>
+<th>Applies when</th>
+<th>Recorded where</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>The threshold check fails when a built TFM has no coverage file. Upstream skips the file.</td>
+<td>Always</td>
+<td>This ADR, plus a code comment at the divergence in <code>cake.cs</code></td>
+</tr>
+<tr>
+<td>2</td>
+<td>The unused LegacySupport <code>GetOrAdd</code> polyfill is kept, not deleted</td>
+<td>Only if deleting it breaks a <code>netstandard2.0</code>, <code>net472</code> or <code>net462</code> build</td>
+<td>This ADR, a D7 code comment, and a note on #28</td>
+</tr>
+<tr>
+<td>3</td>
+<td>A documented local <code>MinVerSkip</code> step for mutation runs, documentation only</td>
+<td>Only if stryker-net#3094 affects local runs</td>
+<td>This ADR, plus the PR body's FR-9 finding</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Fences-only tests, or documented coverage exclusions</td>
+<td>Only for a coverage gap that traces to code or tests upstream does not have</td>
+<td>This ADR, plus the PR body's FR-6 list</td>
+</tr>
+</tbody>
+</table>
+<h3 id="the-mechanism-end-to-end">The mechanism, end to end</h3>
+<pre><code class="lang-mermaid">sequenceDiagram
+    participant PS as build.ps1
+    participant B as Cake Build target
+    participant RT as __RunTests
+    participant H as MTP test host, per project per TFM
+    participant CC as CodeCoverage extension
+    participant GR as __GenerateCoverageReports
+    participant RG as reportgenerator tool
+    participant VT as __VerifyCoverageThresholds
+    participant MB as MSBuild
+
+    PS-&gt;&gt;B: dotnet cake.cs -- --target=Default
+    B-&gt;&gt;RT: run after build and AOT validation
+    RT-&gt;&gt;H: dotnet test, one call per test project
+    H-&gt;&gt;CC: --coverage --coverage-output-format cobertura --coverage-output path
+    CC--&gt;&gt;H: writes artifacts/coverage/Project/coverage.TFM.xml
+    H--&gt;&gt;RT: exit 0, or the build stops at the first failing test
+    B-&gt;&gt;GR: run next
+    GR-&gt;&gt;RG: one call per coverage file, tagged with its TFM
+    RG--&gt;&gt;GR: HTML into the project's shared report directory
+    GR--&gt;&gt;GR: on CI, append a collapsible Markdown section to the job summary
+    B-&gt;&gt;VT: run next
+    VT-&gt;&gt;MB: Fences divergence 1 - ask for the project's built TFMs
+    MB--&gt;&gt;VT: net10.0, net9.0, net8.0, plus net481 on Windows
+    VT--&gt;&gt;VT: apply the decision ladder below to every project and TFM
+    VT--&gt;&gt;B: pass and print figures, or throw after listing every violation
+    B-&gt;&gt;B: create NuGet packages only if every earlier task passed
+</code></pre>
+<p>The threshold check applies this ladder to each test project, in this order. Row 3 is the only row that is
+not upstream's behaviour.</p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Situation</th>
+<th>Outcome</th>
+<th>Diagnostic</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>The project declares no <code>&lt;Threshold&gt;</code></td>
+<td>Not checked. This is not an error</td>
+<td>None</td>
+<td>Upstream</td>
+</tr>
+<tr>
+<td>2</td>
+<td>A <code>&lt;ThresholdType&gt;</code> value is not <code>line</code>, <code>branch</code> or <code>method</code></td>
+<td>The build fails at once</td>
+<td><code>Unsupported &lt;ThresholdType&gt; value '…'.</code></td>
+<td>Upstream</td>
+</tr>
+<tr>
+<td>3</td>
+<td>A built TFM has no coverage file (or the project has no coverage directory)</td>
+<td>A violation is recorded, and the check continues</td>
+<td><code>&lt;Project&gt; (&lt;tfm&gt;): no coverage file was found at '&lt;path&gt;'.</code></td>
+<td><strong>Fences divergence 1</strong></td>
+</tr>
+<tr>
+<td>4</td>
+<td>A coverage file is empty or is not valid XML</td>
+<td>The build fails at once, at the XML load</td>
+<td>The XML parser's exception. It need not name the project or TFM</td>
+<td>Upstream</td>
+</tr>
+<tr>
+<td>5</td>
+<td>The file has no Cobertura <code>package</code> named for the covered assembly</td>
+<td>A violation is recorded</td>
+<td><code>&lt;Project&gt; (&lt;tfm&gt;): no coverage data was found for assembly '&lt;assembly&gt;'.</code></td>
+<td>Upstream</td>
+</tr>
+<tr>
+<td>6</td>
+<td>The file has data for the covered assembly</td>
+<td>The figures are printed</td>
+<td><code>&lt;Project&gt; (&lt;tfm&gt;): line=…%, branch=…%, method=…% for '&lt;assembly&gt;'.</code></td>
+<td>Upstream</td>
+</tr>
+<tr>
+<td>7</td>
+<td>A metric's unrounded actual value is below its required value</td>
+<td>A violation is recorded, one for each failing metric</td>
+<td><code>&lt;Project&gt; (&lt;tfm&gt;): &lt;metric&gt; coverage of &lt;actual, 0.##&gt;% for '&lt;assembly&gt;' is below the required threshold of &lt;required&gt;%.</code></td>
+<td>Upstream</td>
+</tr>
+<tr>
+<td>8</td>
+<td>All projects are processed, and at least one violation exists</td>
+<td>Each violation is logged as an error, then the build fails</td>
+<td><code>&lt;n&gt; coverage threshold violation(s) found. See the errors above.</code></td>
+<td>Upstream</td>
+</tr>
+<tr>
+<td>9</td>
+<td>All projects are processed, and there are no violations</td>
+<td>The check passes</td>
+<td>The figures from row 6</td>
+<td>Upstream</td>
+</tr>
+</tbody>
+</table>
+<p>The mutation run is unchanged except for its runner and its environment:</p>
+<pre><code class="lang-mermaid">flowchart LR
+    T[&quot;MutationTests target, e.g. MutationTestsCore&quot;] --&gt; S[&quot;dotnet stryker, current 5.x&quot;]
+    S --&gt; C[&quot;eng/stryker-config.json: test-runner mtp, net10.0, Debug, thresholds 100&quot;]
+    S --&gt; H[&quot;MTP test host of the paired test project&quot;]
+    E[&quot;CI only: MinVerSkip true, set as job env&quot;] -.-&gt; S
+    S --&gt; R[&quot;artifacts/mutation-report&quot;]
+</code></pre>
+<p>These invariants follow from the diagrams:</p>
+<ul>
+<li>Reports never depend on the threshold check. Cake runs <code>Build</code>'s dependencies in the order they are
+declared, and <code>__GenerateCoverageReports</code> is declared before <code>__VerifyCoverageThresholds</code>. A failing
+check therefore leaves every HTML report and every job-summary section already written.</li>
+<li>A failing test stops the build at <code>__RunTests</code>, before any report is generated. Upstream does the same,
+and FR-4 accepts it.</li>
+<li>No TFM can drop out silently. The project file's evaluated <code>TargetFrameworks</code> sets which TFMs the check
+expects. The files that happen to exist do not.</li>
+<li>Comparisons use the unrounded value. A figure of 99.995 against 100 fails, even though it prints as
+<code>100%</code>.</li>
+<li>Every violation is reported before the build fails. Rows 2 and 4 are the exceptions: they throw at
+once, as upstream does.</li>
+<li>The test project's <code>.csproj</code> stays the single source of truth for both the threshold triple and the
+TFM list.</li>
+<li>Requirements discharged: FR-3, FR-4, FR-5, FR-9, FR-10, AC-10, AC-11, AC-12, AC-13, AC-14, AC-15, AC-22.</li>
+</ul>
+<h3 id="where-the-pieces-live">Where the pieces live</h3>
+<pre><code class="lang-mermaid">flowchart TB
+    subgraph REPO[&quot;Repository configuration&quot;]
+        GJ[&quot;global.json - CHANGED: test runner is MTP&quot;]
+        DPP[&quot;Directory.Packages.props - CHANGED: FR-2 rows&quot;]
+        TOOLS[&quot;.config/dotnet-tools.json - CHANGED: reportgenerator added, stryker bumped&quot;]
+    end
+    subgraph ENG[&quot;eng/ MSBuild and Stryker&quot;]
+        TT[&quot;eng/Test.targets - REPLACED: MTP packages and coverage arguments&quot;]
+        SC[&quot;eng/stryker-config.json - CHANGED: test-runner mtp&quot;]
+    end
+    subgraph TEST[&quot;Test projects&quot;]
+        CSP[&quot;test/*/*.csproj - CHANGED: Exe, no coverlet Include, Specs threshold&quot;]
+        TSRC[&quot;test sources - CHANGED and NEW: xunit v3 adaptations, upstream's new tests&quot;]
+    end
+    subgraph SRC[&quot;Production code&quot;]
+        SRCF[&quot;src/ - CHANGED: four upstream edits, polyfill deleted&quot;]
+    end
+    subgraph CAKE[&quot;cake.cs&quot;]
+        RTK[&quot;__RunTests - CHANGED: VSTest loggers removed&quot;]
+        GRK[&quot;__GenerateCoverageReports - NEW&quot;]
+        VTK[&quot;__VerifyCoverageThresholds - NEW, carries divergence 1&quot;]
+        HLP[&quot;Coverage helpers - NEW, plus GetBuiltTargetFrameworks for divergence 1&quot;]
+    end
+    subgraph CI[&quot;CI workflows&quot;]
+        BY[&quot;build.yml - UNCHANGED: uploads artifacts/coverage-reports&quot;]
+        MY[&quot;mutation-tests.yml - CHANGED: MinVerSkip env&quot;]
+    end
+    subgraph DOCS[&quot;Contributor docs&quot;]
+        DOC[&quot;CONTRIBUTING.md and .agent_instructions - CHANGED: FR-11&quot;]
+    end
+
+    CSP --&gt; TT
+    TT --&gt; DPP
+    CSP --&gt; SRCF
+    TSRC --&gt; CSP
+    RTK --&gt; GJ
+    RTK --&gt; CSP
+    GRK --&gt; TOOLS
+    VTK --&gt; CSP
+    VTK --&gt; HLP
+    BY --&gt; RTK
+    BY --&gt; GRK
+    MY --&gt; SC
+    SC --&gt; CSP
+    DOC --&gt; GJ
+</code></pre>
+<p>The arrows point from a user to the thing it depends on. Each <code>.csproj</code> imports <code>eng/Test.targets</code> through
+<code>ProjectType=Test</code> (<code>Directory.Build.targets:3</code>). The Cake tasks depend on the <code>.csproj</code> files for
+thresholds and TFMs, and on the <code>reportgenerator</code> tool from the tool manifest. Nothing in <code>src/</code> depends on
+the test or build changes.</p>
+<h3 id="key-components">Key Components</h3>
+<h4 id="the-roles-and-what-each-is-responsible-for">The roles, and what each is responsible for</h4>
+<table>
+<thead>
+<tr>
+<th>Role</th>
+<th>Type</th>
+<th>Responsibilities</th>
+<th>Responsibility classifier</th>
+<th>Collaborators</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Selects the test runner</td>
+<td><code>global.json</code> <code>test.runner</code></td>
+<td>Makes <code>dotnet test</code> use MTP instead of VSTest</td>
+<td>knowing</td>
+<td>.NET SDK, Cake <code>DotNetTest</code></td>
+</tr>
+<tr>
+<td>Runs one project's tests for one TFM</td>
+<td>MTP test host (each test project built as <code>Exe</code> with <code>xunit.v3.mtp-v2</code>)</td>
+<td>Discovers and runs xunit v3 tests. Hosts the coverage and reporting extensions</td>
+<td>doing</td>
+<td><code>eng/Test.targets</code>, CodeCoverage extension, GitHub reporter</td>
+</tr>
+<tr>
+<td>Tells each test host what to collect and where</td>
+<td><code>eng/Test.targets</code>, target <code>_UpdateTestPlatformProperties</code></td>
+<td>Knows the coverage path pattern, the results directory and the CI-only report flags. Builds the host's command-line arguments</td>
+<td>knowing, doing</td>
+<td>MTP test host, <code>ArtifactsPath</code> from <code>UseArtifactsOutput</code></td>
+</tr>
+<tr>
+<td>Measures coverage for one test run</td>
+<td><code>Microsoft.Testing.Extensions.CodeCoverage</code></td>
+<td>Instruments the run. Applies the default attribute exclusions. Writes one Cobertura file</td>
+<td>doing</td>
+<td>MTP test host</td>
+</tr>
+<tr>
+<td>Holds a project's coverage policy</td>
+<td>Test project <code>.csproj</code></td>
+<td>Knows the threshold triple (<code>&lt;Threshold&gt;</code>, optional <code>&lt;ThresholdType&gt;</code>) and its TFMs</td>
+<td>knowing</td>
+<td><code>__VerifyCoverageThresholds</code>, MSBuild</td>
+</tr>
+<tr>
+<td>Runs every test project</td>
+<td>Cake task <code>__RunTests</code></td>
+<td>Calls <code>dotnet test</code> for each <code>test/**/*{Tests,Specs}.csproj</code> without rebuilding</td>
+<td>doing</td>
+<td>MTP test host</td>
+</tr>
+<tr>
+<td>Turns coverage files into reports</td>
+<td>Cake task <code>__GenerateCoverageReports</code></td>
+<td>Runs <code>reportgenerator</code> once for each file. Appends the Markdown summary on CI. Fails if <code>reportgenerator</code> exits non-zero</td>
+<td>doing</td>
+<td><code>reportgenerator</code> tool, <code>GITHUB_STEP_SUMMARY</code></td>
+</tr>
+<tr>
+<td>Renders a report</td>
+<td><code>reportgenerator</code> local tool</td>
+<td>Writes HTML and Cobertura, and the GitHub Markdown summary on CI</td>
+<td>doing</td>
+<td><code>__GenerateCoverageReports</code></td>
+</tr>
+<tr>
+<td>Decides whether coverage is good enough</td>
+<td>Cake task <code>__VerifyCoverageThresholds</code></td>
+<td>Applies the decision ladder. Collects every violation before failing</td>
+<td>deciding</td>
+<td><code>.csproj</code>, coverage helpers, <code>GetBuiltTargetFrameworks</code></td>
+</tr>
+<tr>
+<td>Reads a threshold triple</td>
+<td><code>GetCoverageThresholds</code></td>
+<td>Parses <code>&lt;Threshold&gt;</code> and <code>&lt;ThresholdType&gt;</code> with coverlet's reuse-the-last-value rule</td>
+<td>knowing</td>
+<td><code>.csproj</code> via <code>XmlPeek</code></td>
+</tr>
+<tr>
+<td>Names the covered assembly</td>
+<td><code>GetCoverageAssemblyName</code></td>
+<td>Removes the <code>.Tests</code> or <code>.Specs</code> suffix</td>
+<td>knowing</td>
+<td>none</td>
+</tr>
+<tr>
+<td>Computes one file's figures</td>
+<td><code>GetAssemblyCoverage</code></td>
+<td>Loads the Cobertura file. Returns line, branch and method percentages for one package, or none</td>
+<td>doing</td>
+<td>Cobertura file</td>
+</tr>
+<tr>
+<td>Lists the TFMs a project builds on this OS (Fences-only)</td>
+<td><code>GetBuiltTargetFrameworks</code></td>
+<td>Asks MSBuild for the evaluated <code>TargetFrameworks</code></td>
+<td>knowing</td>
+<td>MSBuild (<code>dotnet msbuild -getProperty</code>)</td>
+</tr>
+<tr>
+<td>Orders the pipeline</td>
+<td>Cake task <code>Build</code></td>
+<td>Runs tests, then reports, then the check, then packaging</td>
+<td>deciding</td>
+<td>the tasks above</td>
+</tr>
+<tr>
+<td>Holds mutation settings</td>
+<td><code>eng/stryker-config.json</code></td>
+<td>Knows the runner, TFM, configuration, thresholds and ignore lists</td>
+<td>knowing</td>
+<td><code>RunMutationTests</code>, <code>dotnet-stryker</code></td>
+</tr>
+<tr>
+<td>Works around stryker-net#3094 on CI</td>
+<td><code>.github/workflows/mutation-tests.yml</code> job <code>env</code></td>
+<td>Sets <code>MinVerSkip: true</code> for every mutation job</td>
+<td>knowing</td>
+<td>MinVer, <code>dotnet-stryker</code></td>
+</tr>
+</tbody>
+</table>
+<h4 id="_updatetestplatformproperties-in-engtesttargets"><code>_UpdateTestPlatformProperties</code> (in <code>eng/Test.targets</code>)</h4>
+<table>
+<thead>
+<tr>
+<th>Member</th>
+<th>Input</th>
+<th>Output</th>
+<th>Error conditions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>CoverageOutput</code> property</td>
+<td><code>ArtifactsPath</code>, <code>MSBuildProjectName</code>, <code>TargetFramework</code>. A caller can override it</td>
+<td><code>artifacts/coverage/&lt;Project&gt;/coverage.&lt;tfm&gt;.xml</code></td>
+<td>None. A wrong path shows up as a missing file at ladder row 3</td>
+</tr>
+<tr>
+<td>Host arguments</td>
+<td><code>CoverageFormat</code> (<code>cobertura</code>), <code>CoverageOutput</code>, optional <code>CoverageRunSettings</code>, <code>CI</code></td>
+<td><code>--results-directory</code>, <code>--coverage</code>, <code>--coverage-output-format</code>, <code>--coverage-output</code>. On CI it adds <code>--report-github --report-github-summary-include-passed false --report-xunit-junit --report-xunit-junit-filename &lt;Project&gt;.&lt;tfm&gt;.junit.xml</code></td>
+<td>None. <code>CoverageRunSettings</code> is unset, so <code>--coverage-settings</code> is never passed</td>
+</tr>
+</tbody>
+</table>
+<h4 id="__generatecoveragereports"><code>__GenerateCoverageReports</code></h4>
+<table>
+<thead>
+<tr>
+<th>Member</th>
+<th>Input</th>
+<th>Output</th>
+<th>Error conditions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>The task</td>
+<td><code>artifacts/coverage/&lt;Project&gt;/coverage.*.xml</code>, plus <code>GITHUB_ACTIONS</code>, <code>GITHUB_SHA</code> and <code>GITHUB_STEP_SUMMARY</code></td>
+<td><code>artifacts/coverage-reports/&lt;Project&gt;/</code> (shared by the project's TFMs, so it holds the last TFM processed). On CI, one <code>&lt;Project&gt; Code Coverage report (&lt;tfm&gt;)</code> section for each file</td>
+<td>A non-zero <code>reportgenerator</code> exit throws <code>Failed to generate the coverage report for '&lt;project&gt;' (&lt;tfm&gt;).</code> A missing directory or file is skipped, as upstream does. Divergence 1 applies only to the check</td>
+</tr>
+</tbody>
+</table>
+<h4 id="__verifycoveragethresholds-and-its-helpers"><code>__VerifyCoverageThresholds</code> and its helpers</h4>
+<table>
+<thead>
+<tr>
+<th>Member</th>
+<th>Input</th>
+<th>Output</th>
+<th>Error conditions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>The task</td>
+<td>Every test <code>.csproj</code>, and <code>artifacts/coverage/&lt;Project&gt;/coverage.*.xml</code></td>
+<td>Logs figures for each project and TFM, then passes</td>
+<td>Follows the decision ladder: ladder rows 3, 5 and 7 add violations, rows 2 and 4 throw at once, and row 8 throws after logging every violation</td>
+</tr>
+<tr>
+<td><code>GetCoverageThresholds(csprojPath)</code></td>
+<td><code>.csproj</code> path</td>
+<td>A list of (metric, required) pairs, or an empty list when there is no <code>&lt;Threshold&gt;</code></td>
+<td>A value that is not a number throws a <code>FormatException</code> (upstream)</td>
+</tr>
+<tr>
+<td><code>GetCoverageAssemblyName(projectName)</code></td>
+<td>Test project name</td>
+<td>Covered assembly name</td>
+<td>None</td>
+</tr>
+<tr>
+<td><code>GetAssemblyCoverage(coberturaPath, assemblyName)</code></td>
+<td>Coverage file path, assembly name</td>
+<td>(line, branch, method) as unrounded percentages. Method coverage is the share of <code>method</code> elements with <code>line-rate &gt; 0</code>, or 100 when there are none. Returns none when no package matches</td>
+<td>An empty or malformed file throws from <code>XDocument.Load</code> (ladder row 4)</td>
+</tr>
+<tr>
+<td><code>GetBuiltTargetFrameworks(csprojPath)</code> (Fences-only)</td>
+<td><code>.csproj</code> path</td>
+<td>The TFMs from <code>dotnet msbuild &lt;csproj&gt; -getProperty:TargetFrameworks</code>, split on <code>;</code></td>
+<td>A non-zero exit from MSBuild throws, naming the project</td>
+</tr>
+</tbody>
+</table>
+<h4 id="where-each-type-is-touched">Where each type is touched</h4>
+<table>
+<thead>
+<tr>
+<th>Area</th>
+<th>Type or file</th>
+<th>Change</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Repository configuration</td>
+<td><code>global.json</code></td>
+<td>Adds <code>&quot;test&quot;: { &quot;runner&quot;: &quot;Microsoft.Testing.Platform&quot; }</code>. <code>Cake.Sdk</code> stays on Fences' 6.3.0</td>
+</tr>
+<tr>
+<td>Repository configuration</td>
+<td><code>Directory.Packages.props</code></td>
+<td>FR-2 rows only</td>
+</tr>
+<tr>
+<td>Repository configuration</td>
+<td><code>.config/dotnet-tools.json</code></td>
+<td>Adds <code>dotnet-reportgenerator-globaltool</code>. Bumps <code>dotnet-stryker</code></td>
+</tr>
+<tr>
+<td>eng/</td>
+<td><code>eng/Test.targets</code></td>
+<td>Coverlet, the ReportGenerator task and the retry-append task are removed. MTP packages and <code>_UpdateTestPlatformProperties</code> are added</td>
+</tr>
+<tr>
+<td>eng/</td>
+<td><code>eng/stryker-config.json</code></td>
+<td>Adds <code>&quot;test-runner&quot;: &quot;mtp&quot;</code></td>
+</tr>
+<tr>
+<td>cake.cs</td>
+<td><code>__RunTests</code></td>
+<td>The VSTest loggers are removed</td>
+</tr>
+<tr>
+<td>cake.cs</td>
+<td><code>__GenerateCoverageReports</code>, <code>__VerifyCoverageThresholds</code>, <code>Build</code></td>
+<td>The two tasks are new, and <code>Build</code> depends on both</td>
+</tr>
+<tr>
+<td>cake.cs</td>
+<td>Helpers</td>
+<td>Upstream's four helpers are added, and <code>GetBuiltTargetFrameworks</code> is added for divergence 1</td>
+</tr>
+<tr>
+<td>Test projects</td>
+<td>five test <code>.csproj</code> files</td>
+<td><code>&lt;OutputType&gt;Exe&lt;/OutputType&gt;</code> is added and the coverlet <code>&lt;Include&gt;</code> is removed. Specs gets <code>96,95,93</code> and loses <code>Xunit.Abstractions</code>. Core.Tests moves to <code>FsCheck.Xunit.v3</code></td>
+</tr>
+<tr>
+<td>Test sources</td>
+<td>FR-7 files</td>
+<td>xunit v3 adaptations, and upstream's new tests with upstream's names</td>
+</tr>
+<tr>
+<td>Production code</td>
+<td><code>TaskExecution</code>, <code>RetryHelper</code>, <code>TelemetryUtil</code>, <code>TelemetryOptions</code>, LegacySupport polyfill</td>
+<td>FR-8's edits. The polyfill is deleted, or kept under divergence 2</td>
+</tr>
+<tr>
+<td>Production code</td>
+<td><code>src/Snippets/Snippets.csproj</code></td>
+<td><code>xunit</code> becomes <code>xunit.v3.assert</code></td>
+</tr>
+<tr>
+<td>CI workflows</td>
+<td><code>mutation-tests.yml</code></td>
+<td>Adds a job-level <code>MinVerSkip: true</code> with the stryker-net#3094 comment</td>
+</tr>
+<tr>
+<td>Contributor docs</td>
+<td><code>CONTRIBUTING.md</code> and three <code>.agent_instructions</code> files</td>
+<td>FR-11, plus the divergence 3 note if needed</td>
+</tr>
+</tbody>
+</table>
+<p>These stay deliberately unchanged:</p>
+<ul>
+<li>The public API. No <code>.PublicAPI</code> file changes (NFR-2).</li>
+<li><code>src/</code> behaviour (NFR-3).</li>
+<li>The TFMs that libraries and tests target (C-6).</li>
+<li>Stryker's target framework, configuration, thresholds, ignored methods and ignored mutations (C-7).</li>
+<li><code>.github/workflows/build.yml</code>, including its 20-minute timeout and its upload step.</li>
+<li><code>build.ps1</code>.</li>
+<li><code>xunit.runner.visualstudio</code> and <code>GitHubActionsTestLogger</code>, and their versions.</li>
+<li><code>.github/dependabot.yml</code>, whose <code>xunit*</code> group already matches the new packages (A-4).</li>
+<li><code>CHANGELOG.md</code>, whose entry is the PR title (ADR 0003 D8).</li>
+<li>Every thresholds other than the Specs project's.</li>
+<li><code>.github/wordlist.txt</code>, whose <code>coverlet</code> entry stays.</li>
+</ul>
+<h3 id="technology-choices">Technology Choices</h3>
+<p><strong>Why port verbatim rather than redesign?</strong> ADR 0003 D7 makes &quot;rebrand, don't redesign&quot; the rule for every
+port. Fences' <code>cake.cs</code> and <code>eng/Test.targets</code> differ from the 1a80392b parent only by rebranding. A
+verbatim port keeps them that way, so the next upstream commit to these files also applies as a rebrand.
+Any redesign, however small, becomes a merge conflict in every later sync. NFR-7 therefore limits Fences to
+four divergences, each with a reason the upstream shape cannot meet.</p>
+<p><strong>Why Microsoft CodeCoverage rather than coverlet 10 or <code>coverlet.collector</code>?</strong> Upstream chose Microsoft
+CodeCoverage, and the port follows upstream. On its own merits, MTP needs a collector that runs as an MTP
+extension. <code>coverlet.msbuild</code> hooks VSTest's <code>dotnet test</code> targets, and those targets do not run under the
+MTP runner. Staying on coverlet would mean either staying on VSTest, or adopting a coverlet MTP integration
+that upstream does not use. Both keep Fences off upstream's shape. The <code>coverlet.msbuild</code> 10.x bump (#6) and
+PR #19's fixes are VSTest-era repairs. Neither addresses #14's non-determinism at its source.</p>
+<p><strong>Why does <code>[ExcludeFromCodeCoverage]</code> still work without a settings file?</strong> Upstream passes no
+<code>--coverage-settings</code>: <code>CoverageRunSettings</code> is never set, so <code>eng/Test.targets</code> omits the flag. Upstream
+relies on Microsoft CodeCoverage's default attribute exclusions. That list contains
+<code>System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute</code>, along with <code>DebuggerHiddenAttribute</code>,
+<code>DebuggerNonUserCodeAttribute</code>, <code>CompilerGeneratedAttribute</code> and <code>GeneratedCodeAttribute</code>. Fences' 13 files
+that use the attribute match upstream's file for file, so they need no setting. The extra default
+exclusions can move figures relative to coverlet. That is one reason why the thresholds are re-measured,
+not assumed.</p>
+<ul>
+<li>FR-3 (the <code>[ExcludeFromCodeCoverage]</code> bullet), FR-6, AC-6, AC-17.</li>
+</ul>
+<p><strong>Why fail on a missing coverage file when upstream skips it?</strong> Upstream's check iterates over the files
+that exist. A TFM whose run wrote nothing therefore reports nothing, which looks the same as success. #14
+describes exactly that failure. The divergence is a few lines in one task, with a code comment that points
+to this ADR. It stays easy to see during later syncs, and the rest of the task remains upstream's text.</p>
+<ul>
+<li>FR-5 (missing coverage file boundary), NFR-7 item 1, AC-14.</li>
+</ul>
+<p><strong>Why ask MSBuild for the built TFMs, rather than list them in <code>cake.cs</code>?</strong> The <code>.csproj</code> already knows its
+TFMs, including the Windows-only <code>net481</code> condition. <code>dotnet msbuild -getProperty:TargetFrameworks</code>
+evaluates that condition on the current OS. A list in <code>cake.cs</code> would copy that knowledge and drift the
+first time a TFM changes. Reading <code>artifacts/bin</code> would tie the check to the build output layout, and would
+only report what was built, which is the condition being checked. One MSBuild evaluation per project costs
+seconds, which is small against NFR-4's bound.</p>
+<p><strong>Why keep the shared HTML report directory?</strong> Upstream writes every TFM of a project into one directory,
+so the HTML holds the last TFM processed. A separate directory for each TFM, as PR #19 proposes, would be a
+fifth divergence, which NFR-7 does not allow. The coverage files, the threshold check output and the CI job
+summary already show each TFM's coverage. The HTML is for inspection, not enforcement.</p>
+<ul>
+<li>FR-4 (shared HTML directory boundary), FR-10, AC-8.</li>
+</ul>
+<p><strong>Why keep upstream's message format, rounding and XML-load failure?</strong> These are upstream's text. Changing
+them would be a divergence that buys only cosmetic precision. The comparison already uses the unrounded
+value, so a figure printed as <code>100%</code> that is below 100 still fails. An empty or malformed file still fails
+the build at <code>XDocument.Load</code>, before any later file is read.</p>
+<ul>
+<li>FR-5 (rounding and unreadable-file boundaries), AC-13, AC-15.</li>
+</ul>
+<p><strong>Why is the local <code>MinVerSkip</code> step documentation only, and why record it as a divergence?</strong> Upstream
+works around stryker-net#3094 only in its CI workflow. A coded local workaround in <code>cake.cs</code> would change a
+file that must track upstream. A note in <code>CONTRIBUTING.md</code> and <code>.agent_instructions/testing.md</code> changes no
+upstream-tracked file. It is still a difference in how Fences tells contributors to run an upstream-shaped
+process. This ADR therefore records it as divergence 3, so the next sync after stryker-net#3094 is fixed
+knows to remove it. FR-11's other documentation changes only describe Fences' files as they are after the
+port. They are not divergences.</p>
+<ul>
+<li>FR-9 (local runs), FR-11, NFR-7 item 3, AC-23.</li>
+</ul>
+<p><strong>Why keep upstream's test names?</strong> Upstream's two new Core.Tests methods already follow
+<code>Member_Scenario_Outcome</code>. Its new Specs methods use snake_case, which matches the Specs project's legacy
+style. If the names change, f35bc00d's hunks no longer land on methods of the same name, and neither will
+any later upstream edit.</p>
+<ul>
+<li>FR-7, FR-12, AC-20, AC-28.</li>
+</ul>
+<p><strong>Why <code>--filter-class</code> replaces <code>--filter &quot;FullyQualifiedName~…&quot;</code>?</strong> Under MTP, xunit v3 does not accept
+VSTest filter expressions. It provides <code>--filter-class</code>, <code>--filter-method</code>, <code>--filter-namespace</code>,
+<code>--filter-trait</code> and <code>--filter-query</code>. <code>--filter-class</code> with leading and trailing wildcards gives the
+substring-like match that the documented commands intend. <code>dotnet test</code> passes the option through to the
+test host:</p>
+<pre><code class="lang-bash">dotnet test --project ./test/Paramore.Fences.Core.Tests --filter-class &quot;*CircuitBreaker*&quot;
+dotnet test --project ./test/Paramore.Fences.Core.Tests --framework net10.0 --filter-class &quot;*CircuitBreaker*&quot;
+</code></pre>
+<p>The documented <code>FullyQualifiedName~CircuitBreakerTests</code> matches no test today. No class or namespace in
+<code>Paramore.Fences.Core.Tests</code> contains that substring. VSTest only warns about this. MTP fails a run that
+executes zero tests, so a literal translation would fail AC-26. <code>*CircuitBreaker*</code> matches every class in
+the <code>Paramore.Fences.Core.Tests.CircuitBreaker</code> namespaces, which is what the command intends.
+<code>--filter-query</code> would also work, but its path syntax is harder to read in a contributor guide.</p>
+<ul>
+<li>FR-11, AC-26, Open Question 5.</li>
+</ul>
+<p><strong>How does the threshold check run on its own?</strong> AC-13, AC-14 and AC-15 edit coverage files after a test
+run, then run only the check. Running <code>--target=__VerifyCoverageThresholds</code> alone would first run its
+dependency <code>__RunTests</code>, which rewrites the edited files. Cake's existing <code>--exclusive</code> option runs a
+target without its dependencies. Cake.Sdk's generated command line declares <code>--exclusive|-e</code> and calls
+<code>UseExclusiveTarget()</code> when it is set. <code>build.ps1</code> does not pass extra arguments through, so verification
+calls the script directly, in the same form <code>build.ps1</code> uses:</p>
+<pre><code class="lang-bash">dotnet cake.cs -- --target=__VerifyCoverageThresholds --exclusive
+</code></pre>
+<p>This command needs no change to <code>build.ps1</code> or <code>cake.cs</code>, so it is not a divergence. Before the AC runs,
+<code>--dryrun</code> added to the same command confirms that only <code>__VerifyCoverageThresholds</code> would execute. If the
+pinned <code>Cake.Sdk</code> does not honour <code>--exclusive</code>, the fallback is a local, uncommitted edit that removes
+<code>.IsDependentOn(&quot;__RunTests&quot;)</code> from the check task. This is the same kind of experiment as AC-10's and
+AC-12's temporary <code>&lt;Threshold&gt;</code> edits.</p>
+<ul>
+<li>AC-13, AC-14, AC-15.</li>
+</ul>
+<h3 id="implementation-approach">Implementation Approach</h3>
+<p>Commits are listed in order. Each step that is not a commit says so. Upstream line numbers come from
+<code>git show 1a80392b</code>. Fences line numbers are at the current merge base.</p>
+<ol start="0">
+<li><p><strong>Record the baselines. These are not commits.</strong></p>
+<ul>
+<li>Mutation: record the five mutation scores from the completed <code>mutation-tests</code> run on <code>main</code> at the
+merge-base SHA, with the SHA and the run link (FR-14). If the merge base moves, take the baseline
+again.</li>
+<li>Duration: record the median wall-clock time of the last three successful <code>build</code> runs on <code>main</code> for
+each OS (NFR-4).</li>
+<li>Versions: check nuget.org for each FR-2 row. Apply the major-version rule (MTP stays on 2.x) and the
+Dependabot rule (keep <code>main</code>'s version if it is already at or above the current version). Write the
+PR-body table with versions, dates, sources and superseded Dependabot PRs.</li>
+</ul>
+</li>
+<li><p><strong>Commit <code>Port App-vNext/Polly@1a80392b: Update to xunit v3</code>.</strong> Apply upstream's diff, rebranded per the
+glossary's path and namespace map. Do not add any Fences divergence in this commit, so AC-39 can compare
+it with upstream line for line.</p>
+<ol>
+<li>Packages and tools (FR-2):
+<ul>
+<li>In <code>Directory.Packages.props</code>, remove <code>coverlet.msbuild</code> (:5), <code>JunitXml.TestLogger</code> (:11),
+<code>ReportGenerator</code> (:29) and <code>xunit</code> (:38).</li>
+<li>In the same file, replace <code>FsCheck.Xunit</code> (:7) with <code>FsCheck.Xunit.v3</code>, and bump
+<code>Microsoft.NET.Test.Sdk</code> (:22).</li>
+<li>Add <code>Microsoft.Testing.Extensions.CodeCoverage</code> and <code>Microsoft.Testing.Platform</code> after :22, and
+<code>xunit.v3.assert</code> and <code>xunit.v3.mtp-v2</code> after :39.</li>
+<li>In <code>.config/dotnet-tools.json</code>, add <code>dotnet-reportgenerator-globaltool</code> before <code>dotnet-stryker</code>
+(:19), and bump <code>dotnet-stryker</code> (:20).</li>
+<li>In <code>global.json</code>, add the <code>test</code> section after <code>msbuild-sdks</code>, and keep <code>Cake.Sdk</code> at 6.3.0.</li>
+<li>In <code>src/Snippets/Snippets.csproj:35</code>, change <code>xunit</code> to <code>xunit.v3.assert</code>.</li>
+</ul>
+</li>
+<li>Test projects (FR-1, FR-6):
+<ul>
+<li>In each test <code>.csproj</code>, add <code>&lt;OutputType&gt;Exe&lt;/OutputType&gt;</code> and remove <code>&lt;Include&gt;</code>
+(<code>Paramore.Fences.Core.Tests.csproj:10</code>, and :8 in the Extensions, RateLimiting, Testing and Specs
+projects).</li>
+<li>In <code>Paramore.Fences.Core.Tests.csproj:18</code>, change the reference to <code>FsCheck.Xunit.v3</code>.</li>
+<li>In <code>Paramore.Fences.Specs.csproj</code>, change <code>&lt;Threshold&gt;</code> at :7 to <code>96,95,93</code>, and remove the
+<code>Xunit.Abstractions</code> using at :25.</li>
+</ul>
+</li>
+<li><code>eng/Test.targets</code> (FR-3, FR-10): replace lines 14 onwards with upstream's package group, the
+<code>CoverageFormat</code>, <code>CoverageOutputPath</code> and <code>CoverageOutput</code> properties, and the
+<code>_UpdateTestPlatformProperties</code> target. Lines 1 to 13 match upstream already.</li>
+<li><code>cake.cs</code> (FR-4, FR-5):
+<ul>
+<li>Add <code>coverageDir</code> and <code>coverageReportsDir</code> after :29.</li>
+<li>Replace <code>__RunTests</code> (:137–163) with upstream's version, which has no <code>Loggers</code>.</li>
+<li>Add <code>__GenerateCoverageReports</code> and <code>__VerifyCoverageThresholds</code> after it.</li>
+<li>Add the two dependencies to <code>Build</code> (:219–223) after <code>__RunTests</code>.</li>
+<li>Add <code>GetCoverageThresholds</code>, <code>GetCoverageAssemblyName</code>, <code>GetAssemblyCoverage</code> and
+<code>AppendAllLinesWithRetry</code> before <code>PatchStrykerConfig</code> (:288).</li>
+<li>The <code>#:property</code> lines (:1–6), including <code>XunitAutoGeneratedEntryPoint=false</code>, already match
+upstream.</li>
+</ul>
+</li>
+<li><code>src/</code> (FR-8):
+<ul>
+<li>In <code>TaskExecution.cs</code>, extract secondary-action creation into a private method.</li>
+<li>In <code>RetryHelper.cs:10</code>, remove the <code>en-us</code> slug from the URL. Add the <code>stryker disable once all</code>
+comment above :12, with upstream's reason.</li>
+<li>In <code>TelemetryUtil.cs</code>, add the same comment above :11 and :13.</li>
+<li>In <code>TelemetryOptions.cs:25</code>, add <code>: this()</code>.</li>
+<li>Delete <code>src/LegacySupport/ConcurrentDictionaryExtensions.cs</code>. If any <code>netstandard2.0</code>, <code>net472</code>
+or <code>net462</code> build of Core, Extensions or RateLimiting then fails, keep the file with a D7 comment
+and note it on #28 (divergence 2). A-3 expects this fallback not to be needed.</li>
+</ul>
+</li>
+<li><code>test/</code> (FR-7):
+<ul>
+<li>In <code>test/Shared/TestCancellation.cs:5</code>, return <code>TestContext.Current.CancellationToken</code>.</li>
+<li>Make <code>AnnotatedOutputHelper</code> and <code>SilentOutputHelper</code> implement the xunit v3 <code>ITestOutputHelper</code>.</li>
+<li>Remove the <code>using Xunit.Abstractions;</code> at <code>HedgingResilienceStrategyTests.cs:6</code>.</li>
+<li>Link the 20-second guard in <code>IssuesTests.InfiniteRetry_2163.cs</code> to the test-context token.</li>
+<li>Put <code>RelativeTtlSpecs</code> in the existing <code>Constants.SystemClockDependentTestCollection</code>, and reset
+<code>SystemClock</code> on dispose.</li>
+<li>Apply the <code>TheoryData</code> typing fixes in <code>ResiliencePipelineTests</code> and
+<code>PipelineComponentFactoryTests</code>.</li>
+<li>Add upstream's new test to <code>HedgingResiliencePipelineBuilderExtensionsTests</code>.</li>
+<li>Add upstream's new test to <code>RetryHelperTests</code>. Wrap the FsCheck usings (:1–2) and <code>Arbitraries</code>
+(:316) in <code>#if !NETFRAMEWORK</code>.</li>
+<li>Add the five new Specs files, rebranded.</li>
+</ul>
+</li>
+<li>Stryker (FR-9): add <code>&quot;test-runner&quot;: &quot;mtp&quot;</code> after <code>eng/stryker-config.json:25</code>. Add the job-level
+<code>env: MinVerSkip: true</code>, with upstream's <code>HACK</code> comment that links stryker-net#3094, after
+<code>.github/workflows/mutation-tests.yml:27</code>.</li>
+<li>If <code>src/Snippets</code> changed, run <code>dotnet mdsnippets</code>. No Markdown diff is expected (AC-27).</li>
+</ol>
+</li>
+<li><p><strong>Fences-only commit: fail the threshold check on a missing coverage file (divergence 1).</strong></p>
+<ul>
+<li>In <code>__VerifyCoverageThresholds</code>, replace upstream's <code>if (!DirectoryExists(projectCoverageDir)) continue;</code> with a loop over <code>GetBuiltTargetFrameworks(proj.FullPath)</code>.</li>
+<li>The loop adds <code>&lt;Project&gt; (&lt;tfm&gt;): no coverage file was found at '&lt;path&gt;'.</code> for each expected file
+that is missing.</li>
+<li>The existing loop over the files that exist then continues unchanged.</li>
+<li>Add <code>GetBuiltTargetFrameworks</code> next to the other coverage helpers. It uses <code>StartProcess</code> with
+<code>RedirectStandardOutput</code> to run <code>dotnet msbuild &lt;csproj&gt; -getProperty:TargetFrameworks</code>.</li>
+<li>Put one comment at the change: <code>// Fences divergence (ADR 0004): upstream skips a missing coverage file. Fences fails, so a TFM cannot drop out of the gate silently.</code></li>
+<li>This is a behaviour change, so it is its own commit, separate from the structural port in step 1.</li>
+</ul>
+</li>
+<li><p><strong>Fences-only commit: contributor documentation (FR-11).</strong></p>
+<ul>
+<li>Change every <code>dotnet test ./test/…</code> to <code>dotnet test --project ./test/…</code>. At the merge base these are
+<code>CONTRIBUTING.md:48</code>, <code>:334</code>, <code>:337</code> and <code>:340</code>, <code>.agent_instructions/build_and_development.md:62</code>,
+<code>:65</code> and <code>:69</code>, and <code>.agent_instructions/testing.md:122</code>.</li>
+<li>Change each <code>--filter &quot;FullyQualifiedName~…&quot;</code> to <code>--filter-class &quot;*CircuitBreaker*&quot;</code>
+(<code>CONTRIBUTING.md:337</code>, <code>build_and_development.md:65</code>, <code>testing.md:122</code>).</li>
+<li>Update the tooling text: <code>CONTRIBUTING.md:236</code>, <code>.agent_instructions/testing.md:20</code> and <code>:22</code>, and
+<code>.agent_instructions/dependency_management.md:42</code>.</li>
+<li>If FR-9's local run of <code>MutationTestsCore</code> without <code>MinVerSkip</code> fails with stryker-net#3094, add the
+<code>MinVerSkip=true</code> note to <code>CONTRIBUTING.md</code> (Mutation Testing, from :219) and to
+<code>.agent_instructions/testing.md</code> (from :94), linking the issue. This is divergence 3. If the local
+run passes, add nothing.</li>
+</ul>
+</li>
+<li><p><strong>Fences-only commit(s), only if a coverage gap remains (FR-6, divergence 4).</strong></p>
+<ul>
+<li>First, investigate each shortfall on each built TFM as a porting omission: a missed test, guard or
+suppression, or a rebranding slip. Fix an omission in a review fix that follows upstream.</li>
+<li>Only a gap that traces to code or tests upstream does not have gets a Fences-only test, or an
+exclusion with a comment.</li>
+<li>List each one in the PR body with its file, member, reason and gap.</li>
+<li>Never lower a threshold.</li>
+</ul>
+</li>
+<li><p><strong>Commit <code>Port App-vNext/Polly@f35bc00d: .NET 11 preparation (Specs)</code> (FR-12).</strong> This commit touches only
+three files:</p>
+<ul>
+<li>In <code>ContextDictionarySpecs.cs</code>, use <code>var context</code>.</li>
+<li>In <code>PolicyOverloadSmokeSpecs.cs</code>, add upstream's three <code>continueOnCapturedContext: true</code> calls.</li>
+<li>In <code>Timeout/TimeoutOverloadSmokeSpecs.cs</code>, add <code>private static Context CreateContext() =&gt; new(&quot;operation-key&quot;);</code> and use it in every <code>ShouldTimeout</code> call.</li>
+</ul>
+<p>After this commit, only review fixes may follow.</p>
+</li>
+<li><p><strong>Verification. This is not a commit.</strong></p>
+<ul>
+<li><strong>Isolation check:</strong> <code>dotnet cake.cs -- --target=__VerifyCoverageThresholds --exclusive --dryrun</code> lists
+only <code>__VerifyCoverageThresholds</code>. If it lists more, use the fallback from Technology Choices.</li>
+<li><strong>AC-12:</strong> set Core.Tests' <code>&lt;Threshold&gt;</code> to <code>101</code> without committing, run <code>./build.ps1</code> on macOS or
+Linux, and expect 9 violations. AC-10 is the same run: check that every project still has its
+<code>index.html</code>.</li>
+<li><strong>AC-13:</strong> after a passing <code>./build.ps1</code>, set the <code>line-rate</code> of the <code>Paramore.Fences.Core</code> package in
+<code>artifacts/coverage/Paramore.Fences.Core.Tests/coverage.net8.0.xml</code> to <code>0.9996</code>. Run the isolated
+check and expect exactly one <code>net8.0 line</code> violation, with the other TFMs printed. Repeat with
+<code>0.99995</code>, and expect a failure that prints <code>100%</code>.</li>
+<li><strong>AC-14:</strong> delete <code>artifacts/coverage/Paramore.Fences.Specs/coverage.net9.0.xml</code>, run the isolated
+check, and expect the missing-file violation for <code>net9.0</code>.</li>
+<li><strong>AC-15, covered assembly absent:</strong> rename the covered package in one file, and expect the &quot;no
+coverage data&quot; violation.</li>
+<li><strong>AC-15, empty file:</strong> truncate one file to zero bytes, and expect the build to fail at the XML load.</li>
+<li><strong>AC-15, no threshold:</strong> remove <code>&lt;Threshold&gt;</code> from RateLimiting.Tests without committing. Expect that
+project to be skipped and the other four checked.</li>
+<li><strong>FR-15, AC-33:</strong> run <code>./build.ps1</code> three times on one OS. Tabulate line, branch and method (to 2 d.p.)
+and test counts for each project and TFM.</li>
+<li><strong>FR-14, AC-31, AC-32:</strong> compare the five mutation scores with the baseline. If <code>mutations-core</code>
+hangs (#46), rerun it. After two hung reruns, use the like-for-like local fallback.</li>
+<li><strong>NFR-4, AC-37:</strong> compare build durations with the step 0 median.</li>
+<li><strong>AC-26:</strong> run every documented <code>dotnet test</code> command and expect exit code 0.</li>
+<li><strong>AC-2, AC-7, AC-25, AC-36:</strong> run the <code>git grep</code> checks from the requirement.</li>
+</ul>
+</li>
+<li><p><strong>The pull request (FR-13).</strong></p>
+<ul>
+<li>Title, in Fences' voice (ADR 0003 D8): <em>Move tests to xunit v3 and Microsoft Testing Platform v2, with
+per-framework coverage thresholds</em>.</li>
+<li>The body links #28 and #34 and names both SHAs. It contains the FR-2 table, the FR-6 list (or
+&quot;none&quot;), the FR-8 suppression list, the FR-9 finding, the FR-14 scores with mutants removed by
+suppressions, and the FR-15 table. Where they apply, it also contains NFR-4's timings and the FR-2
+major-version open item.</li>
+<li><code>CHANGELOG.md</code> is not edited.</li>
+<li>The PR merges only with maintainer approval (C-5).</li>
+</ul>
+</li>
+<li><p><strong>Housekeeping after the merge (FR-13, FR-15).</strong></p>
+<ul>
+<li>On #28, link the merged PR from the <code>1a80392b</code> entry and from the f35bc00d Specs entry.</li>
+<li>On #6 (already closed), comment that coverlet was removed.</li>
+<li>Close PR #19 unmerged. The comment says that its failing-gate fix is carried and that its per-TFM
+HTML fix deliberately is not.</li>
+<li>Close each superseded Dependabot PR (for example #39 and #41) with a link.</li>
+<li>Close #14 with the FR-15 evidence. If the figures varied, update #14 with the project, TFM, metric
+and values instead.</li>
+</ul>
+</li>
+</ol>
+<h2 id="consequences">Consequences</h2>
+<h3 id="positive">Positive</h3>
+<ul>
+<li>Later upstream commits that touch tests, Cake, <code>eng/Test.targets</code> or Stryker port as rebrands. The
+deferred half of f35bc00d lands in the same PR.</li>
+<li>Coverage is collected and enforced for every built TFM, <code>net481</code> included. A missing TFM fails the build
+and does not pass silently.</li>
+<li>Coverage reports and job-summary sections survive a failing threshold check, so the project that needs
+attention is always inspectable. This replaces PR #19's gate fix.</li>
+<li>The coverage pipeline becomes plain Cake code that can be read and tested in place. It no longer depends
+on coverlet's MSBuild integration and an inline Roslyn task.</li>
+<li>Upstream's added tests and the Specs threshold of <code>96,95,93</code> raise Fences' coverage floor.</li>
+</ul>
+<h3 id="negative">Negative</h3>
+<ul>
+<li>The HTML report holds only the last TFM processed. Per-TFM detail is in the coverage files, the
+threshold output and the CI job summary, not in a browsable report.</li>
+<li>Divergence 1 is code that each later sync touching <code>__VerifyCoverageThresholds</code> must carry forward by
+hand. The code comment marks it, but it is still a merge point.</li>
+<li>The threshold check now runs one MSBuild evaluation per test project, which adds a few seconds to every
+build.</li>
+<li>Contributors must learn <code>dotnet test --project</code> and xunit v3's filter options. The VSTest commands they
+know stop working.</li>
+<li>Stryker 5 on MTP needs <code>MinVerSkip</code> on CI as a workaround for an open Stryker issue. Local runs may need
+the same.</li>
+</ul>
+<h3 id="risks-and-mitigations">Risks and Mitigations</h3>
+<table>
+<thead>
+<tr>
+<th>Risk</th>
+<th>Mitigation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>net481</code> coverage is checked for the first time, and it falls short of <code>100</code> or <code>96,95,93</code> on Windows.</td>
+<td>FR-6: investigate as a porting omission first. Only a Fences-specific gap gets a Fences-only test or a documented exclusion (divergence 4). Thresholds are never lowered (C-4).</td>
+</tr>
+<tr>
+<td>Microsoft CodeCoverage is also non-deterministic (A-1), for example at <code>src/Paramore.Fences.Core/Utils/Pipeline/ComponentDisposeHelper.cs:30</code>.</td>
+<td>FR-15's three runs measure it. If figures vary, #14 stays open with the evidence. That does not block the merge while CI's threshold checks pass.</td>
+</tr>
+<tr>
+<td>Stryker 5 with MTP changes the <code>mutations-core</code> hang (#46).</td>
+<td>FR-14's rerun path, then the like-for-like local fallback, with #46 updated. A hang that neither path resolves fails FR-14.</td>
+</tr>
+<tr>
+<td>stryker-net#3094 also breaks local mutation runs.</td>
+<td>FR-9 measures it. If it does, divergence 3 documents <code>MinVerSkip=true</code>, and <code>cake.cs</code> stays upstream's.</td>
+</tr>
+<tr>
+<td>Losing per-TFM HTML hides a TFM-specific gap from reviewers.</td>
+<td>The threshold check prints figures for every TFM, and the CI job summary has one section per TFM. A short TFM fails the build, naming the project, TFM and metric.</td>
+</tr>
+<tr>
+<td>Collecting coverage on <code>net481</code>, plus Stryker 5, pushes the Windows <code>build</code> job toward its 20-minute timeout.</td>
+<td>NFR-4 records the measured times and the cause if the 20% bound is exceeded. Changing <code>build.yml</code>'s timeout is not in NFR-7's list, so it would need the requirements amended first.</td>
+</tr>
+<tr>
+<td>The pinned <code>Cake.Sdk</code> does not honour <code>--exclusive</code>, so the isolated check cannot run.</td>
+<td>The <code>--dryrun</code> pre-check finds this before the AC runs. The fallback is a local, uncommitted edit, so no script changes.</td>
+</tr>
+<tr>
+<td>A current version under FR-2 is a higher major than upstream's (for example MTP 3.x).</td>
+<td>FR-2 pins to upstream's major and records an open item in the PR body. A maintainer decides on a follow-up.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="alternatives-considered">Alternatives Considered</h2>
+<p><strong>1. Do nothing: keep xunit v2, VSTest and coverlet 6.0.4.</strong> This option costs nothing now. It is rejected
+because every later upstream commit to tests or build scripts becomes a re-engineering task, which
+contradicts ADR 0003 D7. The deferred half of f35bc00d stays blocked. #14's non-determinism and the
+unchecked <code>net481</code> coverage stay as they are.</p>
+<p><strong>2. Move to coverlet 10, or to <code>coverlet.collector</code>, on xunit v2.</strong> This is the path of #6 and PR #19. It
+would fix the report-on-failure bug and might reduce coverlet's variance. It is rejected because it moves
+Fences further from upstream's shape, not closer. Every 1a80392b-dependent upstream commit would still
+need re-engineering. The coverlet version would also become a Fences-only dependency choice outside FR-2.
+The VSTest host itself is suspected in the varying test count and the #46 hang (A-6), and this option keeps
+it.</p>
+<p><strong>3. Port only part of 1a80392b, for example xunit v3 and MTP, while keeping coverlet's gate.</strong> This option
+looks smaller. It is rejected because the parts depend on each other. Coverlet's MSBuild gate does not run
+under MTP. Upstream's <code>test/</code> changes assume xunit v3 and its new Cake tasks. Upstream's Stryker suppressions
+and added tests exist because of the collector change. A partial port is a redesign that every later sync
+pays for, and it breaks NFR-7's closed divergence list.</p>
+<p><strong>4. Redesign the coverage pipeline the Fences way: per-TFM HTML, one MSBuild target per concern, and named
+errors for every failure mode.</strong> This option would give a cleaner local design: per-TFM HTML reports, a
+named error for an unreadable file, and exact-decimal messages. It is rejected because each of those is a
+divergence that NFR-7 does not allow, and each becomes a merge conflict in later syncs. Only the
+missing-file failure earns its divergence, because it closes the gap that #14 describes. The other
+improvements are cosmetic next to the cost of drifting from upstream.</p>
+<h2 id="references">References</h2>
+<ul>
+<li>Requirements: <a href="../../specs/001-port-xunit-v3/requirements.md">specs/001-port-xunit-v3/requirements.md</a></li>
+<li>Related ADRs:
+<ul>
+<li><a href="0003-upstream-polly-sync-process.html">ADR 0003: Upstream Polly Sync Process</a> (Accepted). This port runs
+under it. It applies D7 (rebrand, don't redesign), D8 (the PR title is the CHANGELOG entry) and D5
+(dependency bumps are skipped by default, overridden here by FR-2's explicit authorisation).</li>
+<li><a href="0002-fork-polly-as-fences.html">ADR 0002: Fork Polly as Fences</a> (Accepted). It sets the rebranding map
+(D1) that the port applies.</li>
+<li><a href="0001-record-architecture-decisions.html">ADR 0001: Record architecture decisions</a> (Accepted). It sets
+the ADR convention.</li>
+<li>This ADR supersedes none of them.</li>
+</ul>
+</li>
+<li>External references:
+<ul>
+<li><a href="https://github.com/App-vNext/Polly/commit/1a80392b">App-vNext/Polly@1a80392b</a>, &quot;Update to xunit v3&quot;
+(App-vNext/Polly#3131)</li>
+<li><a href="https://github.com/App-vNext/Polly/commit/f35bc00d">App-vNext/Polly@f35bc00d</a>, &quot;.NET 11 preparation&quot;
+(App-vNext/Polly#3225)</li>
+<li><a href="https://github.com/stryker-mutator/stryker-net/issues/3094">stryker-mutator/stryker-net#3094</a>, the
+MinVer and MTP issue that <code>MinVerSkip</code> works around</li>
+<li><a href="https://xunit.net/docs/getting-started/v3/microsoft-testing-platform">xunit v3 on Microsoft Testing Platform</a>,
+which covers the <code>--filter-class</code>, <code>--filter-method</code> and <code>--filter-query</code> options</li>
+<li><a href="https://learn.microsoft.com/dotnet/core/testing/microsoft-testing-platform-extensions-code-coverage">Microsoft.Testing.Platform code coverage extension</a></li>
+<li><a href="https://learn.microsoft.com/dotnet/core/testing/unit-testing-with-dotnet-test">Testing with <code>dotnet test</code> under MTP</a></li>
+<li>Historical anchors: #14, #6, PR #19, #28, #34, #39, #41, #44, #46</li>
+</ul>
+</li>
+</ul>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/BrighterCommand/Fences/blob/main/docs/adr/0004-port-xunit-v3.md/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

@@ -113,9 +113,16 @@ ADR, rerun the generator documented in
 <td>meta, licensing, governance</td>
 <td>Every upstream sync from App-vNext/Polly runs a mandatory licence-text gate before any diff, triage or port step; ported commits rebrand to Fences namespaces while preserving Polly's public API shape, with any unavoidable incompatibility called out at the point it occurs and in the tracking issue; a read-only upstream remote and polly-upstream tracking branch bound each sync's diff to what changed since the last one, and dependency-bump commits are skipped by default.</td>
 </tr>
+<tr>
+<td><code>0004-port-xunit-v3</code></td>
+<td>Port upstream's xunit v3 and Microsoft Testing Platform v2 test setup</td>
+<td>Accepted</td>
+<td>testing, build, mutation-testing, polly-compatibility</td>
+<td>Fences ports App-vNext/Polly@1a80392b's xunit v3, Microsoft Testing Platform v2, Microsoft CodeCoverage, per-TFM threshold check and Stryker-on-MTP setup verbatim, rebranded, then ports f35bc00d's Specs edits as a follow-on commit. It diverges from upstream only by NFR-7's closed list: failing on a missing coverage file, keeping the LegacySupport polyfill if deleting it breaks a build, a documentation-only local MinVerSkip note if needed, and Fences-only tests or exclusions for a Fences-specific coverage gap.</td>
+</tr>
 </tbody>
 </table>
-<p><em>3 ADRs indexed.</em></p>
+<p><em>4 ADRs indexed.</em></p>
 
 </article>
 
