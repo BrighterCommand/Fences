@@ -252,9 +252,15 @@ Task("__VerifyCoverageThresholds")
         var assemblyName = GetCoverageAssemblyName(projectName);
         var projectCoverageDir = System.IO.Path.Combine(coverageDir, projectName);
 
-        if (!DirectoryExists(projectCoverageDir))
+        // Fences divergence (ADR 0004): upstream skips a missing coverage file. Fences fails, so a TFM cannot drop out of the gate silently.
+        foreach (var builtTargetFramework in GetBuiltTargetFrameworks(proj.FullPath))
         {
-            continue;
+            var expectedCoverageFile = System.IO.Path.Combine(projectCoverageDir, $"coverage.{builtTargetFramework}.xml");
+
+            if (!FileExists(expectedCoverageFile))
+            {
+                violations.Add($"{projectName} ({builtTargetFramework}): no coverage file was found at '{expectedCoverageFile}'.");
+            }
         }
 
         var coverageFiles = GetFiles(System.IO.Path.Combine(projectCoverageDir, "coverage.*.xml"));
@@ -445,6 +451,22 @@ List<(string Type, double Required)> GetCoverageThresholds(string csprojPath)
 
     // Mirrors coverlet's Threshold parsing: when fewer values are supplied than types, the last value is reused for the remaining types.
     return [.. types.Select((type, index) => (type, values[Math.Min(index, values.Length - 1)]))];
+}
+
+string[] GetBuiltTargetFrameworks(string csprojPath)
+{
+    var result = StartProcess("dotnet", new ProcessSettings
+    {
+        Arguments = $"msbuild \"{csprojPath}\" -getProperty:TargetFrameworks",
+        RedirectStandardOutput = true,
+    }, out var lines);
+
+    if (result != 0)
+    {
+        throw new InvalidOperationException($"Failed to evaluate the target frameworks of '{System.IO.Path.GetFileNameWithoutExtension(csprojPath)}'.");
+    }
+
+    return [.. lines.SelectMany((line) => line.Split(';')).Select((tfm) => tfm.Trim()).Where((tfm) => tfm.Length > 0)];
 }
 
 string GetCoverageAssemblyName(string projectName) => projectName switch
