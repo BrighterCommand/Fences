@@ -33,7 +33,7 @@ reproducible across runs (#14), and on Windows the coverage gate never sees `net
 
 **Parent requirement:** [specs/001-port-xunit-v3/requirements.md](../../specs/001-port-xunit-v3/requirements.md)
 
-**In scope**
+#### In scope
 
 - FR-1: every test project becomes an MTP executable on xunit v3, and `global.json` selects MTP as the
   `dotnet test` runner.
@@ -62,7 +62,7 @@ reproducible across runs (#14), and on Windows the coverage gate never sees `net
 - NFR-7: the port matches upstream, rebranded, except for the closed list of four divergences that this
   ADR records.
 
-**Out of scope**
+#### Out of scope
 
 - Porting any other upstream commit. The sync process is [ADR 0003](0003-upstream-polly-sync-process.md).
   The non-Specs half of f35bc00d has already been ported (#44).
