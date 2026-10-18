@@ -59,14 +59,14 @@ dotnet build src/Paramore.Fences.Core/Paramore.Fences.Core.csproj
 dotnet test
 
 # One test project
-dotnet test ./test/Paramore.Fences.Core.Tests
+dotnet test --project ./test/Paramore.Fences.Core.Tests
 
-# One test, by filter
-dotnet test ./test/Paramore.Fences.Core.Tests --filter "FullyQualifiedName~CircuitBreakerTests"
+# Tests in matching classes, by filter
+dotnet test --project ./test/Paramore.Fences.Core.Tests --filter-class "*CircuitBreaker*"
 
 # One target framework. Test projects multi-target net10.0, net9.0 and net8.0, so naming one
 # framework is roughly three times faster and is the right default while iterating.
-dotnet test ./test/Paramore.Fences.Core.Tests --framework net10.0
+dotnet test --project ./test/Paramore.Fences.Core.Tests --framework net10.0
 ```
 
 There is **no external infrastructure**. Every test in this repository runs in process. There is no

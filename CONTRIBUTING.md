@@ -45,7 +45,7 @@ Welcome! Here's how to get started.
 1. Fork and clone the repository
 2. Ensure you have the .NET SDK pinned in `global.json` or later installed: `dotnet --version`
 3. Build and test everything: `./build.ps1`
-4. Or, for a faster inner loop: `dotnet build` then `dotnet test ./test/Paramore.Fences.Core.Tests`
+4. Or, for a faster inner loop: `dotnet build` then `dotnet test --project ./test/Paramore.Fences.Core.Tests`
 
 There are no external services to stand up. Every test in this repository runs in process, so a
 clone and an SDK are all you need.
@@ -233,9 +233,20 @@ not kill the mutants is not finished.
 ./build.ps1 -Target MutationTests
 ```
 
-Coverage is collected by coverlet during the normal test run. CI publishes it as the
-`coverage-<os>` build artefact and as a job step summary; there is no external coverage
-service.
+Set `MinVerSkip=true` for local mutation runs, for example
+`MinVerSkip=true dotnet cake.cs -- --target=MutationTestsCore`, or `$env:MinVerSkip='true'` before
+`./build.ps1 -Target MutationTestsCore`. Without it the run still exits 0 but reports no mutation
+score, because the Microsoft Testing Platform host terminates during coverage capture
+([stryker-net#3094](https://github.com/stryker-mutator/stryker-net/issues/3094)). CI already sets
+it in `mutation-tests.yml`.
+
+Coverage is collected by the Microsoft CodeCoverage extension
+(`Microsoft.Testing.Extensions.CodeCoverage`) during the normal test run. It writes
+`artifacts/coverage/<Project>/coverage.<tfm>.xml` per project per target framework, including
+`net481` on Windows. HTML comes from the `reportgenerator` tool into
+`artifacts/coverage-reports/<Project>/`. Cake's `__VerifyCoverageThresholds` enforces the
+thresholds per target framework. CI publishes the result as the `coverage-<os>` build artefact and
+as a job step summary; there is no external coverage service.
 
 ## Documentation
 
@@ -331,13 +342,13 @@ dotnet build
 dotnet test
 
 # One test project
-dotnet test ./test/Paramore.Fences.Core.Tests
+dotnet test --project ./test/Paramore.Fences.Core.Tests
 
-# One test, by filter
-dotnet test ./test/Paramore.Fences.Core.Tests --filter "FullyQualifiedName~CircuitBreakerTests"
+# Tests in matching classes, by filter
+dotnet test --project ./test/Paramore.Fences.Core.Tests --filter-class "*CircuitBreaker*"
 
 # One target framework — test projects multi-target, so this is much quicker
-dotnet test ./test/Paramore.Fences.Core.Tests --framework net10.0
+dotnet test --project ./test/Paramore.Fences.Core.Tests --framework net10.0
 ```
 
 Notes:

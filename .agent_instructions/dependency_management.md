@@ -39,8 +39,8 @@ A `PackageReference` that carries its own `Version` is an error under central pa
 
 Several references you will not find in project files at all, because `eng/*.targets` add them by
 `ProjectType`: analysers and MinVer from `eng/Analyzers.targets` and `eng/Common.props`, the whole
-test stack from `eng/Test.targets`. Do not add xUnit, Shouldly, NSubstitute or coverlet to a test
-project — they are already there.
+test stack from `eng/Test.targets`. Do not add xUnit, Shouldly, NSubstitute or the coverage
+extension to a test project — they are already there.
 
 ## Conventions
 

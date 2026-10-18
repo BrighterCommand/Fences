@@ -17,9 +17,9 @@ implement. Do not write a test by hand and carry straight on into the implementa
 | Test framework | xUnit | `Xunit` and `Shouldly` are implicit usings in every test project. |
 | Assertions | [Shouldly](https://github.com/shouldly/shouldly) | `result.ShouldBe(expected)`. |
 | Test doubles | [NSubstitute](https://nsubstitute.github.io/) | **Not** FakeItEasy — that is Brighter. |
-| Property-based | [FsCheck.Xunit](https://fscheck.github.io/FsCheck/) | Referenced by `Paramore.Fences.Core.Tests` only. |
+| Property-based | [FsCheck.Xunit.v3](https://fscheck.github.io/FsCheck/) | Referenced by `Paramore.Fences.Core.Tests` only. |
 | Time | `FakeTimeProvider` | From `Microsoft.Extensions.TimeProvider.Testing`. |
-| Coverage | coverlet | Collected on every non-.NET-Framework run, reported by ReportGenerator. |
+| Coverage | Microsoft CodeCoverage (`Microsoft.Testing.Extensions.CodeCoverage`) | Collected on every run, per TFM; HTML via the `reportgenerator` tool. |
 | Mutation | [Stryker](https://stryker-mutator.io/docs/stryker-net/introduction/) | 100% threshold. See below. |
 
 Do not introduce FluentAssertions, Moq or FakeItEasy.
@@ -59,7 +59,7 @@ This is the same reason `DateTime.Now` and friends are banned in `src/` — see
 [code_style.md](code_style.md).
 
 Some timing-sensitive tests are still flaky on a loaded machine. Before treating a failure as a
-regression, re-run that test on its own with `--filter`.
+regression, re-run that test on its own with `--filter-method`.
 
 ## Reaching internals
 
@@ -107,6 +107,13 @@ generic instantiation, this is what will tell you.
 ./build.ps1 -Target MutationTests
 ```
 
+Set `MinVerSkip=true` for local mutation runs, for example
+`MinVerSkip=true dotnet cake.cs -- --target=MutationTestsCore`, or `$env:MinVerSkip='true'` before
+`./build.ps1 -Target MutationTestsCore`. Without it the run still exits 0 but reports no mutation
+score, because the Microsoft Testing Platform host terminates during coverage capture
+([stryker-net#3094](https://github.com/stryker-mutator/stryker-net/issues/3094)). CI already sets
+it in `mutation-tests.yml`.
+
 Stryker runs against `net10.0` in `Debug`. `block` and `statement` mutations are ignored, as are
 mutations inside `Dispose`, `ConfigureAwait`, `Debug.Assert`, the logging methods and exception
 constructors.
@@ -119,7 +126,7 @@ The report lands in `artifacts/mutation-report/`.
 See [build_and_development.md](build_and_development.md). The short version:
 
 ```bash
-dotnet test ./test/Paramore.Fences.Core.Tests --framework net10.0 --filter "FullyQualifiedName~CircuitBreaker"
+dotnet test --project ./test/Paramore.Fences.Core.Tests --framework net10.0 --filter-class "*CircuitBreaker*"
 ```
 
 Naming one framework matters: test projects multi-target `net10.0;net9.0;net8.0`, so leaving it out
