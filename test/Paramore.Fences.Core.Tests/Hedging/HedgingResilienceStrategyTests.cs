@@ -3,7 +3,6 @@ using Paramore.Fences.Hedging;
 using Paramore.Fences.Hedging.Utils;
 using Paramore.Fences.Telemetry;
 using Paramore.Fences.Testing;
-using Xunit.Abstractions;
 
 namespace Paramore.Fences.Core.Tests.Hedging;
 
