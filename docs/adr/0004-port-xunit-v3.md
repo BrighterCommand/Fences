@@ -5,7 +5,7 @@ status: Accepted
 author:
   - "iancooper"
 created: 2026-10-12
-summary: "Fences ports App-vNext/Polly@1a80392b's xunit v3, Microsoft Testing Platform v2, Microsoft CodeCoverage, per-TFM threshold check and Stryker-on-MTP setup verbatim, rebranded, then ports f35bc00d's Specs edits as a follow-on commit. It diverges from upstream only by NFR-7's closed list: failing on a missing coverage file, keeping the LegacySupport polyfill if deleting it breaks a build, a documentation-only local MinVerSkip note if needed, and Fences-only tests or exclusions for a Fences-specific coverage gap."
+summary: "Fences ports App-vNext/Polly@1a80392b's xunit v3, Microsoft Testing Platform v2, Microsoft CodeCoverage, per-TFM threshold check and Stryker-on-MTP setup verbatim, rebranded, then ports f35bc00d's Specs edits as a follow-on commit. It diverges from upstream only by NFR-7's closed list: failing on a missing coverage file, keeping the LegacySupport polyfill if deleting it breaks a build, a documentation-only local MinVerSkip note if needed, and Fences-only tests or exclusions for a Fences-specific coverage gap. Amended 2026-10-18 to add a fifth: a coverage report directory per TFM, carrying PR #19's per-framework report fix."
 tags:
   - "testing"
   - "build"
@@ -20,6 +20,9 @@ Date: 2026-10-12
 ## Status
 
 Accepted
+
+Amended 2026-10-18 (after PR #51 merged): divergence 5, a coverage report directory per TFM. It replaces
+the "Why keep the shared HTML report directory?" reasoning below. PR #19 is closed in favour of it.
 
 ## Context
 
@@ -60,7 +63,7 @@ reproducible across runs (#14), and on Windows the coverage gate never sees `net
 - NFR-1 to NFR-6: no new analyser warnings, no public API change, no `src/` behaviour change, a
   build-duration bound, no skipped tests, and in-process tests only.
 - NFR-7: the port matches upstream, rebranded, except for the closed list of four divergences that this
-  ADR records.
+  ADR records. The 2026-10-18 amendment adds a fifth.
 
 #### Out of scope
 
@@ -120,7 +123,8 @@ lists the TFMs that should have been checked. On Windows, that gap is permanent 
 ## Decision
 
 **Fences adopts upstream's xunit v3, MTP v2, coverage and Stryker setup from App-vNext/Polly@1a80392b,
-rebranded, and diverges from it only by the four divergences that NFR-7 lists.**
+rebranded, and diverges from it only by the four divergences that NFR-7 lists, plus the fifth that the
+2026-10-18 amendment adds.**
 
 The port lands as one upstream-SHA commit that applies 1a80392b as written, with names rebranded. One or
 more Fences-only commits follow it. These make the threshold check fail on a missing coverage file, update
@@ -136,6 +140,7 @@ The closed list of divergences:
 | 2 | The unused LegacySupport `GetOrAdd` polyfill is kept, not deleted | Only if deleting it breaks a `netstandard2.0`, `net472` or `net462` build | This ADR, a D7 code comment, and a note on #28 |
 | 3 | A documented local `MinVerSkip` step for mutation runs, documentation only | Only if stryker-net#3094 affects local runs | This ADR, plus the PR body's FR-9 finding |
 | 4 | Fences-only tests, or documented coverage exclusions | Only for a coverage gap that traces to code or tests upstream does not have | This ADR, plus the PR body's FR-6 list |
+| 5 | `__GenerateCoverageReports` writes each TFM's report to its own directory, `artifacts/coverage-reports/<Project>/<tfm>/`. Upstream writes every TFM to `<Project>/`, so the HTML holds only the last TFM processed. *(Amendment, 2026-10-18.)* | Always | This ADR, plus a code comment at the divergence in `cake.cs` |
 
 ### The mechanism, end to end
 
@@ -301,7 +306,7 @@ the test or build changes.
 
 | Member | Input | Output | Error conditions |
 | --- | --- | --- | --- |
-| The task | `artifacts/coverage/<Project>/coverage.*.xml`, plus `GITHUB_ACTIONS`, `GITHUB_SHA` and `GITHUB_STEP_SUMMARY` | `artifacts/coverage-reports/<Project>/` (shared by the project's TFMs, so it holds the last TFM processed). On CI, one `<Project> Code Coverage report (<tfm>)` section for each file | A non-zero `reportgenerator` exit throws `Failed to generate the coverage report for '<project>' (<tfm>).` A missing directory or file is skipped, as upstream does. Divergence 1 applies only to the check |
+| The task | `artifacts/coverage/<Project>/coverage.*.xml`, plus `GITHUB_ACTIONS`, `GITHUB_SHA` and `GITHUB_STEP_SUMMARY` | `artifacts/coverage-reports/<Project>/<tfm>/`, one directory per coverage file (divergence 5). On CI, one `<Project> Code Coverage report (<tfm>)` section for each file | A non-zero `reportgenerator` exit throws `Failed to generate the coverage report for '<project>' (<tfm>).` A missing directory or file is skipped, as upstream does. Divergence 1 applies only to the check |
 
 #### `__VerifyCoverageThresholds` and its helpers
 
@@ -386,10 +391,16 @@ first time a TFM changes. Reading `artifacts/bin` would tie the check to the bui
 only report what was built, which is the condition being checked. One MSBuild evaluation per project costs
 seconds, which is small against NFR-4's bound.
 
-**Why keep the shared HTML report directory?** Upstream writes every TFM of a project into one directory,
-so the HTML holds the last TFM processed. A separate directory for each TFM, as PR #19 proposes, would be a
-fifth divergence, which NFR-7 does not allow. The coverage files, the threshold check output and the CI job
-summary already show each TFM's coverage. The HTML is for inspection, not enforcement.
+**Why a report directory per TFM? (Amendment, 2026-10-18.)** Upstream writes every TFM of a project into
+one directory, so each run overwrites the last, and the HTML a reviewer opens shows only one TFM. The
+original decision kept upstream's shape, arguing that the check output and the CI job summary already show
+every TFM. In practice, the HTML is where a reviewer finds the uncovered lines, and a TFM-specific gap (the
+kind #14 chases, and `net481`'s first appearance) is exactly the case it hid. PR #19 fixed this overwrite
+for coverlet, and #51 dropped that fix. Divergence 5 restores it on MTP: `__GenerateCoverageReports` passes
+`<Project>/<tfm>/` as `-targetdir`. That is one path segment in one task, so a later upstream change to the
+task still applies as a rebrand plus that segment. The CI artefact already uploads all of
+`artifacts/coverage-reports`, so `build.yml` does not change. Each TFM's job-summary section reads that
+TFM's own `SummaryGithub.md`.
 
 - FR-4 (shared HTML directory boundary), FR-10, AC-8.
 
@@ -610,8 +621,8 @@ Commits are listed in order. Each step that is not a commit says so. Upstream li
 8. **Housekeeping after the merge (FR-13, FR-15).**
    - On #28, link the merged PR from the `1a80392b` entry and from the f35bc00d Specs entry.
    - On #6 (already closed), comment that coverlet was removed.
-   - Close PR #19 unmerged. The comment says that its failing-gate fix is carried and that its per-TFM
-     HTML fix deliberately is not.
+   - Close PR #19 unmerged. The comment says that its failing-gate fix is carried, and that its per-TFM
+     HTML fix is carried by divergence 5 (amendment, 2026-10-18).
    - Close each superseded Dependabot PR (for example #39 and #41) with a link.
    - Close #14 with the FR-15 evidence. If the figures varied, update #14 with the project, TFM, metric
      and values instead.
@@ -651,7 +662,7 @@ Commits are listed in order. Each step that is not a commit says so. Upstream li
 | Microsoft CodeCoverage is also non-deterministic (A-1), for example at `src/Paramore.Fences.Core/Utils/Pipeline/ComponentDisposeHelper.cs:30`. | FR-15's three runs measure it. If figures vary, #14 stays open with the evidence. That does not block the merge while CI's threshold checks pass. |
 | Stryker 5 with MTP changes the `mutations-core` hang (#46). | FR-14's rerun path, then the like-for-like local fallback, with #46 updated. A hang that neither path resolves fails FR-14. |
 | stryker-net#3094 also breaks local mutation runs. | FR-9 measures it. If it does, divergence 3 documents `MinVerSkip=true`, and `cake.cs` stays upstream's. |
-| Losing per-TFM HTML hides a TFM-specific gap from reviewers. | The threshold check prints figures for every TFM, and the CI job summary has one section per TFM. A short TFM fails the build, naming the project, TFM and metric. |
+| Losing per-TFM HTML hides a TFM-specific gap from reviewers. | Resolved by divergence 5 (amendment, 2026-10-18): each TFM keeps its own report directory. The threshold check still prints figures for every TFM, and a short TFM still fails the build. |
 | Collecting coverage on `net481`, plus Stryker 5, pushes the Windows `build` job toward its 20-minute timeout. | NFR-4 records the measured times and the cause if the 20% bound is exceeded. Changing `build.yml`'s timeout is not in NFR-7's list, so it would need the requirements amended first. |
 | The pinned `Cake.Sdk` does not honour `--exclusive`, so the isolated check cannot run. | The `--dryrun` pre-check finds this before the AC runs. The fallback is a local, uncommitted edit, so no script changes. |
 | A current version under FR-2 is a higher major than upstream's (for example MTP 3.x). | FR-2 pins to upstream's major and records an open item in the PR body. A maintainer decides on a follow-up. |

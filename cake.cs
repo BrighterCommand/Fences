@@ -182,11 +182,12 @@ Task("__GenerateCoverageReports")
             continue;
         }
 
-        var targetDirectory = System.IO.Path.Combine(coverageReportsDir, projectName);
-
         foreach (var coverageFile in coverageFiles.OrderBy((file) => file.FullPath))
         {
             var tag = coverageFile.GetFilenameWithoutExtension().ToString()["coverage.".Length..];
+
+            // Fences divergence 5 (ADR 0004): upstream writes every TFM to one directory, so the HTML holds only the last TFM. Fences gives each TFM its own.
+            var targetDirectory = System.IO.Path.Combine(coverageReportsDir, projectName, tag);
 
             var reportTypes = "Cobertura;HTML";
 

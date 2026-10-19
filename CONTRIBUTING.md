@@ -244,9 +244,10 @@ Coverage is collected by the Microsoft CodeCoverage extension
 (`Microsoft.Testing.Extensions.CodeCoverage`) during the normal test run. It writes
 `artifacts/coverage/<Project>/coverage.<tfm>.xml` per project per target framework, including
 `net481` on Windows. HTML comes from the `reportgenerator` tool into
-`artifacts/coverage-reports/<Project>/`. Cake's `__VerifyCoverageThresholds` enforces the
-thresholds per target framework. CI publishes the result as the `coverage-<os>` build artefact and
-as a job step summary; there is no external coverage service.
+`artifacts/coverage-reports/<Project>/<tfm>/`, one report per target framework. Cake's
+`__VerifyCoverageThresholds` enforces the thresholds per target framework. CI publishes the result
+as the `coverage-<os>` build artefact and as a job step summary; there is no external coverage
+service.
 
 ## Documentation
 
