@@ -2,7 +2,13 @@
 
 Param(
     [string]$Configuration = "Release",
-    [switch]$Interactive
+    [string]$Framework = "net10.0",
+    [Parameter(Mandatory = $false)][string] $Job = "",
+    [Parameter(Mandatory = $false)][string[]] $Runtimes = @("net10.0"),
+    [Parameter(Mandatory = $false)][string] $Affinity = "",
+    [Parameter(Mandatory = $false)][string] $Filter = "*",
+    [Parameter(Mandatory = $false)][switch] $EnableMemoryDiagnoser,
+    [Parameter(Mandatory = $false)][switch] $EnableEventPipeProfiler
 )
 
 $ErrorActionPreference = "Stop"
@@ -12,14 +18,46 @@ Write-Output "Running benchmarks..."
 
 $additionalArgs = @()
 
-if ($Interactive -ne $true) {
-    $additionalArgs += "--"
-    $additionalArgs += "--filter"
-    $additionalArgs += "*"
+$additionalArgs += "--runtimes"
+$additionalArgs += $Runtimes
+
+if (-Not [string]::IsNullOrEmpty($Job)) {
+    $additionalArgs += "--job"
+    $additionalArgs += $Job
 }
 
-$project = Join-Path "Paramore.Fences.Core.Benchmarks" "Paramore.Fences.Core.Benchmarks.csproj"
+if (-Not [string]::IsNullOrEmpty($Affinity)) {
+    $additionalArgs += "--affinity"
+    $additionalArgs += $Affinity
+}
 
-dotnet run --configuration $Configuration --framework net10.0 --project $project $additionalArgs
+if (-Not [string]::IsNullOrEmpty($Filter)) {
+    $additionalArgs += "--filter"
+    $additionalArgs += $Filter
+}
 
-exit $LASTEXITCODE
+if ($EnableMemoryDiagnoser) {
+    $additionalArgs += "--memory"
+}
+
+if ($EnableEventPipeProfiler) {
+    $additionalArgs += "--profiler"
+    $additionalArgs += "EP"
+}
+
+$project = (Join-Path $PSScriptRoot "Paramore.Fences.Core.Benchmarks" "Paramore.Fences.Core.Benchmarks.csproj")
+
+$dotnetArgs = @(
+    "run"
+    "--configuration", $Configuration
+    "--framework", $Framework
+    "--project", $project
+    "--"
+) + $additionalArgs
+
+$p = Start-Process -FilePath "dotnet" -ArgumentList $dotnetArgs -NoNewWindow -PassThru
+$p.WaitForExit()
+
+if ($p.ExitCode -ne 0) {
+    throw "Benchmarks failed with exit code $($p.ExitCode)."
+}
