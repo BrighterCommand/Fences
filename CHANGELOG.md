@@ -11,6 +11,9 @@
 
 <!-- next-release -->
 
+## 9.0.1
+
+
 ## 9.0.0
 
 * Package identifiers are now `Paramore.Fences.*`: `Polly.Core` becomes `Paramore.Fences.Core`, `Polly.Extensions` becomes `Paramore.Fences.Extensions`, `Polly.RateLimiting` becomes `Paramore.Fences.RateLimiting`, `Polly.Testing` becomes `Paramore.Fences.Testing`, and `Polly` — the pre-v8 legacy API — becomes `Paramore.Fences`.
