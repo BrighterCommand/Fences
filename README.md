@@ -34,6 +34,13 @@ All five are published as stable releases starting with `9.0.0`.
 
 The library, the repository and the documentation site are all called **Fences**. Only the package and assembly identifiers carry the `Paramore` prefix, which is the identifier family the rest of the Brighter Command projects use.
 
+## Version numbers
+
+Fences version numbers are our own and do not line up with Polly's. Fences started at `9.0.0` because moving from `Polly` to `Paramore.Fences` is a breaking change for every consumer, and a new major version is the honest signal for that ([ADR 0002](docs/adr/0002-fork-polly-as-fences.md), D3). It does not mean Fences is based on a "Polly 9".
+
+- **Fences 9.x is the Polly 8 API.** It is Polly 8.7.0 plus the upstream changes we have adopted since, rebranded. A Fences 9.x minor or patch release may carry fixes that Polly has not released yet, but it does not break the API.
+- **Fences 9 is not Polly 9.** If Polly ships a 9.0, it is a separate release with its own changes. Fences does not follow it automatically, and the numbers matching means nothing. We review upstream changes one at a time ([ADR 0003](docs/adr/0003-upstream-polly-sync-process.md)); one that would break the API waits for a Fences major version, and we will say so plainly when that happens.
+
 ## Documentation
 
 This README aims to give a quick overview of some Fences features - including enough to get you started with any resilience strategy. For more detail on any resilience strategy, and many other aspects of Fences, see the [documentation](docs/), which is also published at [brightercommand.github.io/Fences](https://brightercommand.github.io/Fences/).
