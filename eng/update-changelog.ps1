@@ -25,13 +25,18 @@ $entry = [System.Collections.Generic.List[string]]@(
     ""
 )
 
-$releaseNotes = $ReleaseNotesText.Split("`n") | Select-Object -Skip 1
+$releaseNotes = $ReleaseNotesText -split "\r?\n"
+$hasBullets = $false
 foreach ($line in $releaseNotes) {
     if ($line -eq "") {
         continue
     }
+    # Skip anything before the first bullet, such as GitHub's generated comment and the section heading
     if ($line.StartsWith("##")) {
-        break
+        if ($hasBullets) {
+            break
+        }
+        continue
     }
     if (!$line.StartsWith("* ")) {
         continue
@@ -41,6 +46,7 @@ foreach ($line in $releaseNotes) {
     $line = $line -Replace "\@(([a-zA-Z0-9\-]+))", ('[@$1](' + $GitHubServerUrl + '/$1)')
 
     $entry.Add($line)
+    $hasBullets = $true
 }
 
 $index = $lines.IndexOf("<!-- next-release -->")

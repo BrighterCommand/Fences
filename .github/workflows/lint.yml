@@ -20,6 +20,7 @@ jobs:
 
     env:
       FORCE_COLOR: 3
+      PESTER_VERSION: '6.2.0'
       POWERSHELL_YAML_VERSION: '0.4.12'
       PSSCRIPTANALYZER_VERSION: '1.24.0'
       TERM: xterm
@@ -74,3 +75,14 @@ jobs:
         if ($issues.Count -gt 0) {
           exit 1
         }
+
+    - name: Test PowerShell scripts
+      shell: pwsh
+      run: |
+        Install-PSResource -Name Pester -Version ${env:PESTER_VERSION} -Scope CurrentUser -TrustRepository -Quiet
+        Import-Module Pester -RequiredVersion ${env:PESTER_VERSION}
+        $configuration = New-PesterConfiguration
+        $configuration.Run.Path = ${env:GITHUB_WORKSPACE}
+        $configuration.Run.Exit = $true
+        $configuration.Output.Verbosity = "Detailed"
+        Invoke-Pester -Configuration $configuration

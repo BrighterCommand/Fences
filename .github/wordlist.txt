@@ -65,6 +65,7 @@ contrib
 Costello
 coverlet
 creatable
+CRLF
 dedupe
 dependabot
 Dependabot's
