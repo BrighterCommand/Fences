@@ -9,7 +9,8 @@ $unshippedName = "PublicAPI.Unshipped.txt"
 
 $repo = Join-Path $PSScriptRoot ".."
 $src = Join-Path $repo "src"
-$files = Get-ChildItem -Path $src -Filter $unshippedName -Recurse
+# -Force because the baselines live in .PublicAPI folders, which are hidden on Linux and macOS
+$files = Get-ChildItem -Path $src -Filter $unshippedName -Recurse -Force
 
 # See https://github.com/dotnet/roslyn-analyzers/blob/b07c100bfc66013a8444172d00cfa04c9ceb5a97/src/PublicApiAnalyzers/Core/CodeFixes/DeclarePublicApiFix.cs#L373-L390
 $comparer = {
