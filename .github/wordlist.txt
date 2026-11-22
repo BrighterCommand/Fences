@@ -37,6 +37,7 @@ bcl
 bdd
 behavioural
 BenchmarkDotNet
+BOM
 bootstrapped
 brighter
 Brighter's
@@ -269,6 +270,7 @@ unprefixed
 unquantified
 unresolvable
 unrounded
+Unshipped
 Upstream's
 usings
 uwp
