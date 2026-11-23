@@ -1,2 +1,1 @@
 ﻿#nullable enable
-Paramore.Fences.DependencyInjection.AddResiliencePipelineContext<TKey>.EnableReloadsWithMonitor<TOptions>(Microsoft.Extensions.Options.IOptionsMonitor<TOptions>! monitor, string? name = null) -> void

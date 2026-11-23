@@ -2,6 +2,7 @@
 abstract Paramore.Fences.Telemetry.MeteringEnricher.Enrich<TResult, TArgs>(in Paramore.Fences.Telemetry.EnrichmentContext<TResult, TArgs> context) -> void
 Paramore.Fences.DependencyInjection.AddResiliencePipelineContext<TKey>
 Paramore.Fences.DependencyInjection.AddResiliencePipelineContext<TKey>.EnableReloads<TOptions>(string? name = null) -> void
+Paramore.Fences.DependencyInjection.AddResiliencePipelineContext<TKey>.EnableReloadsWithMonitor<TOptions>(Microsoft.Extensions.Options.IOptionsMonitor<TOptions>! monitor, string? name = null) -> void
 Paramore.Fences.DependencyInjection.AddResiliencePipelineContext<TKey>.GetOptions<TOptions>(string? name = null) -> TOptions
 Paramore.Fences.DependencyInjection.AddResiliencePipelineContext<TKey>.OnPipelineDisposed(System.Action! callback) -> void
 Paramore.Fences.DependencyInjection.AddResiliencePipelineContext<TKey>.PipelineKey.get -> TKey
@@ -10,8 +11,8 @@ Paramore.Fences.DependencyInjection.AddResiliencePipelinesContext<TKey>
 Paramore.Fences.DependencyInjection.AddResiliencePipelinesContext<TKey>.AddResiliencePipeline(TKey key, System.Action<Paramore.Fences.ResiliencePipelineBuilder!, Paramore.Fences.DependencyInjection.AddResiliencePipelineContext<TKey>!>! configure) -> void
 Paramore.Fences.DependencyInjection.AddResiliencePipelinesContext<TKey>.AddResiliencePipeline<TResult>(TKey key, System.Action<Paramore.Fences.ResiliencePipelineBuilder<TResult>!, Paramore.Fences.DependencyInjection.AddResiliencePipelineContext<TKey>!>! configure) -> void
 Paramore.Fences.DependencyInjection.AddResiliencePipelinesContext<TKey>.ServiceProvider.get -> System.IServiceProvider!
-Paramore.Fences.ResilienceServiceCollectionExtensions
 Paramore.Fences.Registry.ConfigureBuilderContextExtensions
+Paramore.Fences.ResilienceServiceCollectionExtensions
 Paramore.Fences.Telemetry.EnrichmentContext<TResult, TArgs>
 Paramore.Fences.Telemetry.EnrichmentContext<TResult, TArgs>.EnrichmentContext() -> void
 Paramore.Fences.Telemetry.EnrichmentContext<TResult, TArgs>.EnrichmentContext(in Paramore.Fences.Telemetry.TelemetryEventArguments<TResult, TArgs> telemetryEvent, System.Collections.Generic.IList<System.Collections.Generic.KeyValuePair<string!, object?>>! tags) -> void
@@ -37,6 +38,7 @@ Paramore.Fences.Telemetry.TelemetryOptions.TelemetryListeners.get -> System.Coll
 Paramore.Fences.Telemetry.TelemetryOptions.TelemetryOptions() -> void
 Paramore.Fences.Telemetry.TelemetryOptions.TelemetryOptions(Paramore.Fences.Telemetry.TelemetryOptions! other) -> void
 Paramore.Fences.TelemetryResiliencePipelineBuilderExtensions
+static Paramore.Fences.Registry.ConfigureBuilderContextExtensions.EnableReloads<TKey, TOptions>(this Paramore.Fences.Registry.ConfigureBuilderContext<TKey>! context, Microsoft.Extensions.Options.IOptionsMonitor<TOptions>! optionsMonitor, string? name = null) -> void
 static Paramore.Fences.ResilienceServiceCollectionExtensions.AddResiliencePipeline<TKey, TResult>(this Microsoft.Extensions.DependencyInjection.IServiceCollection! services, TKey key, System.Action<Paramore.Fences.ResiliencePipelineBuilder<TResult>!, Paramore.Fences.DependencyInjection.AddResiliencePipelineContext<TKey>!>! configure) -> Microsoft.Extensions.DependencyInjection.IServiceCollection!
 static Paramore.Fences.ResilienceServiceCollectionExtensions.AddResiliencePipeline<TKey, TResult>(this Microsoft.Extensions.DependencyInjection.IServiceCollection! services, TKey key, System.Action<Paramore.Fences.ResiliencePipelineBuilder<TResult>!>! configure) -> Microsoft.Extensions.DependencyInjection.IServiceCollection!
 static Paramore.Fences.ResilienceServiceCollectionExtensions.AddResiliencePipeline<TKey>(this Microsoft.Extensions.DependencyInjection.IServiceCollection! services, TKey key, System.Action<Paramore.Fences.ResiliencePipelineBuilder!, Paramore.Fences.DependencyInjection.AddResiliencePipelineContext<TKey>!>! configure) -> Microsoft.Extensions.DependencyInjection.IServiceCollection!
@@ -44,6 +46,5 @@ static Paramore.Fences.ResilienceServiceCollectionExtensions.AddResiliencePipeli
 static Paramore.Fences.ResilienceServiceCollectionExtensions.AddResiliencePipelineRegistry<TKey>(this Microsoft.Extensions.DependencyInjection.IServiceCollection! services) -> Microsoft.Extensions.DependencyInjection.IServiceCollection!
 static Paramore.Fences.ResilienceServiceCollectionExtensions.AddResiliencePipelineRegistry<TKey>(this Microsoft.Extensions.DependencyInjection.IServiceCollection! services, System.Action<Paramore.Fences.Registry.ResiliencePipelineRegistryOptions<TKey>!>! configure) -> Microsoft.Extensions.DependencyInjection.IServiceCollection!
 static Paramore.Fences.ResilienceServiceCollectionExtensions.AddResiliencePipelines<TKey>(this Microsoft.Extensions.DependencyInjection.IServiceCollection! services, System.Action<Paramore.Fences.DependencyInjection.AddResiliencePipelinesContext<TKey>!>! configure) -> Microsoft.Extensions.DependencyInjection.IServiceCollection!
-static Paramore.Fences.Registry.ConfigureBuilderContextExtensions.EnableReloads<TKey, TOptions>(this Paramore.Fences.Registry.ConfigureBuilderContext<TKey>! context, Microsoft.Extensions.Options.IOptionsMonitor<TOptions>! optionsMonitor, string? name = null) -> void
 static Paramore.Fences.TelemetryResiliencePipelineBuilderExtensions.ConfigureTelemetry<TBuilder>(this TBuilder! builder, Microsoft.Extensions.Logging.ILoggerFactory! loggerFactory) -> TBuilder!
 static Paramore.Fences.TelemetryResiliencePipelineBuilderExtensions.ConfigureTelemetry<TBuilder>(this TBuilder! builder, Paramore.Fences.Telemetry.TelemetryOptions! options) -> TBuilder!
