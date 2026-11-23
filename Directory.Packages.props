@@ -18,7 +18,7 @@
     <PackageVersion Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="10.0.14" />
     <PackageVersion Include="Microsoft.Extensions.TimeProvider.Testing" Version="10.4.0" />
     <PackageVersion Include="Microsoft.Testing.Extensions.CodeCoverage" Version="18.12.0" />
-    <PackageVersion Include="Microsoft.Testing.Platform" Version="2.5.1" />
+    <PackageVersion Include="Microsoft.Testing.Platform" Version="2.5.2" />
     <PackageVersion Include="MinVer" Version="8.0.0" />
     <PackageVersion Include="Newtonsoft.Json" Version="13.0.4" />
     <PackageVersion Include="NSubstitute" Version="6.2.0" />
@@ -33,8 +33,8 @@
     <PackageVersion Include="System.Memory" Version="4.6.3" />
     <PackageVersion Include="System.Threading.Tasks.Extensions" Version="4.5.4" />
     <PackageVersion Include="System.ValueTuple" Version="4.5.0" />
-    <PackageVersion Include="xunit.v3.assert" Version="4.0.2" />
-    <PackageVersion Include="xunit.v3.mtp-v2" Version="4.0.2" />
+    <PackageVersion Include="xunit.v3.assert" Version="4.0.3" />
+    <PackageVersion Include="xunit.v3.mtp-v2" Version="4.0.3" />
   </ItemGroup>
   <!-- Dependencies below are pinned for the libraries we ship to NuGet.org -->
   <ItemGroup>

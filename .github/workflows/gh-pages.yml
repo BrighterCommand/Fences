@@ -42,12 +42,12 @@ jobs:
           !specs/**
 
     - name: Spellcheck
-      uses: rojopolis/spellcheck-github-actions@f2df388397bcb35f524b4a0a3567d6b1e8a4e595 # 0.68.0
+      uses: rojopolis/spellcheck-github-actions@dad57fc333130f4c9ae9632a6ad7ddc4de3515a2 # 0.69.0
       with:
         config_path: .github/spellcheck.yml
 
     - name: Setup .NET SDK
-      uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6.0.0
+      uses: actions/setup-dotnet@0f4a354dd5547a28c70b7853dbd95d5b67886e73 # v6.1.0
 
     - name: Generate documentation
       run: |
